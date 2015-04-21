@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
@@ -27,7 +27,6 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.lecturas.elfec.R;
 import com.lecturas.elfec.controlador.accionesycustomizaciones.*;
 import com.lecturas.elfec.controlador.dialogos.DialogoAgregarOrdenativo;
@@ -223,6 +222,7 @@ public class TomarLectura extends Activity implements ISwipeListener{
 	 */
 	private void asignarTouchListenerATxtLecturaNueva() {
 		txtLecturaNueva.setOnTouchListener(new OnTouchListener() {	
+			@SuppressLint("ClickableViewAccessibility")
 			@Override
 			public boolean onTouch(View v, MotionEvent ev) {
 				if(txtLecturaNueva.hasFocus() && contadorSatelite==0)

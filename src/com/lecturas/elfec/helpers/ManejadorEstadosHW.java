@@ -23,6 +23,7 @@ public class ManejadorEstadosHW {
 	 * @param context
 	 * @return
 	 */
+	@SuppressWarnings("deprecation")
 	public static boolean servicioGPSEstaDeshabilitado(Context context)
 	{
 		return !Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED).contains("gps");

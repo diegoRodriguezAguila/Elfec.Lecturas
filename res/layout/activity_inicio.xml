@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:text="@string/titulo_inicio"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -21,7 +22,8 @@
         android:id="@+id/separator_1"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="true"   
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/lbl_titulo"
         android:background="@android:color/darker_gray" />
 
@@ -32,8 +34,10 @@
         android:layout_alignBaseline="@+id/lbl_ruta"
         android:layout_alignBottom="@+id/lbl_ruta"
         android:layout_toRightOf="@+id/lbl_ruta"
+        android:layout_toEndOf="@+id/lbl_ruta"
         android:text="@string/ruta_info_lbl"
         android:layout_marginLeft="3dp"
+        android:layout_marginStart="3dp"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
@@ -43,11 +47,14 @@
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
         android:layout_alignLeft="@+id/lbl_ruta"
+        android:layout_alignStart="@+id/lbl_ruta"
         android:layout_alignRight="@+id/separator_1"
+        android:layout_alignEnd="@+id/separator_1"
         android:layout_below="@+id/lbl_ruta"
         android:layout_marginTop="10dp"
         android:text="@string/menu_principal_btn" 
         android:drawableRight="@drawable/arrow_right"
+        android:drawableEnd="@drawable/arrow_right"
         android:onClick="btnMenuPrincipalClick"
         />
 
@@ -56,7 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btn_menu_principal"
+        android:layout_alignStart="@+id/btn_menu_principal"
         android:layout_alignRight="@+id/btn_menu_principal"
+        android:layout_alignEnd="@+id/btn_menu_principal"
         android:layout_below="@+id/btn_menu_principal"
         android:layout_marginTop="6dp"
         android:text="@string/menu_principal_info"
@@ -67,6 +76,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/lbl_usuario"
+        android:layout_alignStart="@+id/lbl_usuario" 
         android:layout_below="@+id/lbl_usuario"
         android:text="@string/sample_fecha"
         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -76,7 +86,8 @@
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentRight="true"   
+        android:layout_alignParentEnd="true"
         android:onClick="btnSalirClick"
         android:text="@string/salida_btn" />
 
@@ -84,7 +95,8 @@
         android:id="@+id/lbl_usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="true"   
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/separator_1"
         android:layout_marginTop="10dp"
         android:text="@string/nom_usuario_lbl"
@@ -96,7 +108,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/lbl_usuario"
         android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp" 
         android:layout_toRightOf="@+id/lbl_usuario"
+        android:layout_toEndOf="@+id/lbl_usuario"
         android:text="@string/blank"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -107,7 +121,9 @@
         android:layout_alignBaseline="@+id/lbl_imei"
         android:layout_alignBottom="@+id/lbl_imei"
         android:layout_marginLeft="3dp"
+        android:layout_marginStart="3dp"
         android:layout_toRightOf="@+id/lbl_imei"
+        android:layout_toEndOf="@+id/lbl_imei"
         android:text="@string/blank"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -116,6 +132,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/lbl_imei"
+        android:layout_alignStart="@+id/lbl_imei"
         android:layout_below="@+id/lbl_imei"
         android:layout_marginTop="14dp"
         android:text="@string/ruta_lbl"
@@ -126,6 +143,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/lbl_fecha"
+        android:layout_alignStart="@+id/lbl_fecha"
         android:layout_below="@+id/lbl_fecha"
         android:layout_marginTop="14dp"
         android:text="@string/imei_lbl"
@@ -136,9 +154,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/lbl_menu_principal_info"
+        android:layout_alignStart="@+id/lbl_menu_principal_info"
         android:layout_below="@+id/btn_cargar_datos"
         android:layout_marginTop="2dp"
         android:layout_toLeftOf="@+id/btn_salir"
+        android:layout_toStartOf="@+id/btn_salir"
         android:text="@string/info_datos_no_cargados_lbl"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="12sp" />
@@ -147,10 +167,12 @@
         android:id="@+id/btn_cargar_datos"
         android:layout_width="145dp"
         android:layout_height="64dp"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentLeft="true"   
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/lbl_menu_principal_info"
         android:layout_marginTop="10dp"
         android:drawableLeft="@drawable/cargar_datos"
+        android:drawableStart="@drawable/cargar_datos" 
         android:onClick="btnCargarDatosClick"
         android:textSize="12sp"
         android:text="@string/cargar_datos_btn" />
@@ -160,7 +182,9 @@
         android:layout_width="145dp"
         android:layout_height="64dp"
         android:layout_alignTop="@+id/btn_cargar_datos"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentRight="true"   
+        android:layout_alignParentEnd="true"
+        android:drawableStart="@drawable/descargar_datos"
         android:drawableLeft="@drawable/descargar_datos"
         android:onClick="btnDescargarDatosClick"
         android:textSize="12sp"
