@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp" >
+
+    <TextView
+        android:id="@+id/lbl_num_cuenta_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/lbl_cuenta_item"
+        android:text="@string/sample_cuenta"
+        android:textSize="20sp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/lbl_medidor_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_cuenta_item"
+        android:layout_marginTop="8dp"
+        android:text="@string/medidor_lbl"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/lbl_num_medidor_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_num_cuenta_item"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@+id/lbl_medidor_item"
+        android:text="@string/sample_num_medidor"
+        android:textSize="15sp"
+        android:layout_marginTop="2dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/lbl_estado_lectura"
+        android:layout_width="85dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="12dp"
+        android:background="@color/green_nephritis"
+        android:gravity="center"
+        android:text="@string/sample_estado_medidor"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lbl_cuenta_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="19dp"
+        android:text="@string/cuenta_lbl"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/lbl_ruta_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_estado_lectura"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="17dp"
+        android:layout_toRightOf="@+id/img_ruta"
+        android:text="@string/sample_ruta"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/img_ruta"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignLeft="@+id/lbl_estado_lectura"
+        android:layout_below="@+id/lbl_estado_lectura"
+        android:layout_marginTop="12dp"
+        android:background="@color/blue_peter_river"
+        android:contentDescription="@string/blank"
+        android:src="@drawable/ruta" />
+
+    <TextView
+        android:id="@+id/lbl_nus_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_medidor_item"
+        android:layout_marginTop="8dp"
+        android:text="@string/nus_lbl"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/lbl_nus_cliente_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lbl_num_medidor_item"
+        android:layout_marginLeft="4dp"
+        android:layout_toRightOf="@+id/lbl_nus_item"
+        android:text="@string/sample_nus"
+        android:textSize="15sp"
+        android:layout_marginTop="4dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

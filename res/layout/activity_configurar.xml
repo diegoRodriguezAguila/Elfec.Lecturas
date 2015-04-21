@@ -1,0 +1,165 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Configurar" >
+
+    <TextView
+        android:id="@+id/lbl_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/titulo_configurar"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <View
+        android:id="@+id/separator_1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_titulo"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/lbl_servidor_bd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/separator_1"
+        android:layout_marginTop="18dp"
+        android:text="@string/servidor_bd_lbl"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/lbl_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_servidor_bd"
+        android:layout_marginTop="20dp"
+        android:text="@string/ip_lbl"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/txt_ip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_ip"
+        android:layout_alignBottom="@+id/lbl_ip"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/lbl_ip"
+        android:ems="10"
+        android:inputType="textUri" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/lbl_puerto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_ip"
+        android:layout_marginTop="25dp"
+        android:text="@string/puerto_lbl"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/txt_puerto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_puerto"
+        android:layout_alignBottom="@+id/lbl_puerto"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/lbl_puerto"
+        android:ems="10"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btn_salir"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:onClick="btnSalirClick"
+        android:text="@string/salida_btn" />
+
+    <TextView
+        android:id="@+id/lbl_servicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_puerto"
+        android:layout_marginTop="25dp"
+        android:text="@string/servicio_lbl"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/txt_servicio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_servicio"
+        android:layout_alignBottom="@+id/lbl_servicio"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/lbl_servicio"
+        android:ems="10"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btn_guardar_medidor_entre_lineas"
+        android:layout_width="150dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:drawableLeft="@drawable/save"
+        android:onClick="btnGuardarClick"
+        android:text="@string/guardar_btn" />
+
+    <TextView
+        android:id="@+id/lbl_rol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_servicio"
+        android:text="@string/rol_lbl"
+        android:layout_marginTop="25dp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/txt_rol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_rol"
+        android:layout_alignBottom="@+id/lbl_rol"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/lbl_rol"
+        android:ems="10"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/lbl_password_rol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_rol"
+        android:layout_marginTop="25dp"
+        android:text="@string/password_rol_lbl"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/txt_password_rol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBaseline="@+id/lbl_password_rol"
+        android:layout_alignBottom="@+id/lbl_password_rol"
+        android:layout_toRightOf="@+id/lbl_password_rol"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+</RelativeLayout>

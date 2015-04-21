@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="tab_host_default_height">48dp</dimen>
+    <dimen name="dialog_horizontal_margin">10dp</dimen>
+    <dimen name="dialog_vertical_button_margin">2dp</dimen>
+    <dimen name="dialog_horizontal_button_margin">6dp</dimen>
+    <dimen name="dialog_vertical_margin">10dp</dimen>
+    <dimen name="dialog_message_margin">15dp</dimen>
+</resources>

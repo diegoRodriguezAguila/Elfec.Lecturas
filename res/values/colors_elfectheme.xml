@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="green_color">#5b9221</color>
+    <color name="elfectheme_color">#215b92</color>
+    <color name="highlight_elfectheme_color">#4481C0</color>
+    <color name="red_alizarin">#E74C3C</color>
+    <color name="blue_peter_river">#3498DB</color>
+    <color name="blue_belize_hole">#2980B9</color>
+    <color name="red_pomegranate">#C0392B</color>
+    <color name="green_nephritis">#27AE60</color>
+    <color name="black_wet_asphalt">#34495E</color>
+    <color name="purple_wisteria">#8E44AD</color>
+    <color name="white">#FFFFFF</color>
+    <color name="orange_carrot">#E67E22</color>
+    <color name="orange_pumpkin">#D35400</color>
+    <color name="gray_asbestos">#7F8C8D</color>
+    <color name="gray_concrete">#95A5A6</color>
+    <color name="gray_clouds">#ECF0F1</color>
+</resources>

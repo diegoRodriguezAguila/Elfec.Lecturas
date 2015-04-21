@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Generated with http://android-holo-colors.com -->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <style name="ActionBarElfecTheme" parent="android:Widget.Holo.Light.ActionBar.Solid.Inverse">
+      <item name="android:background">#215b92</item>
+       <item name="android:textColorPrimary">@color/white</item>
+  </style>
+  <style name="AutoCompleteTextViewElfecTheme" parent="android:Widget.Holo.Light.AutoCompleteTextView">
+      <item name="android:dropDownSelector">@drawable/elfectheme_list_selector_holo_light</item>
+	    <item name="android:background">@drawable/elfectheme_edit_text_holo_light</item>
+  </style>
+
+  <style name="ButtonElfecTheme" parent="android:Widget.Holo.Light.Button">
+	  <item name="android:background">@drawable/elfectheme_btn_default_holo_light</item>
+	  <item name="android:textColor">#ffffff</item>
+  </style>
+
+  <style name="ImageButtonElfecTheme" parent="android:Widget.Holo.Light.ImageButton">
+	  <item name="android:background">@drawable/elfectheme_btn_default_holo_light</item>
+  </style>
+
+  <style name="SpinnerElfecTheme" parent="android:Widget.Holo.Light.Spinner">
+      <item name="android:background">@drawable/elfectheme_spinner_background_holo_light</item>
+      <item name="android:dropDownSelector">@drawable/elfectheme_list_selector_holo_light</item>
+  </style>
+
+  <style name="ProgressBarElfecTheme" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
+      <item name="android:progressDrawable">@drawable/elfectheme_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/elfectheme_progress_indeterminate_horizontal_holo_light</item>
+  </style>
+
+  <style name="SeekBarElfecTheme" parent="android:Widget.Holo.Light.SeekBar">
+      <item name="android:progressDrawable">@drawable/elfectheme_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/elfectheme_scrubber_progress_horizontal_holo_light</item>
+      <item name="android:thumb">@drawable/elfectheme_scrubber_control_selector_holo_light</item>
+  </style>
+
+  <style name="RatingBarElfecTheme" parent="android:Widget.Holo.Light.RatingBar">
+      <item name="android:progressDrawable">@drawable/elfectheme_ratingbar_full_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/elfectheme_ratingbar_full_holo_light</item>
+  </style>
+
+  <style name="RatingBarBigElfecTheme" parent="android:Widget.Holo.Light.RatingBar.Indicator">
+      <item name="android:progressDrawable">@drawable/elfectheme_ratingbar_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/elfectheme_ratingbar_holo_light</item>
+  </style>
+
+  <style name="RatingBarSmallElfecTheme" parent="android:Widget.Holo.Light.RatingBar.Small">
+      <item name="android:progressDrawable">@drawable/elfectheme_ratingbar_small_holo_light</item>
+      <item name="android:indeterminateDrawable">@drawable/elfectheme_ratingbar_small_holo_light</item>
+  </style>
+
+  <style name="ToggleElfecTheme" parent="android:Widget.Holo.Light.Button.Toggle">
+      <item name="android:background">@drawable/elfectheme_btn_toggle_holo_light</item>
+  </style>
+
+  <style name="DialogElfecTheme" parent="@style/ElfecTheme">
+       <item name="android:windowFrame">@null</item>
+        <item name="android:windowTitleStyle">@style/DialogWindowTitle</item>
+        <item name="android:windowBackground">@android:drawable/alert_light_frame</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+  </style>
+  
+  <style name="DialogWindowTitle">
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/elfectheme_color</item>
+        <item name="android:height">20dp</item>
+        <item name="android:scrollHorizontally">true</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textAppearance">@style/TextAppearanceDialogWindowTitle</item>
+    </style>
+  
+  <style name="TextAppearanceDialogWindowTitle">
+        <item name="android:textSize">20sp</item>
+    </style>
+  
+</resources>

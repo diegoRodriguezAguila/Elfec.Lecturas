@@ -1,0 +1,500 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    tools:context=".TomarLectura" >
+
+<RelativeLayout
+    android:id="@+id/datos_de_lectura" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="0dp"
+    tools:context=".TomarLectura" >
+
+    <TextView
+        android:id="@+id/lbl_datos_cliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/separator_1"
+        android:layout_marginTop="8dp"
+        android:text="@string/datos_cliente_lbl"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/lbl_nombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_datos_cliente"
+        android:layout_marginTop="8dp"
+        android:text="@string/nombre_lbl"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_direccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_nombre"
+        android:layout_marginTop="8dp"
+        android:text="@string/direccion_lbl"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_nus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_direccion"
+        android:layout_marginTop="8dp"
+        android:text="@string/nus_lbl"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_cuenta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_nus"
+        android:layout_marginTop="8dp"
+        android:text="@string/cuenta_lbl"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_datos_medidor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_cuenta"
+        android:layout_marginTop="8dp"
+        android:text="@string/datos_medidor_lbl"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/lbl_numero"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_datos_medidor"
+        android:text="@string/numero_lbl"
+        android:layout_marginTop="8dp"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_nueva_lectura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lbl_obs"
+        android:layout_below="@+id/lbl_obs"
+        android:layout_marginTop="10dp"
+        android:text="@string/nueva_lectura_lbl"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/lbl_info_digitos_medidor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/lbl_titulo"
+        android:layout_below="@+id/lbl_numero"
+        android:layout_marginTop="8dp"
+        android:text="@string/info_digitos_lbl"
+        android:textColor="@color/blue_peter_river"
+        android:textAppearance="?android:attr/textAppearanceSmall" 
+        android:textSize="12sp"/>
+
+    <TextView
+        android:id="@+id/lbl_obs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lbl_info_digitos_medidor"
+        android:layout_marginTop="6dp"
+        android:text="@string/observacion_lbl"
+        android:textColorHighlight="@color/blue_peter_river"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <EditText
+        android:id="@+id/txt_nueva_lectura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_nueva_lectura"
+        android:layout_alignBottom="@+id/lbl_nueva_lectura"
+        android:layout_toRightOf="@+id/lbl_nueva_lectura"
+        android:ems="10"
+        android:inputType="number" >
+        <requestFocus />
+        </EditText>
+
+    <Button
+        android:id="@+id/btn_confirmar_lectura"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignRight="@+id/txt_nueva_lectura"
+        android:layout_below="@+id/txt_nueva_lectura"
+        android:layout_marginTop="10dp"
+        android:text="@string/confirmar_lectura_btn" 
+        android:onClick="btnConfirmarLecturaClick"/>
+
+    <Button
+        android:id="@+id/btn_inicio"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/separator_1"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:contentDescription="@string/volver_al_menu_principal"
+        android:scaleType="fitCenter"
+        android:background="@drawable/state_list_drawable"
+        android:onClick="btnInicioClick"
+        />
+
+    <View
+        android:id="@+id/separator_1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@+id/lbl_datos_cliente"
+        android:layout_below="@+id/btn_inicio"
+        android:background="@android:color/darker_gray" />
+
+    <TextView
+        android:id="@+id/lbl_nombre_cliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_nombre"
+        android:layout_marginLeft="3dp"
+        android:textStyle="bold"
+        android:layout_toRightOf="@+id/lbl_nombre"
+        android:layout_alignBottom="@+id/lbl_nombre"
+        android:text="@string/sample_nombre"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_direccion_cliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/lbl_direccion"
+        android:layout_alignBottom="@+id/lbl_direccion"
+        android:layout_toRightOf="@+id/lbl_direccion"
+        android:text="@string/sample_direccion"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_nus_cliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
+        android:textStyle="bold"
+        android:layout_alignBaseline="@+id/lbl_nus"
+        android:layout_alignBottom="@+id/lbl_nus"
+        android:layout_toRightOf="@+id/lbl_nus"
+        android:text="@string/sample_nus"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_orden_cliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_orden"
+        android:layout_alignBottom="@+id/lbl_orden"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@+id/lbl_orden"
+        android:text="@string/sample_orden"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lbl_cuenta_cliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_cuenta"
+        android:layout_alignBottom="@+id/lbl_cuenta"
+        android:layout_toRightOf="@+id/lbl_cuenta"
+        android:layout_marginLeft="3dp"
+        android:textStyle="bold" 
+        android:text="@string/sample_cuenta"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_tarifa_cliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_tarifa"
+        android:layout_alignBottom="@+id/lbl_tarifa"
+        android:layout_toRightOf="@+id/lbl_tarifa"
+        android:layout_marginLeft="3dp"
+        android:textStyle="bold" 
+        android:text="@string/sample_tarifa"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_tarifa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_nus_cliente"
+        android:layout_alignBottom="@+id/lbl_nus_cliente"
+        android:layout_toRightOf="@+id/lbl_nus_cliente"
+        android:layout_marginLeft="15dp"
+        android:text="@string/tarifa_lbl"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_orden"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_cuenta_cliente"
+        android:layout_alignBottom="@+id/lbl_cuenta_cliente"
+        android:layout_toRightOf="@+id/lbl_cuenta_cliente"
+        android:layout_marginLeft="15dp"
+        android:text="@string/orden_lbl"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_numero_medidor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_numero"
+        android:layout_alignBottom="@+id/lbl_numero"
+        android:layout_toRightOf="@+id/lbl_numero"
+        android:layout_marginLeft="3dp"
+        android:textStyle="bold" 
+        android:text="@string/sample_num_medidor"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_obs_medidor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_obs"
+        android:layout_alignBottom="@+id/lbl_obs"
+        android:layout_toRightOf="@+id/lbl_obs"
+        android:layout_marginLeft="3dp"
+        android:textStyle="bold" 
+        android:text="@string/sample_obs"
+        android:textColorHighlight="@color/blue_peter_river"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btn_inicio"
+        android:layout_alignParentLeft="true"
+        android:text="@string/titulo_tomar_lecturas"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/lbl_lectura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_nueva_lectura"
+        android:layout_alignBottom="@+id/lbl_nueva_lectura"
+        android:layout_toRightOf="@+id/lbl_nueva_lectura"
+        android:layout_marginLeft="4dp"
+        android:textStyle="bold"
+        android:text="@string/sample_lectura"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/lbl_fecha_lectura"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_datos_cliente"
+        android:layout_alignParentRight="true"
+        android:text="@string/sample_fecha"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/lbl_estado_lectura"
+        android:layout_width="85dp"
+        android:layout_height="30dp"
+        android:layout_alignBaseline="@+id/lbl_numero_medidor"
+        android:layout_alignParentRight="true"
+        android:background="@color/green_nephritis"
+        android:gravity="center"
+        android:layout_marginRight="10dp"
+        android:text="@string/sample_estado_medidor"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@android:color/white"
+        android:layout_below="@+id/lbl_datos_medidor"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lbl_estado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_numero_medidor"
+        android:layout_alignBottom="@+id/lbl_numero_medidor"
+        android:layout_toLeftOf="@+id/lbl_estado_lectura"
+        android:text="@string/estado_lbl"
+        android:layout_marginRight="5dp"
+        android:layout_below="@+id/lbl_datos_medidor"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+	
+    <Button
+    android:id="@+id/btn_postergar_lectura"
+    android:layout_width="wrap_content"
+    android:layout_height="40dp"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentLeft="true"
+    android:layout_marginBottom="50dp" 
+    android:layout_marginLeft="-8dp"
+    android:text="@string/postergar_lectura"
+    android:background="@drawable/purple_btn_default_holo_light"
+    android:onClick="btnPostergarLecturaClick" />
+
+    <Button
+        android:id="@+id/btn_reintentar_lectura"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignBaseline="@+id/btn_postergar_lectura"
+        android:layout_alignBottom="@+id/btn_postergar_lectura"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:layout_toRightOf="@+id/btn_postergar_lectura"
+        android:background="@drawable/orange_btn_default_holo_light"
+        android:text="@string/reintentar_lectura"
+        android:onClick="btnReintentarLecturaClick" />
+    
+    <ImageButton
+            android:id="@+id/btn_agregar_ordenativo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/lbl_info_digitos_medidor"
+            android:layout_toRightOf="@+id/lbl_obs_medidor"
+            android:layout_marginLeft="4dp"
+            android:background="@drawable/round_button_selector"
+            android:contentDescription="@string/mostrar_lista"
+            android:scaleType="fitCenter"
+            android:src="@drawable/agregar" 
+            android:onClick="btnAgregarOrdenativoClick"/>
+
+    <ImageButton
+        android:id="@+id/btn_recordatorio"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_below="@+id/lbl_cuenta_cliente"
+        android:layout_toRightOf="@+id/lbl_datos_medidor"
+        android:contentDescription="@string/titulo_recordatorio"
+        android:onClick="btnRecordatorioClick"
+        android:scaleType="fitCenter"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="4dp"
+        android:background="@drawable/btn_recordatorio"
+        />
+
+</RelativeLayout>
+
+<View
+    android:id="@+id/activity_bar"
+    android:layout_width="fill_parent"
+    android:layout_height="40dp"
+    android:layout_alignParentBottom="true"
+    android:background="@color/elfectheme_color" />
+
+<TextView
+    android:id="@+id/viewMiddleInvisible"
+    android:layout_width="1dp"
+    android:layout_height="40dp"
+    android:layout_centerInParent="true"
+    android:layout_alignTop="@+id/activity_bar"
+     />
+
+<ImageButton
+    android:id="@+id/btn_anterior"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginRight="6dp"
+    android:layout_alignTop="@+id/activity_bar"
+    android:layout_toLeftOf="@+id/viewMiddleInvisible"
+    android:background="@drawable/round_button_selector"
+    android:contentDescription="@string/ir_anterior"
+    android:scaleType="fitCenter"
+    android:src="@drawable/back"
+    android:onClick="btnAnteriorClick" />
+
+<ImageButton
+    android:id="@+id/btn_siguiente"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginLeft="6dp"
+    android:layout_alignTop="@+id/activity_bar"
+    android:layout_toRightOf="@+id/viewMiddleInvisible"
+    android:background="@drawable/round_button_selector"
+    android:contentDescription="@string/ir_siguiente"
+    android:scaleType="fitCenter"
+    android:src="@drawable/next" 
+    android:onClick="btnSiguienteClick"/>
+
+<ImageButton
+    android:id="@+id/btn_ultimo"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginLeft="12dp"
+    android:layout_alignTop="@+id/activity_bar"
+    android:layout_toRightOf="@+id/btn_siguiente"
+    android:background="@drawable/round_button_selector"
+    android:contentDescription="@string/ir_ultimo"
+    android:scaleType="fitCenter"
+    android:src="@drawable/last" 
+    android:onClick="btnUltimoClick"/>
+
+<ImageButton
+    android:id="@+id/btn_buscar"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginLeft="12dp"
+    android:layout_alignTop="@+id/activity_bar"
+    android:layout_toRightOf="@+id/btn_ultimo"
+    android:background="@drawable/round_button_selector"
+    android:contentDescription="@string/buscar_lectura"
+    android:scaleType="fitCenter"
+    android:src="@drawable/search" 
+    android:onClick="btnBuscarClick"/>
+
+<ImageButton
+    android:id="@+id/btn_primero"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginRight="12dp"
+    android:layout_alignTop="@+id/activity_bar"
+    android:layout_toLeftOf="@+id/btn_anterior"
+    android:background="@drawable/round_button_selector"
+    android:contentDescription="@string/ir_primero"
+    android:scaleType="fitCenter"
+    android:src="@drawable/first"
+    android:onClick="btnPrimeroClick" />
+
+<ImageButton
+    android:id="@+id/btn_lista"
+    android:layout_width="35dp"
+    android:layout_height="35dp"
+     android:layout_marginTop="3dp"
+    android:layout_marginRight="12dp"
+    android:layout_alignTop="@+id/activity_bar"
+    android:layout_toLeftOf="@+id/btn_primero"
+    android:background="@drawable/round_button_selector"
+    android:contentDescription="@string/mostrar_lista"
+    android:scaleType="fitCenter"
+    android:src="@drawable/list"
+    android:onClick="btnListaLecturasClick" />
+
+
+</RelativeLayout>

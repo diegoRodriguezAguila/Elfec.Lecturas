@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".Login" >
+
+    <TextView
+        android:id="@+id/lbl_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/titulo_login"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/lbl_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lbl_titulo"
+        android:layout_below="@+id/lbl_titulo"
+        android:layout_marginTop="38dp"
+        android:text="@string/usuario_lbl"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/txt_usuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_usuario"
+        android:layout_alignBottom="@+id/lbl_usuario"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/lbl_fecha"
+        android:ems="10"
+        android:hint="@string/usuario_hint" 
+        android:inputType="textShortMessage">
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/lbl_fecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lbl_usuario"
+        android:layout_below="@+id/txt_usuario"
+        android:layout_marginTop="34dp"
+        android:text="@string/password_lbl"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/txt_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/lbl_fecha"
+        android:layout_alignBottom="@+id/lbl_fecha"
+        android:layout_alignLeft="@+id/txt_usuario"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_alignLeft="@+id/lbl_titulo"
+        android:layout_below="@+id/lbl_titulo"
+        android:background="@android:color/darker_gray" />
+
+    <Button
+        android:id="@+id/btn_ingresar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/txt_password"
+        android:layout_below="@+id/txt_password"
+        android:layout_marginTop="22dp"
+        android:text="@string/login_btn" 
+        android:onClick="btnIngresarClick"/> <!-- ver funcion en controlador de login -->
+
+    <ImageView
+        android:id="@+id/img_logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_above="@+id/lbl_creditos"
+        android:layout_centerHorizontal="true"
+        android:background="#215b92"
+        android:src="@drawable/credits_logo" android:contentDescription="@string/logo"/>
+
+    <TextView
+        android:id="@+id/lbl_creditos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="@string/creditos"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
+
+</RelativeLayout>

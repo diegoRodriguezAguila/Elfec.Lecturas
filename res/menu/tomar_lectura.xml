@@ -1,0 +1,59 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"  >
+
+    <item
+        android:id="@+id/menu_item_visualizar_potencia"
+        android:title="@string/visualizar_potencia" 
+        android:showAsAction="never"
+        android:icon="@drawable/visualizar_potencia"/>
+    
+    <item
+        android:id="@+id/menu_item_tomar_foto"
+        android:title="@string/tomar_foto" 
+        android:showAsAction="never"
+        android:icon="@drawable/camera"/>
+    
+    <item
+        android:id="@+id/menu_item_modificar_lectura"
+        android:title="@string/modificar_lectura" 
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/modificar_lectura"/>
+    
+    <item
+        android:id="@+id/menu_item_estimar_lectura"
+        android:title="@string/estimar_lectura" 
+        android:showAsAction="never"
+        android:icon="@drawable/estimar_lectura"/>
+    
+    <item
+        android:id="@+id/menu_item_impedir_lectura"
+        android:title="@string/impedir_lectura" 
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/impedir_lectura"/>
+   
+    
+    <item
+        android:id="@+id/menu_item_re_imprimir"
+        android:title="@string/re_imprimir" 
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/imprimir"/>
+    
+    <item
+        android:id="@+id/menu_item_filtrar_lecturas"
+        android:title="@string/filtrar_lecturas" 
+        android:showAsAction="ifRoom"
+        android:icon="@drawable/filtrar_lecturas"/>
+    
+    <item
+        android:id="@+id/menu_item_recordatorio_lector"
+        android:title="@string/recordatorio_lector" 
+        android:showAsAction="never"
+        android:icon="@drawable/recordatorio_lector"/>
+    
+   	<item
+        android:id="@+id/menu_item_medidor_entre_lineas"
+        android:title="@string/menu_medidor_entre_lineas"
+        android:showAsAction="never" 
+        android:icon="@drawable/nuevo_medidor"/>
+    
+
+</menu>
