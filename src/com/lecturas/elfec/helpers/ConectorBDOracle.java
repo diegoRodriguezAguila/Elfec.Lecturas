@@ -59,8 +59,6 @@ public class ConectorBDOracle {
 	 */
 	public ConectorBDOracle(Context contexto, boolean habilitarRol) 
 	{
-		//fecha de prueba
-		//calendar.set(2014,Calendar.JUNE,12);
 		try 
 		{
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -271,9 +269,9 @@ public class ConectorBDOracle {
 		{
 			query  = new StringBuilder("SELECT * FROM MOVILES.LECTURAS WHERE LEMRUT=");
 			query.append(ruta.Ruta) 
-					.append(" AND LEMARE=").append(calendar.get(Calendar.DAY_OF_MONTH))
-					.append(" AND LEMMES=").append((calendar.get(Calendar.MONTH)+1)) 
-					.append(" AND LEMANO=").append(calendar.get(Calendar.YEAR))
+					.append(" AND LEMARE=").append(ruta.Dia)
+					.append(" AND LEMMES=").append(ruta.Mes) 
+					.append(" AND LEMANO=").append(ruta.Anio)
 					.append(" AND TO_NUMBER(LEMCTAANT,'9999999999')>=").append(ruta.obtenerCuentaInicio())
 					.append(" AND TO_NUMBER(LEMCTAANT,'9999999999')<=").append(ruta.obtenerCuentaFin());
 		}
@@ -890,7 +888,7 @@ public class ConectorBDOracle {
 	{
 		List<AsignacionRuta> lista = new ArrayList<AsignacionRuta>();
 		rs = stmt.executeQuery("SELECT * FROM MOVILES.USUARIO_ASIGNACION WHERE USUARIO='" + usuario + 
-				"' AND DIA="+calendar.get(Calendar.DAY_OF_MONTH)+" AND MES="+(calendar.get(Calendar.MONTH)+1)+ 
+				"' AND DIA_ASIG_CARGA="+calendar.get(Calendar.DAY_OF_MONTH)+" AND MES="+(calendar.get(Calendar.MONTH)+1)+ 
 				" AND ANIO="+calendar.get(Calendar.YEAR)+" AND (ESTADO=1 OR ESTADO=6)");
 		while (rs.next())
 		{

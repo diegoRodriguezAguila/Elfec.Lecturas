@@ -36,6 +36,8 @@ public class PasoVerifFechaSinc extends PasoValidacionUsuario {
 	 */
 	private static boolean fechaSincronizacionEstaEnRango(Date fechaSinc, int rangoDias)
 	{
+		if(fechaSinc==null)
+			return false;
 		Calendar calFechaSinc = Calendar.getInstance();
 		calFechaSinc.setTime(fechaSinc);
 		Calendar calFechaActual = Calendar.getInstance();
