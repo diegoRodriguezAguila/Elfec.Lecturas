@@ -834,7 +834,7 @@ public class ConectorBDOracle {
 	 */
 	public boolean validarExistenciaIMEI(String imei) throws SQLException
 	{
-		rs = stmt.executeQuery("SELECT * FROM MOVILES.IMEI_APP WHERE IMEI='"+imei+"' AND ESTADO=1");
+		rs = stmt.executeQuery("SELECT * FROM MOVILES.IMEI_APP WHERE APLICACION='Lecturas Moviles' AND IMEI='"+imei+"' AND ESTADO=1");
 		while(rs.next())
 		{
 			return true;
