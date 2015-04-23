@@ -585,19 +585,18 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion, EventoAl
 	{
 		if(ConsumoPromedio==0)
 			return false;
-		int consumoActual=LecturaNueva-LecturaAnterior;
-		return (consumoActual>(ConsumoPromedio*2));
+		return (calcularConsumoFacturado(LecturaAnterior, LecturaNueva)>(ConsumoPromedio*2));
 	}
 	
 	/**
-	 * Verifica si la variable <b>Consumo</b> representa un valor elevado.
+	 * Verifica si la variable <b>ConsumoFacturado</b> representa un valor elevado.
 	 * @return true, false
 	 */
-	public boolean consumoAsignadoElevado()
+	public boolean consumoFacturadoAsignadoElevado()
 	{
 		if(ConsumoPromedio==0)
 			return false;
-		return (Consumo>(ConsumoPromedio*2));
+		return (ConsumoFacturado>(ConsumoPromedio*2));
 	}
 	
 	/**
@@ -608,8 +607,30 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion, EventoAl
 	{
 		if(ConsumoPromedio==0)
 			return false;
-		int consumoActual=LecturaNueva-LecturaAnterior;
-		return (consumoActual<(ConsumoPromedio/2));
+		return (calcularConsumoFacturado(LecturaAnterior, LecturaNueva)<(ConsumoPromedio/2));
+	}
+	
+	/**
+	 * Calcula el consumo facturado a partir de las lecturas anterior y nueva. No actualiza las variables de Consumo ni 
+	 * ConsumoFacturado
+	 * @param lectAnterior
+	 * @param lectNueva
+	 * @return consumo facturado
+	 */
+	private int calcularConsumoFacturado(int lectAnterior, int lectNueva)
+	{
+		int consumo = ((new BigDecimal(lectNueva - lectAnterior)).multiply(FactorMultiplicador))
+		.setScale(0,RoundingMode.HALF_UP).intValue();
+		int consumoFacturado = consumo +KhwAdicionales;
+		if(PerdidasCobrePorcentaje!=null)
+		{
+			consumoFacturado += (PerdidasCobrePorcentaje.multiply(new BigDecimal(consumo)).setScale(0,RoundingMode.HALF_UP).intValue());
+		}
+		if(PerdidasHierroKwh!=null)
+		{
+			consumoFacturado+=	PerdidasHierroKwh.intValue();
+		}
+		return consumoFacturado;
 	}
 	
 	/**

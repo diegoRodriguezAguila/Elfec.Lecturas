@@ -344,7 +344,7 @@ public class TomarLectura extends Activity implements ISwipeListener{
 		{
 			ordLec.guardarYEnviarPor3G();
 			lecturaActual.ObservacionLectura = ordLec.Ordenativo.Codigo;
-			if (lecturaActual.ObservacionLectura==85 && lecturaActual.consumoAsignadoElevado())//Caso Lectura Adelantada: hubo volteo y consumo es elevado
+			if (lecturaActual.ObservacionLectura==85 && lecturaActual.consumoFacturadoAsignadoElevado())//Caso Lectura Adelantada: hubo volteo y consumo es elevado
 			{
 				Ordenativo ord = Ordenativo.obtenerOrdenativoPorCodigo(68);
 				OrdenativoLectura ordLecAdelantada = new OrdenativoLectura(ord, lecturaActual, new Date());
