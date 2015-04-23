@@ -731,7 +731,7 @@ public class ConectorBDOracle {
 	 */
 	public Usuario obtenerUsuario(String username) throws SQLException
 	{
-		rs = stmt.executeQuery("SELECT * FROM MOVILES.USUARIO_APP WHERE USUARIO='"+username+"'");
+		rs = stmt.executeQuery("SELECT * FROM MOVILES.USUARIO_APP WHERE APLICACION='Lecturas Moviles' AND UPPER(USUARIO)=UPPER('"+username+"')");
 		while(rs.next())
 		{
 			return new Usuario(rs);
@@ -748,7 +748,7 @@ public class ConectorBDOracle {
 	{
 		try
 		{
-			rs = stmt.executeQuery("SELECT * FROM MOVILES.PERFIL_APP_OPCIONES WHERE PERFIL='"+perfil+"' AND ESTADO=1");
+			rs = stmt.executeQuery("SELECT * FROM MOVILES.PERFIL_APP_OPCIONES WHERE APP='Lecturas Moviles' AND PERFIL='"+perfil+"' AND ESTADO=1");
 			while(rs.next())
 			{
 				(new PermisoRestriccion(rs)).save();
