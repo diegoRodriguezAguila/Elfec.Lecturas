@@ -586,7 +586,7 @@ public class ConectorBDOracle {
 				    ", '"+lec.NumeroMedidor+"', "+lec.LecturaNueva+", "+
 				((lec.PotenciaLectura==null || lec.PotenciaLectura.LecturaNuevaPotencia==null)?"NULL":lec.PotenciaLectura.LecturaNuevaPotencia.toPlainString())+
 				", "+((lec.PotenciaLectura==null || lec.PotenciaLectura.Reactiva==null)?"NULL":lec.PotenciaLectura.Reactiva.toPlainString())+
-				", TO_DATE('"+fechaHora+"', 'dd/mm/yyyy hh24:mi:ss'), "+lec.GPSLatitud+", "+lec.GPSLongitud+", '"+lec.UsuarioAuditoria+"', "+
+				", TO_DATE('"+fechaHora+"', 'dd/mm/yyyy hh24:mi:ss'), "+lec.GPSLatitud+", "+lec.GPSLongitud+", UPPER('"+lec.UsuarioAuditoria+"'), "+
 				lec.getEstadoLectura().getEstadoEntero()+", "+(lec.Recordatorio==null?"NULL":("'"+lec.Recordatorio+"'"))+", "+
 				"USER , SYSDATE, "+(lec.ImporteTotal!=null?lec.ImporteTotal.toString():"NULL")+", "+
 				((lec.PotenciaLectura==null)?"-1":lec.PotenciaLectura.ConsumoFacturado)+")";
@@ -610,7 +610,7 @@ public class ConectorBDOracle {
 			String query = "INSERT INTO ERP_ELFEC.SGC_MOVIL_ORDENATIVOS VALUES " +
 				"("+ordLec.Lectura.Ruta+", "+ordLec.Lectura.Anio+", "+ordLec.Lectura.Mes+", "+ordLec.Lectura.Dia+", "+ordLec.Lectura.Suministro+
 			    ", "+ordLec.Ordenativo.Codigo+", TO_DATE('"+
-				fechaHora+"', 'dd/mm/yyyy hh24:mi:ss'), '"+ordLec.UsuarioAuditoria+"', USER , SYSDATE)";
+				fechaHora+"', 'dd/mm/yyyy hh24:mi:ss'), UPPER('"+ordLec.UsuarioAuditoria+"'), USER , SYSDATE)";
 			stmt.executeUpdate(query);
 			ordLec.Enviado3G = 2;//2 se envió al servidor, no necesariamente por 3G
 			ordLec.save();
@@ -636,7 +636,7 @@ public class ConectorBDOracle {
 				    ", '"+lecEL.NumeroMedidor+"', "+lecEL.LecturaNueva+", "+
 				(lecEL.LecturaPotencia==null?"NULL":lecEL.LecturaPotencia.toPlainString())+
 				", "+(lecEL.Reactiva==null?"NULL":lecEL.Reactiva.toPlainString())+", TO_DATE('"+
-				fechaHora+"', 'dd/mm/yyyy hh24:mi:ss'), "+lecEL.GPSLatitud+", "+lecEL.GPSLongitud+", '"+lecEL.UsuarioAuditoria+"', USER , SYSDATE)";
+				fechaHora+"', 'dd/mm/yyyy hh24:mi:ss'), "+lecEL.GPSLatitud+", "+lecEL.GPSLongitud+", UPPER('"+lecEL.UsuarioAuditoria+"'), USER , SYSDATE)";
 			stmt.executeUpdate(query);
 			lecEL.Enviado3G = 2;//2 se envió al servidor, no necesariamente por 3G
 			lecEL.save();
@@ -774,7 +774,7 @@ public class ConectorBDOracle {
 	{
 		try
 		{
-			rs = stmt.executeQuery("SELECT * FROM MOVILES.USUARIO_PREFERENCIAS_UI WHERE USUARIO='"+usuario+"' AND ESTADO=1");
+			rs = stmt.executeQuery("SELECT * FROM MOVILES.USUARIO_PREFERENCIAS_UI WHERE UPPER(USUARIO)=UPPER('"+usuario+"') AND ESTADO=1");
 			while(rs.next())
 			{
 				(new PreferenciaUI(rs)).save();
@@ -887,8 +887,8 @@ public class ConectorBDOracle {
 	public List<AsignacionRuta> obtenerRutasAsignadas(String usuario) throws SQLException
 	{
 		List<AsignacionRuta> lista = new ArrayList<AsignacionRuta>();
-		rs = stmt.executeQuery("SELECT * FROM MOVILES.USUARIO_ASIGNACION WHERE USUARIO='" + usuario + 
-				"' AND DIA_ASIG_CARGA="+calendar.get(Calendar.DAY_OF_MONTH)+" AND MES="+(calendar.get(Calendar.MONTH)+1)+ 
+		rs = stmt.executeQuery("SELECT * FROM MOVILES.USUARIO_ASIGNACION WHERE UPPER(USUARIO)=UPPER('" + usuario + 
+				"') AND DIA_ASIG_CARGA="+calendar.get(Calendar.DAY_OF_MONTH)+" AND MES="+(calendar.get(Calendar.MONTH)+1)+ 
 				" AND ANIO="+calendar.get(Calendar.YEAR)+" AND (ESTADO=1 OR ESTADO=6)");
 		while (rs.next())
 		{
@@ -914,8 +914,8 @@ public class ConectorBDOracle {
 		{
 			query = "UPDATE MOVILES.USUARIO_ASIGNACION";
 			datos = " SET ESTADO="+ruta.Estado+(actualizarCantLecturasRecibidas?", CANT_LEC_REC="+ruta.cantLecturasEnviadas:"");
-			condicion = " WHERE USUARIO='" + ruta.UsuarioAsignado + 
-					"' AND DIA="+ruta.Dia+" AND MES="+ruta.Mes+ 
+			condicion = " WHERE UPPER(USUARIO)=UPPER('" + ruta.UsuarioAsignado + 
+					"') AND DIA="+ruta.Dia+" AND MES="+ruta.Mes+ 
 					" AND ANIO="+ruta.Anio+" AND RUTA="+ruta.Ruta;
 			stmt.executeUpdate(query+datos+condicion);
 		}
