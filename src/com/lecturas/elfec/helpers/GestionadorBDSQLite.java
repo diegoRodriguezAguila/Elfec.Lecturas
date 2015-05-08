@@ -108,12 +108,12 @@ public class GestionadorBDSQLite
 	
 	/**
 	 * Comprueba si los datos diarios de la base de datos fueron cargados.
-	 * Los datos diarios son las tablas correspondientes a los modelos de: Lectura, Potencia, Ordenativo, EvolucionConsumo
+	 * Los datos diarios son las tablas correspondientes a los modelos de: Lectura, Ordenativo, EvolucionConsumo
 	 * @return true o false
 	 */
 	public static boolean datosDiariosFueronCargados()
 	{
-		List<String> nombresTablasImportacionDiaria = nombresTablasDatosDiarios.subList(0, 2);
+		List<String> nombresTablasImportacionDiaria = nombresTablasDatosDiarios.subList(0, 3);
 		boolean res = false;
 		for(String nombreTabla : nombresTablasImportacionDiaria)
 		{
