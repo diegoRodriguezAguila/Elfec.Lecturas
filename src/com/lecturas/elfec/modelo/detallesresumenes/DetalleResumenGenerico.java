@@ -63,15 +63,15 @@ public abstract class DetalleResumenGenerico
 		double margenCache = margenIzqCuenta;
 		double separacionEntreLecturas = 0.35;
 		double separacionTitulos = 0.5;
-		double margenIzqTitulo = 4;
-		double margenInferior =10.3;
+		double margenIzqTitulo = 2.5;
+		double margenInferior = 10.3;
 		String imprimible =
 		 "! 0 1200 1723 1223 1\r\n" + "ON-FEED IGNORE\r\n"+"IN-CENTIMETERS\r\n" +
-				 "T270 SEGOEUI7.CPF 0 "+margenInferior+" "+(margenIzqTitulo-2.5)+" "+pagActual+"/"+numPags+"\r\n" +
-				 "T270 SEGOEUI7.CPF 0 "+margenInferior+" "+(margenIzqTitulo-1.5)+" ("+cantLecturas+")\r\n" +
+				 "T270 SEGOEUI7.CPF 0 "+margenInferior+" "+(margenIzqTitulo-2)+" "+pagActual+"/"+numPags+"\r\n" +
+				 "T270 SEGOEUI7.CPF 0 "+margenInferior+" "+(margenIzqTitulo-1)+" ("+cantLecturas+")\r\n" +
 				 "T270 SEGOEUIB.CPF 0 "+margenInferior+" "+margenIzqTitulo+" "+titulo+"\r\n" +
-				 "T270 SEGOEUI7.CPF 0 "+margenInferior+" "+(margenIzqTitulo+=6)+" "+fechaImpresion+"\r\n" +
-				 "T270 SEGOEUI7.CPF 0 "+margenInferior+" "+(margenIzqTitulo+=2.5)+" "+horaImpresion+"\r\n" +
+				 "T270 SEGOEUI7.CPF 0 "+margenInferior+" "+(margenIzqTitulo+=7)+" "+fechaImpresion+"\r\n" +
+				 "T270 SEGOEUI7.CPF 0 "+margenInferior+" "+(margenIzqTitulo+=1.5)+" "+horaImpresion+"\r\n" +
 				 "T270 SEGOEUI8.CPF 0 "+(margenInferior-=separacionTitulos)+" "+margenIzqCuenta+" Cuenta\r\n" ;
 		imprimible+=
 				 "T270 SEGOEUI8.CPF 0 "+margenInferior+" "+(margenCache+=2.1)+" N.U.S\r\n" +

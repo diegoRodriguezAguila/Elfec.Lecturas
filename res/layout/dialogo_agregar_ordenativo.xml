@@ -2,17 +2,18 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="10dp"
     android:paddingRight="10dp"
-    android:paddingTop="@dimen/activity_vertical_margin" 
-    android:background="@android:color/white"
-    >
+    android:paddingTop="@dimen/activity_vertical_margin" >
+
     <TextView
         android:id="@+id/lbl_cod_obs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="5dp"
         android:text="@string/cod_obs_lbl"
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_alignBaseline="@+id/lbl_cod_obs"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:text="@string/btn_ok" />
 
@@ -31,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:text="@string/salida_btn" />
 
@@ -39,20 +42,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btn_salir_dialogo"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="10dp"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/btn_guardar_obs"
+        android:layout_marginBottom="10dp"
         android:layout_marginTop="14dp" >
-
     </ListView>
 
     <View
         android:id="@+id/separator_1"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/list_view_ordenativos"
         android:background="@android:color/darker_gray" />
 
@@ -61,8 +67,10 @@
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:layout_alignBottom="@+id/list_view_ordenativos"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:background="@android:color/darker_gray" />
 
     <EditText
@@ -70,6 +78,7 @@
         android:layout_width="65dp"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/lbl_cod_obs"
+        android:layout_toEndOf="@+id/lbl_cod_obs"
         android:layout_toRightOf="@+id/lbl_cod_obs"
         android:ems="10"
         android:inputType="number"
@@ -82,38 +91,45 @@
         android:id="@+id/info_tip"
         android:layout_width="fill_parent"
         android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/list_view_ordenativos"
         android:background="@drawable/background2"
         android:gravity="center"
-		android:visibility="gone"
         android:text="@string/sample_desc_ord"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:visibility="gone" />
 
     <RelativeLayout
-        android:visibility="gone"
-	    android:id="@+id/layout_prohibir_agregar"
-	    android:layout_width="fill_parent"
-	    android:layout_height="fill_parent"
-	    android:layout_alignParentLeft="true"
-	    android:layout_alignParentRight="true"
-	    android:layout_alignTop="@id/btn_guardar_obs"
-	    android:layout_alignBottom="@id/separator"
-	    android:background="#99215b92"
-	    android:gravity="center_vertical">
-    <TextView 
-        android:layout_width="wrap_content"
-	    android:layout_height="wrap_content"
-	    android:gravity="center"
-	    android:background="@color/white"
+        android:id="@+id/layout_prohibir_agregar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignBottom="@id/separator"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-	    android:layout_alignParentRight="true"
-	    android:padding="10dp"
-	    android:textAppearance="?android:attr/textAppearanceMedium"
-	    android:textColor="@android:color/black"
-	    android:text="@string/prohibir_agregar_msg"/>
-	</RelativeLayout>
-    
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@id/btn_guardar_obs"
+        android:background="#99215b92"
+        android:gravity="center_vertical"
+        android:visibility="gone" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:background="@color/white"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/prohibir_agregar_msg"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@android:color/black" />
+    </RelativeLayout>
+
 </RelativeLayout>
