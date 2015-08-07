@@ -20,7 +20,7 @@ import com.lecturas.elfec.modelo.OrdenativoLectura;
 public class DetalleOrdenativos extends DetalleResumenGenerico {
 
 	public DetalleOrdenativos() {
-		titulo = "RESUMEN DETALLE LECTURAS POR ORDENATIVO - GC-702-13";
+		titulo = "RESUMEN DETALLE LECTURAS POR ORDENATIVO - GC-0702-13";
 		Date fechaActual = new Date();
 		DateFormat df = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
 		DateFormat horaFormato = new SimpleDateFormat("HH:mm:ss",

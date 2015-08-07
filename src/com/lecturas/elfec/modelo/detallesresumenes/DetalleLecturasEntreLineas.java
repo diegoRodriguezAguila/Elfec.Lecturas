@@ -11,31 +11,30 @@ import com.lecturas.elfec.modelo.MedidorEntreLineas;
 
 /**
  * Es el resumen diario de Detalle de Lecturas Impedidas, listo para ser impreso
+ * 
  * @author drodriguez
  *
  */
-public class DetalleLecturasEntreLineas extends DetalleResumenGenerico 
-{
+public class DetalleLecturasEntreLineas extends DetalleResumenGenerico {
 
-	public DetalleLecturasEntreLineas()
-	{
-		titulo="DETALLE LECTURAS ENTRE LINEAS";
+	public DetalleLecturasEntreLineas() {
+		titulo = "DETALLE LECTURAS ENTRE LINEAS - GC-0702-15";
 		Date fechaActual = new Date();
-		DateFormat df = new SimpleDateFormat("dd/MM/yy",Locale.getDefault());
-		DateFormat horaFormato = new SimpleDateFormat("HH:mm:ss",Locale.getDefault());
+		DateFormat df = new SimpleDateFormat("dd/MM/yy", Locale.getDefault());
+		DateFormat horaFormato = new SimpleDateFormat("HH:mm:ss",
+				Locale.getDefault());
 		fechaImpresion = df.format(fechaActual);
 		horaImpresion = horaFormato.format(fechaActual);
 	}
-	
+
 	@Override
-	public List<ResumenLectura> obtenerResumenesLecturas() 
-	{
-		List<MedidorEntreLineas> lecturas = MedidorEntreLineas.obtenerMedidoresEntreLineas();
+	public List<ResumenLectura> obtenerResumenesLecturas() {
+		List<MedidorEntreLineas> lecturas = MedidorEntreLineas
+				.obtenerMedidoresEntreLineas();
 		List<ResumenLectura> resLecs = new ArrayList<ResumenLectura>();
-		for (MedidorEntreLineas lec : lecturas) 
-		{
+		for (MedidorEntreLineas lec : lecturas) {
 			ResumenLectura resLec = new ResumenLectura(lec);
-			resLecs.add(resLec);	
+			resLecs.add(resLec);
 		}
 		return resLecs;
 	}
