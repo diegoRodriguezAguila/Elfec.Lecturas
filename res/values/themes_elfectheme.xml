@@ -3,49 +3,31 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-  <style name="ElfecTheme" parent="@style/_ElfecTheme"/>
+    <style name="ElfecTheme" parent="@style/_ElfecTheme" />
 
-  <style name="_ElfecTheme" parent="android:Theme.Light">
-	
-      
-    <item name="android:editTextStyle">@style/EditTextElfecTheme</item>
-
-    <item name="android:textColorHighlight">#99416190</item>
-
-    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewElfecTheme</item>
-
-    <item name="android:checkboxStyle">@style/CheckBoxElfecTheme</item>
-
-    <item name="android:radioButtonStyle">@style/RadioButtonElfecTheme</item>
-
-    <item name="android:buttonStyle">@style/ButtonElfecTheme</item>
-
-    <item name="android:imageButtonStyle">@style/ImageButtonElfecTheme</item>
-
-    <item name="android:spinnerStyle">@style/SpinnerElfecTheme</item>
-
-    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemElfecTheme</item>
-
-    <item name="android:progressBarStyleHorizontal">@style/ProgressBarElfecTheme</item>
-
-    <item name="android:seekBarStyle">@style/SeekBarElfecTheme</item>
-
-    <item name="android:ratingBarStyle">@style/RatingBarElfecTheme</item>
-
-    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigElfecTheme</item>
-
-    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallElfecTheme</item>
-
-    <item name="android:buttonStyleToggle">@style/ToggleElfecTheme</item>
-
-    <item name="android:listViewStyle">@style/ListViewElfecTheme</item>
-
-    <item name="android:listViewWhiteStyle">@style/ListViewElfecTheme.White</item>
-
-    <item name="android:spinnerItemStyle">@style/SpinnerItemElfecTheme</item>
-
-    <item name="android:alertDialogStyle">@style/DialogElfecTheme</item>
-
-  </style>
+    <style name="_ElfecTheme" parent="android:Theme.Light">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:editTextStyle">@style/EditTextElfecTheme</item>
+        <item name="android:textColorHighlight">#99416190</item>
+        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewElfecTheme</item>
+        <item name="android:checkboxStyle">@style/CheckBoxElfecTheme</item>
+        <item name="android:radioButtonStyle">@style/RadioButtonElfecTheme</item>
+        <item name="android:buttonStyle">@style/ButtonElfecTheme</item>
+        <item name="android:imageButtonStyle">@style/ImageButtonElfecTheme</item>
+        <item name="android:spinnerStyle">@style/SpinnerElfecTheme</item>
+        <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemElfecTheme</item>
+        <item name="android:progressBarStyleHorizontal">@style/ProgressBarElfecTheme</item>
+        <item name="android:seekBarStyle">@style/SeekBarElfecTheme</item>
+        <item name="android:ratingBarStyle">@style/RatingBarElfecTheme</item>
+        <item name="android:ratingBarStyleIndicator">@style/RatingBarBigElfecTheme</item>
+        <item name="android:ratingBarStyleSmall">@style/RatingBarSmallElfecTheme</item>
+        <item name="android:buttonStyleToggle">@style/ToggleElfecTheme</item>
+        <item name="android:listViewStyle">@style/ListViewElfecTheme</item>
+        <item name="android:listViewWhiteStyle">@style/ListViewElfecTheme.White</item>
+        <item name="android:spinnerItemStyle">@style/SpinnerItemElfecTheme</item>
+        <item name="android:alertDialogStyle">@style/DialogElfecTheme</item>
+    </style>
 
 </resources>

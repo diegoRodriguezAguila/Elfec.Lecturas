@@ -54,7 +54,7 @@ public class LecturaAdapter extends ArrayAdapter<Lectura> {
 
 	@Override
 	public long getItemId(int position) {
-		return position;
+		return lLecturas.get(position).getId();
 	}
 
 	@Override

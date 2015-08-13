@@ -144,6 +144,8 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	protected void onResume() {
 		super.onResume();
 		verificarServiciosDeHW();
+		asignarLista();
+		asignarDatos();
 	}
 
 	/**
@@ -184,7 +186,6 @@ public class TomarLectura extends Activity implements ISwipeListener {
 			dialogo.setIcon(R.drawable.warning);
 			dialogo.setMessage(R.string.advertencia_filtros);
 			dialogo.setPositiveButton(R.string.btn_ok, new OnClickListener() {
-
 				@Override
 				public void onClick(View v) {
 					dialogo.dismiss();

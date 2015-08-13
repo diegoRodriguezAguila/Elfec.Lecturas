@@ -5,7 +5,7 @@
     <string name="app_name">Elfec Lecturas</string>
     <string name="app_title">Elfec Lecturas v. 1.15.05.08</string>
     <string name="action_settings">Settings</string>
-    
+
     <!-- Login -->
     <string name="titulo_login">Iniciar Sesión</string>
     <string name="usuario_lbl">Usuario:</string>
@@ -15,12 +15,12 @@
     <string name="creditos">Elfec Lecturas es una herramienta de propiedad exclusiva de la empresa.\nTodos los derechos reservados \u00AE</string>
     <string name="logo">Logo</string>
     <string name="fecha_no_cambiada">La fecha y hora no fueron cambiadas&#8230;</string>
-    	<!-- Login : Dialogo -->
-    	<string name="titulo_login_usuario">Validando usuario&#8230;</string>
-    	<string name="login_usuario_msg">Se esta validando la información de usuario proporcionada, espere por favor</string>
-		<!-- Login : Dialogo Advertencia Cuadro Tarifario -->
-		<string name="titulo_cuadro_tarif">Cuadro tarifario incorrecto</string>
-		<string name="cuadro_tarif_msg">Se encontraron datos en el telefono que corresponden a un cuadro tarifario que no es el actual, se eliminaran para poder proceder con el ingreso al sistema!</string>
+    <!-- Login : Dialogo -->
+    <string name="titulo_login_usuario">Validando usuario&#8230;</string>
+    <string name="login_usuario_msg">Se esta validando la información de usuario proporcionada, espere por favor</string>
+    <!-- Login : Dialogo Advertencia Cuadro Tarifario -->
+    <string name="titulo_cuadro_tarif">Cuadro tarifario incorrecto</string>
+    <string name="cuadro_tarif_msg">Se encontraron datos en el telefono que corresponden a un cuadro tarifario que no es el actual, se eliminaran para poder proceder con el ingreso al sistema!</string>
     <!-- Inicio -->
     <string name="titulo_inicio">Inicio</string>
     <string name="nom_usuario_lbl">Usuario: </string>
@@ -29,31 +29,31 @@
     <string name="salida_btn">Salir</string>
     <string name="menu_principal_btn">Menu Principal</string>
     <string name="menu_principal_info">Presione menu principal para ingresar a las opciones de lecturas.</string>
-	<string name="cargar_datos_btn">CARGAR DATOS</string>
-	<string name="ruta_info_lbl">Ruta no asignada.</string>
-	<string name="info_datos_no_cargados_lbl">Los datos no fueron cargados, no puede acceder al Menu Principal.</string>
+    <string name="cargar_datos_btn">CARGAR DATOS</string>
+    <string name="ruta_info_lbl">Ruta no asignada.</string>
+    <string name="info_datos_no_cargados_lbl">Los datos no fueron cargados, no puede acceder al Menu Principal.</string>
     <string name="info_datos_cargados_lbl">Los datos ya fueron cargados.</string>
-    	<!-- Inicio: Carga de datos -->
-    	<string name="titulo_cargando_datos">Cargando datos&#8230;</string>
-    	<string name="cargando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
-    	<string name="datos_cargados_exito">Datos cargados exitosamente!</string>
-    	<string name="error_carga_datos">ERROR en la carga de datos!</string>
+    <!-- Inicio: Carga de datos -->
+    <string name="titulo_cargando_datos">Cargando datos&#8230;</string>
+    <string name="cargando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
+    <string name="datos_cargados_exito">Datos cargados exitosamente!</string>
+    <string name="error_carga_datos">ERROR en la carga de datos!</string>
     <string name="descargar_datos_btn">DESCARGAR DATOS</string>
-    	<!-- Inicio: Descarga de datos -->
-    	<string name="titulo_descargando_datos">Descargando datos&#8230;</string>
-    	<string name="descargando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
-    	<string name="datos_descargados_exito">Datos descargados exitosamente! Se cerró su sesión, gracias.</string>
-    	<string name="error_descarga_datos">Ocurrió un problema al descargar los datos!</string>
-    	<string name="descarga_inhabilitada">Aún no se completaron las lecturas, no puede descargar los datos</string>
-    	<!-- Dialogo Eliminar datos -->
-    	<string name="titulo_eliminar_datos">Eliminando todos los datos&#8230;</string>
-   		<string name="eliminando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
-    	<string name="datos_eliminados_exito">Datos eliminados exitosamente!</string>
-   		<string name="datos_eliminados_error">Ocurrió un problema al eliminar los datos!</string>
-    	<!-- Inicio: Dialogos -->
-    	<string name="forzar_descarga_msg">Se descargarán las lecturas existentes (Leidas, Impedidas y Reintentar), despuéss se procederá a eliminar todos los datos y cerrar su sesión, confirma que desea hacerlo?</string>
-    	<string name="eliminar_datos_msg">¡Se eliminaran todos los datos incluyendo los datos mensuales, diarios y lecturas realizadas!, después se cerrará su sesión</string>
-    
+    <!-- Inicio: Descarga de datos -->
+    <string name="titulo_descargando_datos">Descargando datos&#8230;</string>
+    <string name="descargando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
+    <string name="datos_descargados_exito">Datos descargados exitosamente! Se cerró su sesión, gracias.</string>
+    <string name="error_descarga_datos">Ocurrió un problema al descargar los datos!</string>
+    <string name="descarga_inhabilitada">Aún no se completaron las lecturas, no puede descargar los datos</string>
+    <!-- Dialogo Eliminar datos -->
+    <string name="titulo_eliminar_datos">Eliminando todos los datos&#8230;</string>
+    <string name="eliminando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
+    <string name="datos_eliminados_exito">Datos eliminados exitosamente!</string>
+    <string name="datos_eliminados_error">Ocurrió un problema al eliminar los datos!</string>
+    <!-- Inicio: Dialogos -->
+    <string name="forzar_descarga_msg">Se descargarán las lecturas existentes (Leidas, Impedidas y Reintentar), despuéss se procederá a eliminar todos los datos y cerrar su sesión, confirma que desea hacerlo?</string>
+    <string name="eliminar_datos_msg">¡Se eliminaran todos los datos incluyendo los datos mensuales, diarios y lecturas realizadas!, después se cerrará su sesión</string>
+
     <!-- Menu principal -->
     <string name="titulo_menu_principal">Menu Principal</string>
     <string name="tomar_lecturas_btn">Tomar Lecturas</string>
@@ -62,13 +62,13 @@
     <string name="detalle_lecturas_btn">Detalle Lecturas</string>
     <string name="detalle_ordenativos_btn">Detalle Ordenativos</string>
     <string name="detalle_entre_lineas_btn">Detalle Entre Lineas</string>
-    	<!-- Menu Principal : Botones Info-->
-    	<string name="tomar_lecturas_btn_info">comenzar a realizar lecturas o continuar desde donde estaba</string>
-	    <string name="resumen_lecturas_btn_info">ver resumen general</string>
-	    <string name="detalle_impedidas_btn_info">imprimir resumen imp.</string>
-	    <string name="detalle_lecturas_btn_info">imprimir resumen lec.</string>
-	    <string name="detalle_ordenativos_btn_info">imprimir lecturas con ordenativos</string>
-	    <string name="detalle_entre_lineas_btn_info">imprimir resumen</string>
+    <!-- Menu Principal : Botones Info -->
+    <string name="tomar_lecturas_btn_info">comenzar a realizar lecturas o continuar desde donde estaba</string>
+    <string name="resumen_lecturas_btn_info">ver resumen general</string>
+    <string name="detalle_impedidas_btn_info">imprimir resumen imp.</string>
+    <string name="detalle_lecturas_btn_info">imprimir resumen lec.</string>
+    <string name="detalle_ordenativos_btn_info">imprimir lecturas con ordenativos</string>
+    <string name="detalle_entre_lineas_btn_info">imprimir resumen</string>
 
     <!-- Tomar Lecturas -->
     <string name="titulo_tomar_lecturas">Toma de Lecturas</string>
@@ -100,26 +100,26 @@
     <string name="servicios_ubicacion_apagados">Tiene que habilitar los sevicios de ubicación para poder tomar lecturas, activelos y luego presione atras para volver a la aplicación</string>
     <string name="bateria_nivel_critico">La batería está en un nivel muy bajo, se le recomienda apagar el GPS y los Datos Móviles 3G.</string>
     <!-- Tomar Lecturas : Dialogos -->
-	    <string name="postergar_mensaje">Confirma que desea postergar la lectura?</string>
-	    <string name="reintentar_mensaje">Confirma que desea poner la lectura en estado para reintentarla al dia siguiente?</string>
-	    <string name="estimar_mensaje">Confirma que desea estimar la lectura?, se la marcará como leída y se pondrá el ordenativo de lectura estimada!</string>
-	    <string name="advertencia_filtros">No existe ninguna lectura que cumpla con los criterios de filtro que estableció, se mostrarán todas las lectura!</string>
+    <string name="postergar_mensaje">Confirma que desea postergar la lectura?</string>
+    <string name="reintentar_mensaje">Confirma que desea poner la lectura en estado para reintentarla al dia siguiente?</string>
+    <string name="estimar_mensaje">Confirma que desea estimar la lectura?, se la marcará como leída y se pondrá el ordenativo de lectura estimada!</string>
+    <string name="advertencia_filtros">No existe ninguna lectura que cumpla con los criterios de filtro que estableció, se mostrarán todas las lecturas!</string>
     <!-- Tomar Lecturas : Menu -->
-	    <string name="visualizar_potencia">Visualizar Potencia</string>
-	    <string name="tomar_foto">Tomar Foto</string>
-	    <string name="modificar_lectura">Modificar Lectura</string>
-	    <string name="filtrar_lecturas">Filtrar Lecturas</string>
-	    <string name="estimar_lectura">Estimar Lectura</string>
-	    <string name="impedir_lectura">Impedir Lectura</string>
-	    <string name="re_imprimir">ReImprimir Aviso Cobranza</string>
-	    <string name="recordatorio_lector">Recordatorio Lector</string>
-	    <string name="menu_medidor_entre_lineas">Medidor Entre Lineas</string>
-	<!-- Tomar Lecturas : Dialogo Confirmación Impresion-->
-		<string name="titulo_confirmar_impresion">Confirmar Impresión</string>  
-		<string name="confirmar_impresion_msg">¿Desea imprimir el aviso de cobro?</string>  
-		<string name="no_mostrar_chk">No volver a mostrar este mensaje</string>
-		<string name="no_mostrar_info">Puede volver a habilitar esta opción en Inicio dentro el menu de opciones, en la opción Personalizar UI</string>
-    
+    <string name="visualizar_potencia">Visualizar Potencia</string>
+    <string name="tomar_foto">Tomar Foto</string>
+    <string name="modificar_lectura">Modificar Lectura</string>
+    <string name="filtrar_lecturas">Filtrar Lecturas</string>
+    <string name="estimar_lectura">Estimar Lectura</string>
+    <string name="impedir_lectura">Impedir Lectura</string>
+    <string name="re_imprimir">ReImprimir Aviso Cobranza</string>
+    <string name="recordatorio_lector">Recordatorio Lector</string>
+    <string name="menu_medidor_entre_lineas">Medidor Entre Lineas</string>
+    <!-- Tomar Lecturas : Dialogo Confirmación Impresion -->
+    <string name="titulo_confirmar_impresion">Confirmar Impresión</string>
+    <string name="confirmar_impresion_msg">¿Desea imprimir el aviso de cobro?</string>
+    <string name="no_mostrar_chk">No volver a mostrar este mensaje</string>
+    <string name="no_mostrar_info">Puede volver a habilitar esta opción en Inicio dentro el menu de opciones, en la opción Personalizar UI</string>
+
     <!-- Busqueda Lectura -->
     <string name="titulo_buscar_lectura">Buscar Lectura</string>
     <string name="buscar_btn">Buscar</string>
@@ -128,9 +128,9 @@
     <string name="buscar_por_nus_lbl">Buscar por NUS</string>
     <string name="medidor_lbl">Medidor:</string>
     <string name="res_fallido_busqueda">Su búsqueda no produjo ningún resultado!</string>
-    	<!-- Busqueda Lectura : Dialogo Resultados -->
-    	<string name="titulo_resultados_busqueda">Resultados Búsqueda</string>
-    	<string name="resultados_lbl">Encontrados:</string>
+    <!-- Busqueda Lectura : Dialogo Resultados -->
+    <string name="titulo_resultados_busqueda">Resultados Búsqueda</string>
+    <string name="resultados_lbl">Encontrados:</string>
 
     <!-- Resumen Lecturas -->
     <string name="titulo_resumen_lecturas">Resumen de Lecturas</string>
@@ -147,6 +147,9 @@
     <!-- Lista Lecturas -->
     <string name="titulo_lista_lecturas">Lista de Lecturas</string>
     <string name="mostrar_lbl">Mostrar:</string>
+    <string name="lbl_cargando_lecturas">Espere, se estan cargando las lecturas&#8230;</string>
+    <string name="lbl_no_lecturas">No se encontró ninguna lectura que coincida con los filtros solicitados.</string>
+    <string name="lbl_ayuda_no_lecturas">Si no utilizó ningún filtro, asegurese de haber cargado correctamente las lecturas al dispositivo.</string>
 
     <!-- Cuadros de Dialogo -->
     <string name="titulo_mensajes_error">Error!</string>
@@ -163,7 +166,7 @@
     <string name="menu_seleccionar_impresora">Seleccionar Impresora</string>
     <string name="menu_forzar_descarga">Forzar Descarga</string>
     <string name="menu_eliminar_datos">Eliminar Datos</string>
-    
+
     <!-- Configuracion -->
     <string name="titulo_configurar">Configurar</string>
     <string name="servidor_bd_lbl">Servidor de la base de datos</string>
@@ -175,8 +178,8 @@
     <string name="guardar_btn">Guardar</string>
     <string name="config_guardado_exito">Configuración guardada correctamente.</string>
     <string name="config_no_guardada">La configuración no se pudo guardar.</string>
-    <string name="config_invalida" >El archivo de configuración no existe o es inválido</string>
-    
+    <string name="config_invalida">El archivo de configuración no existe o es inválido</string>
+
     <!-- Dialogo Tomar Foto -->
     <string name="tomar_foto_titulo">Tomar Fotografía</string>
     <string name="preguntar_tomar_foto_lectura">Desea tomar una fotografía asociada a la lectura?</string>
@@ -185,7 +188,7 @@
     <string name="limite_fotos_titulo">No se puede proceder</string>
     <string name="limite_fotos_msg">Usted a llegado a la cantidad máxima de fotos para la lectura</string>
     <string name="camara_cancelada">No se guardó ninguna fotografía&#8230;</string>
-	<string name="foto_tomada">Fotografía guardada correctamente</string>
+    <string name="foto_tomada">Fotografía guardada correctamente</string>
     <!-- Dialogo Potencia -->
     <string name="titulo_registro_potencia">Registro Potencia</string>
     <string name="titulo_ver_potencia">Visualizar Potencia</string>
@@ -194,111 +197,111 @@
     <string name="cancelar_btn">Cancelar</string>
     <string name="demanda_lbl">Demanda:</string>
     <string name="no_potencia_mensaje">La lectura no tiene potencia ni energía reactiva</string>
-    
+
     <!-- Dialogo Agregar Ordenativo -->
     <string name="titulo_agregar_ordenativo">Agregar Ordenativo</string>
     <string name="cod_obs_lbl">Cód. Observ:</string>
     <string name="prohibir_agregar_msg">Usted a excedido el número de ordenativos máximo para esta lectura!</string>
-    
+
     <!-- Dialogo Ver Ordenativos -->
     <string name="titulo_ver_ordenativos">Ver Ordenativos</string>
     <string name="agregado_el">Agregado el</string>
     <string name="a_las">a las</string>
     <string name="no_ordenativos_lbl">La lectura no tiene ordenativos.</string>
-    
-     <!-- Dialogo Filtrar Lecturas -->
+
+    <!-- Dialogo Filtrar Lecturas -->
     <string name="titulo_filtrar_lecturas">Filtrar Lecturas</string>
-    
+
     <!-- Dialogo Impedir Lectura -->
-     <string name="titulo_impedir_lectura">Impedidas</string>
-     
+    <string name="titulo_impedir_lectura">Impedidas</string>
+
     <!-- Dialogo Seleccionar Impresora -->
     <string name="titulo_seleccionar_impresora">Seleccionar Impresora</string>
     <string name="lbl_info_no_dispositivos">No se encontraron dispositivos sincronizados, vaya a las configuraciones del telefono
         y revise los dispositivos sincronizados con el telefono.</string>
-        
-     <!-- Dialogo Reimprimir Aviso Cobranza -->
+
+    <!-- Dialogo Reimprimir Aviso Cobranza -->
     <string name="titulo_reimprimir">Re imprimir Aviso de Cobranza</string>
     <string name="reimprimir_mensaje">Esta seguro que desea reimprimir el aviso de cobranza?</string>
-    
+
     <!-- Dialogo Limite de Impresión -->
     <string name="titulo_limite_impresion">No se puede imprimir!</string>
     <string name="limite_impresion_mensaje">Usted a llegado al límite de impresiones para esta lectura.</string>
-    
+
     <!-- Dialogo Limite de Modificaciones -->
     <string name="titulo_limite_modificaciones">No se puede modificar la lectura!</string>
     <string name="limite_modificaciones_mensaje">Usted a llegado al límite de modificaciones para esta lectura.</string>
-    
-    
-     <!-- Dialogo Modificar Lectura -->
+
+    <!-- Dialogo Modificar Lectura -->
     <string name="modificar_lectura_mensaje">Esta seguro que desea modifcar la lectura?, se pondra la lectura en estado pendiente y se eliminaran 
         todos los datos que se hayan ingresado previamente, asi como también las fotos y ordenativos asociados a ella.</string>
-        
+
     <!-- Dialogo Recordatorio Lector -->
     <string name="titulo_recordatorio">Recordatorios</string>
-    <string name="recordatorio_actual_title_lbl" >Recordatorio Actual</string>
-    <string name="recordatorio_actual_lbl" >La lectura no tiene un recordatorio actualmente.</string>
-    <string name="recordatorio_nuevo_title_lbl" >Recordatorio Nuevo</string>
+    <string name="recordatorio_actual_title_lbl">Recordatorio Actual</string>
+    <string name="recordatorio_actual_lbl">La lectura no tiene un recordatorio actualmente.</string>
+    <string name="recordatorio_nuevo_title_lbl">Recordatorio Nuevo</string>
     <string name="recordatorio_info_lbl">Cuando guarda un recordatorio nuevo, el anterior se sobreescribe.</string>
     <string name="recordatorio_guardado_msg">Recordatorio guardado exitosamente!</string>
-    
-     <!-- Dialogo Medidor Entre Lineas -->
+
+    <!-- Dialogo Medidor Entre Lineas -->
     <string name="titulo_medidor_entre_lineas">Medidor Entre Lineas</string>
-    <string name="num_medidor_lbl" >Num. Medidor:</string>
-    <string name="lectura_entre_lineas_lbl" >Lectura:</string>
-    <string name="con_potencia_chk" >Con potencia</string>
-    <string name="demanda_entre_lineas_lbl" >Demanda:</string>
-    <string name="reactiva_entre_lineas_lbl" >Reactiva:</string>
+    <string name="num_medidor_lbl">Num. Medidor:</string>
+    <string name="lectura_entre_lineas_lbl">Lectura:</string>
+    <string name="con_potencia_chk">Con potencia</string>
+    <string name="demanda_entre_lineas_lbl">Demanda:</string>
+    <string name="reactiva_entre_lineas_lbl">Reactiva:</string>
     <string name="medidor_entre_lineas_guardado_msg">Medidor entre lineas guardado exitosamente!</string>
-    
+
     <!-- Dialogo Detalle Impedidas -->
     <string name="titulo_detalle_impedidas">Imprimir Detalle de Impedidas</string>
     <string name="detalle_impedidas_msg">Confirma que desea imprimir el resumen de detalle de lecturas impedidas?</string>
-    
+
     <!-- Dialogo Detalle Lecturas -->
     <string name="titulo_detalle_lecturas">Imprimir Detalle de Lecturas</string>
     <string name="detalle_lecturas_msg">Confirma que desea imprimir el resumen de detalle de lecturas?</string>
-    
+
     <!-- Dialogo Detalle Ordenativos -->
     <string name="titulo_detalle_ordenativos">Imprimir Detalle de Ordenativos</string>
     <string name="detalle_ordenativos_msg">Confirma que desea imprimir el resumen de detalle de ordenativos?</string>
-    
+
     <!-- Dialogo Detalle Lecturas Entre Lineas -->
     <string name="titulo_detalle_entre_lineas">Imprimir Detalle de Entre Lineas</string>
     <string name="detalle_entre_lineas_msg">Confirma que desea imprimir el resumen de detalle de lecturas entre lineas?</string>
-    
+
     <!-- Dialogo No Variables de Entorno -->
     <string name="titulo_no_variables">Error en los archivos!</string>
     <string name="no_variables_msg">Los archivos de variables de entorno estan corruptos, o no se descargaron de la tabla de parametros correctamente, contacte al administrador</string>
-    
+
     <!-- Custom Dialog -->
     <string name="dialog_title">Dialogo</string>
     <string name="dialog_message">Mensaje</string>
-	<string name="btn_neutral">Neutral</string>
-	<string name="btn_cancel">Cancelar</string>
-	<string name="btn_si">Si</string>
-	<string name="btn_no">No</string>
+    <string name="btn_neutral">Neutral</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_si">Si</string>
+    <string name="btn_no">No</string>
     <!-- Samples -->
-	<string name="sample_num_lecturas">372</string>
-	<string name="sample_desc_ord">INACCESIBILIDAD AL TERRENO O LUGAR</string>
-	<string name="sample_nombre">RODRIGUEZ AGUILA, DIEGO</string>
-	<string name="sample_direccion">C. LUIS ZEGARRA #6</string>
-	<string name="sample_nus">321233</string>
-	<string name="sample_cuenta" tools:ignore="TypographyDashes">37-222-563-23</string>
-	<string name="sample_tarifa">GENERAL-1/PDBT</string>
-	<string name="sample_orden">9</string>
-	<string name="sample_num_medidor">6435122</string>
-	<string name="sample_estado_medidor">Leída</string>
-	<string name="sample_obs">84</string>
-	<string name="sample_username">drodriguez</string>
-	<string name="sample_ruta">2222</string>
-	<string name="sample_imei">359084041065203</string>
-	<string name="sample_fecha">27/Mar/2014</string>
-	<string name="sample_lectura">46377</string>
-	<string name="sample_default_potencia">0</string>
-	<string name="sample_hora">18:05</string>
-	<string name="sample_nombre_dispositivo">IMP-22</string>
-	<string name="sample_mac_address">10:00:00:60:69:00:23:74</string>
-	<string name="sample_texto_square_button">Sirve para realizar lecturas</string>
-	<string name="guion">-</string>
+    <string name="sample_num_lecturas">0</string>
+    <string name="sample_desc_ord">INACCESIBILIDAD AL TERRENO O LUGAR</string>
+    <string name="sample_nombre">RODRIGUEZ AGUILA, DIEGO</string>
+    <string name="sample_direccion">C. LUIS ZEGARRA #6</string>
+    <string name="sample_nus">321233</string>
+    <string name="sample_cuenta" tools:ignore="TypographyDashes">37-222-563-23</string>
+    <string name="sample_tarifa">GENERAL-1/PDBT</string>
+    <string name="sample_orden">9</string>
+    <string name="sample_num_medidor">6435122</string>
+    <string name="sample_estado_medidor">Leída</string>
+    <string name="sample_obs">84</string>
+    <string name="sample_username">drodriguez</string>
+    <string name="sample_ruta">2222</string>
+    <string name="sample_imei">359084041065203</string>
+    <string name="sample_fecha">27/Mar/2014</string>
+    <string name="sample_lectura">46377</string>
+    <string name="sample_default_potencia">0</string>
+    <string name="sample_hora">18:05</string>
+    <string name="sample_nombre_dispositivo">IMP-22</string>
+    <string name="sample_mac_address">10:00:00:60:69:00:23:74</string>
+    <string name="sample_texto_square_button">Sirve para realizar lecturas</string>
+    <string name="guion">-</string>
+
 </resources>
