@@ -26,7 +26,7 @@
         android:clickable="false">
 
 
-        <com.lecturas.elfec.controlador.accionesycustomizaciones.SquareButton
+        <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
         android:id="@+id/btn_resumen_lecturas"
         custom:principalText="@string/resumen_lecturas_btn"
         custom:subText="@string/resumen_lecturas_btn_info"
@@ -36,7 +36,7 @@
         android:layout_height="fill_parent"
         android:onClick="btnResumenLecturasClick" />
         
-        <com.lecturas.elfec.controlador.accionesycustomizaciones.SquareButton
+        <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
         android:id="@+id/btn_tomar_lecturas"
         android:layout_width="0dp"
         android:layout_weight="0.66" 
@@ -54,7 +54,7 @@
         android:layout_weight="0.33" 
         android:clickable="false">
         
-       <com.lecturas.elfec.controlador.accionesycustomizaciones.SquareButton
+       <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
         android:id="@+id/btn_detalle_impedidas"
          android:layout_width="0dp"
         android:layout_weight="0.33" 
@@ -64,7 +64,7 @@
         custom:subText="@string/detalle_impedidas_btn_info"
         android:onClick="btnDetalleImpedidasClick"  />
 
-     <com.lecturas.elfec.controlador.accionesycustomizaciones.SquareButton
+     <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
         android:id="@+id/btn_detalle_lecturas"
          android:layout_width="0dp"
         android:layout_weight="0.33" 
@@ -74,7 +74,7 @@
         custom:subText="@string/detalle_lecturas_btn_info"
         android:onClick="btnDetalleLecturasClick" />
 
-     <com.lecturas.elfec.controlador.accionesycustomizaciones.SquareButton
+     <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
         android:id="@+id/btn_detalle_ordenativos"
         android:layout_width="0dp"
         android:layout_weight="0.33" 
@@ -92,7 +92,7 @@
         android:layout_weight="0.33" 
         android:clickable="false">
         
-     <com.lecturas.elfec.controlador.accionesycustomizaciones.SquareButton
+     <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
         android:id="@+id/btn_detalle_entre_lineas"
         android:layout_width="0dp"
         android:layout_weight="0.33" 
