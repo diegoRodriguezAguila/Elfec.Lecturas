@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import android.annotation.SuppressLint;
@@ -32,6 +33,9 @@ import android.widget.Toast;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.ActivitySwipeDetector;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.ISwipeListener;
+import com.elfec.lecturas.controlador.adaptadores.NavegacionAdapter;
+import com.elfec.lecturas.controlador.adaptadores.NavegacionAdapter.NavegacionListener;
+import com.elfec.lecturas.controlador.adaptadores.NavegacionAdapter.Predicado;
 import com.elfec.lecturas.controlador.dialogos.DialogoAgregarOrdenativo;
 import com.elfec.lecturas.controlador.dialogos.DialogoConfirmacionImpresion;
 import com.elfec.lecturas.controlador.dialogos.DialogoFiltrarLecturas;
@@ -47,7 +51,6 @@ import com.elfec.lecturas.helpers.GestionadorImportesYConceptos;
 import com.elfec.lecturas.helpers.ManejadorBackupTexto;
 import com.elfec.lecturas.helpers.ManejadorConexionRemota;
 import com.elfec.lecturas.helpers.ManejadorDeCamara;
-import com.elfec.lecturas.helpers.ManejadorDeIndice;
 import com.elfec.lecturas.helpers.ManejadorEstadosHW;
 import com.elfec.lecturas.helpers.ManejadorImpresora;
 import com.elfec.lecturas.helpers.ManejadorSonido;
@@ -69,7 +72,15 @@ import com.elfec.lecturas.modelo.seguridad.Restricciones;
 import com.elfec.lecturas.modelo.validaciones.IValidacionLectura;
 import com.lecturas.elfec.R;
 
-public class TomarLectura extends Activity implements ISwipeListener {
+public class TomarLectura extends Activity implements ISwipeListener,
+		NavegacionListener<Lectura> {
+
+	public static final String ARG_ID_LECTURA = "IdLecturaSeleccionada";
+	public static final int LISTA_LECTURAS = 1;
+	public static final int BUSCAR_LECTURA = 2;
+
+	private RelativeLayout lecturaLayout;
+	private View layoutCargaListaLecturas;
 
 	private TextView lblNombre;
 	private TextView lblDireccion;
@@ -91,21 +102,53 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	public Button btnPostergarLectura;
 	public Button btnReintentarLectura;
 	public ImageButton btnRecordatorios;
+
 	public MenuItem menuEstimarLectura;
 	public MenuItem menuImpedirLectura;
 	public MenuItem menuVerPotencia;
 	public MenuItem menuReImprimir;
 	public MenuItem menuModificarLectura;
 	public MenuItem menuTomarFoto;
-	private ArrayList<Lectura> listaLecturas;
-	private int indiceLecturaActual;
+	private MenuItem menuRecordatorioLector;
+	private MenuItem menuFiltrarLecturas;
+
+	private NavegacionAdapter<Lectura> navegacionAdapter;
+	private FiltroLecturas filtroLecturas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_tomar_lectura);
-		asignarLista();
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				navegacionAdapter = new NavegacionAdapter<Lectura>(
+						TomarLectura.this);
+				filtroLecturas = new FiltroLecturas();
+				inicializarCampos();
+				asignarLista();
+				btnPrimeroClick(null);
+				ponerClickListenerAObservacion();
+				asignarTouchListenerATxtLecturaNueva();
+				crearSwipeListener();
+				inicializarVariablesDeEntorno();
+			}
+		}).start();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
 		verificarServiciosDeHW();
+	}
+
+	/**
+	 * Inicializa los campos
+	 */
+	private void inicializarCampos() {
+		lecturaLayout = (RelativeLayout) findViewById(R.id.datos_de_lectura);
+		layoutCargaListaLecturas = findViewById(R.id.layout_carga_lista_lecturas);
+
 		lblNombre = (TextView) findViewById(R.id.lbl_nombre_cliente);
 		lblDireccion = (TextView) findViewById(R.id.lbl_direccion_cliente);
 		lblNus = (TextView) findViewById(R.id.lbl_nus_cliente);
@@ -117,7 +160,6 @@ public class TomarLectura extends Activity implements ISwipeListener {
 		lblNumDigitos = (TextView) findViewById(R.id.lbl_info_digitos_medidor);
 		lblObservacion = (TextView) findViewById(R.id.lbl_obs_medidor);
 		lblObsNum = (TextView) findViewById(R.id.lbl_obs);
-		ponerClickListenerAObservacion();
 		txtLecturaNueva = (EditText) findViewById(R.id.txt_nueva_lectura);
 		lblNuevaLectura = (TextView) findViewById(R.id.lbl_nueva_lectura);
 		lblLecturaActual = (TextView) findViewById(R.id.lbl_lectura);
@@ -127,6 +169,12 @@ public class TomarLectura extends Activity implements ISwipeListener {
 		btnReintentarLectura = (Button) findViewById(R.id.btn_reintentar_lectura);
 		btnAgergarOrdenativo = (ImageButton) findViewById(R.id.btn_agregar_ordenativo);
 		btnRecordatorios = (ImageButton) findViewById(R.id.btn_recordatorio);
+	}
+
+	/**
+	 * Inicializa las variables de entorno
+	 */
+	private void inicializarVariablesDeEntorno() {
 		VariablesDeEntorno.limiteImpresiones = AdministradorSeguridad
 				.obtenerAdministradorSeguridad(
 						VariablesDeSesion.getPerfilUsuario())
@@ -135,17 +183,6 @@ public class TomarLectura extends Activity implements ISwipeListener {
 				.obtenerAdministradorSeguridad(
 						VariablesDeSesion.getPerfilUsuario())
 				.obtenerRestriccion(Restricciones.MAX_MODIFICAR_LECTURA);
-		asignarTouchListenerATxtLecturaNueva();
-		crearSwipeListener();
-		asignarDatos();
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		verificarServiciosDeHW();
-		asignarLista();
-		asignarDatos();
 	}
 
 	/**
@@ -175,39 +212,42 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	 * un mensaje al usuario y se veran todas las lecturas sin filtros.
 	 */
 	public void asignarLista() {
-		listaLecturas = (ArrayList<Lectura>) FiltroLecturas
-				.obtenerListaDeLecturas();
+		boolean criteriosCambiaron = filtroLecturas.criteriosCambiaron();
+		if (criteriosCambiaron)
+			mostrarCargaLectura();
+		List<Lectura> listaLecturas = filtroLecturas.obtenerListaDeLecturas();
 		if (listaLecturas.size() == 0) {
-			FiltroLecturas.resetearCriteriosFiltro();
-			listaLecturas = (ArrayList<Lectura>) FiltroLecturas
-					.obtenerListaDeLecturas();
-			final CustomDialog dialogo = new CustomDialog(this);
-			dialogo.setTitle(R.string.titulo_mensajes_advertencia);
-			dialogo.setIcon(R.drawable.warning);
-			dialogo.setMessage(R.string.advertencia_filtros);
-			dialogo.setPositiveButton(R.string.btn_ok, new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					dialogo.dismiss();
-				}
-			});
-			dialogo.setCancelable(false);
-			dialogo.show();
+			mostrarCargaLectura();
+			filtroLecturas.resetearCriteriosFiltro();
+			criteriosCambiaron = true;
+			mostrarDialogoAdvertenciaFiltros();
 		}
-		asignarIndiceDeLecturaActual();
+		if (criteriosCambiaron)
+			navegacionAdapter.setLista(filtroLecturas.obtenerListaDeLecturas());
 	}
 
 	/**
-	 * Se encarga de asignar el indice de la lectura actual que se esta
-	 * mostrando en la lista en caso de no encontrarse la lectura en la lista,
-	 * se lleva al ultimo pendiente
+	 * Muestra un dialogo de advertencia de filtros
 	 */
-	public void asignarIndiceDeLecturaActual() {
-		long idLecturaActual = ManejadorDeIndice.getIdLecturaActual();
-		if (idLecturaActual == -1) {
-			idLecturaActual = obtenerIdUltimoPendiente();
-		}
-		indiceLecturaActual = obtenerLecturaActual(idLecturaActual);
+	private void mostrarDialogoAdvertenciaFiltros() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				final CustomDialog dialogo = new CustomDialog(TomarLectura.this);
+				dialogo.setTitle(R.string.titulo_mensajes_advertencia);
+				dialogo.setIcon(R.drawable.warning);
+				dialogo.setMessage(R.string.advertencia_filtros);
+				dialogo.setPositiveButton(R.string.btn_ok,
+						new OnClickListener() {
+							@Override
+							public void onClick(View v) {
+								dialogo.dismiss();
+							}
+						});
+				dialogo.setCancelable(false);
+				dialogo.show();
+			}
+		});
 	}
 
 	/**
@@ -226,8 +266,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 			@Override
 			public boolean onTouch(View v, MotionEvent ev) {
 				if (txtLecturaNueva.hasFocus() && contadorSatelite == 0) {
-					Lectura lecturaActual = listaLecturas
-							.get(indiceLecturaActual);
+					Lectura lecturaActual = navegacionAdapter.getActual();
 					contadorSatelite++;
 					ManejadorUbicacion.obtenerUbicacionActual(
 							TomarLectura.this, lecturaActual);
@@ -241,25 +280,71 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	 * Asigna los datos correspondientes de la lectura actual a la vista
 	 */
 	public void asignarDatos() {
-		Lectura lecturaActual = listaLecturas.get(indiceLecturaActual);
-		lblNombre.setText(lecturaActual.NombreCliente);
-		lblDireccion.setText(lecturaActual.DireccionSuministro);
-		lblNus.setText("" + lecturaActual.Suministro);
-		lblTarifa.setText(lecturaActual.SiglaCategoria);
-		lblCuenta.setText(lecturaActual.obtenerCuentaConFormato());
-		lblOrden.setText("" + (indiceLecturaActual + 1));
-		lblNumMedidor.setText("" + lecturaActual.NumeroMedidor);
-		lecturaActual.mostrarLecturaEnTomarLectura(this);
-		lecturaActual.mostrarMenuEnTomarLectura(this);
-		lblNumDigitos.setText("El medidor es de "
-				+ lecturaActual.NumDigitosMedidor + " dígitos");
-		txtLecturaNueva
-				.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
-						lecturaActual.NumDigitosMedidor) });
-		lblObservacion
-				.setText((lecturaActual.ObservacionLectura == 0) ? "Ninguna"
-						: "" + lecturaActual.ObservacionLectura);
-		btnRecordatorios.setEnabled(lecturaActual.tieneRecordatorio());
+		final Lectura lecturaActual = navegacionAdapter.getActual();
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				lblNombre.setText(lecturaActual.NombreCliente);
+				lblDireccion.setText(lecturaActual.DireccionSuministro);
+				lblNus.setText("" + lecturaActual.Suministro);
+				lblTarifa.setText(lecturaActual.SiglaCategoria);
+				lblCuenta.setText(lecturaActual.obtenerCuentaConFormato());
+				lblOrden.setText(""
+						+ (navegacionAdapter.getPosicionActual() + 1));
+				lblNumMedidor.setText("" + lecturaActual.NumeroMedidor);
+				lecturaActual.mostrarLecturaEnTomarLectura(TomarLectura.this);
+				lecturaActual.mostrarMenuEnTomarLectura(TomarLectura.this);
+				lblNumDigitos.setText("El medidor es de "
+						+ lecturaActual.NumDigitosMedidor + " dígitos");
+				txtLecturaNueva
+						.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
+								lecturaActual.NumDigitosMedidor) });
+				lblObservacion
+						.setText((lecturaActual.ObservacionLectura == 0) ? "Ninguna"
+								: "" + lecturaActual.ObservacionLectura);
+				btnRecordatorios.setEnabled(lecturaActual.tieneRecordatorio());
+				txtLecturaNueva.setText("");
+			}
+		});
+	}
+
+	/**
+	 * Muestra la lectura y esconde la carga
+	 */
+	private void mostrarLectura() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (lecturaLayout.getVisibility() == View.GONE) {
+					if (menuRecordatorioLector != null)
+						menuRecordatorioLector.setVisible(true);
+					if (menuFiltrarLecturas != null)
+						menuFiltrarLecturas.setVisible(true);
+					lecturaLayout.setVisibility(View.VISIBLE);
+					layoutCargaListaLecturas.setVisibility(View.GONE);
+
+				}
+			}
+		});
+	}
+
+	/**
+	 * Muestra la carga y esconde la lectura
+	 */
+	private void mostrarCargaLectura() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (layoutCargaListaLecturas.getVisibility() == View.GONE) {
+					if (menuRecordatorioLector != null)
+						menuRecordatorioLector.setVisible(false);
+					if (menuFiltrarLecturas != null)
+						menuFiltrarLecturas.setVisible(false);
+					layoutCargaListaLecturas.setVisibility(View.VISIBLE);
+					lecturaLayout.setVisibility(View.GONE);
+				}
+			}
+		});
 	}
 
 	private void ponerClickListenerAObservacion() {
@@ -274,9 +359,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 				abrirDialogoVerOrdenativos();
 			}
 		};
-		lblObservacion.setClickable(true);
 		lblObservacion.setOnClickListener(clickListener);
-		lblObsNum.setClickable(true);
 		lblObsNum.setOnClickListener(clickListener);
 
 	}
@@ -291,8 +374,13 @@ public class TomarLectura extends Activity implements ISwipeListener {
 		menuReImprimir = menu.findItem(R.id.menu_item_re_imprimir);
 		menuModificarLectura = menu.findItem(R.id.menu_item_modificar_lectura);
 		menuTomarFoto = menu.findItem(R.id.menu_item_tomar_foto);
-		Lectura lecturaActual = listaLecturas.get(indiceLecturaActual);
-		lecturaActual.mostrarMenuEnTomarLectura(this);
+		menuRecordatorioLector = menu
+				.findItem(R.id.menu_item_recordatorio_lector);
+		menuFiltrarLecturas = menu.findItem(R.id.menu_item_filtrar_lecturas);
+		if (navegacionAdapter.getLista() != null) {
+			menuRecordatorioLector.setVisible(true);
+			menuFiltrarLecturas.setVisible(true);
+		}
 		return true;
 	}
 
@@ -303,9 +391,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	}
 
 	public void btnInicioClick(View view) {
-		Intent intent = new Intent(this, MenuPrincipal.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
+		finish();
 		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
 	}
 
@@ -313,7 +399,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 
 	public void btnConfirmarLecturaClick(View view) {
 		if (!txtLecturaNueva.getText().toString().isEmpty()) {
-			lecturaActual = listaLecturas.get(indiceLecturaActual);
+			lecturaActual = navegacionAdapter.getActual();
 			int lectura = Integer
 					.parseInt(txtLecturaNueva.getText().toString());
 			boolean procederConGuardado = lecturaActual.LecturaNueva == lectura;
@@ -399,9 +485,8 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	public void actualizarLecturasYFiltro(boolean irSiguiente) {
 		if (irSiguiente)
 			btnSiguienteClick(null);
-		if (FiltroLecturas.existenCriterios()) {
+		if (filtroLecturas.existenCriterios()) {
 			asignarLista();
-			asignarDatos();
 		}
 	}
 
@@ -452,92 +537,42 @@ public class TomarLectura extends Activity implements ISwipeListener {
 		Intent intent = new Intent(this, BuscarLectura.class);
 		intent.putExtra("RutaActual", lblCuenta.getText().subSequence(0, 6)
 				.toString());
-		startActivity(intent);
+		startActivityForResult(intent, BUSCAR_LECTURA);
 		overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 	}
 
 	public void btnListaLecturasClick(View view) {
 		Intent intent = new Intent(this, ListaLecturas.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
+		startActivityForResult(intent, LISTA_LECTURAS);
 		overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
 	}
 
 	public void btnAnteriorClick(View view) {
-		if (indiceLecturaActual > 0) {
-			contadorSatelite = 0;
-			txtLecturaNueva.setText("");
-			ordLec = null;
-			indiceLecturaActual--;
-			ManejadorDeIndice.setIdLecturaActual(listaLecturas.get(
-					indiceLecturaActual).getId());
-			asignarDatos();
-		}
+		navegacionAdapter
+				.setPosicion(navegacionAdapter.getPosicionActual() - 1);
 	}
 
-	public void btnSiguienteClick(View view) {
-		if (indiceLecturaActual < listaLecturas.size() - 1) {
-			contadorSatelite = 0;
-			txtLecturaNueva.setText("");
-			ordLec = null;
-			indiceLecturaActual++;
-			ManejadorDeIndice.setIdLecturaActual(listaLecturas.get(
-					indiceLecturaActual).getId());
-			asignarDatos();
+	private Predicado<Lectura> predicadoLectura = new Predicado<Lectura>() {
+		@Override
+		public boolean evaluar(Lectura lect) {
+			return lect.getEstadoLectura().getEstadoEntero() == 0;
 		}
+	};
+
+	public void btnSiguienteClick(View view) {
+		navegacionAdapter
+				.setPosicion(navegacionAdapter.getPosicionActual() + 1);
 	}
 
 	public void btnPrimeroClick(View view) {
-		indiceLecturaActual = 0;
-		contadorSatelite = 0;
-		txtLecturaNueva.setText("");
-		ordLec = null;
-		for (int i = 0; i < listaLecturas.size(); i++) {
-			if (listaLecturas.get(i).getEstadoLectura().getEstadoEntero() == 0) {
-				indiceLecturaActual = i;
-				break;
-			}
-		}
-		ManejadorDeIndice.setIdLecturaActual(listaLecturas.get(
-				indiceLecturaActual).getId());
-		asignarDatos();
+		int pos = navegacionAdapter.buscar(predicadoLectura);
+		navegacionAdapter.setPosicion(pos == -1 ? 0 : pos);
 	}
 
 	public void btnUltimoClick(View view) {
-		contadorSatelite = 0;
-		indiceLecturaActual = listaLecturas.size() - 1;
-		txtLecturaNueva.setText("");
-		ordLec = null;
-		for (int i = listaLecturas.size() - 1; i >= 0; i--) {
-			if (listaLecturas.get(i).getEstadoLectura().getEstadoEntero() == 0) {
-				indiceLecturaActual = i;
-				break;
-			}
-		}
-		ManejadorDeIndice.setIdLecturaActual(listaLecturas.get(
-				indiceLecturaActual).getId());
-		asignarDatos();
-	}
-
-	// -------------------------------- METODOS INICIALIZACION DE VISTA
-	// ----------------------------------
-	public long obtenerIdUltimoPendiente() {
-		for (Lectura lectura : listaLecturas) {
-			if (lectura.getEstadoLectura().getEstadoEntero() == 0) {
-				return lectura.getId();
-			}
-		}
-		return 0;
-	}
-
-	public int obtenerLecturaActual(long idLecturaActual) {
-		for (int i = 0; i < listaLecturas.size(); i++) {
-			Lectura lectura = listaLecturas.get(i);
-			if (lectura.getId() == idLecturaActual) {
-				return i;
-			}
-		}
-		return 0;
+		int pos = navegacionAdapter.buscarAlReves(predicadoLectura);
+		navegacionAdapter.setPosicion(pos == -1 ? navegacionAdapter.getLista()
+				.size() : pos);
 	}
 
 	// -------------------------- BOTONES POSTERGAR Y
@@ -549,7 +584,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 		dialog.setPositiveButton(R.string.btn_ok, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Lectura lecturaActual = listaLecturas.get(indiceLecturaActual);
+				Lectura lecturaActual = navegacionAdapter.getActual();
 				lecturaActual.setEstadoLectura(3);
 				lecturaActual.save();
 				asignarDatos();
@@ -574,7 +609,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 		dialog.setPositiveButton(R.string.btn_ok, new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Lectura lecturaActual = listaLecturas.get(indiceLecturaActual);
+				Lectura lecturaActual = navegacionAdapter.getActual();
 				DateFormat df = new SimpleDateFormat("HH:mm", Locale
 						.getDefault());
 				Date fechaLec = new Date();
@@ -612,7 +647,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 
 	public void btnAgregarOrdenativoClick(View view) {
 		DialogoAgregarOrdenativo pd = new DialogoAgregarOrdenativo(
-				TomarLectura.this, listaLecturas.get(indiceLecturaActual));
+				TomarLectura.this, navegacionAdapter.getActual());
 		pd.show();
 	}
 
@@ -621,7 +656,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 
 	private void abrirDialogoVerOrdenativos() {
 		DialogoVerOrdenativos dvo = new DialogoVerOrdenativos(
-				TomarLectura.this, listaLecturas.get(indiceLecturaActual));
+				TomarLectura.this, navegacionAdapter.getActual());
 		dvo.setOnDismissListener(new OnDismissListener() {
 
 			@Override
@@ -679,23 +714,30 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	 * Abre un dialogo para filtrar las lecturas que se estan viendo actualmente
 	 */
 	private void mostrarDialogoFiltrarLecturas() {
-		final DialogoFiltrarLecturas dialogo = new DialogoFiltrarLecturas(this);
+		final DialogoFiltrarLecturas dialogo = new DialogoFiltrarLecturas(this,
+				filtroLecturas);
 		dialogo.setPositiveButton(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (dialogo.criterioEstado != null)
-					FiltroLecturas
-							.agregarCriterioAFiltro(dialogo.criterioEstado);
-				else
-					FiltroLecturas.quitarCriterioDeFiltro(CriterioEstado.class);
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						if (dialogo.criterioEstado != null)
+							filtroLecturas
+									.agregarCriterioAFiltro(dialogo.criterioEstado);
+						else
+							filtroLecturas
+									.quitarCriterioDeFiltro(CriterioEstado.class);
 
-				if (dialogo.criterioRuta != null)
-					FiltroLecturas.agregarCriterioAFiltro(dialogo.criterioRuta);
-				else
-					FiltroLecturas.quitarCriterioDeFiltro(CriterioRuta.class);
-
-				asignarLista();
-				asignarDatos();
+						if (dialogo.criterioRuta != null)
+							filtroLecturas
+									.agregarCriterioAFiltro(dialogo.criterioRuta);
+						else
+							filtroLecturas
+									.quitarCriterioDeFiltro(CriterioRuta.class);
+						asignarLista();
+					}
+				}).start();
 				dialogo.dismiss();
 			}
 		});
@@ -727,7 +769,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	 */
 	private void mostrarDialogoRecordatorioLector() {
 		DialogoRecordatorio dialogo = new DialogoRecordatorio(this,
-				listaLecturas.get(indiceLecturaActual));
+				navegacionAdapter.getActual());
 		dialogo.show();
 	}
 
@@ -737,13 +779,9 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	 * Abre el dialogo de confirmación para modificar una lectura
 	 */
 	private void mostrarDialogoModificarLectura() {
-		final Lectura lectura = listaLecturas.get(indiceLecturaActual);
-		if (lectura.NumModificaciones < VariablesDeEntorno.limiteModificacionesLectura)// verifica
-																						// el
-																						// limite
-																						// de
-																						// modificaciones
-		{
+		final Lectura lectura = navegacionAdapter.getActual();
+		// verifica el limite de modificaciones
+		if (lectura.NumModificaciones < VariablesDeEntorno.limiteModificacionesLectura) {
 			final CustomDialog dialog = new CustomDialog(this);
 			dialog.setMessage(R.string.modificar_lectura_mensaje);
 			dialog.setTitle(R.string.titulo_mensajes_advertencia);
@@ -786,7 +824,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 			@Override
 			public void onClick(View arg0) {
 				dialog.dismiss();
-				Lectura lectura = listaLecturas.get(indiceLecturaActual);
+				Lectura lectura = navegacionAdapter.getActual();
 				imprimirLectura(lectura);
 			}
 		});
@@ -809,8 +847,8 @@ public class TomarLectura extends Activity implements ISwipeListener {
 			public void onClick(View v) {
 				dialog.dismiss();
 				estimarLectura();
-				ManejadorBackupTexto.guardarBackupModelo(listaLecturas
-						.get(indiceLecturaActual));
+				ManejadorBackupTexto.guardarBackupModelo(navegacionAdapter
+						.getActual());
 				txtLecturaNueva.setText("");
 				asignarDatos();
 				actualizarLecturasYFiltro(true);
@@ -824,7 +862,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	 * Invoca a los metodos necesarios para estimar la lectura actual
 	 */
 	private void estimarLectura() {
-		Lectura lecturaActual = listaLecturas.get(indiceLecturaActual);
+		Lectura lecturaActual = navegacionAdapter.getActual();
 		Date fechaActual = new Date();
 		int lecturaEstimada = lecturaActual.obtenerLecturaActivaEstimada();
 		lecturaActual.leerLectura(lecturaEstimada, fechaActual);
@@ -871,7 +909,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	// ----------------------------- Impedir Lectura
 	// -----------------------------------------------
 	private void mostrarDialogoImpedirLectura() {
-		final Lectura lecturaActual = listaLecturas.get(indiceLecturaActual);
+		final Lectura lecturaActual = navegacionAdapter.getActual();
 		final DialogoAgregarOrdenativo pd = new DialogoAgregarOrdenativo(
 				TomarLectura.this, lecturaActual,
 				R.string.titulo_impedir_lectura,
@@ -897,7 +935,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	// ---------------------------------- Visualizar Potencia
 	// -------------------------------------
 	private void mostrarDialogoVerPotencia() {
-		Lectura lecturaActual = listaLecturas.get(indiceLecturaActual);
+		Lectura lecturaActual = navegacionAdapter.getActual();
 		if (lecturaActual.LeePotencia == 1 || lecturaActual.LeeReactiva == 1
 				|| lecturaActual.TagCalculaPotencia == 1)// si lee potencia o
 															// reactiva
@@ -1042,9 +1080,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	private void crearSwipeListener() {
 		ActivitySwipeDetector activitySwipeDetector = new ActivitySwipeDetector(
 				this);
-		RelativeLayout lowestLayout = (RelativeLayout) this
-				.findViewById(R.id.datos_de_lectura);
-		lowestLayout.setOnTouchListener(activitySwipeDetector);
+		lecturaLayout.setOnTouchListener(activitySwipeDetector);
 	}
 
 	@Override
@@ -1074,7 +1110,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	 * infromando al usuario de ello.
 	 */
 	private void mostrarDialogoFotoLectura() {
-		final Lectura lecturaActual = listaLecturas.get(indiceLecturaActual);
+		final Lectura lecturaActual = navegacionAdapter.getActual();
 		if (lecturaActual.NumFotosTomadas < VariablesDeEntorno.numMaxFotosPorLectura) {
 			final CustomDialog dialog = new CustomDialog(this);
 			dialog.setTitle(R.string.tomar_foto_titulo);
@@ -1106,7 +1142,7 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	 * infromando al usuario de ello.
 	 */
 	private void mostrarDialogoFotoOrdenativo(final OrdenativoLectura ordLec) {
-		if (listaLecturas.get(indiceLecturaActual).NumFotosTomadas < VariablesDeEntorno.numMaxFotosPorLectura) {
+		if (navegacionAdapter.getActual().NumFotosTomadas < VariablesDeEntorno.numMaxFotosPorLectura) {
 			final CustomDialog dialog = new CustomDialog(this);
 			dialog.setTitle(R.string.tomar_foto_titulo);
 			dialog.setIcon(R.drawable.camera);
@@ -1159,21 +1195,77 @@ public class TomarLectura extends Activity implements ISwipeListener {
 	 * foto
 	 */
 	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	protected void onActivityResult(int requestCode, int resultCode,
+			final Intent data) {
 		if (resultCode == RESULT_OK) {
-			if (requestCode == ManejadorDeCamara.TOMAR_FOTO_LECTURA_REQUEST) {
-				Lectura lecturaActual = listaLecturas.get(indiceLecturaActual);
-				lecturaActual.NumFotosTomadas++;
-				lecturaActual.save();
+			if (requestCode == ManejadorDeCamara.TOMAR_FOTO_LECTURA_REQUEST)
+				actualizarNumeroDeFotosLectura();
+			if (requestCode == LISTA_LECTURAS || requestCode == BUSCAR_LECTURA) {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						final long idLectura = data.getLongExtra(
+								ARG_ID_LECTURA, -1);
+						if (idLectura != -1) {
+							int posNueva = obtenerPosLectura(idLectura);
+							if (posNueva == -1) {
+								filtroLecturas.resetearCriteriosFiltro();
+								asignarLista();
+								posNueva = obtenerPosLectura(idLectura);
+							}
+							navegacionAdapter.setPosicion(posNueva == -1 ? 0
+									: posNueva);
+						}
+					}
+				}).start();
 			}
-			Toast.makeText(this, R.string.foto_tomada, Toast.LENGTH_SHORT)
-					.show();
 		} else if (resultCode == RESULT_CANCELED) {
-			Toast.makeText(
-					this,
-					(requestCode == ManejadorDeCamara.TOMAR_FOTO_LECTURA_REQUEST || requestCode == ManejadorDeCamara.TOMAR_FOTO_ENTRE_LINEAS_REQUEST) ? R.string.camara_cancelada
-							: R.string.bluetooth_no_encendido,
-					Toast.LENGTH_SHORT).show();
+			if (requestCode == ManejadorDeCamara.TOMAR_FOTO_LECTURA_REQUEST
+					|| requestCode == ManejadorDeCamara.TOMAR_FOTO_ENTRE_LINEAS_REQUEST) {
+				Toast.makeText(
+						this,
+						(requestCode == ManejadorDeCamara.TOMAR_FOTO_LECTURA_REQUEST || requestCode == ManejadorDeCamara.TOMAR_FOTO_ENTRE_LINEAS_REQUEST) ? R.string.camara_cancelada
+								: R.string.bluetooth_no_encendido,
+						Toast.LENGTH_SHORT).show();
+			}
 		}
 	}
+
+	/**
+	 * Obtiene la posición de la lectura
+	 * 
+	 * @param idLectura
+	 * @return pos lectura, -1 si no se encontró
+	 */
+	private int obtenerPosLectura(final long idLectura) {
+		return navegacionAdapter.buscar(new Predicado<Lectura>() {
+			@Override
+			public boolean evaluar(Lectura lect) {
+				return idLectura == lect.getId();
+			}
+		});
+	}
+
+	/**
+	 * Actualiza el numero de fotos de la lectura
+	 */
+	private void actualizarNumeroDeFotosLectura() {
+		Lectura lecturaActual = navegacionAdapter.getActual();
+		lecturaActual.NumFotosTomadas++;
+		lecturaActual.save();
+		Toast.makeText(this, R.string.foto_tomada, Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onListaChanged(List<Lectura> lecturas) {
+		mostrarLectura();
+	}
+
+	@Override
+	public void onPosicionChanged(int nuevaPos) {
+		asignarDatos();
+		contadorSatelite = 0;
+		ordLec = null;
+	}
+
 }

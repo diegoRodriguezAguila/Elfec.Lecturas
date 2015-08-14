@@ -8,102 +8,124 @@ import com.activeandroid.query.Select;
 import com.elfec.lecturas.modelo.Lectura;
 
 /**
- * Se encarga de aplicar los filtros seleccionados por el usuario a la lista de lecturas
+ * Se encarga de aplicar los filtros seleccionados por el usuario a la lista de
+ * lecturas
+ * 
  * @author drodriguez
  */
-public class FiltroLecturas 
-{
-	private static HashMap<String, ICriterioFiltroLectura> criteriosFiltro;
-	static
-	{
+public class FiltroLecturas {
+	private HashMap<String, ICriterioFiltroLectura> criteriosFiltro;
+	private volatile boolean criteriosCambiaron;
+	private List<Lectura> cacheListaLectura;
+
+	public FiltroLecturas() {
 		criteriosFiltro = new HashMap<String, ICriterioFiltroLectura>();
+		criteriosCambiaron = true;
 	}
-	
+
 	/**
 	 * Obtiene la lista de lecturas aplicando los criterios de filtro agregados.
+	 * 
 	 * @return Lista de lecturas filtrada
 	 */
-	public static List<Lectura> obtenerListaDeLecturas()
-	{
+	public List<Lectura> obtenerListaDeLecturas() {
+		if (!criteriosCambiaron) {
+			return cacheListaLectura;
+		}
+		criteriosCambiaron = false;
 		StringBuilder condiciones = new StringBuilder("");
 		Collection<ICriterioFiltroLectura> criterios = criteriosFiltro.values();
 		int tam = criterios.size();
-		if(tam==0)//no hay filtros
-			return Lectura.obtenerTodasLasLecturas();
-		int i = 0;
-		for(ICriterioFiltroLectura criterio : criterios)
-		{
-			condiciones.append(criterio.obtenerCadenaDeFiltro());
-			if(i<tam-1)
-				condiciones.append(" AND ");
-			i++;
+		if (tam == 0)// no hay filtros
+			cacheListaLectura = Lectura.obtenerTodasLasLecturas();
+		else {
+			int i = 0;
+			for (ICriterioFiltroLectura criterio : criterios) {
+				condiciones.append(criterio.obtenerCadenaDeFiltro());
+				if (i < tam - 1)
+					condiciones.append(" AND ");
+				i++;
+			}
+			cacheListaLectura = new Select().from(Lectura.class)
+					.where(condiciones.toString()).orderBy("LEMCTAANT")
+					.execute();
 		}
-		return new Select().from(Lectura.class).where(condiciones.toString()).orderBy("LEMCTAANT").execute();
+		return cacheListaLectura;
 	}
-	
+
+	public synchronized boolean criteriosCambiaron() {
+		return criteriosCambiaron;
+	}
+
 	/**
 	 * Agrega o actualiza el tipo de criterio al filtro de lecturas.<br>
-	 * Nota.- se debe volver a llamar al metodo obtenerListaDeLecturas() y asignarlos
-	 * a la lista actual para que se actualizen los resultados filtrados.
+	 * Nota.- se debe volver a llamar al metodo obtenerListaDeLecturas() y
+	 * asignarlos a la lista actual para que se actualizen los resultados
+	 * filtrados.
+	 * 
 	 * @param criterio
 	 */
-	public static void agregarCriterioAFiltro(ICriterioFiltroLectura criterio)
-	{
+	public void agregarCriterioAFiltro(ICriterioFiltroLectura criterio) {
+		criteriosCambiaron = !criterio.equals(criteriosFiltro.get(criterio
+				.getClass().getName())) || criteriosCambiaron;
 		criteriosFiltro.put(criterio.getClass().getName(), criterio);
 	}
-	
+
 	/**
-	 * Obtiene el criterio al filtro, se le debe pasar la clase del criterio, con el methodo .class 
-	 * de la clase (ej. CriterioRuta.class ) retornara null en caso de que no se haya agregado dicho criterio 
+	 * Obtiene el criterio al filtro, se le debe pasar la clase del criterio,
+	 * con el methodo .class de la clase (ej. CriterioRuta.class ) retornara
+	 * null en caso de que no se haya agregado dicho criterio
+	 * 
 	 * @param claseCriterio
 	 */
-	public static ICriterioFiltroLectura obtenerCriterioDeFiltro(Class<?> claseCriterio)
-	{
+	public ICriterioFiltroLectura obtenerCriterioDeFiltro(Class<?> claseCriterio) {
 		return criteriosFiltro.get(claseCriterio.getName());
 	}
-	
+
 	/**
-	 * Quita el criterio al filtro, se le debe pasar la clase del criterio, con el methodo .class 
-	 * de la clase (ej. CriterioRuta.class )
+	 * Quita el criterio al filtro, se le debe pasar la clase del criterio, con
+	 * el methodo .class de la clase (ej. CriterioRuta.class )
+	 * 
 	 * @param claseCriterio
 	 */
-	public static void quitarCriterioDeFiltro(Class<?> claseCriterio)
-	{
+	public void quitarCriterioDeFiltro(Class<?> claseCriterio) {
+		criteriosCambiaron = criteriosFiltro.containsKey(claseCriterio
+				.getName()) || criteriosCambiaron;
 		criteriosFiltro.remove(claseCriterio.getName());
 	}
-	
+
 	/**
-	 * Verifica si una lectura cumple los criterios del filtro, basta que no cumpla con uno para que
-	 * sea falso el resultado
+	 * Verifica si una lectura cumple los criterios del filtro, basta que no
+	 * cumpla con uno para que sea falso el resultado
+	 * 
 	 * @param lectura
 	 * @return
 	 */
-	public static boolean lecturaCoincideCriterios(Lectura lectura)
-	{
+	public boolean lecturaCoincideCriterios(Lectura lectura) {
 		Collection<ICriterioFiltroLectura> criterios = criteriosFiltro.values();
 		boolean resultado = true;
-		for(ICriterioFiltroLectura criterio : criterios)
-		{
-			if(criterio!=null)
-				resultado = resultado && criterio.lecturaCumpleCriterio(lectura);
+		for (ICriterioFiltroLectura criterio : criterios) {
+			if (criterio != null)
+				resultado = resultado
+						&& criterio.lecturaCumpleCriterio(lectura);
 		}
 		return resultado;
 	}
-	
+
 	/**
 	 * Verifica si existe algún criterio agregado al filtro
+	 * 
 	 * @return
 	 */
-	public static boolean existenCriterios()
-	{
-		return criteriosFiltro.size()>0;
+	public boolean existenCriterios() {
+		return criteriosFiltro.size() > 0;
 	}
-	
+
 	/**
 	 * Elimina todos los criterios del filtro de lecturas
 	 */
-	public static void resetearCriteriosFiltro()
-	{
+	public void resetearCriteriosFiltro() {
+		criteriosCambiaron = existenCriterios();
 		criteriosFiltro.clear();
 	}
 }

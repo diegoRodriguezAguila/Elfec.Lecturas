@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.elfec.lecturas.controlador.adaptadores.LecturaAdapter;
-import com.elfec.lecturas.helpers.ManejadorDeIndice;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.estadoslectura.EstadoLecturaFactory;
 import com.elfec.lecturas.modelo.estadoslectura.IEstadoLectura;
@@ -35,8 +35,6 @@ public class ListaLecturas extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lista_lecturas);
 		new Thread(new Runnable() {
-
-			@SuppressLint("NewApi")
 			@Override
 			public void run() {
 				lblNumLecturas = (TextView) findViewById(R.id.lbl_num_lecturas_lista);
@@ -44,16 +42,16 @@ public class ListaLecturas extends Activity {
 				// Datos seleccionables
 				cargarEstadosLecturas();
 				listViewLecturas = (SuperListview) findViewById(R.id.list_lecturas);
-				listViewLecturas.getList().setFastScrollEnabled(true);
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-					listViewLecturas.getList().setFastScrollAlwaysVisible(true);
 				listViewLecturas
 						.setOnItemClickListener(new OnItemClickListener() {
 							@Override
 							public void onItemClick(AdapterView<?> arg0,
 									View view, int pos, long id) {
-								ManejadorDeIndice.setIdLecturaActual(adapter
-										.getItemId(pos));
+								Intent returnIntent = new Intent();
+								returnIntent.putExtra(
+										TomarLectura.ARG_ID_LECTURA,
+										adapter.getItemId(pos));
+								setResult(RESULT_OK, returnIntent);
 								finish();
 								overridePendingTransition(
 										R.anim.slide_right_in,
@@ -67,6 +65,7 @@ public class ListaLecturas extends Activity {
 							public void onItemSelected(AdapterView<?> adapter,
 									View selectedItemView, final int position,
 									long id) {
+								listViewLecturas.showProgress();
 								new Thread(new Runnable() {
 									@Override
 									public void run() {
@@ -113,6 +112,7 @@ public class ListaLecturas extends Activity {
 				: Lectura.obtenerLecturasPorEstado(estado));
 	}
 
+	@SuppressLint("NewApi")
 	public void asignarListaLecturas(final List<Lectura> lecturas) {
 		runOnUiThread(new Runnable() {
 			@Override
@@ -121,12 +121,17 @@ public class ListaLecturas extends Activity {
 						R.layout.list_item_lectura, lecturas);
 				listViewLecturas.setAdapter(adapter);
 				lblNumLecturas.setText("" + adapter.getCount());
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
+					listViewLecturas.getList().setFastScrollAlwaysVisible(true);
+				listViewLecturas.getList().setFastScrollEnabled(true);
 			}
 		});
 	}
 
 	@Override
 	public void onBackPressed() {
+		Intent returnIntent = new Intent();
+		setResult(RESULT_CANCELED, returnIntent);
 		finish();// go back to the previous Activity
 		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
 	}

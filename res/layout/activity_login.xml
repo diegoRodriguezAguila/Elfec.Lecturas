@@ -40,7 +40,7 @@
         android:layout_toRightOf="@+id/lbl_fecha"
          android:layout_toEndOf="@+id/lbl_fecha" 
         android:ems="10"
-        android:hint="@string/usuario_hint" 
+        android:hint="@string/usuario_hint"
         android:inputType="textShortMessage">
 
         <requestFocus />
