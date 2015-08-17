@@ -55,6 +55,7 @@
         android:text="@string/menu_principal_btn" 
         android:drawableRight="@drawable/arrow_right"
         android:drawableEnd="@drawable/arrow_right"
+        android:enabled="false"
         android:onClick="btnMenuPrincipalClick"
         />
 
@@ -165,6 +166,7 @@
         android:drawableStart="@drawable/cargar_datos" 
         android:onClick="btnCargarDatosClick"
         android:textSize="12sp"
+        android:enabled="false"
         android:text="@string/cargar_datos_btn" />
 
     <Button
@@ -178,6 +180,7 @@
         android:drawableLeft="@drawable/descargar_datos"
         android:onClick="btnDescargarDatosClick"
         android:textSize="12sp"
+        android:enabled="false"
         android:text="@string/descargar_datos_btn" />
 
 </RelativeLayout>

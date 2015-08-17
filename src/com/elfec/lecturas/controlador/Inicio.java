@@ -58,33 +58,60 @@ public class Inicio extends Activity {
 				.permitAll().build();
 		StrictMode.setThreadPolicy(policy);
 		setContentView(R.layout.activity_inicio);
-		asignarTextos();
 		lblNumRuta = (TextView) findViewById(R.id.lbl_numero_ruta);
 		btnMenuPrincipal = (Button) findViewById(R.id.btn_menu_principal);
 		btnCargarDatos = (Button) findViewById(R.id.btn_cargar_datos);
 		btnDescargarDatos = (Button) findViewById(R.id.btn_descargar_datos);
 		lblInfoCargaDatos = (TextView) findViewById(R.id.lbl_info_carga_datos);
-		asignarEstadoBotonCargar();
-		asignarEstadoBotonDescargar();
+		lblNomUsuario = (TextView) findViewById(R.id.lbl_nom_usuario);
+		lblFecha = (TextView) findViewById(R.id.lbl_fecha);
+		lblNumIMEI = (TextView) findViewById(R.id.lbl_num_imei);
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		new Thread(new Runnable() {
+			public void run() {
+				obtenerTextos();
+				obtenerEstadoBotonDescargar();
+				obtenerEstadoBotonCargar();
+				asignarLabelDeRutas();
+			}
+		}).start();
 	}
 
 	/**
 	 * Asigna los datos a los labels de nombre de usuario, fecha e IMEI
 	 */
-	public void asignarTextos() {
-		lblNomUsuario = (TextView) findViewById(R.id.lbl_nom_usuario);
+	public void obtenerTextos() {
 		String usuario = VariablesDeSesion.getUsuarioLogeado();
-		if (usuario != null && !usuario.isEmpty())
-			lblNomUsuario.setText(usuario);
-		lblFecha = (TextView) findViewById(R.id.lbl_fecha);
 		Date hoy = new Date();
 		String fechaHoy = new SimpleDateFormat("dd/MMM/yyyy",
 				Locale.getDefault()).format(hoy);
-		lblFecha.setText(fechaHoy);
-		lblNumIMEI = (TextView) findViewById(R.id.lbl_num_imei);
 		String imei = VariablesDeSesion.getImeiCelular();
-		if (imei != null && !imei.isEmpty())
-			lblNumIMEI.setText(imei);
+		asignarTextos(usuario, fechaHoy, imei);
+	}
+
+	/**
+	 * Asigna los campos de los textos
+	 * 
+	 * @param usuario
+	 * @param fecha
+	 * @param imei
+	 */
+	public void asignarTextos(final String usuario, final String fecha,
+			final String imei) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (usuario != null && !usuario.isEmpty())
+					lblNomUsuario.setText(usuario);
+				lblFecha.setText(fecha);
+				if (imei != null && !imei.isEmpty())
+					lblNumIMEI.setText(imei);
+			}
+		});
 	}
 
 	@Override
@@ -180,17 +207,6 @@ public class Inicio extends Activity {
 		dialog.show();
 	}
 
-	/**
-	 * Se utiliza para que cada vez que se vaya a esta actividad, se actualize
-	 * el estado de los botones.
-	 */
-	@Override
-	public void onWindowFocusChanged(boolean hasFocus) {
-		super.onWindowFocusChanged(hasFocus);
-		asignarEstadoBotonDescargar();
-		asignarTextos();
-	}
-
 	@Override
 	public void onBackPressed() {
 		new Thread(new Runnable() {
@@ -254,7 +270,7 @@ public class Inicio extends Activity {
 		List<AsignacionRuta> listaRutas = AsignacionRuta
 				.obtenerRutasDeUsuario(VariablesDeSesion.getUsuarioLogeado());
 		if (listaRutas.size() == 0) {
-			lblNumRuta.setText(R.string.ruta_info_lbl);
+			setLabelDeRutas(getText(R.string.ruta_info_lbl));
 		} else {
 			StringBuilder strBuild = new StringBuilder("");
 			int tam = listaRutas.size();
@@ -263,27 +279,45 @@ public class Inicio extends Activity {
 				if (i < tam - 1)
 					strBuild.append(", ");
 			}
-			lblNumRuta.setText(strBuild.toString());
+			setLabelDeRutas(strBuild.toString());
 		}
+	}
+
+	public void setLabelDeRutas(final CharSequence txt) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				lblNumRuta.setText(txt);
+			}
+		});
 	}
 
 	/**
 	 * Habilita o deshabilita el boton de Cargar datos, verificando si es que ya
 	 * fueron cargados todos los datos
 	 */
-	public void asignarEstadoBotonCargar() {
-		if (!(GestionadorBDSQLite.datosDiariosFueronCargados())) {
-			btnMenuPrincipal.setEnabled(false);
-			btnCargarDatos.setEnabled(true);
-			lblInfoCargaDatos.setText(getResources().getString(
-					R.string.info_datos_no_cargados_lbl));
-		} else {
-			btnMenuPrincipal.setEnabled(true);
-			btnCargarDatos.setEnabled(false);
-			lblInfoCargaDatos.setText(getResources().getString(
-					R.string.info_datos_cargados_lbl));
-		}
-		asignarLabelDeRutas();
+	public void obtenerEstadoBotonCargar() {
+		boolean datosDiariosCargados = GestionadorBDSQLite
+				.datosDiariosFueronCargados();
+		asignarEstadoBotonCargar(
+				datosDiariosCargados,
+				!datosDiariosCargados,
+				(getResources()
+						.getString(datosDiariosCargados ? R.string.info_datos_cargados_lbl
+								: R.string.info_datos_no_cargados_lbl)));
+	}
+
+	public void asignarEstadoBotonCargar(final boolean menuPrincipalEnabled,
+			final boolean cargarDatosEnabled,
+			final CharSequence lblInfoCargaDatosStr) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				btnMenuPrincipal.setEnabled(menuPrincipalEnabled);
+				btnCargarDatos.setEnabled(cargarDatosEnabled);
+				lblInfoCargaDatos.setText(lblInfoCargaDatosStr);
+			}
+		});
 	}
 
 	/**
@@ -292,11 +326,21 @@ public class Inicio extends Activity {
 	 */
 	private boolean btnDescargarHabilitado;
 
-	public void asignarEstadoBotonDescargar() {
+	public void obtenerEstadoBotonDescargar() {
 		btnDescargarHabilitado = Lectura.seRealizaronTodasLasLecturas();
-		btnDescargarDatos
-				.setBackgroundResource(btnDescargarHabilitado ? R.drawable.elfectheme_btn_default_holo_light
-						: R.drawable.elfectheme_btn_default_disabled_holo_light);
+		asignarEstadoBotonDescargar();
+	}
+
+	public void asignarEstadoBotonDescargar() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				btnDescargarDatos.setEnabled(true);
+				btnDescargarDatos
+						.setBackgroundResource(btnDescargarHabilitado ? R.drawable.elfectheme_btn_default_holo_light
+								: R.drawable.elfectheme_btn_default_disabled_holo_light);
+			}
+		});
 	}
 
 	/**
@@ -305,9 +349,10 @@ public class Inicio extends Activity {
 	 * @param view
 	 */
 	public void btnCargarDatosClick(View view) {
-
-		CargaDeDatos cargaDeDatos = new CargaDeDatos(this);
-		cargaDeDatos.execute((Void[]) null);
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			CargaDeDatos cargaDeDatos = new CargaDeDatos(this);
+			cargaDeDatos.execute((Void[]) null);
+		}
 	}
 
 	/**
@@ -317,14 +362,16 @@ public class Inicio extends Activity {
 	 * @param view
 	 */
 	public void btnDescargarDatosClick(View view) {
-		if (btnDescargarHabilitado) {
-			DescargaDeDatos descargaDeDatos = new DescargaDeDatos(this);
-			descargaDeDatos.execute((Void[]) null);
-		} else {
-			Toast.makeText(this, R.string.descarga_inhabilitada,
-					Toast.LENGTH_SHORT).show();
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			if (btnDescargarHabilitado) {
+				DescargaDeDatos descargaDeDatos = new DescargaDeDatos(this);
+				descargaDeDatos.execute((Void[]) null);
+			} else {
+				Toast.makeText(this, R.string.descarga_inhabilitada,
+						Toast.LENGTH_SHORT).show();
+			}
+			asignarLabelDeRutas();
 		}
-		asignarLabelDeRutas();
 	}
 
 	/**
@@ -370,7 +417,7 @@ public class Inicio extends Activity {
 			if (progressDialog != null) {
 				progressDialog.dismiss();
 				if (result) {
-					asignarEstadoBotonCargar();
+					obtenerEstadoBotonCargar();
 					Toast.makeText(context, R.string.datos_descargados_exito,
 							Toast.LENGTH_LONG).show();
 					onBackPressed();
@@ -421,7 +468,7 @@ public class Inicio extends Activity {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if (progressDialog != null) {
-				asignarEstadoBotonCargar();
+				obtenerEstadoBotonCargar();
 				progressDialog.dismiss();
 				if (result) {
 					Toast.makeText(context, R.string.datos_cargados_exito,
@@ -486,7 +533,7 @@ public class Inicio extends Activity {
 		@Override
 		protected void onPostExecute(Boolean result) {
 			if (progressDialog != null) {
-				asignarEstadoBotonCargar();
+				obtenerEstadoBotonCargar();
 				progressDialog.dismiss();
 				if (result) {
 					Toast.makeText(Inicio.this,
