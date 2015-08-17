@@ -1,4 +1,4 @@
-package com.elfec.lecturas.modelo.seguridad;
+package com.elfec.lecturas.settings;
 
 import java.util.HashMap;
 import java.util.List;

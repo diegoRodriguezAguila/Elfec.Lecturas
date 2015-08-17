@@ -1,4 +1,4 @@
-package com.elfec.lecturas.modelo.preferencias_ui;
+package com.elfec.lecturas.settings.ui;
 
 import java.util.HashMap;
 import java.util.List;

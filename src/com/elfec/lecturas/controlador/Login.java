@@ -20,8 +20,8 @@ import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.helpers.validacionessincronizacion.IEstadoSincronizacion;
 import com.elfec.lecturas.modelo.SesionUsuario;
 import com.elfec.lecturas.modelo.Usuario;
-import com.elfec.lecturas.modelo.seguridad.AdministradorSeguridad;
 import com.elfec.lecturas.modelo.validaciones.IValidacionUsuario;
+import com.elfec.lecturas.settings.AdministradorSeguridad;
 import com.lecturas.elfec.R;
 
 /**

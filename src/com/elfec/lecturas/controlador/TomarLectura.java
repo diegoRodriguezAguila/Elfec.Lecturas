@@ -66,11 +66,11 @@ import com.elfec.lecturas.modelo.OrdenativoLectura;
 import com.elfec.lecturas.modelo.Potencia;
 import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.avisocobranza.AvisoCobranza;
-import com.elfec.lecturas.modelo.preferencias_ui.AdminUI;
-import com.elfec.lecturas.modelo.preferencias_ui.OpcionesPreferenciasUI;
-import com.elfec.lecturas.modelo.seguridad.AdministradorSeguridad;
 import com.elfec.lecturas.modelo.seguridad.Restricciones;
 import com.elfec.lecturas.modelo.validaciones.IValidacionLectura;
+import com.elfec.lecturas.settings.AdministradorSeguridad;
+import com.elfec.lecturas.settings.ui.AdminUI;
+import com.elfec.lecturas.settings.ui.OpcionesPreferenciasUI;
 import com.lecturas.elfec.R;
 
 public class TomarLectura extends Activity implements ISwipeListener,

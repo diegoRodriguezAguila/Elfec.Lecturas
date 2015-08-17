@@ -111,48 +111,8 @@ public class ConectorBDOracle {
 									+ configBD.getString("password") + "\""));
 			stmt.executeUpdate(query);
 		} catch (SQLException e) {
-			Log.d("com.lecturas.elfec", e.getCause() + ": " + e.getMessage());
+			Log.d("com.elfec.lecturas", e.getCause() + ": " + e.getMessage());
 		}
-	}
-
-	/**
-	 * Importa todos los datos diarios, son las tablas que corresponden a los
-	 * modelos: Lectura, Potencia, Ordenativo, OrdenativoLectura,
-	 * ConceptoLectura, EvolucionConsumo y MedidorEntreLinea. También se encarga
-	 * de actualizar la tabla de asignaciones MOVILES.USUARIO_ASIGNACION a los
-	 * estados correspondientes.
-	 * 
-	 * @return true, si se lograron importar todos los datos
-	 */
-	public boolean importarDatosDiariosDeOracle() {
-		boolean rutasImportadas = importarRutasAsignadas();
-		List<AsignacionRuta> rutas = AsignacionRuta
-				.obtenerRutasDeUsuario(VariablesDeSesion.getUsuarioLogeado());
-		return rutasImportadas
-				&& importarLecturasPotenciasConceptosYEvConsumos(rutas)
-				&& importarOrdenativos() && importarParametrizables();
-	}
-
-	/**
-	 * Verifica el cuadro tarifario actual y si es necesario importa todos los
-	 * datos mensuales, son las tablas que corresponden a los modelos:
-	 * BaseCalculo, BaseCalculoConcepto, Concepto, ConceptoCategoria y
-	 * ReclasificacionCategoria. <br>
-	 * <br>
-	 * <b>NOTA.-</b> Se debe llamar antes de importar datos diarios dado que
-	 * verifica que el cuadro tarifario sea el actual, si no lo es, elimina
-	 * todos los datos mensuales y diarios.
-	 * 
-	 * @return true, si se lograrion importar todos los datos
-	 */
-	public boolean importarDatosMensualesDeOracle() {
-		if (!GestionadorBDSQLite.idCuadroTarifarioEsActual()) {
-			GestionadorBDSQLite.eliminarDatosDiariosExceptoUsuario();
-			GestionadorBDSQLite.eliminarDatosMensuales();
-			return importarConceptosCategoriasTarifasGruposYBasesCalculo()
-					&& importarReclasificacionCategorias();
-		}
-		return false;
 	}
 
 	/**
@@ -235,33 +195,6 @@ public class ConectorBDOracle {
 	}
 
 	/**
-	 * Importa los ordenativos de la base de datos oracle,
-	 * ERP_ELFEC.TIPOS_NOV_SUM y los inserta en la base de datos local SQLite
-	 * 
-	 * @return
-	 */
-	private boolean importarOrdenativos() {
-		try {
-			List<Ordenativo> listaOrdenativos = obtenerOrdenativos();
-			ActiveAndroid.beginTransaction();
-			for (Ordenativo ord : listaOrdenativos) {
-				ord.save();
-			}
-			ActiveAndroid.setTransactionSuccessful();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		} finally {
-			if (ActiveAndroid.inTransaction())
-				ActiveAndroid.endTransaction();
-		}
-	}
-
-	/**
 	 * Importa todas las lecturas correspondientes a la ruta propocionada. Toma
 	 * en cuenta el dia, mes y año para realizar la importación y lo realiza de
 	 * la tabla MOVILES.LECTURAS
@@ -270,7 +203,7 @@ public class ConectorBDOracle {
 	 * @return
 	 * @throws SQLException
 	 */
-	private List<Lectura> obtenerLecturasPorRuta(AsignacionRuta ruta)
+	public List<Lectura> obtenerLecturasPorRuta(AsignacionRuta ruta)
 			throws SQLException {
 		List<Lectura> lista = new ArrayList<Lectura>();
 		StringBuilder query = new StringBuilder();
@@ -353,7 +286,13 @@ public class ConectorBDOracle {
 		return lista;
 	}
 
-	private List<Ordenativo> obtenerOrdenativos() throws SQLException {
+	/**
+	 * Obtiene los ordenativos remotamente
+	 * 
+	 * @return lista ordenativos
+	 * @throws SQLException
+	 */
+	public List<Ordenativo> obtenerOrdenativos() throws SQLException {
 		List<Ordenativo> lista = new ArrayList<Ordenativo>();
 		rs = stmt
 				.executeQuery("SELECT * FROM ERP_ELFEC.TIPOS_NOV_SUM WHERE ESTADO='A'");
@@ -363,56 +302,7 @@ public class ConectorBDOracle {
 		return lista;
 	}
 
-	private boolean importarConceptosCategoriasTarifasGruposYBasesCalculo() {
-		try {
-			List<Concepto> listaConceptos = obtenerConceptos();
-			List<ConceptoCategoria> listaCategorias = obtenerConceptosCategorias();
-			List<ConceptoTarifa> listaTarifas = obtenerConceptosTarifas();
-			List<BaseCalculo> listaBasesCalculo = obtenerBasesCalculo();
-			List<BaseCalculoConcepto> listaBasesCalculoConceptos = obtenerBasesCalculoConceptos();
-			ActiveAndroid.beginTransaction();
-			for (Concepto concep : listaConceptos) {
-				concep.save();
-			}
-			for (ConceptoCategoria cat : listaCategorias) {
-				cat.Concepto = Concepto.obtenerConcepto(cat.IdConcepto,
-						cat.IdSubConcepto);
-				cat.save();
-			}
-			for (ConceptoTarifa tarif : listaTarifas) {
-				tarif.Concepto = Concepto.obtenerConcepto(tarif.IdConcepto,
-						tarif.IdSubConcepto);
-				tarif.save();
-			}
-			for (BaseCalculo basCalc : listaBasesCalculo) {
-				basCalc.save();
-			}
-			for (BaseCalculoConcepto basCalcCon : listaBasesCalculoConceptos) {
-				BaseCalculo baseCalc = BaseCalculo
-						.obtenerBaseDeCalculo(basCalcCon.IdBaseCalculo);
-				Concepto concepto = Concepto.obtenerConcepto(
-						basCalcCon.IdConcepto, basCalcCon.IdSubConcepto);
-				if (baseCalc != null && concepto != null) {
-					basCalcCon.BaseCalculo = baseCalc;
-					basCalcCon.Concepto = concepto;
-					basCalcCon.save();
-				}
-			}
-			ActiveAndroid.setTransactionSuccessful();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		} finally {
-			if (ActiveAndroid.inTransaction())
-				ActiveAndroid.endTransaction();
-		}
-	}
-
-	private List<ConceptoCategoria> obtenerConceptosCategorias()
+	public List<ConceptoCategoria> obtenerConceptosCategorias()
 			throws SQLException {
 		List<ConceptoCategoria> lista = new ArrayList<ConceptoCategoria>();
 		int idCuadroTarifario = ((calendar.get(Calendar.YEAR) - 2000) * 100)
@@ -427,7 +317,7 @@ public class ConectorBDOracle {
 		return lista;
 	}
 
-	private List<ConceptoTarifa> obtenerConceptosTarifas() throws SQLException {
+	public List<ConceptoTarifa> obtenerConceptosTarifas() throws SQLException {
 		List<ConceptoTarifa> lista = new ArrayList<ConceptoTarifa>();
 		int idCuadroTarifario = ((calendar.get(Calendar.YEAR) - 2000) * 100)
 				+ (calendar.get(Calendar.MONTH) + 1);
@@ -440,7 +330,7 @@ public class ConectorBDOracle {
 		return lista;
 	}
 
-	private List<BaseCalculo> obtenerBasesCalculo() throws SQLException {
+	public List<BaseCalculo> obtenerBasesCalculo() throws SQLException {
 		List<BaseCalculo> lista = new ArrayList<BaseCalculo>();
 		rs = stmt
 				.executeQuery("SELECT IDBASE_CALCULO,DESCRIPCION,"
@@ -452,7 +342,7 @@ public class ConectorBDOracle {
 		return lista;
 	}
 
-	private List<BaseCalculoConcepto> obtenerBasesCalculoConceptos()
+	public List<BaseCalculoConcepto> obtenerBasesCalculoConceptos()
 			throws SQLException {
 		List<BaseCalculoConcepto> lista = new ArrayList<BaseCalculoConcepto>();
 		rs = stmt
@@ -463,7 +353,7 @@ public class ConectorBDOracle {
 		return lista;
 	}
 
-	private List<Concepto> obtenerConceptos() throws SQLException {
+	public List<Concepto> obtenerConceptos() throws SQLException {
 		List<Concepto> lista = new ArrayList<Concepto>();
 		rs = stmt
 				.executeQuery("SELECT * FROM ERP_ELFEC.CONCEPTOS WHERE IDCONCEPTO>=10000 AND IDCONCEPTO<12000");
@@ -473,28 +363,7 @@ public class ConectorBDOracle {
 		return lista;
 	}
 
-	private boolean importarReclasificacionCategorias() {
-		try {
-			List<ReclasificacionCategoria> listaReclasifCats = obtenerReclasificacionCategorias();
-			ActiveAndroid.beginTransaction();
-			for (ReclasificacionCategoria reclasifCat : listaReclasifCats) {
-				reclasifCat.save();
-			}
-			ActiveAndroid.setTransactionSuccessful();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		} finally {
-			if (ActiveAndroid.inTransaction())
-				ActiveAndroid.endTransaction();
-		}
-	}
-
-	private List<ReclasificacionCategoria> obtenerReclasificacionCategorias()
+	public List<ReclasificacionCategoria> obtenerReclasificacionCategorias()
 			throws SQLException {
 		List<ReclasificacionCategoria> lista = new ArrayList<ReclasificacionCategoria>();
 		rs = stmt
@@ -710,26 +579,6 @@ public class ConectorBDOracle {
 	}
 
 	/**
-	 * Importa las variables parametrizables de las tablas:
-	 * ERP_ELFEC.SGC_MOVIL_PARAM ERP_ELFEC.SGC_MOVIL_PARAM_CATEG_NO_CFIJO Y
-	 * ERP_ELFEC.SGC_MOVIL_PARAM_COD_ORD_RES y las guarda en archivos JSON para
-	 * su uso por la clase estatica VariablesDeEntorno
-	 */
-	public boolean importarParametrizables() {
-		try {
-			return obtenerParametrosGenerales()
-					&& obtenerParamCodOrdenativosResumen()
-					&& obtenerParamCategsNoMuestraCargoFijo();
-		} catch (SQLException e) {
-			return false;
-		} catch (JSONException e) {
-			return false;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	/**
 	 * Importa las variables parametrizables de las tabla
 	 * ERP_ELFEC.SGC_MOVIL_PARAM y las guarda en archivos JSON para su uso por
 	 * la clase estatica VariablesDeEntorno
@@ -738,7 +587,7 @@ public class ConectorBDOracle {
 	 * @throws SQLException
 	 * @throws JSONException
 	 */
-	private boolean obtenerParametrosGenerales() throws SQLException,
+	public boolean obtenerParametrosGenerales() throws SQLException,
 			JSONException {
 		rs = stmt
 				.executeQuery("SELECT * FROM ERP_ELFEC.SGC_MOVIL_PARAM WHERE ESTADO=1");
@@ -761,7 +610,7 @@ public class ConectorBDOracle {
 	 * @throws SQLException
 	 * @throws JSONException
 	 */
-	private boolean obtenerParamCodOrdenativosResumen() throws SQLException,
+	public boolean obtenerParamCodOrdenativosResumen() throws SQLException,
 			JSONException {
 		rs = stmt
 				.executeQuery("SELECT CODIGO FROM ERP_ELFEC.SGC_MOVIL_PARAM_COD_ORD_RES WHERE ESTADO=1");
@@ -784,7 +633,7 @@ public class ConectorBDOracle {
 	 * @throws SQLException
 	 * @throws JSONException
 	 */
-	private boolean obtenerParamCategsNoMuestraCargoFijo() throws SQLException,
+	public boolean obtenerParamCategsNoMuestraCargoFijo() throws SQLException,
 			JSONException {
 		rs = stmt
 				.executeQuery("SELECT CATEGORIA FROM ERP_ELFEC.SGC_MOVIL_PARAM_CATEG_NO_CFIJO WHERE ESTADO=1");
@@ -907,36 +756,6 @@ public class ConectorBDOracle {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * Realiza la importación de las rutas asignadas para el usuario en la fecha
-	 * actual y actualiza el estado de las asignaciones de rutas a 2
-	 * (Descargadas) o a 7 en caso de ser una ruta de relectura
-	 * 
-	 * @return
-	 */
-	public boolean importarRutasAsignadas() {
-		try {
-			List<AsignacionRuta> listaAsignacionRutas = obtenerRutasAsignadas(VariablesDeSesion
-					.getUsuarioLogeado());
-			ActiveAndroid.beginTransaction();
-			for (AsignacionRuta asignRuta : listaAsignacionRutas) {
-				asignRuta.save();
-			}
-			ActiveAndroid.setTransactionSuccessful();
-			actualizarEstadoRutas(listaAsignacionRutas, false);
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		} finally {
-			if (ActiveAndroid.inTransaction())
-				ActiveAndroid.endTransaction();
-		}
 	}
 
 	/**

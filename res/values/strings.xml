@@ -37,9 +37,27 @@
     <string name="titulo_cargando_datos">Cargando datos&#8230;</string>
     <string name="cargando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
     <string name="datos_cargados_exito">Datos cargados exitosamente!</string>
+    <string name="title_import_data">Carga de datos</string>
+    <string name="msg_confirm_import_data">Se procederá a iniciar el proceso de carga de datos ¿Desea continuar?</string>
+    <string name="msg_import_data_initialize">Inicializando la importación de datos del servidor&#8230;</string>
+    <string name="msg_importando_parametrizables">Cargando parametrizables (SGC_MOVIL_PARAM)&#8230;</string>
+    <string name="msg_importando_ordenativos">Cargando ordenativos (TIPOS_NOV_SUM)&#8230;</string>
+    <string name="msg_importando_conceptos">Cargando conceptos (CONCEPTOS)&#8230;</string>
+    <string name="msg_importando_conceptos_categ">Cargando categorias conceptos (CPTOS_CATEGORIAS)&#8230;</string>
+    <string name="msg_importando_conceptos_tarifa">Cargando conceptos tarifas(CPTOS_CATEGORIAS)&#8230;</string>
+    <string name="msg_importando_bases_calculo">Cargando bases de calculo (GBASES_CALC_IMP)&#8230;</string>
+    <string name="msg_importando_bases_calculo_cptos">Cargando conceptos bases de calculo (GBASES_CALC_CPTOS)&#8230;</string>
+    <string name="msg_importando_reclasif_categs">Cargando reclasificación de categorías (CATEG_RECLASIF)&#8230;</string>
+    <string name="msg_importando_asignacion_rutas">Cargando asignación de rutas del usuario (USUARIO_ASIGNACION)&#8230;</string>
+    <string name="msg_importando_lecturas">Cargando información de lecturas (LECTURAS)&#8230;</string>
+    <string name="msg_importing_reading_meters">Cargando información de medidores de lecturas (LECTURASGD_MED)&#8230;</string>
+    <string name="msg_finishing_import">Finalizando la carga de datos&#8230;</string>
+    <string name="title_import_data_error">Error en la carga de datos</string>
+    <string name="msg_data_imported_successfully">Se completó la carga de datos exitosamente!</string>
     <string name="error_carga_datos">ERROR en la carga de datos!</string>
-    <string name="descargar_datos_btn">DESCARGAR DATOS</string>
+
     <!-- Inicio: Descarga de datos -->
+    <string name="descargar_datos_btn">DESCARGAR DATOS</string>
     <string name="titulo_descargando_datos">Descargando datos&#8230;</string>
     <string name="descargando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
     <string name="datos_descargados_exito">Datos descargados exitosamente! Se cerró su sesión, gracias.</string>

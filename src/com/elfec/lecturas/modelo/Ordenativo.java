@@ -7,6 +7,7 @@ import java.util.List;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 /**
@@ -100,6 +101,13 @@ public class Ordenativo extends Model {
 							// cambiase se debe cambiar este codigo
 		return new Select().from(Ordenativo.class).where("IDNOVEDAD=?", codigo)
 				.executeSingle();
+	}
+
+	/**
+	 * ELimina todos los ordenativos guardados
+	 */
+	public static void eliminarTodosLosOrdenativos() {
+		new Delete().from(Ordenativo.class).execute();
 	}
 
 }

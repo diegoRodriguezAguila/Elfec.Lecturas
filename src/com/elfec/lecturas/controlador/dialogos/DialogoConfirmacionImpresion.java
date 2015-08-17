@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.helpers.VariablesDeSesion;
-import com.elfec.lecturas.modelo.preferencias_ui.AdminUI;
-import com.elfec.lecturas.modelo.preferencias_ui.OpcionesPreferenciasUI;
+import com.elfec.lecturas.settings.ui.AdminUI;
+import com.elfec.lecturas.settings.ui.OpcionesPreferenciasUI;
 import com.lecturas.elfec.R;
 
 public class DialogoConfirmacionImpresion extends CustomDialog {

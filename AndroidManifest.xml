@@ -29,7 +29,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/elfec_app_name"
-        android:theme="@style/ElfecTheme" android:name="com.activeandroid.app.Application">
+        android:theme="@style/ElfecTheme" android:name="com.elfec.lecturas.ElfecApp">
         <meta-data android:name="com.google.android.gms.version"
        android:value="@integer/google_play_services_version" />
         <meta-data
@@ -88,6 +88,9 @@
                 </action>
             </intent-filter>
         </receiver>
+        
+         <service android:name="com.elfec.lecturas.servicios.ServicioImportacionDatos" />
+        
     </application>
 
 </manifest>

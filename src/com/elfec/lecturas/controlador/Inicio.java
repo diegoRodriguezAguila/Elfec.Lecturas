@@ -29,8 +29,8 @@ import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.SesionUsuario;
-import com.elfec.lecturas.modelo.seguridad.AdministradorSeguridad;
 import com.elfec.lecturas.modelo.seguridad.Permisos;
+import com.elfec.lecturas.settings.AdministradorSeguridad;
 import com.lecturas.elfec.R;
 
 /**
@@ -367,11 +367,26 @@ public class Inicio extends Activity {
 				DescargaDeDatos descargaDeDatos = new DescargaDeDatos(this);
 				descargaDeDatos.execute((Void[]) null);
 			} else {
-				Toast.makeText(this, R.string.descarga_inhabilitada,
-						Toast.LENGTH_SHORT).show();
+				mostrarMensajeUsuario(R.string.descarga_inhabilitada);
 			}
 			asignarLabelDeRutas();
 		}
+	}
+
+	/**
+	 * Muestra un mensaje en un Toast
+	 * 
+	 * @param msgStrId
+	 *            id de la cadena del mensaje
+	 */
+	public void mostrarMensajeUsuario(final int msgStrId) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				Toast.makeText(Inicio.this, msgStrId, Toast.LENGTH_SHORT)
+						.show();
+			}
+		});
 	}
 
 	/**
@@ -418,12 +433,10 @@ public class Inicio extends Activity {
 				progressDialog.dismiss();
 				if (result) {
 					obtenerEstadoBotonCargar();
-					Toast.makeText(context, R.string.datos_descargados_exito,
-							Toast.LENGTH_LONG).show();
+					mostrarMensajeUsuario(R.string.datos_descargados_exito);
 					onBackPressed();
 				} else {
-					Toast.makeText(context, R.string.error_descarga_datos,
-							Toast.LENGTH_LONG).show();
+					mostrarMensajeUsuario(R.string.error_descarga_datos);
 				}
 			}
 		}
@@ -461,8 +474,7 @@ public class Inicio extends Activity {
 		@Override
 		protected Boolean doInBackground(Void... voids) {
 			ConectorBDOracle conexion = new ConectorBDOracle(context, true);
-			return conexion.importarDatosMensualesDeOracle()
-					&& conexion.importarDatosDiariosDeOracle();
+			return false;
 		}
 
 		@Override
@@ -471,11 +483,9 @@ public class Inicio extends Activity {
 				obtenerEstadoBotonCargar();
 				progressDialog.dismiss();
 				if (result) {
-					Toast.makeText(context, R.string.datos_cargados_exito,
-							Toast.LENGTH_LONG).show();
+					mostrarMensajeUsuario(R.string.datos_cargados_exito);
 				} else {
-					Toast.makeText(context, R.string.error_carga_datos,
-							Toast.LENGTH_LONG).show();
+					mostrarMensajeUsuario(R.string.error_carga_datos);
 				}
 			}
 		}
@@ -536,14 +546,10 @@ public class Inicio extends Activity {
 				obtenerEstadoBotonCargar();
 				progressDialog.dismiss();
 				if (result) {
-					Toast.makeText(Inicio.this,
-							R.string.datos_eliminados_exito, Toast.LENGTH_SHORT)
-							.show();
+					mostrarMensajeUsuario(R.string.datos_eliminados_exito);
 					onBackPressed();
 				} else {
-					Toast.makeText(Inicio.this,
-							R.string.datos_eliminados_error, Toast.LENGTH_SHORT)
-							.show();
+					mostrarMensajeUsuario(R.string.datos_eliminados_error);
 				}
 			}
 		}

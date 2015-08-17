@@ -1,4 +1,4 @@
-package com.elfec.lecturas.modelo.preferencias_ui;
+package com.elfec.lecturas.settings.ui;
 
 /**
  * Define las distintas opciones y preferencias de UI que los usuarios pueden elegir
