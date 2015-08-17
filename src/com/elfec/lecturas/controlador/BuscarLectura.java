@@ -16,11 +16,14 @@ import android.widget.Spinner;
 
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.dialogos.DialogoResultadosBusqueda;
+import com.elfec.lecturas.helpers.ui.TecladoHelper;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.lecturas.elfec.R;
 
 public class BuscarLectura extends Activity {
+
+	private View rootLayout;
 
 	private EditText txtCuenta;
 	private EditText txtMedidor;
@@ -33,6 +36,7 @@ public class BuscarLectura extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_buscar_lectura);
+		rootLayout = findViewById(R.id.root_layout);
 		txtCuenta = (EditText) findViewById(R.id.txt_cuenta);
 		txtMedidor = (EditText) findViewById(R.id.txt_medidor);
 		txtNUS = (EditText) findViewById(R.id.txt_bus_nus);
@@ -200,6 +204,7 @@ public class BuscarLectura extends Activity {
 	 * @param lecturaEnc
 	 */
 	public void irALecturaEncontrada(Lectura lecturaEnc) {
+		TecladoHelper.esconderTeclado(rootLayout);
 		Intent returnIntent = new Intent();
 		returnIntent.putExtra(TomarLectura.ARG_ID_LECTURA, lecturaEnc.getId());
 		setResult(RESULT_OK, returnIntent);

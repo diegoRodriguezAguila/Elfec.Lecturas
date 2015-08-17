@@ -58,6 +58,7 @@ import com.elfec.lecturas.helpers.ManejadorUbicacion;
 import com.elfec.lecturas.helpers.VariablesDeEntorno;
 import com.elfec.lecturas.helpers.VariablesDeSesion;
 import com.elfec.lecturas.helpers.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
+import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.MedidorEntreLineas;
 import com.elfec.lecturas.modelo.Ordenativo;
@@ -391,25 +392,30 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	}
 
 	public void btnInicioClick(View view) {
-		finish();
-		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			finish();
+			overridePendingTransition(R.anim.slide_right_in,
+					R.anim.slide_right_out);
+		}
 	}
 
 	private Lectura lecturaActual;
 
 	public void btnConfirmarLecturaClick(View view) {
-		if (!txtLecturaNueva.getText().toString().isEmpty()) {
-			lecturaActual = navegacionAdapter.getActual();
-			int lectura = Integer
-					.parseInt(txtLecturaNueva.getText().toString());
-			boolean procederConGuardado = lecturaActual.LecturaNueva == lectura;
-			lecturaActual.LecturaNueva = lectura;
-			IValidacionLectura resultadoValidacion = lecturaActual
-					.validarLectura();
-			if (resultadoValidacion.esAdvertencia()) {
-				mostrarAdvertencia(resultadoValidacion, procederConGuardado);
-			} else {
-				procederConProcesoDeGuardado();
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			if (!txtLecturaNueva.getText().toString().isEmpty()) {
+				lecturaActual = navegacionAdapter.getActual();
+				int lectura = Integer.parseInt(txtLecturaNueva.getText()
+						.toString());
+				boolean procederConGuardado = lecturaActual.LecturaNueva == lectura;
+				lecturaActual.LecturaNueva = lectura;
+				IValidacionLectura resultadoValidacion = lecturaActual
+						.validarLectura();
+				if (resultadoValidacion.esAdvertencia()) {
+					mostrarAdvertencia(resultadoValidacion, procederConGuardado);
+				} else {
+					procederConProcesoDeGuardado();
+				}
 			}
 		}
 	}
@@ -534,17 +540,23 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	// --------------------------- BARRA DE HERRAMIENTAS INFERIOR
 	// ------------------------------------
 	public void btnBuscarClick(View view) {
-		Intent intent = new Intent(this, BuscarLectura.class);
-		intent.putExtra("RutaActual", lblCuenta.getText().subSequence(0, 6)
-				.toString());
-		startActivityForResult(intent, BUSCAR_LECTURA);
-		overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			Intent intent = new Intent(this, BuscarLectura.class);
+			intent.putExtra("RutaActual", lblCuenta.getText().subSequence(0, 6)
+					.toString());
+			startActivityForResult(intent, BUSCAR_LECTURA);
+			overridePendingTransition(R.anim.slide_left_in,
+					R.anim.slide_left_out);
+		}
 	}
 
 	public void btnListaLecturasClick(View view) {
-		Intent intent = new Intent(this, ListaLecturas.class);
-		startActivityForResult(intent, LISTA_LECTURAS);
-		overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			Intent intent = new Intent(this, ListaLecturas.class);
+			startActivityForResult(intent, LISTA_LECTURAS);
+			overridePendingTransition(R.anim.slide_left_in,
+					R.anim.slide_left_out);
+		}
 	}
 
 	public void btnAnteriorClick(View view) {
@@ -578,22 +590,26 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	// -------------------------- BOTONES POSTERGAR Y
 	// REINTENTAR-------------------------------------
 	public void btnPostergarLecturaClick(View view) {
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(R.string.postergar_mensaje);
-		dialog.setTitle(R.string.titulo_mensajes_confirmar);
-		dialog.setPositiveButton(R.string.btn_ok, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Lectura lecturaActual = navegacionAdapter.getActual();
-				lecturaActual.setEstadoLectura(3);
-				lecturaActual.save();
-				asignarDatos();
-				dialog.dismiss();
-				actualizarLecturasYFiltro(true);
-			}
-		});
-		dialog.setNegativeButton(null);
-		dialog.show();
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			final CustomDialog dialog = new CustomDialog(this);
+			dialog.setMessage(R.string.postergar_mensaje);
+			dialog.setTitle(R.string.titulo_mensajes_confirmar);
+			dialog.setPositiveButton(R.string.btn_ok,
+					new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Lectura lecturaActual = navegacionAdapter
+									.getActual();
+							lecturaActual.setEstadoLectura(3);
+							lecturaActual.save();
+							asignarDatos();
+							dialog.dismiss();
+							actualizarLecturasYFiltro(true);
+						}
+					});
+			dialog.setNegativeButton(null);
+			dialog.show();
+		}
 	}
 
 	/**
@@ -603,52 +619,63 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	 * @param view
 	 */
 	public void btnReintentarLecturaClick(View view) {
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(R.string.reintentar_mensaje);
-		dialog.setTitle(R.string.titulo_mensajes_confirmar);
-		dialog.setPositiveButton(R.string.btn_ok, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Lectura lecturaActual = navegacionAdapter.getActual();
-				DateFormat df = new SimpleDateFormat("HH:mm", Locale
-						.getDefault());
-				Date fechaLec = new Date();
-				lecturaActual.FechaLecturaActual = fechaLec;
-				lecturaActual.HoraLectura = df.format(fechaLec);
-				lecturaActual.setEstadoLectura(4);
-				Ordenativo ord = Ordenativo
-						.obtenerOrdenativoLecturaReintentar();
-				OrdenativoLectura ordLect = new OrdenativoLectura(ord,
-						lecturaActual, new Date());
-				lecturaActual.ObservacionLectura = ord.Codigo;// le asigna el
-																// codigo de
-																// ordenativo
-																// lectura
-																// estimada
-				lecturaActual.UsuarioAuditoria = VariablesDeSesion
-						.getUsuarioLogeado();
-				lecturaActual.save();
-				ordLect.guardarYEnviarPor3G();
-				asignarDatos();
-				dialog.dismiss();
-				actualizarLecturasYFiltro(true);
-			}
-		});
-		dialog.setNegativeButton(null);
-		dialog.show();
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			final CustomDialog dialog = new CustomDialog(this);
+			dialog.setMessage(R.string.reintentar_mensaje);
+			dialog.setTitle(R.string.titulo_mensajes_confirmar);
+			dialog.setPositiveButton(R.string.btn_ok,
+					new View.OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							Lectura lecturaActual = navegacionAdapter
+									.getActual();
+							DateFormat df = new SimpleDateFormat("HH:mm",
+									Locale.getDefault());
+							Date fechaLec = new Date();
+							lecturaActual.FechaLecturaActual = fechaLec;
+							lecturaActual.HoraLectura = df.format(fechaLec);
+							lecturaActual.setEstadoLectura(4);
+							Ordenativo ord = Ordenativo
+									.obtenerOrdenativoLecturaReintentar();
+							OrdenativoLectura ordLect = new OrdenativoLectura(
+									ord, lecturaActual, new Date());
+							lecturaActual.ObservacionLectura = ord.Codigo;// le
+																			// asigna
+																			// el
+																			// codigo
+																			// de
+																			// ordenativo
+																			// lectura
+																			// estimada
+							lecturaActual.UsuarioAuditoria = VariablesDeSesion
+									.getUsuarioLogeado();
+							lecturaActual.save();
+							ordLect.guardarYEnviarPor3G();
+							asignarDatos();
+							dialog.dismiss();
+							actualizarLecturasYFiltro(true);
+						}
+					});
+			dialog.setNegativeButton(null);
+			dialog.show();
+		}
 	}
 
 	public void btnRecordatorioClick(View view) {
-		mostrarDialogoRecordatorioLector();
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			mostrarDialogoRecordatorioLector();
+		}
 	}
 
 	// -------------------------- DIALOGO AGREGAR
 	// ORDENATIVO-------------------------------------
 
 	public void btnAgregarOrdenativoClick(View view) {
-		DialogoAgregarOrdenativo pd = new DialogoAgregarOrdenativo(
-				TomarLectura.this, navegacionAdapter.getActual());
-		pd.show();
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			DialogoAgregarOrdenativo pd = new DialogoAgregarOrdenativo(
+					TomarLectura.this, navegacionAdapter.getActual());
+			pd.show();
+		}
 	}
 
 	// -------------------------- DIALOGO VER ORDENATIVOS
@@ -674,37 +701,40 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	// -----------------------------------------------
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-		case R.id.menu_item_estimar_lectura:
-			mostrarDialogoEstimarLectura();
-			return true;
-		case R.id.menu_item_impedir_lectura:
-			mostrarDialogoImpedirLectura();
-			return true;
-		case R.id.menu_item_medidor_entre_lineas:
-			mostrarDialogoMedidorEntreLineas();
-			return true;
-		case R.id.menu_item_modificar_lectura:
-			mostrarDialogoModificarLectura();
-			return true;
-		case R.id.menu_item_re_imprimir:
-			mostrarDialogoReImprimir();
-			return true;
-		case R.id.menu_item_filtrar_lecturas:
-			mostrarDialogoFiltrarLecturas();
-			return true;
-		case R.id.menu_item_recordatorio_lector:
-			mostrarDialogoRecordatorioLector();
-			return true;
-		case R.id.menu_item_visualizar_potencia:
-			mostrarDialogoVerPotencia();
-			return true;
-		case R.id.menu_item_tomar_foto:
-			mostrarDialogoFotoLectura();
-			return true;
-		default:
-			return true;
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			switch (item.getItemId()) {
+			case R.id.menu_item_estimar_lectura:
+				mostrarDialogoEstimarLectura();
+				return true;
+			case R.id.menu_item_impedir_lectura:
+				mostrarDialogoImpedirLectura();
+				return true;
+			case R.id.menu_item_medidor_entre_lineas:
+				mostrarDialogoMedidorEntreLineas();
+				return true;
+			case R.id.menu_item_modificar_lectura:
+				mostrarDialogoModificarLectura();
+				return true;
+			case R.id.menu_item_re_imprimir:
+				mostrarDialogoReImprimir();
+				return true;
+			case R.id.menu_item_filtrar_lecturas:
+				mostrarDialogoFiltrarLecturas();
+				return true;
+			case R.id.menu_item_recordatorio_lector:
+				mostrarDialogoRecordatorioLector();
+				return true;
+			case R.id.menu_item_visualizar_potencia:
+				mostrarDialogoVerPotencia();
+				return true;
+			case R.id.menu_item_tomar_foto:
+				mostrarDialogoFotoLectura();
+				return true;
+			default:
+				return true;
+			}
 		}
+		return true;
 	}
 
 	// ----------------------------- DIALOGO FILTRAR LECTURAS

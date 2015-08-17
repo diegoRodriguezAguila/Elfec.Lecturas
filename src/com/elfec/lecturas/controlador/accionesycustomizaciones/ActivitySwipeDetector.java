@@ -1,5 +1,6 @@
 package com.elfec.lecturas.controlador.accionesycustomizaciones;
 
+import android.annotation.SuppressLint;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,6 +33,7 @@ public class ActivitySwipeDetector implements OnTouchListener {
 		activityListener.onBottomToTopSwipe();
 	}
 
+	@SuppressLint("ClickableViewAccessibility")
 	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		switch (event.getAction()) {

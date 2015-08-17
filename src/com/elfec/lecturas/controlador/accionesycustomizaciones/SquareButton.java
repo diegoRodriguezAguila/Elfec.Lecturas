@@ -3,82 +3,100 @@ package com.elfec.lecturas.controlador.accionesycustomizaciones;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import com.lecturas.elfec.R;
-
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class SquareButton extends RelativeLayout{
+import com.lecturas.elfec.R;
 
-	private Button baseButton;
+public class SquareButton extends LinearLayout {
+
+	private CharSequence textPrincipal;
+	private CharSequence textSub;
+	private Drawable iconBottom;
+	private Drawable background;
+	private String onClickHandler;
+	private LinearLayout backgroundLayout;
 	private TextView principalText;
+	private float principalTextSize;
 	private TextView subText;
+	private float subTextSize;
 	private ImageView bottomIcon;
-	
-	@SuppressWarnings("deprecation")
-	public SquareButton(final Context context, AttributeSet attrs) {
-		super(context, attrs);
-		TypedArray a = context.obtainStyledAttributes(attrs,
-		        R.styleable.SquareButtonOptions, 0, 0);
-		    String textPrincipal = a.getString(R.styleable.SquareButtonOptions_principalText);
-		    String textSub = a.getString(R.styleable.SquareButtonOptions_subText);
-		    Drawable iconBottom = a.getDrawable(R.styleable.SquareButtonOptions_bottomIcon);
-		    Drawable background = a.getDrawable(R.styleable.SquareButtonOptions_buttonBackground);
-		    a.recycle();
-		    
-		    int[] onClickAttr = new int[] { android.R.attr.onClick };
-		    TypedArray ta = context.obtainStyledAttributes(attrs, onClickAttr,0,0);
-		    final String onClickHandler = ta.getString(0);
-		    ta.recycle();
 
-		    setGravity(Gravity.CENTER_VERTICAL);
-		    LayoutInflater inflater = (LayoutInflater) context
-		        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		    RelativeLayout layoutButton = (RelativeLayout) inflater.inflate(R.layout.square_button, this, true);
-		    principalText = (TextView) layoutButton.findViewById(R.id.principal_text);
-		    principalText.setText(textPrincipal);
-		    subText = (TextView) layoutButton.findViewById(R.id.sub_text);
-		    subText.setText(textSub);
-		    bottomIcon = (ImageView) layoutButton.findViewById(R.id.bottom_icon);
-		    bottomIcon.setImageDrawable(iconBottom);    
-		    baseButton = (Button) layoutButton.findViewById(R.id.principal_button);
-		    if(background!=null)
-		    {
-		    	baseButton.setBackgroundDrawable(background);
-		    }
-		    
-		    baseButton.setOnClickListener(new OnClickListener() {
-				private Method mHandler;
-				@Override
-				public void onClick(View v) {
-					if(mHandler == null)
-					{
-						try{
-							mHandler = getContext().getClass().getMethod(onClickHandler, View.class);
-						}
-						catch(NoSuchMethodException e){
-							throw new IllegalStateException();
-						}
+	public SquareButton(final Context context, final AttributeSet attrs) {
+		super(context, attrs);
+		LayoutInflater inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		inflater.inflate(R.layout.square_button, this);
+		TypedArray a = context.obtainStyledAttributes(attrs,
+				R.styleable.SquareButtonOptions, 0, 0);
+		textPrincipal = a
+				.getText(R.styleable.SquareButtonOptions_principalText);
+		textSub = a.getText(R.styleable.SquareButtonOptions_subText);
+		iconBottom = a.getDrawable(R.styleable.SquareButtonOptions_bottomIcon);
+		background = a
+				.getDrawable(R.styleable.SquareButtonOptions_buttonBackground);
+		principalTextSize = a.getDimension(
+				R.styleable.SquareButtonOptions_principalTextSize, -1);
+		subTextSize = a.getDimension(
+				R.styleable.SquareButtonOptions_subTextSize, -1);
+		a.recycle();
+
+		int[] onClickAttr = new int[] { android.R.attr.onClick };
+		TypedArray ta = context
+				.obtainStyledAttributes(attrs, onClickAttr, 0, 0);
+		onClickHandler = ta.getString(0);
+		ta.recycle();
+
+	}
+
+	@SuppressWarnings("deprecation")
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+		principalText = (TextView) findViewById(R.id.principal_text);
+		subText = (TextView) findViewById(R.id.sub_text);
+		bottomIcon = (ImageView) findViewById(R.id.bottom_icon);
+		principalText.setText(textPrincipal);
+		if (principalTextSize != -1)
+			principalText.setTextSize(principalTextSize);
+		subText.setText(textSub);
+		if (subTextSize != -1)
+			subText.setTextSize(subTextSize);
+		bottomIcon.setImageDrawable(iconBottom);
+		backgroundLayout = (LinearLayout) findViewById(R.id.square_button_root_layout);
+		if (background != null) {
+			backgroundLayout.setBackgroundDrawable(background);
+		}
+		backgroundLayout.setOnClickListener(new OnClickListener() {
+			private Method mHandler;
+
+			@Override
+			public void onClick(View v) {
+				if (mHandler == null) {
+					try {
+						mHandler = getContext().getClass().getMethod(
+								onClickHandler, View.class);
+					} catch (NoSuchMethodException e) {
+						throw new IllegalStateException();
 					}
-						
-						try{
-							mHandler.invoke(getContext(), baseButton);
-						} catch (IllegalAccessException e) {
-		                    throw new IllegalStateException();
-		                } catch (InvocationTargetException e) {
-		                    throw new IllegalStateException();
-		                }
 				}
-			});
+
+				try {
+					mHandler.invoke(getContext(), (View) SquareButton.this);
+				} catch (IllegalAccessException e) {
+					throw new IllegalStateException();
+				} catch (InvocationTargetException e) {
+					throw new IllegalStateException();
+				}
+			}
+		});
 	}
 
 }

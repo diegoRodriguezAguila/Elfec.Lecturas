@@ -10,9 +10,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
+import com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton;
 import com.elfec.lecturas.controlador.dialogos.DialogoSeleccionImpresora;
 import com.elfec.lecturas.helpers.ManejadorImpresora;
+import com.elfec.lecturas.helpers.VariablesDeEntorno;
 import com.elfec.lecturas.helpers.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
+import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleImpedidas;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleLecturas;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleLecturasEntreLineas;
@@ -22,17 +25,36 @@ import com.lecturas.elfec.R;
 
 public class MenuPrincipal extends Activity {
 
+	private SquareButton btnTomarLecturas;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_menu_principal);
-		try {
-			Class.forName("com.elfec.lecturas.helpers.VariablesDeEntorno");
-		} catch (Exception e) {
-			mostrarDialogoErrorVariables();
-		} catch (ExceptionInInitializerError e) {
-			mostrarDialogoErrorVariables();
-		}
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					btnTomarLecturas = (SquareButton) findViewById(R.id.btn_tomar_lecturas);
+					VariablesDeEntorno.inicializar();
+					mostrarBotonTomarLecturas();
+				} catch (Exception e) {
+					mostrarDialogoErrorVariables();
+				}
+			}
+		}).start();
+	}
+
+	/**
+	 * Hace visible el boton de tomar lecturas
+	 */
+	private void mostrarBotonTomarLecturas() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				btnTomarLecturas.setVisibility(View.VISIBLE);
+			}
+		});
 	}
 
 	/**
@@ -40,19 +62,24 @@ public class MenuPrincipal extends Activity {
 	 * las tablas parametrizables no se encuentren correctas en el dispositivo
 	 */
 	private void mostrarDialogoErrorVariables() {
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(R.string.no_variables_msg);
-		dialog.setTitle(R.string.titulo_no_variables);
-		dialog.setIcon(R.drawable.error);
-		dialog.setCancelable(false);
-		dialog.setPositiveButton(new View.OnClickListener() {
+		runOnUiThread(new Runnable() {
 			@Override
-			public void onClick(View v) {
-				onBackPressed();
-				dialog.dismiss();
+			public void run() {
+				final CustomDialog dialog = new CustomDialog(MenuPrincipal.this);
+				dialog.setMessage(R.string.no_variables_msg);
+				dialog.setTitle(R.string.titulo_no_variables);
+				dialog.setIcon(R.drawable.error);
+				dialog.setCancelable(false);
+				dialog.setPositiveButton(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						dialog.dismiss();
+						onBackPressed();
+					}
+				});
+				dialog.show();
 			}
 		});
-		dialog.show();
 	}
 
 	@Override
@@ -68,21 +95,16 @@ public class MenuPrincipal extends Activity {
 		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
 	}
 
-	public void btnSalirClick(View view) {
-		Intent intent = new Intent(this, Inicio.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP
-				| Intent.FLAG_ACTIVITY_SINGLE_TOP);
-		startActivity(intent);
-		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
-	}
-
 	/**
 	 * Inicia la actividad de tomar lecturas
 	 */
 	public void btnTomarLecturasClick(View view) {
-		Intent intent = new Intent(this, TomarLectura.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			Intent intent = new Intent(this, TomarLectura.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_left_in,
+					R.anim.slide_left_out);
+		}
 	}
 
 	/**
@@ -91,9 +113,12 @@ public class MenuPrincipal extends Activity {
 	 * @param view
 	 */
 	public void btnResumenLecturasClick(View view) {
-		Intent intent = new Intent(this, ResumenLecturas.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.slide_left_in, R.anim.slide_left_out);
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			Intent intent = new Intent(this, ResumenLecturas.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_left_in,
+					R.anim.slide_left_out);
+		}
 	}
 
 	/**
@@ -165,8 +190,11 @@ public class MenuPrincipal extends Activity {
 	 * @param view
 	 */
 	public void btnDetalleOrdenativosClick(View view) {
-		mostrarDialogoImprimirResumen(R.string.detalle_ordenativos_msg,
-				R.string.titulo_detalle_ordenativos, new DetalleOrdenativos());
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			mostrarDialogoImprimirResumen(R.string.detalle_ordenativos_msg,
+					R.string.titulo_detalle_ordenativos,
+					new DetalleOrdenativos());
+		}
 	}
 
 	/**
@@ -176,8 +204,10 @@ public class MenuPrincipal extends Activity {
 	 * @param view
 	 */
 	public void btnDetalleLecturasClick(View view) {
-		mostrarDialogoImprimirResumen(R.string.detalle_lecturas_msg,
-				R.string.titulo_detalle_lecturas, new DetalleLecturas());
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			mostrarDialogoImprimirResumen(R.string.detalle_lecturas_msg,
+					R.string.titulo_detalle_lecturas, new DetalleLecturas());
+		}
 	}
 
 	/**
@@ -187,8 +217,10 @@ public class MenuPrincipal extends Activity {
 	 * @param view
 	 */
 	public void btnDetalleImpedidasClick(View view) {
-		mostrarDialogoImprimirResumen(R.string.detalle_impedidas_msg,
-				R.string.titulo_detalle_impedidas, new DetalleImpedidas());
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			mostrarDialogoImprimirResumen(R.string.detalle_impedidas_msg,
+					R.string.titulo_detalle_impedidas, new DetalleImpedidas());
+		}
 	}
 
 	/**
@@ -198,9 +230,11 @@ public class MenuPrincipal extends Activity {
 	 * @param view
 	 */
 	public void btnDetalleEntreLineasClick(View view) {
-		mostrarDialogoImprimirResumen(R.string.detalle_entre_lineas_msg,
-				R.string.titulo_detalle_entre_lineas,
-				new DetalleLecturasEntreLineas());
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			mostrarDialogoImprimirResumen(R.string.detalle_entre_lineas_msg,
+					R.string.titulo_detalle_entre_lineas,
+					new DetalleLecturasEntreLineas());
+		}
 	}
 
 }

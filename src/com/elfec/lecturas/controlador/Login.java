@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.helpers.SincronizadorServidor;
 import com.elfec.lecturas.helpers.VariablesDeSesion;
+import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.helpers.validacionessincronizacion.IEstadoSincronizacion;
 import com.elfec.lecturas.modelo.SesionUsuario;
 import com.elfec.lecturas.modelo.Usuario;
@@ -57,16 +58,18 @@ public class Login extends Activity {
 	 * @param view
 	 */
 	public void btnIngresarClick(View view) {
-		String usuario = txtUsuario.getText().toString();
-		String password = txtPassword.getText().toString();
-		TelephonyManager telephonyManager = (TelephonyManager) this
-				.getSystemService(Context.TELEPHONY_SERVICE);
-		String imei = telephonyManager.getDeviceId();
-		VariablesDeSesion.setUsuarioLogeado(usuario);
-		VariablesDeSesion.setPasswordUsuario(password);
-		VariablesDeSesion.setImeiCelular(imei);
-		AdministradorSeguridad.resetearAdministradorDeSeguridad();
-		validarYEliminarCuadroTarifario();
+		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+			String usuario = txtUsuario.getText().toString();
+			String password = txtPassword.getText().toString();
+			TelephonyManager telephonyManager = (TelephonyManager) this
+					.getSystemService(Context.TELEPHONY_SERVICE);
+			String imei = telephonyManager.getDeviceId();
+			VariablesDeSesion.setUsuarioLogeado(usuario);
+			VariablesDeSesion.setPasswordUsuario(password);
+			VariablesDeSesion.setImeiCelular(imei);
+			AdministradorSeguridad.resetearAdministradorDeSeguridad();
+			validarYEliminarCuadroTarifario();
+		}
 	}
 
 	/**
