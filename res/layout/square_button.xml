@@ -1,57 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout 
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/square_button_root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clickable="false" >
-    
-    <Button
-        android:id="@+id/principal_button"
-        android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:layout_height="match_parent">
-    </Button>
-    
+    android:background="@drawable/elfectheme_btn_default_holo_light"
+    android:orientation="vertical" >
+
     <TextView
         android:id="@+id/principal_text"
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
         android:layout_height="wrap_content"
-        android:text="@string/tomar_lecturas_btn"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-    
-     <TextView
+        android:layout_marginTop="2dp"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sqbtn_principal_text_size" />
+
+    <TextView
         android:id="@+id/sub_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/principal_text"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:text="@string/sample_texto_square_button"
-        android:textColor="@color/white"
-        android:textSize="10sp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sqbtn_sub_text_size" />
 
-     <ImageView
-         android:id="@+id/bottom_icon"
-         android:contentDescription="@string/sample_texto_square_button"
-         android:layout_width="36dp"
-         android:layout_height="36dp"
-         android:layout_alignLeft="@+id/sub_text"
-         android:layout_alignParentBottom="true"
-         android:layout_alignParentLeft="true"
-         android:src="@drawable/tomar_lectura" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/bottom_icon"
+        android:layout_width="@dimen/sqbtn_icon_size"
+        android:layout_height="@dimen/sqbtn_icon_size"
+        android:layout_marginBottom="-3dp"
+        android:layout_marginLeft="-7dp"
+        android:layout_marginStart="-7dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/tomar_lectura"
+        tools:ignore="ContentDescription" />
+
+</LinearLayout>

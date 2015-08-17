@@ -5,6 +5,8 @@
         <attr name="subText" format="string" localization="suggested" />
         <attr name="bottomIcon" format="reference" localization="suggested" />
         <attr name="buttonBackground" format="reference" localization="suggested" />
+        <attr name="principalTextSize" format="dimension" />
+        <attr name="subTextSize" format="dimension" />
     </declare-styleable>
     
 </resources>

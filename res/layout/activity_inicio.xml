@@ -81,16 +81,6 @@
         android:text="@string/sample_fecha"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <Button
-        android:id="@+id/btn_salir"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"   
-        android:layout_alignParentEnd="true"
-        android:onClick="btnSalirClick"
-        android:text="@string/salida_btn" />
-
     <TextView
         android:id="@+id/lbl_usuario"
         android:layout_width="wrap_content"
@@ -153,12 +143,12 @@
         android:id="@+id/lbl_info_carga_datos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/lbl_menu_principal_info"
+        android:layout_alignLeft="@+id/btn_cargar_datos"
+        android:layout_alignEnd="@+id/btn_descargar_datos"
+        android:layout_alignRight="@+id/btn_descargar_datos"
         android:layout_alignStart="@+id/lbl_menu_principal_info"
         android:layout_below="@+id/btn_cargar_datos"
         android:layout_marginTop="2dp"
-        android:layout_toLeftOf="@+id/btn_salir"
-        android:layout_toStartOf="@+id/btn_salir"
         android:text="@string/info_datos_no_cargados_lbl"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textSize="12sp" />
