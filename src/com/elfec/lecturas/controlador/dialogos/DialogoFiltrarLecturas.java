@@ -5,13 +5,13 @@ import java.util.List;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.filtroslecturas.CriterioEstado;
 import com.elfec.lecturas.controlador.filtroslecturas.CriterioRuta;
 import com.elfec.lecturas.controlador.filtroslecturas.FiltroLecturas;
@@ -20,7 +20,7 @@ import com.elfec.lecturas.modelo.estados.lectura.EstadoLecturaFactory;
 import com.elfec.lecturas.modelo.estados.lectura.IEstadoLectura;
 import com.lecturas.elfec.R;
 
-public class DialogoFiltrarLecturas extends CustomDialog {
+public class DialogoFiltrarLecturas extends AlertDialog {
 	private Spinner selectorTipoLectura;
 	private Spinner selectorRuta;
 	private Context context;

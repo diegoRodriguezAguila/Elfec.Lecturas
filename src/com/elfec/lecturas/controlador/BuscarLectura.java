@@ -6,6 +6,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -14,7 +15,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.dialogos.DialogoResultadosBusqueda;
 import com.elfec.lecturas.helpers.ui.TecladoHelper;
 import com.elfec.lecturas.modelo.AsignacionRuta;
@@ -189,12 +189,10 @@ public class BuscarLectura extends Activity {
 	 * de su búsqueda
 	 */
 	private void mostrarDialogoNoResultados() {
-		CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(R.string.res_fallido_busqueda);
-		dialog.setTitle(R.string.titulo_mensajes_resultado);
-		dialog.setCancelable(false);
-		dialog.setPositiveButton(null);
-		dialog.show();
+		new AlertDialog.Builder(this).setMessage(R.string.res_fallido_busqueda)
+				.setTitle(R.string.titulo_mensajes_resultado)
+				.setCancelable(false).setPositiveButton(R.string.btn_ok, null)
+				.show();
 	}
 
 	/**

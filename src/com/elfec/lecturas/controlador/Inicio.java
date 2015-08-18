@@ -7,23 +7,22 @@ import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alertdialogpro.ProgressDialogPro;
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
-import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.dialogos.DialogoSeleccionImpresora;
 import com.elfec.lecturas.controlador.observers.IDataImportationObserver;
 import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
@@ -58,7 +57,7 @@ public class Inicio extends Activity implements IDataImportationObserver {
 	private Button btnCargarDatos;
 	private Button btnDescargarDatos;
 
-	private CustomDialog progressDialog;
+	private ProgressDialogPro progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -173,21 +172,20 @@ public class Inicio extends Activity implements IDataImportationObserver {
 	 * deberia estar disponible solo para administradores.
 	 */
 	private void eliminarDatos() {
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setTitle(R.string.titulo_mensajes_advertencia);
-		dialog.setMessage(R.string.eliminar_datos_msg);
-		dialog.setIcon(R.drawable.warning);
-		dialog.setPositiveButton(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
-				EliminacionDeDatos eliminacionDeDatos = new EliminacionDeDatos(
-						Inicio.this);
-				eliminacionDeDatos.execute((Void[]) null);
-			}
-		});
-		dialog.setNegativeButton(null);
-		dialog.show();
+		new AlertDialog.Builder(this)
+				.setTitle(R.string.titulo_mensajes_advertencia)
+				.setMessage(R.string.eliminar_datos_msg)
+				.setIcon(R.drawable.warning)
+				.setPositiveButton(R.string.btn_ok,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								EliminacionDeDatos eliminacionDeDatos = new EliminacionDeDatos(
+										Inicio.this);
+								eliminacionDeDatos.execute((Void[]) null);
+							}
+						}).setNegativeButton(R.string.btn_cancel, null).show();
 	}
 
 	/**
@@ -196,21 +194,20 @@ public class Inicio extends Activity implements IDataImportationObserver {
 	 * administradores.
 	 */
 	private void forzarDescarga() {
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setTitle(R.string.titulo_mensajes_advertencia);
-		dialog.setMessage(R.string.forzar_descarga_msg);
-		dialog.setIcon(R.drawable.warning);
-		dialog.setPositiveButton(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
-				DescargaDeDatos descargaDeDatos = new DescargaDeDatos(
-						Inicio.this);
-				descargaDeDatos.execute((Void[]) null);
-			}
-		});
-		dialog.setNegativeButton(null);
-		dialog.show();
+		new AlertDialog.Builder(this)
+				.setTitle(R.string.titulo_mensajes_advertencia)
+				.setMessage(R.string.forzar_descarga_msg)
+				.setIcon(R.drawable.warning)
+				.setPositiveButton(R.string.btn_ok,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								DescargaDeDatos descargaDeDatos = new DescargaDeDatos(
+										Inicio.this);
+								descargaDeDatos.execute((Void[]) null);
+							}
+						}).setNegativeButton(R.string.btn_cancel, null).show();
 	}
 
 	@Override
@@ -426,7 +423,6 @@ public class Inicio extends Activity implements IDataImportationObserver {
 	 *
 	 */
 	private class DescargaDeDatos extends AsyncTask<Void, Void, Boolean> {
-		private CustomDialog progressDialog;
 		private Context context;
 
 		public DescargaDeDatos(Context context) {
@@ -435,11 +431,11 @@ public class Inicio extends Activity implements IDataImportationObserver {
 
 		@Override
 		protected void onPreExecute() {
-			progressDialog = new CustomDialog(context);
-			progressDialog.showProgressbar(true);
+			progressDialog = new ProgressDialogPro(Inicio.this,
+					R.style.AppStyle_Dialog_FlavoredMaterialLight);
 			progressDialog.setCancelable(false);
 			progressDialog.setIcon(R.drawable.descargar_datos);
-			progressDialog.setMessage(R.string.descargando_datos_msg);
+			progressDialog.setMessage(getText(R.string.descargando_datos_msg));
 			progressDialog.setTitle(R.string.titulo_descargando_datos);
 			progressDialog.show();
 		}
@@ -479,7 +475,6 @@ public class Inicio extends Activity implements IDataImportationObserver {
 	 *
 	 */
 	private class EliminacionDeDatos extends AsyncTask<Void, Void, Boolean> {
-		private CustomDialog progressDialog;
 		private Context context;
 
 		public EliminacionDeDatos(Context context) {
@@ -488,11 +483,11 @@ public class Inicio extends Activity implements IDataImportationObserver {
 
 		@Override
 		protected void onPreExecute() {
-			progressDialog = new CustomDialog(context);
-			progressDialog.showProgressbar(true);
+			progressDialog = new ProgressDialogPro(Inicio.this,
+					R.style.AppStyle_Dialog_FlavoredMaterialLight);
 			progressDialog.setCancelable(false);
 			progressDialog.setIcon(R.drawable.borrar_datos);
-			progressDialog.setMessage(R.string.eliminando_datos_msg);
+			progressDialog.setMessage(getText(R.string.eliminando_datos_msg));
 			progressDialog.setTitle(R.string.titulo_eliminar_datos);
 			progressDialog.show();
 		}
@@ -536,12 +531,12 @@ public class Inicio extends Activity implements IDataImportationObserver {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				progressDialog = new CustomDialog(Inicio.this);
-				progressDialog.showProgressbar(true);
+				progressDialog = new ProgressDialogPro(Inicio.this,
+						R.style.AppStyle_Dialog_FlavoredMaterialLight);
 				progressDialog.setCancelable(false);
 				progressDialog.setIcon(R.drawable.cargar_datos);
 				progressDialog
-						.setMessage(R.string.msg_inicializando_importacion);
+						.setMessage(getText(R.string.msg_inicializando_importacion));
 				progressDialog.setTitle(R.string.titulo_cargando_datos);
 				progressDialog.show();
 			}

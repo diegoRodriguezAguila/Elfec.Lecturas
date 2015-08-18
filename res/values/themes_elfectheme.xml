@@ -28,6 +28,8 @@
         <item name="android:listViewWhiteStyle">@style/ListViewElfecTheme.White</item>
         <item name="android:spinnerItemStyle">@style/SpinnerItemElfecTheme</item>
         <item name="android:alertDialogStyle">@style/DialogElfecTheme</item>
+        
+        <item name="alertDialogProTheme">@style/AppStyle.Dialog.FlavoredMaterialLight</item>
     </style>
 
 </resources>

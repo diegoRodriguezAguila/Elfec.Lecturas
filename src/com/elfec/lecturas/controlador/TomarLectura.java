@@ -14,6 +14,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,7 +32,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.elfec.lecturas.controlador.accionesycustomizaciones.ActivitySwipeDetector;
-import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.ISwipeListener;
 import com.elfec.lecturas.controlador.adaptadores.NavegacionAdapter;
 import com.elfec.lecturas.controlador.adaptadores.NavegacionAdapter.NavegacionListener;
@@ -234,19 +234,11 @@ public class TomarLectura extends Activity implements ISwipeListener,
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				final CustomDialog dialogo = new CustomDialog(TomarLectura.this);
-				dialogo.setTitle(R.string.titulo_mensajes_advertencia);
-				dialogo.setIcon(R.drawable.warning);
-				dialogo.setMessage(R.string.advertencia_filtros);
-				dialogo.setPositiveButton(R.string.btn_ok,
-						new OnClickListener() {
-							@Override
-							public void onClick(View v) {
-								dialogo.dismiss();
-							}
-						});
-				dialogo.setCancelable(false);
-				dialogo.show();
+				new AlertDialog.Builder(TomarLectura.this)
+						.setTitle(R.string.titulo_mensajes_advertencia)
+						.setIcon(R.drawable.warning)
+						.setMessage(R.string.advertencia_filtros)
+						.setPositiveButton(R.string.btn_ok, null).show();
 			}
 		});
 	}
@@ -504,24 +496,25 @@ public class TomarLectura extends Activity implements ISwipeListener,
 			final IValidacionLectura resultadoValidacion,
 			final boolean procederConGuardado) {
 		ManejadorSonido.reproducirBeep(this);
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(resultadoValidacion.obtenerMensaje());
-		dialog.setTitle(R.string.titulo_mensajes_advertencia);
-		dialog.setCancelable(false);
-		dialog.setIcon(R.drawable.warning);
-		dialog.setPositiveButton(R.string.btn_ok, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
-				if (procederConGuardado) {
-					Ordenativo ord = resultadoValidacion.obtenerOrdenativo();
-					ordLec = new OrdenativoLectura(ord, lecturaActual,
-							new Date());
-					procederConProcesoDeGuardado();
-				}
-			}
-		});
-		dialog.show();
+		new AlertDialog.Builder(this)
+				.setMessage(resultadoValidacion.obtenerMensaje())
+				.setTitle(R.string.titulo_mensajes_advertencia)
+				.setIcon(R.drawable.warning)
+				.setPositiveButton(R.string.btn_ok,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								if (procederConGuardado) {
+									Ordenativo ord = resultadoValidacion
+											.obtenerOrdenativo();
+									ordLec = new OrdenativoLectura(ord,
+											lecturaActual, new Date());
+									procederConProcesoDeGuardado();
+								}
+							}
+						}).show();
 	}
 
 	// ------------------------------------------ DIALOGO POTENCIA
@@ -591,24 +584,25 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	// REINTENTAR-------------------------------------
 	public void btnPostergarLecturaClick(View view) {
 		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
-			final CustomDialog dialog = new CustomDialog(this);
-			dialog.setMessage(R.string.postergar_mensaje);
-			dialog.setTitle(R.string.titulo_mensajes_confirmar);
-			dialog.setPositiveButton(R.string.btn_ok,
-					new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Lectura lecturaActual = navegacionAdapter
-									.getActual();
-							lecturaActual.setEstadoLectura(3);
-							lecturaActual.save();
-							asignarDatos();
-							dialog.dismiss();
-							actualizarLecturasYFiltro(true);
-						}
-					});
-			dialog.setNegativeButton(null);
-			dialog.show();
+			new AlertDialog.Builder(this)
+					.setMessage(R.string.postergar_mensaje)
+					.setTitle(R.string.titulo_mensajes_confirmar)
+					.setPositiveButton(R.string.btn_ok,
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									Lectura lecturaActual = navegacionAdapter
+											.getActual();
+									lecturaActual.setEstadoLectura(3);
+									lecturaActual.save();
+									asignarDatos();
+									dialog.dismiss();
+									actualizarLecturasYFiltro(true);
+								}
+							}).setNegativeButton(R.string.btn_cancel, null)
+					.show();
 		}
 	}
 
@@ -620,44 +614,41 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	 */
 	public void btnReintentarLecturaClick(View view) {
 		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
-			final CustomDialog dialog = new CustomDialog(this);
-			dialog.setMessage(R.string.reintentar_mensaje);
-			dialog.setTitle(R.string.titulo_mensajes_confirmar);
-			dialog.setPositiveButton(R.string.btn_ok,
-					new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							Lectura lecturaActual = navegacionAdapter
-									.getActual();
-							DateFormat df = new SimpleDateFormat("HH:mm",
-									Locale.getDefault());
-							Date fechaLec = new Date();
-							lecturaActual.FechaLecturaActual = fechaLec;
-							lecturaActual.HoraLectura = df.format(fechaLec);
-							lecturaActual.setEstadoLectura(4);
-							Ordenativo ord = Ordenativo
-									.obtenerOrdenativoLecturaReintentar();
-							OrdenativoLectura ordLect = new OrdenativoLectura(
-									ord, lecturaActual, new Date());
-							lecturaActual.ObservacionLectura = ord.Codigo;// le
-																			// asigna
-																			// el
-																			// codigo
-																			// de
-																			// ordenativo
-																			// lectura
-																			// estimada
-							lecturaActual.UsuarioAuditoria = VariablesDeSesion
-									.getUsuarioLogeado();
-							lecturaActual.save();
-							ordLect.guardarYEnviarPor3G();
-							asignarDatos();
-							dialog.dismiss();
-							actualizarLecturasYFiltro(true);
-						}
-					});
-			dialog.setNegativeButton(null);
-			dialog.show();
+			new AlertDialog.Builder(this)
+					.setMessage(R.string.reintentar_mensaje)
+					.setTitle(R.string.titulo_mensajes_confirmar)
+					.setPositiveButton(R.string.btn_ok,
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									Lectura lecturaActual = navegacionAdapter
+											.getActual();
+									DateFormat df = new SimpleDateFormat(
+											"HH:mm", Locale.getDefault());
+									Date fechaLec = new Date();
+									lecturaActual.FechaLecturaActual = fechaLec;
+									lecturaActual.HoraLectura = df
+											.format(fechaLec);
+									lecturaActual.setEstadoLectura(4);
+									Ordenativo ord = Ordenativo
+											.obtenerOrdenativoLecturaReintentar();
+									OrdenativoLectura ordLect = new OrdenativoLectura(
+											ord, lecturaActual, new Date());
+									// le asigna el codigo de ordenativo lectura
+									// estimada
+									lecturaActual.ObservacionLectura = ord.Codigo;
+									lecturaActual.UsuarioAuditoria = VariablesDeSesion
+											.getUsuarioLogeado();
+									lecturaActual.save();
+									ordLect.guardarYEnviarPor3G();
+									asignarDatos();
+									dialog.dismiss();
+									actualizarLecturasYFiltro(true);
+								}
+							}).setNegativeButton(R.string.btn_cancel, null)
+					.show();
 		}
 	}
 
@@ -746,32 +737,36 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	private void mostrarDialogoFiltrarLecturas() {
 		final DialogoFiltrarLecturas dialogo = new DialogoFiltrarLecturas(this,
 				filtroLecturas);
-		dialogo.setPositiveButton(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				new Thread(new Runnable() {
-					@Override
-					public void run() {
-						if (dialogo.criterioEstado != null)
-							filtroLecturas
-									.agregarCriterioAFiltro(dialogo.criterioEstado);
-						else
-							filtroLecturas
-									.quitarCriterioDeFiltro(CriterioEstado.class);
+		dialogo.setButton(AlertDialog.BUTTON_POSITIVE,
+				getText(R.string.btn_ok),
+				new DialogInterface.OnClickListener() {
 
-						if (dialogo.criterioRuta != null)
-							filtroLecturas
-									.agregarCriterioAFiltro(dialogo.criterioRuta);
-						else
-							filtroLecturas
-									.quitarCriterioDeFiltro(CriterioRuta.class);
-						asignarLista();
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								if (dialogo.criterioEstado != null)
+									filtroLecturas
+											.agregarCriterioAFiltro(dialogo.criterioEstado);
+								else
+									filtroLecturas
+											.quitarCriterioDeFiltro(CriterioEstado.class);
+
+								if (dialogo.criterioRuta != null)
+									filtroLecturas
+											.agregarCriterioAFiltro(dialogo.criterioRuta);
+								else
+									filtroLecturas
+											.quitarCriterioDeFiltro(CriterioRuta.class);
+								asignarLista();
+							}
+						}).start();
 					}
-				}).start();
-				dialogo.dismiss();
-			}
-		});
-		dialogo.setNegativeButton(null);
+				});
+		dialogo.setButton(AlertDialog.BUTTON_NEGATIVE,
+				getText(R.string.btn_cancel),
+				(DialogInterface.OnClickListener) null);
 		dialogo.show();
 	}
 
@@ -812,29 +807,27 @@ public class TomarLectura extends Activity implements ISwipeListener,
 		final Lectura lectura = navegacionAdapter.getActual();
 		// verifica el limite de modificaciones
 		if (lectura.NumModificaciones < VariablesDeEntorno.limiteModificacionesLectura) {
-			final CustomDialog dialog = new CustomDialog(this);
-			dialog.setMessage(R.string.modificar_lectura_mensaje);
-			dialog.setTitle(R.string.titulo_mensajes_advertencia);
-			dialog.setIcon(R.drawable.warning);
-			dialog.setPositiveButton(R.string.btn_ok,
-					new View.OnClickListener() {
-						@Override
-						public void onClick(View v) {
-							lectura.resetearLectura();
-							asignarDatos();
-							dialog.dismiss();
-							actualizarLecturasYFiltro(false);
-						}
-					});
-			dialog.setNegativeButton(null);
-			dialog.show();
+			new AlertDialog.Builder(this)
+					.setMessage(R.string.modificar_lectura_mensaje)
+					.setTitle(R.string.titulo_mensajes_advertencia)
+					.setIcon(R.drawable.warning)
+					.setPositiveButton(R.string.btn_ok,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									lectura.resetearLectura();
+									asignarDatos();
+									actualizarLecturasYFiltro(false);
+								}
+							}).setNegativeButton(R.string.btn_cancel, null)
+					.show();
 		} else {
-			CustomDialog dialog = new CustomDialog(this);
-			dialog.setMessage(R.string.limite_modificaciones_mensaje);
-			dialog.setTitle(R.string.titulo_limite_modificaciones);
-			dialog.setIcon(R.drawable.error);
-			dialog.setPositiveButton(null);
-			dialog.show();
+			new AlertDialog.Builder(this)
+					.setMessage(R.string.limite_modificaciones_mensaje)
+					.setTitle(R.string.titulo_limite_modificaciones)
+					.setIcon(R.drawable.error)
+					.setPositiveButton(R.string.btn_ok, null).show();
 		}
 	}
 
@@ -846,20 +839,20 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	 * 
 	 */
 	private void mostrarDialogoReImprimir() {
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(R.string.reimprimir_mensaje);
-		dialog.setIcon(getResources().getDrawable(R.drawable.imprimir));
-		dialog.setTitle(R.string.titulo_reimprimir);
-		dialog.setPositiveButton(R.string.btn_ok, new View.OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				dialog.dismiss();
-				Lectura lectura = navegacionAdapter.getActual();
-				imprimirLectura(lectura);
-			}
-		});
-		dialog.setNegativeButton(null);
-		dialog.show();
+		new AlertDialog.Builder(this)
+				.setMessage(R.string.reimprimir_mensaje)
+				.setIcon(R.drawable.imprimir)
+				.setTitle(R.string.titulo_reimprimir)
+				.setPositiveButton(R.string.btn_ok,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								Lectura lectura = navegacionAdapter.getActual();
+								imprimirLectura(lectura);
+							}
+						}).setNegativeButton(R.string.btn_cancel, null).show();
 	}
 
 	// ----------------------------- Estimar Lectura
@@ -868,24 +861,24 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	 * Muestra el dialogo de confirmación de estimación de la lectura actual
 	 */
 	private void mostrarDialogoEstimarLectura() {
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(R.string.estimar_mensaje);
-		dialog.setIcon(getResources().getDrawable(R.drawable.estimar_lectura));
-		dialog.setTitle(R.string.titulo_mensajes_confirmar);
-		dialog.setPositiveButton(R.string.btn_ok, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
-				estimarLectura();
-				ManejadorBackupTexto.guardarBackupModelo(navegacionAdapter
-						.getActual());
-				txtLecturaNueva.setText("");
-				asignarDatos();
-				actualizarLecturasYFiltro(true);
-			}
-		});
-		dialog.setNegativeButton(null);
-		dialog.show();
+		new AlertDialog.Builder(this)
+				.setMessage(R.string.estimar_mensaje)
+				.setIcon(R.drawable.estimar_lectura)
+				.setTitle(R.string.titulo_mensajes_confirmar)
+				.setPositiveButton(R.string.btn_ok,
+						new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								estimarLectura();
+								ManejadorBackupTexto
+										.guardarBackupModelo(navegacionAdapter
+												.getActual());
+								txtLecturaNueva.setText("");
+								asignarDatos();
+								actualizarLecturasYFiltro(true);
+							}
+						}).setNegativeButton(R.string.btn_cancel, null).show();
 	}
 
 	/**
@@ -975,11 +968,10 @@ public class TomarLectura extends Activity implements ISwipeListener,
 					true);
 			dialog.show();
 		} else {
-			CustomDialog dialog = new CustomDialog(this);
-			dialog.setMessage(R.string.no_potencia_mensaje);
-			dialog.setTitle(R.string.titulo_mensajes_informacion);
-			dialog.setPositiveButton(R.string.btn_ok, null);
-			dialog.show();
+			new AlertDialog.Builder(this)
+					.setMessage(R.string.no_potencia_mensaje)
+					.setTitle(R.string.titulo_mensajes_informacion)
+					.setPositiveButton(R.string.btn_ok, null).show();
 		}
 	}
 
@@ -1036,16 +1028,18 @@ public class TomarLectura extends Activity implements ISwipeListener,
 			final AvisoCobranza avisoCobranza) {
 		final DialogoConfirmacionImpresion dialogo = new DialogoConfirmacionImpresion(
 				this);
-		dialogo.setPositiveButton(R.string.btn_si, new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				dialogo.dismiss();
-				dialogo.guardarPreferenciaMostrarDialogo();
-				verificarAsignacionImpresora(avisoCobranza);
-			}
-		});
-		dialogo.setNegativeButton(R.string.btn_no, null);
+		dialogo.setButton(AlertDialog.BUTTON_POSITIVE,
+				getText(R.string.btn_si),
+				new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialogo.guardarPreferenciaMostrarDialogo();
+						verificarAsignacionImpresora(avisoCobranza);
+					}
+				});
+		dialogo.setButton(AlertDialog.BUTTON_NEGATIVE,
+				getText(R.string.btn_no),
+				(DialogInterface.OnClickListener) null);
 		dialogo.show();
 	}
 
@@ -1096,12 +1090,11 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	 * impresiones y que no podrá imprimir la lectura
 	 */
 	public void mostrarDialogoLimiteDeImpresiones() {
-		CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(R.string.limite_impresion_mensaje);
-		dialog.setTitle(R.string.titulo_limite_impresion);
-		dialog.setIcon(R.drawable.error);
-		dialog.setPositiveButton(null);
-		dialog.show();
+		new AlertDialog.Builder(this)
+				.setMessage(R.string.limite_impresion_mensaje)
+				.setTitle(R.string.titulo_limite_impresion)
+				.setIcon(R.drawable.error)
+				.setPositiveButton(R.string.btn_ok, null).show();
 	}
 
 	// ------------------------EVENTOS DE
@@ -1142,27 +1135,25 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	private void mostrarDialogoFotoLectura() {
 		final Lectura lecturaActual = navegacionAdapter.getActual();
 		if (lecturaActual.NumFotosTomadas < VariablesDeEntorno.numMaxFotosPorLectura) {
-			final CustomDialog dialog = new CustomDialog(this);
-			dialog.setTitle(R.string.tomar_foto_titulo);
-			dialog.setIcon(R.drawable.camera);
-			dialog.setMessage(R.string.preguntar_tomar_foto_lectura);
-			dialog.setPositiveButton("Si", new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					ManejadorDeCamara.tomarFotoLectura(TomarLectura.this,
-							lecturaActual);
-					dialog.dismiss();
-				}
-			});
-			dialog.setNegativeButton("No", null);
-			dialog.show();
+			new AlertDialog.Builder(this)
+					.setTitle(R.string.tomar_foto_titulo)
+					.setIcon(R.drawable.camera)
+					.setMessage(R.string.preguntar_tomar_foto_lectura)
+					.setPositiveButton("Si",
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									ManejadorDeCamara.tomarFotoLectura(
+											TomarLectura.this, lecturaActual);
+								}
+							}).setNegativeButton("No", null).show();
 		} else {
-			CustomDialog dlg = new CustomDialog(this);
-			dlg.setTitle(R.string.limite_fotos_titulo);
-			dlg.setIcon(R.drawable.warning);
-			dlg.setMessage(R.string.limite_fotos_msg);
-			dlg.setPositiveButton(null);
-			dlg.show();
+			new AlertDialog.Builder(this)
+					.setTitle(R.string.limite_fotos_titulo)
+					.setIcon(R.drawable.warning)
+					.setMessage(R.string.limite_fotos_msg)
+					.setPositiveButton(R.string.btn_ok, null).show();
 		}
 	}
 
@@ -1173,27 +1164,26 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	 */
 	private void mostrarDialogoFotoOrdenativo(final OrdenativoLectura ordLec) {
 		if (navegacionAdapter.getActual().NumFotosTomadas < VariablesDeEntorno.numMaxFotosPorLectura) {
-			final CustomDialog dialog = new CustomDialog(this);
-			dialog.setTitle(R.string.tomar_foto_titulo);
-			dialog.setIcon(R.drawable.camera);
-			dialog.setMessage(R.string.preguntar_tomar_foto_ordenativo);
-			dialog.setPositiveButton("Si", new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					ManejadorDeCamara.tomarFotoOrdenativo(TomarLectura.this,
-							ordLec);
-					dialog.dismiss();
-				}
-			});
-			dialog.setNegativeButton("No", null);
-			dialog.show();
+			new AlertDialog.Builder(this)
+					.setTitle(R.string.tomar_foto_titulo)
+					.setIcon(R.drawable.camera)
+					.setMessage(R.string.preguntar_tomar_foto_ordenativo)
+					.setPositiveButton("Si",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									ManejadorDeCamara.tomarFotoOrdenativo(
+											TomarLectura.this, ordLec);
+								}
+							}).setNegativeButton("No", null).show();
 		} else {
-			CustomDialog dlg = new CustomDialog(this);
-			dlg.setTitle(R.string.limite_fotos_titulo);
-			dlg.setIcon(R.drawable.warning);
-			dlg.setMessage(R.string.limite_fotos_msg);
-			dlg.setPositiveButton(null);
-			dlg.show();
+			new AlertDialog.Builder(this)
+					.setTitle(R.string.limite_fotos_titulo)
+					.setIcon(R.drawable.warning)
+					.setMessage(R.string.limite_fotos_msg)
+					.setPositiveButton(R.string.btn_ok, null).show();
 		}
 	}
 
@@ -1204,20 +1194,17 @@ public class TomarLectura extends Activity implements ISwipeListener,
 	 */
 	private void mostrarDialogoFotoEntreLineas(
 			final MedidorEntreLineas medEntreLineas) {
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setTitle(R.string.tomar_foto_titulo);
-		dialog.setIcon(R.drawable.camera);
-		dialog.setMessage(R.string.preguntar_tomar_foto_entre_lineas);
-		dialog.setPositiveButton("Si", new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				ManejadorDeCamara.tomarFotoEntreLineas(TomarLectura.this,
-						medEntreLineas);
-				dialog.dismiss();
-			}
-		});
-		dialog.setNegativeButton("No", null);
-		dialog.show();
+		new AlertDialog.Builder(this).setTitle(R.string.tomar_foto_titulo)
+				.setIcon(R.drawable.camera)
+				.setMessage(R.string.preguntar_tomar_foto_entre_lineas)
+				.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						ManejadorDeCamara.tomarFotoEntreLineas(
+								TomarLectura.this, medEntreLineas);
+					}
+				}).setNegativeButton("No", null).show();
 	}
 
 	/**

@@ -1,15 +1,17 @@
 package com.elfec.lecturas.controlador;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
-import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton;
 import com.elfec.lecturas.controlador.dialogos.DialogoSeleccionImpresora;
 import com.elfec.lecturas.helpers.ManejadorImpresora;
@@ -65,19 +67,19 @@ public class MenuPrincipal extends Activity {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				final CustomDialog dialog = new CustomDialog(MenuPrincipal.this);
-				dialog.setMessage(R.string.no_variables_msg);
-				dialog.setTitle(R.string.titulo_no_variables);
-				dialog.setIcon(R.drawable.error);
-				dialog.setCancelable(false);
-				dialog.setPositiveButton(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						dialog.dismiss();
-						onBackPressed();
-					}
-				});
-				dialog.show();
+				new AlertDialog.Builder(MenuPrincipal.this)
+						.setMessage(R.string.no_variables_msg)
+						.setTitle(R.string.titulo_no_variables)
+						.setIcon(R.drawable.error)
+						.setCancelable(false)
+						.setPositiveButton(R.string.btn_ok,
+								new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										onBackPressed();
+									}
+								}).show();
 			}
 		});
 	}
@@ -131,23 +133,20 @@ public class MenuPrincipal extends Activity {
 	 */
 	public void mostrarDialogoImprimirResumen(int idStringMensaje,
 			int idStringTitulo, final DetalleResumenGenerico resumenAImprimir) {
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(idStringMensaje);
-		dialog.setIcon(getResources().getDrawable(R.drawable.imprimir));
-		dialog.setTitle(idStringTitulo);
-		dialog.setPositiveButton(R.string.btn_ok, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
-				if (!ManejadorImpresora.impresoraPredefinidaFueAsignada()) {
-					mostrarDialogoSeleccionarImpresora(resumenAImprimir);
-				} else {
-					iniciarImpresionResumen(resumenAImprimir);
-				}
-			}
-		});
-		dialog.setNegativeButton(null);
-		dialog.show();
+		new AlertDialog.Builder(this).setMessage(idStringMensaje)
+				.setIcon(R.drawable.imprimir).setTitle(idStringTitulo)
+				.setPositiveButton(R.string.btn_ok, new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						if (!ManejadorImpresora
+								.impresoraPredefinidaFueAsignada()) {
+							mostrarDialogoSeleccionarImpresora(resumenAImprimir);
+						} else {
+							iniciarImpresionResumen(resumenAImprimir);
+						}
+					}
+				}).setNegativeButton(R.string.btn_cancel, null).show();
 	}
 
 	/**

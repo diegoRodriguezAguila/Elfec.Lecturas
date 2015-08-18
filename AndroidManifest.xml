@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="10"
-        android:targetSdkVersion="19" tools:ignore="OldTargetApi"/>
+        android:targetSdkVersion="22" />
  
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />

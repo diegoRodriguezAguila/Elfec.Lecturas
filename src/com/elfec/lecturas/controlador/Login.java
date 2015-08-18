@@ -4,16 +4,19 @@ import java.util.Date;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
+import com.alertdialogpro.ProgressDialogPro;
 import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.logica_negocio.SincronizadorServidor;
 import com.elfec.lecturas.modelo.SesionUsuario;
@@ -115,13 +118,11 @@ public class Login extends Activity {
 	 */
 	public void mostrarDialogoErrorValidacionUsuario(
 			IValidacionUsuario resultadoValidacion) {
-		CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(resultadoValidacion.obtenerMensaje());
-		dialog.setTitle(R.string.titulo_mensajes_error);
-		dialog.setCancelable(false);
-		dialog.setIcon(R.drawable.error);
-		dialog.setPositiveButton(null);
-		dialog.show();
+		new AlertDialog.Builder(this)
+				.setMessage(resultadoValidacion.obtenerMensaje())
+				.setTitle(R.string.titulo_mensajes_error)
+				.setIcon(R.drawable.error)
+				.setPositiveButton(R.string.btn_ok, null).show();
 		txtPassword.setText("");
 	}
 
@@ -132,23 +133,19 @@ public class Login extends Activity {
 	 */
 	public void mostrarDialogoErrorSincronizacion(
 			final IEstadoSincronizacion estadoSinc) {
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setTitle(R.string.titulo_mensajes_error);
-		dialog.setMessage(estadoSinc.obtenerMensaje());
-		dialog.setIcon(R.drawable.error);
-		dialog.setCancelable(false);
-		dialog.setPositiveButton(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				txtPassword.setText("");
-				dialog.dismiss();
-				if (estadoSinc.obtenerCodigo().equals("VS-003")) {
-					startActivity(new Intent(
-							android.provider.Settings.ACTION_DATE_SETTINGS));
-				}
-			}
-		});
-		dialog.show();
+		new AlertDialog.Builder(this).setTitle(R.string.titulo_mensajes_error)
+				.setMessage(estadoSinc.obtenerMensaje())
+				.setIcon(R.drawable.error)
+				.setPositiveButton(R.string.btn_ok, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						txtPassword.setText("");
+						if (estadoSinc.obtenerCodigo().equals("VS-003")) {
+							startActivity(new Intent(
+									android.provider.Settings.ACTION_DATE_SETTINGS));
+						}
+					}
+				}).show();
 	}
 
 	/**
@@ -174,7 +171,7 @@ public class Login extends Activity {
 	 * conectando con la base de datos oracle no se muestra cuando ya se tiene
 	 * al usuario en el teléfono
 	 */
-	private CustomDialog progressDialog;
+	private ProgressDialogPro progressDialog;
 
 	/**
 	 * Tarea asincrona para la validacion de la sincronizacion del dispositivo
@@ -189,11 +186,12 @@ public class Login extends Activity {
 		@Override
 		protected void onPreExecute() {
 			if (progressDialog == null) {
-				progressDialog = new CustomDialog(Login.this);
-				progressDialog.showProgressbar(true);
+				progressDialog = new ProgressDialogPro(Login.this,
+						R.style.AppStyle_Dialog_FlavoredMaterialLight);
 				progressDialog.setCancelable(false);
 				progressDialog.setIcon(R.drawable.login_usuario);
-				progressDialog.setMessage(R.string.login_usuario_msg);
+				progressDialog.setMessage(getResources().getText(
+						R.string.login_usuario_msg));
 				progressDialog.setTitle(R.string.titulo_login_usuario);
 				progressDialog.show();
 			}

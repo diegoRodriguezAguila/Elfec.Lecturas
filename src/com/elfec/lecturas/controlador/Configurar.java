@@ -4,13 +4,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
 import com.elfec.lecturas.acceso_remoto_datos.LectorConfigBD;
-import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.lecturas.elfec.R;
 
 public class Configurar extends Activity {
@@ -21,29 +23,27 @@ public class Configurar extends Activity {
 	private EditText txtRol;
 	private EditText txtPasswordRol;
 	private JSONObject config;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_configurar);
-		txtIp = (EditText)findViewById(R.id.txt_ip);
-		txtPuerto = (EditText)findViewById(R.id.txt_puerto);
-		txtServicio = (EditText)findViewById(R.id.txt_servicio);
-		txtRol = (EditText)findViewById(R.id.txt_rol);
-		txtPasswordRol = (EditText)findViewById(R.id.txt_password_rol);
+		txtIp = (EditText) findViewById(R.id.txt_ip);
+		txtPuerto = (EditText) findViewById(R.id.txt_puerto);
+		txtServicio = (EditText) findViewById(R.id.txt_servicio);
+		txtRol = (EditText) findViewById(R.id.txt_rol);
+		txtPasswordRol = (EditText) findViewById(R.id.txt_password_rol);
 		try {
-			config =LectorConfigBD.obtenerConfiguracion(this);
+			config = LectorConfigBD.obtenerConfiguracion(this);
 			txtIp.setText(config.getString("ip"));
 			txtPuerto.setText(config.getString("puerto"));
 			txtServicio.setText(config.getString("servicio"));
 			txtRol.setText(config.getString("rol"));
 		} catch (JSONException e) {
-			CustomDialog dialog = new CustomDialog(this);
-			dialog.setMessage(R.string.config_invalida);
-			dialog.setIcon(R.drawable.error);
-			dialog.setTitle(R.string.titulo_mensajes_error);
-			dialog.setPositiveButton(null);
-			dialog.show();
+			new AlertDialog.Builder(this).setMessage(R.string.config_invalida)
+					.setIcon(R.drawable.error)
+					.setTitle(R.string.titulo_mensajes_error)
+					.setPositiveButton(R.string.btn_ok, null).show();
 		}
 	}
 
@@ -53,29 +53,25 @@ public class Configurar extends Activity {
 		getMenuInflater().inflate(R.menu.configurar, menu);
 		return true;
 	}
-	
+
 	@Override
 	public void onBackPressed() {
-	    finish();//go back to the previous Activity
-	    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);  
+		finish();// go back to the previous Activity
+		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
 	}
-	
-	public void btnSalirClick(View view)
-	{
-		finish();//go back to the previous Activity
-	    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);  
+
+	public void btnSalirClick(View view) {
+		finish();// go back to the previous Activity
+		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
 	}
-	
-	public void btnGuardarClick(View view)
-	{
-		try 
-		{
+
+	public void btnGuardarClick(View view) {
+		try {
 			config.put("ip", txtIp.getText());
 			config.put("puerto", txtPuerto.getText());
 			config.put("servicio", txtServicio.getText());
 			config.put("rol", txtRol.getText());
-			if(!txtPasswordRol.getText().toString().equals(""))
-			{
+			if (!txtPasswordRol.getText().toString().equals("")) {
 				String password = txtPasswordRol.getText().toString();
 				config.put("password", password);
 			}
@@ -85,29 +81,24 @@ public class Configurar extends Activity {
 		boolean exito = LectorConfigBD.escribirConfiguracion(config);
 		int tituloResultado;
 		int mensajeResultado;
-		if(exito)
-		{
+		if (exito) {
 			mensajeResultado = R.string.config_guardado_exito;
 			tituloResultado = R.string.titulo_mensajes_exito;
-		}
-		else
-		{
+		} else {
 			mensajeResultado = R.string.config_no_guardada;
 			tituloResultado = R.string.titulo_mensajes_error;
 		}
-		final CustomDialog dialog = new CustomDialog(this);
-		dialog.setMessage(mensajeResultado);
-		dialog.setTitle(tituloResultado);
-		dialog.setCancelable(false);
-		dialog.setPositiveButton(R.string.btn_ok, new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dialog.dismiss();
-				finish();//go back to the previous Activity
-			    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);  
-			}
-           });
-		dialog.show();
+		new AlertDialog.Builder(this).setMessage(mensajeResultado)
+				.setTitle(tituloResultado).setCancelable(false)
+				.setPositiveButton(R.string.btn_ok, new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						finish();// go back to the previous Activity
+						overridePendingTransition(R.anim.slide_right_in,
+								R.anim.slide_right_out);
+					}
+				}).show();
 	}
-	
+
 }
