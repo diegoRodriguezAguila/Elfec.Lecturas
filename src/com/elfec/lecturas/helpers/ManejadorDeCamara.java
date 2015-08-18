@@ -8,6 +8,7 @@ import java.util.Locale;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.MedidorEntreLineas;
 import com.elfec.lecturas.modelo.OrdenativoLectura;
+import com.elfec.lecturas.settings.ConstantesDeEntorno;
 
 import android.app.Activity;
 import android.content.Intent;

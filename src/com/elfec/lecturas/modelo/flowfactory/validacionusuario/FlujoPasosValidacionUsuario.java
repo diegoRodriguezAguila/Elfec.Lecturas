@@ -5,10 +5,10 @@ import java.util.Locale;
 
 import android.content.Context;
 
-import com.elfec.lecturas.helpers.ConectorBDOracle;
-import com.elfec.lecturas.helpers.VariablesDeSesion;
+import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.validaciones.IValidacionUsuario;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
  * Clase estática que se encarga de iniciar el flujo de pasos para validar al usuario

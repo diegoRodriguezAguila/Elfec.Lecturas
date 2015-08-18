@@ -6,7 +6,7 @@ import java.util.Date;
 import com.elfec.lecturas.controlador.TomarLectura;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.adaptadores.OrdenativoAdapter;
-import com.elfec.lecturas.helpers.Animador;
+import com.elfec.lecturas.helpers.ui.Animador;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.Ordenativo;
 import com.elfec.lecturas.modelo.OrdenativoLectura;

@@ -12,7 +12,7 @@ import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
-import com.elfec.lecturas.helpers.VariablesDeSesion;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
  * Guarda los tokens para el uso del servicio web mediante ip publica

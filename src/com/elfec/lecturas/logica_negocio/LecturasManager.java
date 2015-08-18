@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.elfec.lecturas.helpers.ConectorBDOracle;
+import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataImporter;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;

@@ -21,20 +21,20 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.elfec.lecturas.controlador.TomarLectura;
 import com.elfec.lecturas.helpers.GestionadorBDSQLite;
-import com.elfec.lecturas.helpers.ManejadorConexionRemota;
 import com.elfec.lecturas.helpers.ManejadorDeCamara;
-import com.elfec.lecturas.helpers.VariablesDeEntorno;
-import com.elfec.lecturas.helpers.VariablesDeSesion;
-import com.elfec.lecturas.helpers.conexionremota.EventoAlObtenerResultado;
-import com.elfec.lecturas.helpers.estadosmanejadorubicacion.EventoAlObtenerUbicacion;
+import com.elfec.lecturas.logica_negocio.web_services.ManejadorConexionRemota;
 import com.elfec.lecturas.modelo.backuptexto.IModeloBackupableTexto;
-import com.elfec.lecturas.modelo.estadoslectura.EstadoLecturaFactory;
-import com.elfec.lecturas.modelo.estadoslectura.IEstadoLectura;
+import com.elfec.lecturas.modelo.estados.lectura.EstadoLecturaFactory;
+import com.elfec.lecturas.modelo.estados.lectura.IEstadoLectura;
+import com.elfec.lecturas.modelo.estados.ubicacion.EventoAlObtenerUbicacion;
+import com.elfec.lecturas.modelo.eventos.EventoAlObtenerResultado;
 import com.elfec.lecturas.modelo.validaciones.AdvConsumoBajo;
 import com.elfec.lecturas.modelo.validaciones.AdvConsumoElevado;
 import com.elfec.lecturas.modelo.validaciones.AdvIndiceMenorActual;
 import com.elfec.lecturas.modelo.validaciones.IValidacionLectura;
 import com.elfec.lecturas.modelo.validaciones.ValidacionLecturaCorrecta;
+import com.elfec.lecturas.settings.VariablesDeEntorno;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
  * Almacena la información sobre las lecturas, de la tabla Lecturas de la BD

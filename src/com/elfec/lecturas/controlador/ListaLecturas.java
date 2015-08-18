@@ -18,8 +18,8 @@ import android.widget.TextView;
 
 import com.elfec.lecturas.controlador.adaptadores.LecturaAdapter;
 import com.elfec.lecturas.modelo.Lectura;
-import com.elfec.lecturas.modelo.estadoslectura.EstadoLecturaFactory;
-import com.elfec.lecturas.modelo.estadoslectura.IEstadoLectura;
+import com.elfec.lecturas.modelo.estados.lectura.EstadoLecturaFactory;
+import com.elfec.lecturas.modelo.estados.lectura.IEstadoLectura;
 import com.lecturas.elfec.R;
 import com.quentindommerc.superlistview.SuperListview;
 

@@ -2,8 +2,8 @@ package com.elfec.lecturas.controlador.receptoreseventos;
 
 import com.elfec.lecturas.controlador.TomarLectura;
 import com.elfec.lecturas.helpers.ManejadorEstadosHW;
-import com.elfec.lecturas.helpers.VariablesDeSesion;
 import com.elfec.lecturas.modelo.Usuario;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 
 import android.app.ActivityManager;
 import android.content.BroadcastReceiver;

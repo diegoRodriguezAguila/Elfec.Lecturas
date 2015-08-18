@@ -1,6 +1,6 @@
 package com.elfec.lecturas.modelo.flowfactory.validacionusuario;
 
-import com.elfec.lecturas.helpers.ConectorBDOracle;
+import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.modelo.validaciones.ErrorUsuarioPasswordIncorrectos;
 
 /**

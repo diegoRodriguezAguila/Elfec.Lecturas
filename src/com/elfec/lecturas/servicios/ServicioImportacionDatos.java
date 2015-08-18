@@ -6,8 +6,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
-import com.elfec.lecturas.helpers.ConectorBDOracle;
-import com.elfec.lecturas.helpers.VariablesDeSesion;
+import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.helpers.utils.text.AttributePicker;
 import com.elfec.lecturas.helpers.utils.text.ObjectListToSQL;
 import com.elfec.lecturas.logica_negocio.AsignacionRutaManager;
@@ -26,6 +25,7 @@ import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.settings.AppPreferences;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 import com.lecturas.elfec.R;
 
 /**

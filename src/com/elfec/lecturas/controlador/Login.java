@@ -14,14 +14,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
-import com.elfec.lecturas.helpers.SincronizadorServidor;
-import com.elfec.lecturas.helpers.VariablesDeSesion;
 import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
-import com.elfec.lecturas.helpers.validacionessincronizacion.IEstadoSincronizacion;
+import com.elfec.lecturas.logica_negocio.SincronizadorServidor;
 import com.elfec.lecturas.modelo.SesionUsuario;
 import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.validaciones.IValidacionUsuario;
+import com.elfec.lecturas.modelo.validaciones.sincronizacion.IEstadoSincronizacion;
 import com.elfec.lecturas.settings.AdministradorSeguridad;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 import com.lecturas.elfec.R;
 
 /**

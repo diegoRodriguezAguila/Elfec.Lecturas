@@ -13,14 +13,14 @@ import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton;
 import com.elfec.lecturas.controlador.dialogos.DialogoSeleccionImpresora;
 import com.elfec.lecturas.helpers.ManejadorImpresora;
-import com.elfec.lecturas.helpers.VariablesDeEntorno;
-import com.elfec.lecturas.helpers.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
 import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleImpedidas;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleLecturas;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleLecturasEntreLineas;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleOrdenativos;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleResumenGenerico;
+import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
+import com.elfec.lecturas.settings.VariablesDeEntorno;
 import com.lecturas.elfec.R;
 
 public class MenuPrincipal extends Activity {

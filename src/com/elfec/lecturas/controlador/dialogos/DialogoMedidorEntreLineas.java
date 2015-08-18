@@ -6,13 +6,13 @@ import java.util.Date;
 import java.util.List;
 
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
-import com.elfec.lecturas.helpers.Animador;
-import com.elfec.lecturas.helpers.ManejadorBackupTexto;
-import com.elfec.lecturas.helpers.ManejadorConexionRemota;
 import com.elfec.lecturas.helpers.ManejadorUbicacion;
-import com.elfec.lecturas.helpers.VariablesDeEntorno;
+import com.elfec.lecturas.helpers.ui.Animador;
+import com.elfec.lecturas.logica_negocio.ManejadorBackupTexto;
+import com.elfec.lecturas.logica_negocio.web_services.ManejadorConexionRemota;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.MedidorEntreLineas;
+import com.elfec.lecturas.settings.VariablesDeEntorno;
 import com.lecturas.elfec.R;
 
 import android.app.Activity;

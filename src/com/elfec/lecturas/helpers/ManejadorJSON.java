@@ -15,6 +15,8 @@ import java.sql.Types;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.elfec.lecturas.settings.ConstantesDeEntorno;
+
 import android.os.Environment;
 import android.util.Log;
 

@@ -12,7 +12,7 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.elfec.lecturas.modelo.enums.EstadoAsignacionRuta;
-import com.elfec.lecturas.modelo.estadoslectura.ReIntentar;
+import com.elfec.lecturas.modelo.estados.lectura.ReIntentar;
 
 /**
  * Almacena la información sobre las rutas asignadas a un usuario de la tabla

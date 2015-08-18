@@ -9,7 +9,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Looper;
 
-import com.elfec.lecturas.helpers.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
+import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
 import com.zebra.android.comm.BluetoothPrinterConnection;
 import com.zebra.sdk.comm.Connection;
 import com.zebra.sdk.comm.ConnectionException;

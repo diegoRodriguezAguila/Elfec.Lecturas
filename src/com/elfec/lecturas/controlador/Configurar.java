@@ -9,8 +9,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.elfec.lecturas.acceso_remoto_datos.LectorConfigBD;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
-import com.elfec.lecturas.helpers.LectorConfigBD;
 import com.lecturas.elfec.R;
 
 public class Configurar extends Activity {

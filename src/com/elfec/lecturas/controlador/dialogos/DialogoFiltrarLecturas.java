@@ -16,8 +16,8 @@ import com.elfec.lecturas.controlador.filtroslecturas.CriterioEstado;
 import com.elfec.lecturas.controlador.filtroslecturas.CriterioRuta;
 import com.elfec.lecturas.controlador.filtroslecturas.FiltroLecturas;
 import com.elfec.lecturas.modelo.AsignacionRuta;
-import com.elfec.lecturas.modelo.estadoslectura.EstadoLecturaFactory;
-import com.elfec.lecturas.modelo.estadoslectura.IEstadoLectura;
+import com.elfec.lecturas.modelo.estados.lectura.EstadoLecturaFactory;
+import com.elfec.lecturas.modelo.estados.lectura.IEstadoLectura;
 import com.lecturas.elfec.R;
 
 public class DialogoFiltrarLecturas extends CustomDialog {

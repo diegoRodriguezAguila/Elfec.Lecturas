@@ -1,9 +1,9 @@
 package com.elfec.lecturas.modelo.flowfactory.validacionusuario;
 
-import com.elfec.lecturas.helpers.VariablesDeSesion;
 import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.validaciones.ErrorUsuarioPasswordIncorrectos;
 import com.elfec.lecturas.modelo.validaciones.ValidacionUsuarioCorrecta;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
  * Define el paso de validación en el que se verifica que el hash del password ingresado

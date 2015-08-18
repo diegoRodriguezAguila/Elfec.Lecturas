@@ -3,6 +3,8 @@ package com.elfec.lecturas.helpers;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import com.elfec.lecturas.settings.VariablesDeEntorno;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;

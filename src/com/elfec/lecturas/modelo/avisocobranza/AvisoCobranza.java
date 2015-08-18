@@ -9,11 +9,11 @@ import java.util.Date;
 import java.util.Locale;
 
 import com.elfec.lecturas.helpers.ManejadorImpresora;
-import com.elfec.lecturas.helpers.VariablesDeEntorno;
-import com.elfec.lecturas.helpers.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
 import com.elfec.lecturas.modelo.ConceptoLectura;
 import com.elfec.lecturas.modelo.EvolucionConsumo;
 import com.elfec.lecturas.modelo.Lectura;
+import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
+import com.elfec.lecturas.settings.VariablesDeEntorno;
 
 /**
  * El aviso de cobranza listo para ser impreso

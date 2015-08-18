@@ -9,6 +9,8 @@ import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Cache;
 import com.activeandroid.query.Select;
 import com.elfec.lecturas.modelo.*;
+import com.elfec.lecturas.settings.ConstantesDeEntorno;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
  * Provee metodos para la eliminacion de tablas mensuales y diarios y de la base de datos completa

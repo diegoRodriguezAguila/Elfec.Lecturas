@@ -9,7 +9,7 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
-import com.elfec.lecturas.helpers.VariablesDeSesion;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 import com.elfec.lecturas.settings.ui.AdminUI;
 import com.elfec.lecturas.settings.ui.OpcionesPreferenciasUI;
 import com.lecturas.elfec.R;

@@ -11,12 +11,12 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Column.ForeignKeyAction;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
-import com.elfec.lecturas.helpers.ManejadorBackupTexto;
-import com.elfec.lecturas.helpers.ManejadorConexionRemota;
-import com.elfec.lecturas.helpers.VariablesDeEntorno;
-import com.elfec.lecturas.helpers.VariablesDeSesion;
-import com.elfec.lecturas.helpers.conexionremota.EventoAlObtenerResultado;
+import com.elfec.lecturas.logica_negocio.ManejadorBackupTexto;
+import com.elfec.lecturas.logica_negocio.web_services.ManejadorConexionRemota;
 import com.elfec.lecturas.modelo.backuptexto.IModeloBackupableTexto;
+import com.elfec.lecturas.modelo.eventos.EventoAlObtenerResultado;
+import com.elfec.lecturas.settings.VariablesDeEntorno;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
  * Almacena la información sobre los ordenativos que se asignaron a las lecturas, esta tabla se descarga en

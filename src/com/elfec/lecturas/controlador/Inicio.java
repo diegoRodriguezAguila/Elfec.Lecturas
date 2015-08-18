@@ -13,7 +13,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,12 +22,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.dialogos.DialogoSeleccionImpresora;
 import com.elfec.lecturas.controlador.observers.IDataImportationObserver;
-import com.elfec.lecturas.helpers.ConectorBDOracle;
 import com.elfec.lecturas.helpers.GestionadorBDSQLite;
-import com.elfec.lecturas.helpers.VariablesDeSesion;
 import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.helpers.utils.text.MessageListFormatter;
 import com.elfec.lecturas.logica_negocio.AsignacionRutaManager;
@@ -39,6 +37,7 @@ import com.elfec.lecturas.modelo.seguridad.Permisos;
 import com.elfec.lecturas.servicios.ServicioImportacionDatos;
 import com.elfec.lecturas.servicios.receivers.DataImportationReceiver;
 import com.elfec.lecturas.settings.AdministradorSeguridad;
+import com.elfec.lecturas.settings.VariablesDeSesion;
 import com.lecturas.elfec.R;
 
 /**
@@ -64,9 +63,6 @@ public class Inicio extends Activity implements IDataImportationObserver {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-				.permitAll().build();
-		StrictMode.setThreadPolicy(policy);
 		setContentView(R.layout.activity_inicio);
 		lblNumRuta = (TextView) findViewById(R.id.lbl_numero_ruta);
 		btnMenuPrincipal = (Button) findViewById(R.id.btn_menu_principal);
