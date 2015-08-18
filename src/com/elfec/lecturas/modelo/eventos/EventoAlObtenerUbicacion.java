@@ -1,4 +1,4 @@
-package com.elfec.lecturas.modelo.estados.ubicacion;
+package com.elfec.lecturas.modelo.eventos;
 
 import android.location.Location;
 

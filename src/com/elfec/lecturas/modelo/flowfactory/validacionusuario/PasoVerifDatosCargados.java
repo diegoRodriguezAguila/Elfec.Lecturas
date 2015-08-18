@@ -1,6 +1,6 @@
 package com.elfec.lecturas.modelo.flowfactory.validacionusuario;
 
-import com.elfec.lecturas.helpers.GestionadorBDSQLite;
+import com.elfec.lecturas.logica_negocio.GestionadorBDSQLite;
 import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.validaciones.ErrorRangoFechaUsuario;
 

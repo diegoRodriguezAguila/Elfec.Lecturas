@@ -13,14 +13,9 @@ import com.lecturas.elfec.R;
 
 public class Pendiente implements IEstadoLectura {
 
-	static
-	{
-		EstadoLecturaFactory.registrarEstado(0,new Pendiente());
+	Pendiente() {
 	}
-	private Pendiente()
-	{
-		
-	}
+
 	@Override
 	public int getEstadoEntero() {
 		return 0;
@@ -41,32 +36,36 @@ public class Pendiente implements IEstadoLectura {
 		tomarLectura.lblEstadoLectura.setText(getEstadoCadena());
 		tomarLectura.lblLecturaActual.setVisibility(View.INVISIBLE);
 		tomarLectura.txtLecturaNueva.setVisibility(View.VISIBLE);
-		tomarLectura.lblNuevaLectura.setText(tomarLectura.getResources().getString(R.string.nueva_lectura_lbl));
-		tomarLectura.lblEstadoLectura.setBackgroundColor(getColor(tomarLectura));
-		tomarLectura.lblFechaLectura.setText(new SimpleDateFormat("dd/MMM/yyyy",Locale.getDefault()).format(new Date()));
+		tomarLectura.lblNuevaLectura.setText(tomarLectura.getResources()
+				.getString(R.string.nueva_lectura_lbl));
+		tomarLectura.lblEstadoLectura
+				.setBackgroundColor(getColor(tomarLectura));
+		tomarLectura.lblFechaLectura.setText(new SimpleDateFormat(
+				"dd/MMM/yyyy", Locale.getDefault()).format(new Date()));
 		tomarLectura.btnConfirmarLectura.setVisibility(View.VISIBLE);
 		tomarLectura.btnPostergarLectura.setVisibility(View.VISIBLE);
 		tomarLectura.btnReintentarLectura.setVisibility(View.VISIBLE);
 		tomarLectura.btnAgergarOrdenativo.setVisibility(View.INVISIBLE);
 	}
-	
+
 	@Override
-	public void mostrarMenuLectura(TomarLectura tomarLectura,Lectura lecturaActual) {
-		if(tomarLectura.menuEstimarLectura!=null)
+	public void mostrarMenuLectura(TomarLectura tomarLectura,
+			Lectura lecturaActual) {
+		if (tomarLectura.menuEstimarLectura != null)
 			tomarLectura.menuEstimarLectura.setVisible(true);
-		if(tomarLectura.menuImpedirLectura!=null)
+		if (tomarLectura.menuImpedirLectura != null)
 			tomarLectura.menuImpedirLectura.setVisible(true);
-		if(tomarLectura.menuVerPotencia!=null)
+		if (tomarLectura.menuVerPotencia != null)
 			tomarLectura.menuVerPotencia.setVisible(false);
-		if(tomarLectura.menuReImprimir!=null)
+		if (tomarLectura.menuReImprimir != null)
 			tomarLectura.menuReImprimir.setVisible(false);
-		if(tomarLectura.menuModificarLectura!=null)
+		if (tomarLectura.menuModificarLectura != null)
 			tomarLectura.menuModificarLectura.setVisible(false);
-		if(tomarLectura.menuTomarFoto!=null)
+		if (tomarLectura.menuTomarFoto != null)
 			tomarLectura.menuTomarFoto.setVisible(false);
-		
+
 	}
-	
+
 	@Override
 	public Pendiente crearEstado() {
 		return new Pendiente();

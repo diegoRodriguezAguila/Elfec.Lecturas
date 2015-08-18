@@ -17,13 +17,9 @@ public class EstadoManejadorUbicacionFactory {
 	 * deben ser agregadas aqui
 	 */
 	static {
-		try {
-			Class.forName("com.elfec.lecturas.helpers.estadosmanejadorubicacion.NoLeeUbicacion");
-			Class.forName("com.elfec.lecturas.helpers.estadosmanejadorubicacion.LeeUbicacionInternet");
-			Class.forName("com.elfec.lecturas.helpers.estadosmanejadorubicacion.LeeUbicacionGPS");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		registrarEstado(0, new NoLeeUbicacion());
+		registrarEstado(1, new LeeUbicacionInternet());
+		registrarEstado(2, new LeeUbicacionGPS());
 	}
 
 	/**

@@ -13,14 +13,10 @@ import com.lecturas.elfec.R;
 
 public class ReIntentar implements IEstadoLectura {
 
-	static
-	{
-		EstadoLecturaFactory.registrarEstado(4,new ReIntentar());
+	ReIntentar() {
+
 	}
-	private ReIntentar()
-	{
-		
-	}
+
 	@Override
 	public int getEstadoEntero() {
 		return 4;
@@ -42,34 +38,38 @@ public class ReIntentar implements IEstadoLectura {
 		tomarLectura.lblLecturaActual.setText("Reintentar dia siguiente.");
 		tomarLectura.lblLecturaActual.setVisibility(View.VISIBLE);
 		tomarLectura.txtLecturaNueva.setVisibility(View.INVISIBLE);
-		tomarLectura.lblNuevaLectura.setText(tomarLectura.getResources().getString(R.string.lectura_lbl));
-		tomarLectura.lblEstadoLectura.setBackgroundColor(getColor(tomarLectura));
-		tomarLectura.lblFechaLectura.setText(new SimpleDateFormat("dd/MMM/yyyy",Locale.getDefault()).format(new Date()));
+		tomarLectura.lblNuevaLectura.setText(tomarLectura.getResources()
+				.getString(R.string.lectura_lbl));
+		tomarLectura.lblEstadoLectura
+				.setBackgroundColor(getColor(tomarLectura));
+		tomarLectura.lblFechaLectura.setText(new SimpleDateFormat(
+				"dd/MMM/yyyy", Locale.getDefault()).format(new Date()));
 		tomarLectura.btnConfirmarLectura.setVisibility(View.INVISIBLE);
 		tomarLectura.btnPostergarLectura.setVisibility(View.INVISIBLE);
 		tomarLectura.btnReintentarLectura.setVisibility(View.INVISIBLE);
 		tomarLectura.btnAgergarOrdenativo.setVisibility(View.VISIBLE);
 	}
-	
+
 	@Override
-	public void mostrarMenuLectura(TomarLectura tomarLectura,Lectura lecturaActual) {
-		if(tomarLectura.menuEstimarLectura!=null)
+	public void mostrarMenuLectura(TomarLectura tomarLectura,
+			Lectura lecturaActual) {
+		if (tomarLectura.menuEstimarLectura != null)
 			tomarLectura.menuEstimarLectura.setVisible(false);
-		if(tomarLectura.menuImpedirLectura!=null)
+		if (tomarLectura.menuImpedirLectura != null)
 			tomarLectura.menuImpedirLectura.setVisible(false);
-		if(tomarLectura.menuVerPotencia!=null)
+		if (tomarLectura.menuVerPotencia != null)
 			tomarLectura.menuVerPotencia.setVisible(false);
-		if(tomarLectura.menuReImprimir!=null)
+		if (tomarLectura.menuReImprimir != null)
 			tomarLectura.menuReImprimir.setVisible(false);
-		if(tomarLectura.menuModificarLectura!=null)
+		if (tomarLectura.menuModificarLectura != null)
 			tomarLectura.menuModificarLectura.setVisible(true);
-		if(tomarLectura.menuTomarFoto!=null)
+		if (tomarLectura.menuTomarFoto != null)
 			tomarLectura.menuTomarFoto.setVisible(true);
 	}
-	
+
 	@Override
 	public ReIntentar crearEstado() {
 		return new ReIntentar();
 	}
-	
+
 }

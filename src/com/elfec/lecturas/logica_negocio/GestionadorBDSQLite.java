@@ -1,4 +1,4 @@
-package com.elfec.lecturas.helpers;
+package com.elfec.lecturas.logica_negocio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import android.database.Cursor;
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Cache;
 import com.activeandroid.query.Select;
+import com.elfec.lecturas.helpers.ManejadorJSON;
 import com.elfec.lecturas.modelo.*;
 import com.elfec.lecturas.settings.ConstantesDeEntorno;
 import com.elfec.lecturas.settings.VariablesDeSesion;

@@ -13,22 +13,19 @@ import android.util.SparseArray;
  */
 public class EstadoLecturaFactory {
 
-	private static SparseArray<IEstadoLectura> estadosRegistrados = new SparseArray<IEstadoLectura>();
+	private static SparseArray<IEstadoLectura> estadosRegistrados;
 
 	/**
 	 * Todas las clases de EstadoLectura que se vayan a utilizar deben ser
 	 * agregadas aqui
 	 */
 	static {
-		try {
-			Class.forName("com.elfec.lecturas.modelo.estadoslectura.Pendiente");
-			Class.forName("com.elfec.lecturas.modelo.estadoslectura.Leida");
-			Class.forName("com.elfec.lecturas.modelo.estadoslectura.Impedida");
-			Class.forName("com.elfec.lecturas.modelo.estadoslectura.Postergada");
-			Class.forName("com.elfec.lecturas.modelo.estadoslectura.ReIntentar");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+		estadosRegistrados = new SparseArray<IEstadoLectura>();
+		registrarEstado(0, new Pendiente());
+		registrarEstado(1, new Leida());
+		registrarEstado(2, new Impedida());
+		registrarEstado(3, new Postergada());
+		registrarEstado(4, new ReIntentar());
 	}
 
 	/**

@@ -15,8 +15,8 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 import com.elfec.lecturas.logica_negocio.web_services.ManejadorConexionRemota;
 import com.elfec.lecturas.modelo.backuptexto.IModeloBackupableTexto;
-import com.elfec.lecturas.modelo.estados.ubicacion.EventoAlObtenerUbicacion;
 import com.elfec.lecturas.modelo.eventos.EventoAlObtenerResultado;
+import com.elfec.lecturas.modelo.eventos.EventoAlObtenerUbicacion;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 /**
  * Guarda información de las lecturas de medidores entre lineas realizadas, esta tabla se descarga a la tabla

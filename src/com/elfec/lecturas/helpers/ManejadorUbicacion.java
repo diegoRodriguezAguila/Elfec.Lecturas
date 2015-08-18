@@ -3,8 +3,8 @@ package com.elfec.lecturas.helpers;
 
 import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.estados.ubicacion.EstadoManejadorUbicacionFactory;
-import com.elfec.lecturas.modelo.estados.ubicacion.EventoAlObtenerUbicacion;
 import com.elfec.lecturas.modelo.estados.ubicacion.IEstadoManejadorUbicacion;
+import com.elfec.lecturas.modelo.eventos.EventoAlObtenerUbicacion;
 import com.elfec.lecturas.settings.VariablesDeEntorno;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 import com.lecturas.elfec.R;
