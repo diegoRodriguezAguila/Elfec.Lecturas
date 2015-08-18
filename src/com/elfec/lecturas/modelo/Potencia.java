@@ -9,6 +9,7 @@ import java.util.Date;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 /**
@@ -153,6 +154,23 @@ public class Potencia extends Model {
 		Demanda = 0;
 		FechaLecturaPotencia = null;
 		HoraLecturaPotencia = null;
+	}
+
+	/**
+	 * Elimina toda la información general de lecturas que pertenezcan a la
+	 * asignación de ruta dada
+	 * 
+	 * @param asignacionRuta
+	 * @param nusClausulaIN
+	 */
+	public static void eliminarPotenciasDeRutaAsignada(
+			AsignacionRuta asignacionRuta, String nusClausulaIN) {
+		new Delete()
+				.from(Potencia.class)
+				.where("LEMRUT = ? AND LEMARE = ? AND LEMMES = ? AND LEMANO = ?",
+						asignacionRuta.Ruta, asignacionRuta.Dia,
+						asignacionRuta.Mes, asignacionRuta.Anio)
+				.where("LEMSUM IN " + nusClausulaIN).execute();
 	}
 
 }

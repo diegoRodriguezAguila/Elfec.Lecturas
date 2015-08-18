@@ -21,7 +21,6 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.util.Log;
 
-import com.activeandroid.ActiveAndroid;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.BaseCalculo;
 import com.elfec.lecturas.modelo.BaseCalculoConcepto;
@@ -40,6 +39,7 @@ import com.elfec.lecturas.modelo.PreferenciaUI;
 import com.elfec.lecturas.modelo.ReclasificacionCategoria;
 import com.elfec.lecturas.modelo.TokenServicioWeb;
 import com.elfec.lecturas.modelo.Usuario;
+import com.elfec.lecturas.modelo.enums.EstadoAsignacionRuta;
 
 /**
  * Se encarga de la conexión con la base de datos oracle, y la importación y
@@ -116,85 +116,6 @@ public class ConectorBDOracle {
 	}
 
 	/**
-	 * Importa las lecturas y todos sus datos relativos, que son las potencias,
-	 * conceptos y evolucion de consumos asociados a ella. Se obtiene segun las
-	 * rutas proporcionadas
-	 * 
-	 * @param rutas
-	 * @return
-	 */
-	private boolean importarLecturasPotenciasConceptosYEvConsumos(
-			List<AsignacionRuta> rutas) {
-		try {
-			List<Lectura> listaLec = new ArrayList<Lectura>();
-			List<Potencia> listaPot = new ArrayList<Potencia>();
-			List<ConceptoLectura> listaConceptos = new ArrayList<ConceptoLectura>();
-			List<EvolucionConsumo> listaEvCons = new ArrayList<EvolucionConsumo>();
-			for (AsignacionRuta ruta : rutas) {
-				List<Lectura> sigListaLec = obtenerLecturasPorRuta(ruta);
-				String listLecCondicion = convertirListaACondicion(sigListaLec);
-				listaLec.addAll(sigListaLec);
-				listaPot.addAll(obtenerPotenciasPorRuta(ruta.Ruta,
-						listLecCondicion));
-				listaConceptos.addAll(obtenerConceptosPorRuta(ruta.Ruta,
-						listLecCondicion));
-				listaEvCons.addAll(obtenerEvolucionConsumosPorRuta(ruta.Ruta,
-						listLecCondicion));
-			}
-			ActiveAndroid.beginTransaction();
-			for (Potencia pot : listaPot) {
-				pot.save();
-			}
-			for (EvolucionConsumo evCons : listaEvCons) {
-				evCons.save();
-			}
-			for (Lectura lec : listaLec) {
-				lec.PotenciaLectura = Potencia.obtenerPotencia(lec.Suministro,
-						lec.Mes, lec.Anio);
-				lec.save();
-			}
-			for (ConceptoLectura conc : listaConceptos) {
-				Lectura lectura = ConceptoLectura.obtenerLectura(
-						conc.Suministro, conc.Mes, conc.Anio);
-				BaseCalculoConcepto baseCalculoConcepto = BaseCalculoConcepto
-						.obtenerBaseCalculoConcepto(conc.ConceptoCodigo);
-				conc.Lectura = lectura;
-				conc.OrdenImpresion = baseCalculoConcepto.BaseCalculo.OrdenImpresion;
-				conc.AreaImpresion = baseCalculoConcepto.Concepto.AreaImpresion;
-				conc.save();
-			}
-			ActiveAndroid.setTransactionSuccessful();
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		} finally {
-			if (ActiveAndroid.inTransaction())
-				ActiveAndroid.endTransaction();
-		}
-	}
-
-	/**
-	 * Convierte la lista de lecturas a una cadena que sirve de condicion en SQL
-	 * esta cadena es una lista de suministros entre parentesis, separadas por
-	 * comas (4324,23423,3555)
-	 * 
-	 * @param sigListaLec
-	 * @return
-	 */
-	private String convertirListaACondicion(List<Lectura> sigListaLec) {
-		StringBuilder suministros = new StringBuilder("(");
-		for (Lectura lectura : sigListaLec) {
-			suministros.append(lectura.Suministro).append(",");
-		}
-		suministros.setCharAt(suministros.length() - 1, ')');
-		return suministros.toString();
-	}
-
-	/**
 	 * Importa todas las lecturas correspondientes a la ruta propocionada. Toma
 	 * en cuenta el dia, mes y año para realizar la importación y lo realiza de
 	 * la tabla MOVILES.LECTURAS
@@ -207,7 +128,7 @@ public class ConectorBDOracle {
 			throws SQLException {
 		List<Lectura> lista = new ArrayList<Lectura>();
 		StringBuilder query = new StringBuilder();
-		if (ruta.Estado == 2) {
+		if (ruta.getEstado() == EstadoAsignacionRuta.ASIGNADA) {
 			query = new StringBuilder(
 					"SELECT * FROM MOVILES.LECTURAS WHERE LEMRUT=");
 			query.append(ruta.Ruta).append(" AND LEMARE=").append(ruta.Dia)
@@ -218,7 +139,7 @@ public class ConectorBDOracle {
 					.append(" AND TO_NUMBER(LEMCTAANT,'9999999999')<=")
 					.append(ruta.obtenerCuentaFin());
 		}
-		if (ruta.Estado == 7) {
+		if (ruta.getEstado() == EstadoAsignacionRuta.RELECTURA_ASIGNADA) {
 			query = new StringBuilder(
 					"SELECT * FROM MOVILES.LECTURAS a WHERE EXISTS (SELECT 1 FROM ERP_ELFEC.SGC_MOVIL_LECTURAS b"
 							+ " WHERE a.LEMSUM=b.NUS AND a.LEMMES=b.MES AND a.LEMANO=b.ANIO AND a.LEMRUT=b.RUTA AND b.ESTADO=4) AND LEMRUT=");
@@ -241,7 +162,7 @@ public class ConectorBDOracle {
 	 * @return
 	 * @throws SQLException
 	 */
-	private List<Potencia> obtenerPotenciasPorRuta(int ruta,
+	public List<Potencia> obtenerPotenciasPorRuta(int ruta,
 			String listLecCondicion) throws SQLException {
 		List<Potencia> lista = new ArrayList<Potencia>();
 		StringBuilder query = new StringBuilder(
@@ -256,7 +177,7 @@ public class ConectorBDOracle {
 		return lista;
 	}
 
-	private List<ConceptoLectura> obtenerConceptosPorRuta(int ruta,
+	public List<ConceptoLectura> obtenerConceptosPorRuta(int ruta,
 			String listLecCondicion) throws SQLException {
 		List<ConceptoLectura> lista = new ArrayList<ConceptoLectura>();
 		StringBuilder query = new StringBuilder(
@@ -271,7 +192,7 @@ public class ConectorBDOracle {
 		return lista;
 	}
 
-	private List<EvolucionConsumo> obtenerEvolucionConsumosPorRuta(int ruta,
+	public List<EvolucionConsumo> obtenerEvolucionConsumosPorRuta(int ruta,
 			String listLecCondicion) throws SQLException {
 		List<EvolucionConsumo> lista = new ArrayList<EvolucionConsumo>();
 		StringBuilder query = new StringBuilder(
@@ -786,9 +707,7 @@ public class ConectorBDOracle {
 	}
 
 	/**
-	 * Se conecta a la base de datos y pone el estado de las rutas de la base de
-	 * datos SQLite a las rutas de la tabla MOVILES.USUARIO_ASIGNACION, segun la
-	 * lista de rutas proporcionada proporcionado
+	 * Actualiza masivamente los estados de una lista de rutas
 	 * 
 	 * @param listaRutas
 	 * @param actualizarCantLecturasRecibidas
@@ -796,20 +715,35 @@ public class ConectorBDOracle {
 	 */
 	public void actualizarEstadoRutas(List<AsignacionRuta> listaRutas,
 			boolean actualizarCantLecturasRecibidas) throws SQLException {
+		for (AsignacionRuta asignacionRuta : listaRutas) {
+			actualizarEstadoRuta(asignacionRuta,
+					actualizarCantLecturasRecibidas);
+		}
+	}
+
+	/**
+	 * Se conecta a la base de datos y pone el estado de la ruta de la base de
+	 * datos SQLite a las rutas de la tabla MOVILES.USUARIO_ASIGNACION, segun la
+	 * ruta proporcionada
+	 * 
+	 * @param ruta
+	 * @param actualizarCantLecturasRecibidas
+	 * @throws SQLException
+	 */
+	public void actualizarEstadoRuta(AsignacionRuta ruta,
+			boolean actualizarCantLecturasRecibidas) throws SQLException {
 		String query;
 		String datos;
 		String condicion;
-		for (AsignacionRuta ruta : listaRutas) {
-			query = "UPDATE MOVILES.USUARIO_ASIGNACION";
-			datos = " SET ESTADO="
-					+ ruta.Estado
-					+ (actualizarCantLecturasRecibidas ? ", CANT_LEC_REC="
-							+ ruta.cantLecturasEnviadas : "");
-			condicion = " WHERE UPPER(USUARIO)=UPPER('" + ruta.UsuarioAsignado
-					+ "') AND DIA=" + ruta.Dia + " AND MES=" + ruta.Mes
-					+ " AND ANIO=" + ruta.Anio + " AND RUTA=" + ruta.Ruta;
-			stmt.executeUpdate(query + datos + condicion);
-		}
+		query = "UPDATE MOVILES.USUARIO_ASIGNACION";
+		datos = " SET ESTADO="
+				+ ruta.getEstado().toShort()
+				+ (actualizarCantLecturasRecibidas ? ", CANT_LEC_REC="
+						+ ruta.cantLecturasEnviadas : "");
+		condicion = " WHERE UPPER(USUARIO)=UPPER('" + ruta.UsuarioAsignado
+				+ "') AND DIA=" + ruta.Dia + " AND MES=" + ruta.Mes
+				+ " AND ANIO=" + ruta.Anio + " AND RUTA=" + ruta.Ruta;
+		stmt.executeUpdate(query + datos + condicion);
 	}
 
 	/**
@@ -856,14 +790,15 @@ public class ConectorBDOracle {
 			List<AsignacionRuta> listaRutas) throws SQLException {
 		List<AsignacionRuta> listaRutasEquivalentes = new ArrayList<AsignacionRuta>();
 		for (AsignacionRuta ruta : listaRutas) {
-			if (ruta.Estado == 8) {
+			if (ruta.getEstado() == EstadoAsignacionRuta.RELECTURA_EXPORTADA) {
 				AsignacionRuta asignacionEquivalente = buscarAsignacionRuta(
 						ruta.Ruta, ruta.OrdenInicio, ruta.OrdenFin, ruta.Anio,
 						ruta.Mes, 4);
 				if (asignacionEquivalente != null) {
 					asignacionEquivalente.cantLecturasEnviadas = asignacionEquivalente.CantidadLecturasRecibidas
 							+ ruta.cantLecturasEnviadas;
-					asignacionEquivalente.Estado = 3;
+					asignacionEquivalente
+							.setEstado(EstadoAsignacionRuta.EXPORTADA);
 					listaRutasEquivalentes.add(asignacionEquivalente);
 				}
 			}

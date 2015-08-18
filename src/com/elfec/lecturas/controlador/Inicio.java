@@ -1,12 +1,15 @@
 package com.elfec.lecturas.controlador;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -22,14 +25,19 @@ import android.widget.Toast;
 
 import com.elfec.lecturas.controlador.accionesycustomizaciones.CustomDialog;
 import com.elfec.lecturas.controlador.dialogos.DialogoSeleccionImpresora;
+import com.elfec.lecturas.controlador.observers.IDataImportationObserver;
 import com.elfec.lecturas.helpers.ConectorBDOracle;
 import com.elfec.lecturas.helpers.GestionadorBDSQLite;
 import com.elfec.lecturas.helpers.VariablesDeSesion;
 import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
+import com.elfec.lecturas.helpers.utils.text.MessageListFormatter;
+import com.elfec.lecturas.logica_negocio.AsignacionRutaManager;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.SesionUsuario;
 import com.elfec.lecturas.modelo.seguridad.Permisos;
+import com.elfec.lecturas.servicios.ServicioImportacionDatos;
+import com.elfec.lecturas.servicios.receivers.DataImportationReceiver;
 import com.elfec.lecturas.settings.AdministradorSeguridad;
 import com.lecturas.elfec.R;
 
@@ -40,7 +48,7 @@ import com.lecturas.elfec.R;
  * @author drodriguez
  *
  */
-public class Inicio extends Activity {
+public class Inicio extends Activity implements IDataImportationObserver {
 
 	private TextView lblNomUsuario;
 	private TextView lblFecha;
@@ -50,6 +58,8 @@ public class Inicio extends Activity {
 	private Button btnMenuPrincipal;
 	private Button btnCargarDatos;
 	private Button btnDescargarDatos;
+
+	private CustomDialog progressDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -350,9 +360,30 @@ public class Inicio extends Activity {
 	 */
 	public void btnCargarDatosClick(View view) {
 		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
-			CargaDeDatos cargaDeDatos = new CargaDeDatos(this);
-			cargaDeDatos.execute((Void[]) null);
+			new AlertDialog.Builder(this)
+					.setTitle(R.string.titulo_cargando_datos)
+					.setIcon(R.drawable.import_from_server_d)
+					.setMessage(R.string.msg_confirm_import_data)
+					.setNegativeButton(R.string.btn_cancel, null)
+					.setPositiveButton(R.string.btn_ok,
+							new DialogInterface.OnClickListener() {
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									iniciarImportacionDatos();
+								}
+							}).show();
 		}
+	}
+
+	/**
+	 * Inicia el servicio de importación de datos
+	 */
+	public void iniciarImportacionDatos() {
+		startService(new Intent(this, ServicioImportacionDatos.class));
+		new DataImportationReceiver(
+				Arrays.asList((IDataImportationObserver) this), this)
+				.startReceiving();
 	}
 
 	/**
@@ -444,54 +475,6 @@ public class Inicio extends Activity {
 	}
 
 	/**
-	 * Es la tarea asincrona encargada de cargar los datos de las bases de datos
-	 * de oracle ERP_ELFEC y MOVILES. necesarios para el funcionamiento del
-	 * sistema. Verifica si existen datos mensuales antes de descargarlos
-	 * nuevamente.
-	 * 
-	 * @author drodriguez
-	 *
-	 */
-	private class CargaDeDatos extends AsyncTask<Void, Void, Boolean> {
-		private CustomDialog progressDialog;
-		private Context context;
-
-		public CargaDeDatos(Context context) {
-			this.context = context;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			progressDialog = new CustomDialog(context);
-			progressDialog.showProgressbar(true);
-			progressDialog.setCancelable(false);
-			progressDialog.setIcon(R.drawable.cargar_datos);
-			progressDialog.setMessage(R.string.cargando_datos_msg);
-			progressDialog.setTitle(R.string.titulo_cargando_datos);
-			progressDialog.show();
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... voids) {
-			ConectorBDOracle conexion = new ConectorBDOracle(context, true);
-			return false;
-		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			if (progressDialog != null) {
-				obtenerEstadoBotonCargar();
-				progressDialog.dismiss();
-				if (result) {
-					mostrarMensajeUsuario(R.string.datos_cargados_exito);
-				} else {
-					mostrarMensajeUsuario(R.string.error_carga_datos);
-				}
-			}
-		}
-	}
-
-	/**
 	 * Es la tarea asincrona encargada de eliminar los datos de la base de datos
 	 * SQLite del telefono y actualizar el estado de las rutas en la asignacion
 	 * de rutas de oracle en MOVILES.USUARIO_ASIGNACION
@@ -525,13 +508,8 @@ public class Inicio extends Activity {
 				List<AsignacionRuta> listaRutas = AsignacionRuta
 						.obtenerRutasDeUsuario(VariablesDeSesion
 								.getUsuarioLogeado());
-				for (AsignacionRuta asignRuta : listaRutas) {
-					asignRuta.Estado--;// si es 2(ruta cargada a movil) se
-										// vuelve 1(ruta pendiente) y si es 7
-										// (relectura cargada a movil) se vuelve
-										// 6(relectura asignada)
-				}
-				conexion.actualizarEstadoRutas(listaRutas, false);
+				new AsignacionRutaManager().restaurarAsignacionDeRutas(
+						conexion, listaRutas);
 				GestionadorBDSQLite.eliminarTodosLosDatos();
 				return true;
 			} catch (Exception e) {
@@ -554,4 +532,78 @@ public class Inicio extends Activity {
 			}
 		}
 	}
+
+	// #region Observer methods
+
+	@Override
+	public void showImportationWaiting() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				progressDialog = new CustomDialog(Inicio.this);
+				progressDialog.showProgressbar(true);
+				progressDialog.setCancelable(false);
+				progressDialog.setIcon(R.drawable.cargar_datos);
+				progressDialog
+						.setMessage(R.string.msg_inicializando_importacion);
+				progressDialog.setTitle(R.string.titulo_cargando_datos);
+				progressDialog.show();
+			}
+		});
+	}
+
+	@Override
+	public void updateImportationWaiting(final int msgStrId) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (progressDialog != null)
+					progressDialog.setMessage(getResources()
+							.getString(msgStrId));
+			}
+		});
+	}
+
+	@Override
+	public void hideWaiting() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (progressDialog != null) {
+					obtenerEstadoBotonCargar();
+					progressDialog.dismiss();
+				}
+			}
+		});
+	}
+
+	@Override
+	public void showErrors(final int titleStrId, final int iconDrawableId,
+			final List<Exception> errors) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (errors.size() > 0) {
+					new AlertDialog.Builder(Inicio.this)
+							.setTitle(titleStrId)
+							.setIcon(iconDrawableId)
+							.setMessage(
+									MessageListFormatter
+											.fotmatHTMLFromErrors(errors))
+							.setPositiveButton(R.string.btn_ok, null).show();
+				}
+			}
+		});
+	}
+
+	@Override
+	public void notifySuccessfulImportation() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				mostrarMensajeUsuario(R.string.datos_cargados_exito);
+			}
+		});
+	}
+	// #endregion
 }

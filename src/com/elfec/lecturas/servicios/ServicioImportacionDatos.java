@@ -8,14 +8,20 @@ import android.os.IBinder;
 
 import com.elfec.lecturas.helpers.ConectorBDOracle;
 import com.elfec.lecturas.helpers.VariablesDeSesion;
+import com.elfec.lecturas.helpers.utils.text.AttributePicker;
+import com.elfec.lecturas.helpers.utils.text.ObjectListToSQL;
 import com.elfec.lecturas.logica_negocio.AsignacionRutaManager;
 import com.elfec.lecturas.logica_negocio.BasesCalculoManager;
+import com.elfec.lecturas.logica_negocio.ConceptoLecturaManager;
 import com.elfec.lecturas.logica_negocio.ConceptosManager;
+import com.elfec.lecturas.logica_negocio.EvolucionConsumoManager;
 import com.elfec.lecturas.logica_negocio.LecturasManager;
 import com.elfec.lecturas.logica_negocio.OrdenativosManager;
 import com.elfec.lecturas.logica_negocio.ParametrizablesManager;
+import com.elfec.lecturas.logica_negocio.PotenciasManager;
 import com.elfec.lecturas.logica_negocio.ReclasifCategoriasManager;
 import com.elfec.lecturas.modelo.AsignacionRuta;
+import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
@@ -25,7 +31,7 @@ import com.lecturas.elfec.R;
 /**
  * Servicio android que corre en segundo plano para realizar la importación de
  * datos del servidor, notifica eventos de UI a
- * {@link DataImportationReceiverPresenter}
+ * {@link DataImportationReceiver}
  * 
  * @author drodriguez
  *
@@ -62,7 +68,6 @@ public class ServicioImportacionDatos extends Service {
 	@Override
 	public int onStartCommand(Intent intent, int flags, int startId) {
 		new Thread(new Runnable() {
-			@SuppressWarnings("unchecked")
 			@Override
 			public void run() {
 				sendImportationAction(IMPORTATION_STARTING);
@@ -78,44 +83,14 @@ public class ServicioImportacionDatos extends Service {
 					public void onImportacionFinalizada(ResultadoVoid result) {
 					}
 				};
-
 				ResultadoVoid result = importarDatosRequeridosUnaVez(conector,
 						importacionDatosListener);
-
-				List<AsignacionRuta> rutasAsignadas = null;
-				AsignacionRutaManager asignacionRutaManager = new AsignacionRutaManager();
-				if (!result.tieneErrores()) {
-					strMsgId = R.string.msg_importando_asignacion_rutas;
-					result = asignacionRutaManager
-							.importarRutasAsignadasAUsuario(conector,
-									VariablesDeSesion.getUsuarioLogeado(),
-									importacionDatosListener);
-					rutasAsignadas = ((ResultadoTipado<List<AsignacionRuta>>) result)
-							.getResultado();
-				}
-				if (!result.tieneErrores()) {
-					strMsgId = R.string.msg_importando_lecturas;
-					result = new LecturasManager()
-							.importarLecturasDeRutasAsignadas(conector,
-									rutasAsignadas, importacionDatosListener);
-				}
-				if (!result.tieneErrores()) {
-					strMsgId = R.string.msg_importing_reading_meters;
-					result = new ReadingMeterManager().importReadingMeters(
-							username, password,
-							((TypedResult<List<ReadingGeneralInfo>>) result)
-									.getResultado(), importacionDatosListener);
-				}
-				if (!result.tieneErrores()) {// FINALIZACION
-					sendImportationAction(UPDATE_WAITING,
-							R.string.msg_finishing_import);
-					result = routeAssignmentManager
-							.setRoutesSuccessfullyImported(username, password,
-									assignedRoutes);
-				}
+				result = importarDatosRutas(conector, importacionDatosListener,
+						result);
 				sendImportationFinished(result);
 				ServicioImportacionDatos.this.stopSelf();
 			}
+
 		}).start();
 		return Service.START_NOT_STICKY;
 	}
@@ -225,6 +200,73 @@ public class ServicioImportacionDatos extends Service {
 					result.tieneErrores());
 		}
 		return result;
+	}
+
+	@SuppressWarnings("unchecked")
+	private ResultadoVoid importarDatosRutas(ConectorBDOracle conector,
+			ImportacionDatosListener importacionDatosListener,
+			ResultadoVoid result) {
+		List<AsignacionRuta> rutasAsignadas = null;
+		String lecturasClausulaIN = "";
+		AsignacionRutaManager asignacionRutaManager = new AsignacionRutaManager();
+		if (!result.tieneErrores()) {
+			strMsgId = R.string.msg_importando_asignacion_rutas;
+			result = asignacionRutaManager.importarRutasAsignadasAUsuario(
+					conector, VariablesDeSesion.getUsuarioLogeado(),
+					importacionDatosListener);
+			rutasAsignadas = ((ResultadoTipado<List<AsignacionRuta>>) result)
+					.getResultado();
+		}
+		if (!result.tieneErrores()) {
+			strMsgId = R.string.msg_importando_lecturas;
+			result = new LecturasManager().importarLecturasDeRutasAsignadas(
+					conector, rutasAsignadas, importacionDatosListener);
+			lecturasClausulaIN = convertirAClausulaIn(((ResultadoTipado<List<Lectura>>) result)
+					.getResultado());
+		}
+		if (!result.tieneErrores()) {
+			strMsgId = R.string.msg_importando_potencias;
+			result = new PotenciasManager().importarPotenciasDeRutasAsignadas(
+					conector, rutasAsignadas, lecturasClausulaIN,
+					importacionDatosListener);
+		}
+		if (!result.tieneErrores()) {
+			strMsgId = R.string.msg_importando_ev_consumos;
+			result = new EvolucionConsumoManager()
+					.importarEvConsumosDeRutasAsignadas(conector,
+							rutasAsignadas, lecturasClausulaIN,
+							importacionDatosListener);
+		}
+		if (!result.tieneErrores()) {
+			strMsgId = R.string.msg_importando_cptos_lecturas;
+			result = new ConceptoLecturaManager()
+					.importarConceptosLecturasDeRutasAsignadas(conector,
+							rutasAsignadas, lecturasClausulaIN,
+							importacionDatosListener);
+		}
+		if (!result.tieneErrores()) {// FINALIZACION
+			sendImportationAction(UPDATE_WAITING,
+					R.string.msg_finalizando_importacion);
+			result = asignacionRutaManager.setRutasImportadasExitosamente(
+					conector, rutasAsignadas);
+		}
+		return result;
+	}
+
+	/**
+	 * Obtiene la clausula In de la información general de lecturas
+	 * 
+	 * @param lecturas
+	 * @return clausula IN SQL de suministros de lecturas
+	 */
+	private String convertirAClausulaIn(List<Lectura> lecturas) {
+		return ObjectListToSQL.convertToSQL(lecturas, "LEMSUM",
+				new AttributePicker<String, Lectura>() {
+					@Override
+					public String pickAttribute(Lectura readingGeneralInfo) {
+						return "" + readingGeneralInfo.Suministro;
+					}
+				});
 	}
 
 }

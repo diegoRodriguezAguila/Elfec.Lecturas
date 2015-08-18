@@ -11,6 +11,7 @@ import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
+import com.elfec.lecturas.modelo.enums.EstadoAsignacionRuta;
 import com.elfec.lecturas.modelo.estadoslectura.ReIntentar;
 
 /**
@@ -63,7 +64,7 @@ public class AsignacionRuta extends Model {
 	public int OrdenFin;
 
 	@Column(name = "Estado")
-	public int Estado;
+	private int Estado;
 
 	@Column(name = "CantidadLecturasRecibidas")
 	public int CantidadLecturasRecibidas;
@@ -126,6 +127,32 @@ public class AsignacionRuta extends Model {
 	}
 
 	/**
+	 * Indica si la ruta tiene algún estado de asignada. Su status es igual a
+	 * {@link EstadoAsignacionRuta#ASIGNADA} o
+	 * {@link EstadoAsignacionRuta#RELECTURA_ASIGNADA}
+	 * 
+	 * @return true si es que la ruta fué asignada
+	 */
+	public boolean estaAsignada() {
+		EstadoAsignacionRuta status = getEstado();
+		return status == EstadoAsignacionRuta.ASIGNADA
+				|| status == EstadoAsignacionRuta.RELECTURA_ASIGNADA;
+	}
+
+	/**
+	 * Indica si la ruta tiene algún estado de importada. Su status es igual a
+	 * {@link EstadoAsignacionRuta#IMPORTADA} o
+	 * {@link EstadoAsignacionRuta#RELECTURA_IMPORTADA}
+	 * 
+	 * @return true si es que la ruta fué importada
+	 */
+	public boolean estaImportada() {
+		EstadoAsignacionRuta status = getEstado();
+		return status == EstadoAsignacionRuta.IMPORTADA
+				|| status == EstadoAsignacionRuta.RELECTURA_IMPORTADA;
+	}
+
+	/**
 	 * Elimina todas las rutas asignadas a un usuario que no esten en estado
 	 * cargada
 	 * 
@@ -171,5 +198,13 @@ public class AsignacionRuta extends Model {
 		}
 		ruta.insert(2, "-");
 		return ruta.toString();
+	}
+
+	public EstadoAsignacionRuta getEstado() {
+		return EstadoAsignacionRuta.get((short) Estado);
+	}
+
+	public void setEstado(EstadoAsignacionRuta estado) {
+		this.Estado = estado.toShort();
 	}
 }

@@ -22,7 +22,7 @@
         android:id="@+id/separator_1"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_alignParentLeft="true"   
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/lbl_titulo"
         android:background="@android:color/darker_gray" />
@@ -33,40 +33,33 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/lbl_ruta"
         android:layout_alignBottom="@+id/lbl_ruta"
-        android:layout_toRightOf="@+id/lbl_ruta"
-        android:layout_toEndOf="@+id/lbl_ruta"
-        android:text="@string/ruta_info_lbl"
         android:layout_marginLeft="3dp"
         android:layout_marginStart="3dp"
+        android:layout_toEndOf="@+id/lbl_ruta"
+        android:layout_toRightOf="@+id/lbl_ruta"
+        android:text="@string/ruta_info_lbl"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <Button
         android:id="@+id/btn_menu_principal"
-        android:layout_width="150dp"
+        android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_alignLeft="@+id/lbl_ruta"
-        android:layout_alignStart="@+id/lbl_ruta"
-        android:layout_alignRight="@+id/separator_1"
-        android:layout_alignEnd="@+id/separator_1"
-        android:layout_below="@+id/lbl_ruta"
-        android:layout_marginTop="10dp"
-        android:text="@string/menu_principal_btn" 
-        android:drawableRight="@drawable/arrow_right"
-        android:drawableEnd="@drawable/arrow_right"
+        android:layout_centerInParent="true"
+        android:drawableEnd="@drawable/go_main_menu"
+        android:drawablePadding="4dp"
+        android:drawableRight="@drawable/go_main_menu"
         android:enabled="false"
         android:onClick="btnMenuPrincipalClick"
-        />
+        android:text="@string/menu_principal_btn" />
 
     <TextView
         android:id="@+id/lbl_menu_principal_info"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btn_menu_principal"
-        android:layout_alignStart="@+id/btn_menu_principal"
-        android:layout_alignRight="@+id/btn_menu_principal"
-        android:layout_alignEnd="@+id/btn_menu_principal"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/btn_menu_principal"
         android:layout_marginTop="6dp"
         android:text="@string/menu_principal_info"
@@ -77,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/lbl_usuario"
-        android:layout_alignStart="@+id/lbl_usuario" 
+        android:layout_alignStart="@+id/lbl_usuario"
         android:layout_below="@+id/lbl_usuario"
         android:text="@string/sample_fecha"
         android:textAppearance="?android:attr/textAppearanceSmall" />
@@ -86,7 +79,7 @@
         android:id="@+id/lbl_usuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"   
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/separator_1"
         android:layout_marginTop="10dp"
@@ -99,9 +92,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/lbl_usuario"
         android:layout_marginLeft="4dp"
-        android:layout_marginStart="4dp" 
-        android:layout_toRightOf="@+id/lbl_usuario"
+        android:layout_marginStart="4dp"
         android:layout_toEndOf="@+id/lbl_usuario"
+        android:layout_toRightOf="@+id/lbl_usuario"
         android:text="@string/blank"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
@@ -113,8 +106,8 @@
         android:layout_alignBottom="@+id/lbl_imei"
         android:layout_marginLeft="3dp"
         android:layout_marginStart="3dp"
-        android:layout_toRightOf="@+id/lbl_imei"
         android:layout_toEndOf="@+id/lbl_imei"
+        android:layout_toRightOf="@+id/lbl_imei"
         android:text="@string/blank"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -140,47 +133,49 @@
         android:text="@string/imei_lbl"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <TextView
-        android:id="@+id/lbl_info_carga_datos"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btn_cargar_datos"
-        android:layout_alignEnd="@+id/btn_descargar_datos"
-        android:layout_alignRight="@+id/btn_descargar_datos"
-        android:layout_alignStart="@+id/lbl_menu_principal_info"
-        android:layout_below="@+id/btn_cargar_datos"
-        android:layout_marginTop="2dp"
-        android:text="@string/info_datos_no_cargados_lbl"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="12sp" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/btn_cargar_datos"
-        android:layout_width="145dp"
-        android:layout_height="64dp"
-        android:layout_alignParentLeft="true"   
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lbl_menu_principal_info"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/cargar_datos"
-        android:drawableStart="@drawable/cargar_datos" 
-        android:onClick="btnCargarDatosClick"
-        android:textSize="12sp"
-        android:enabled="false"
-        android:text="@string/cargar_datos_btn" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/btn_descargar_datos"
-        android:layout_width="145dp"
-        android:layout_height="64dp"
-        android:layout_alignTop="@+id/btn_cargar_datos"
-        android:layout_alignParentRight="true"   
-        android:layout_alignParentEnd="true"
-        android:drawableStart="@drawable/descargar_datos"
-        android:drawableLeft="@drawable/descargar_datos"
-        android:onClick="btnDescargarDatosClick"
-        android:textSize="12sp"
-        android:enabled="false"
-        android:text="@string/descargar_datos_btn" />
+            <Button
+                android:id="@+id/btn_cargar_datos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableTop="@drawable/import_from_server"
+                android:enabled="false"
+                android:onClick="btnCargarDatosClick"
+                android:text="@string/cargar_datos_btn"
+                android:textSize="14sp" />
+
+            <Button
+                android:id="@+id/btn_descargar_datos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                android:drawableTop="@drawable/export_to_server"
+                android:enabled="false"
+                android:onClick="btnDescargarDatosClick"
+                android:text="@string/descargar_datos_btn"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lbl_info_carga_datos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="@string/info_datos_no_cargados_lbl"
+            android:textSize="12sp" />
+    </LinearLayout>
 
 </RelativeLayout>
