@@ -20,7 +20,7 @@ public class DialogoConfirmacionImpresion extends AlertDialog {
 	private CheckBox chkDecision;
 
 	public DialogoConfirmacionImpresion(Context context) {
-		super(context, R.style.DialogElfecTheme);
+		super(context);
 	}
 
 	@Override

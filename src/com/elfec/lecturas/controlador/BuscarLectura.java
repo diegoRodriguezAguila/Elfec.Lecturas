@@ -3,10 +3,10 @@ package com.elfec.lecturas.controlador;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -21,7 +21,7 @@ import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.lecturas.elfec.R;
 
-public class BuscarLectura extends Activity {
+public class BuscarLectura extends AppCompatActivity {
 
 	private View rootLayout;
 

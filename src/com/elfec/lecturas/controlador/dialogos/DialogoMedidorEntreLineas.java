@@ -48,7 +48,7 @@ public class DialogoMedidorEntreLineas extends AlertDialog {
 	private ArrayList<String> listaRutas;
 
 	public DialogoMedidorEntreLineas(Activity context) {
-		super(context, R.style.DialogElfecTheme);
+		super(context);
 		this.context = context;
 	}
 

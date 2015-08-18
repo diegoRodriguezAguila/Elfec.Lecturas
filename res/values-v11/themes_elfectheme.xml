@@ -3,34 +3,11 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="ElfecTheme" parent="@style/_ElfecTheme" />
-
-    <style name="_ElfecTheme" parent="android:Theme.Holo.Light">
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:windowContentOverlay">@null</item>
+    <style name="ElfecTheme" parent="ElfecTheme.Base">
         <item name="android:actionBarStyle">@style/ActionBarElfecTheme</item>
         <item name="android:editTextBackground">@drawable/elfectheme_edit_text_holo_light</item>
-        <item name="android:textColorHighlight">#99416190</item>
-        <item name="android:textSelectHandleLeft">@drawable/elfectheme_text_select_handle_left</item>
-        <item name="android:textSelectHandleRight">@drawable/elfectheme_text_select_handle_right</item>
-        <item name="android:textSelectHandle">@drawable/elfectheme_text_select_handle_middle</item>
-        <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewElfecTheme</item>
-        <item name="android:listChoiceIndicatorMultiple">@drawable/elfectheme_btn_check_holo_light</item>
-        <item name="android:listChoiceIndicatorSingle">@drawable/elfectheme_btn_radio_holo_light</item>
-        <item name="android:buttonStyle">@style/ButtonElfecTheme</item>
-        <item name="android:imageButtonStyle">@style/ImageButtonElfecTheme</item>
-        <item name="android:dropDownSpinnerStyle">@style/SpinnerElfecTheme</item>
-        <item name="android:progressBarStyleHorizontal">@style/ProgressBarElfecTheme</item>
-        <item name="android:seekBarStyle">@style/SeekBarElfecTheme</item>
-        <item name="android:ratingBarStyle">@style/RatingBarElfecTheme</item>
-        <item name="android:ratingBarStyleIndicator">@style/RatingBarBigElfecTheme</item>
-        <item name="android:ratingBarStyleSmall">@style/RatingBarSmallElfecTheme</item>
-        <item name="android:buttonStyleToggle">@style/ToggleElfecTheme</item>
         <item name="android:listChoiceBackgroundIndicator">@drawable/elfectheme_list_selector_holo_light</item>
-        <item name="android:activatedBackgroundIndicator">@drawable/elfectheme_activated_background_holo_light</item>
         <item name="android:fastScrollThumbDrawable">@drawable/elfectheme_fastscroll_thumb_holo</item>
-        <item name="android:alertDialogStyle">@style/DialogElfecTheme</item>
     </style>
 
 </resources>

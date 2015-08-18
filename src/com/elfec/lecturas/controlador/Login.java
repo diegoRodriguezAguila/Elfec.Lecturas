@@ -2,7 +2,6 @@ package com.elfec.lecturas.controlador;
 
 import java.util.Date;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -10,6 +9,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.telephony.TelephonyManager;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,7 +33,7 @@ import com.lecturas.elfec.R;
  * @author drodriguez
  *
  */
-public class Login extends Activity {
+public class Login extends AppCompatActivity {
 
 	private TextView txtUsuario;
 	private TextView txtPassword;

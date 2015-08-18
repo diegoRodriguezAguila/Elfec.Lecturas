@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -23,7 +23,7 @@ import com.elfec.lecturas.modelo.estados.lectura.IEstadoLectura;
 import com.lecturas.elfec.R;
 import com.quentindommerc.superlistview.SuperListview;
 
-public class ListaLecturas extends Activity {
+public class ListaLecturas extends AppCompatActivity {
 
 	private Spinner selectorTipoLectura;
 	private SuperListview listViewLecturas;

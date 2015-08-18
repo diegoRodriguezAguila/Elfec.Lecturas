@@ -6,13 +6,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,7 +46,8 @@ import com.lecturas.elfec.R;
  * @author drodriguez
  *
  */
-public class Inicio extends Activity implements IDataImportationObserver {
+public class Inicio extends AppCompatActivity implements
+		IDataImportationObserver {
 
 	private TextView lblNomUsuario;
 	private TextView lblFecha;

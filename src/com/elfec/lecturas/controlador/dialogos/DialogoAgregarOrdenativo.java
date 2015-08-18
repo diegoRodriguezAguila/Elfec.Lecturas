@@ -36,7 +36,7 @@ import com.lecturas.elfec.R;
 public class DialogoAgregarOrdenativo extends AlertDialog {
 
 	public DialogoAgregarOrdenativo(Context context, Lectura lectura) {
-		super(context, R.style.DialogElfecTheme);
+		super(context);
 		this.context = context;
 		this.lecturaActual = lectura;
 		hashConvertirCodAPos = new SparseArray<Integer>();
@@ -48,7 +48,7 @@ public class DialogoAgregarOrdenativo extends AlertDialog {
 
 	public DialogoAgregarOrdenativo(Context context, Lectura lectura,
 			int tituloId, ArrayList<Ordenativo> listaOrdenativos) {
-		super(context, R.style.DialogElfecTheme);
+		super(context);
 		this.context = context;
 		this.lecturaActual = lectura;
 		hashConvertirCodAPos = new SparseArray<Integer>();

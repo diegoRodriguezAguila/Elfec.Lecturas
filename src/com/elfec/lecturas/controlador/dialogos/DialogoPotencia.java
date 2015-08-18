@@ -38,7 +38,7 @@ public class DialogoPotencia extends AlertDialog {
 
 	public DialogoPotencia(Context context, Lectura lectura,
 			boolean modoSoloLectura) {
-		super(context, R.style.DialogElfecTheme);
+		super(context);
 		this.context = context;
 		this.lecturaActual = lectura;
 		this.modoSoloLectura = modoSoloLectura;

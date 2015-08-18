@@ -1,11 +1,11 @@
 package com.elfec.lecturas.controlador;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -25,7 +25,7 @@ import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcep
 import com.elfec.lecturas.settings.VariablesDeEntorno;
 import com.lecturas.elfec.R;
 
-public class MenuPrincipal extends Activity {
+public class MenuPrincipal extends AppCompatActivity {
 
 	private SquareButton btnTomarLecturas;
 

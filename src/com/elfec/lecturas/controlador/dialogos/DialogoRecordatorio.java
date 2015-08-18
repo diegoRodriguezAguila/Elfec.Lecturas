@@ -22,7 +22,7 @@ public class DialogoRecordatorio extends AlertDialog {
 	private Activity context;
 
 	public DialogoRecordatorio(Activity cont, Lectura lectura) {
-		super(cont, R.style.DialogElfecTheme);
+		super(cont);
 		lecturaActual = lectura;
 		context = cont;
 	}

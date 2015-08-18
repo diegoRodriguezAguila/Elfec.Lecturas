@@ -3,9 +3,9 @@ package com.elfec.lecturas.controlador;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,7 +19,7 @@ import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.MedidorEntreLineas;
 import com.lecturas.elfec.R;
 
-public class ResumenLecturas extends Activity {
+public class ResumenLecturas extends AppCompatActivity {
 
 	private Spinner selectorRuta;
 	private TextView txtNumLecturas;
@@ -31,11 +31,11 @@ public class ResumenLecturas extends Activity {
 	private TextView txtLecturasPostergadas;
 	private TextView txtLecturasReintentar;
 	private TextView txtLecturasTotales;
-	
+
 	private ArrayList<Lectura> listaLecturas;
 	private ArrayList<String> listaRutas;
 	private ArrayList<MedidorEntreLineas> listaLecturasEntreLineas;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -50,31 +50,32 @@ public class ResumenLecturas extends Activity {
 		txtLecturasReintentar = (TextView) findViewById(R.id.txt_lecturas_reintentar);
 		txtLecturasTotales = (TextView) findViewById(R.id.txt_lecturas_totales);
 		listaLecturas = (ArrayList<Lectura>) Lectura.obtenerTodasLasLecturas();
-		listaLecturasEntreLineas = (ArrayList<MedidorEntreLineas>) MedidorEntreLineas.obtenerMedidoresEntreLineas();
+		listaLecturasEntreLineas = (ArrayList<MedidorEntreLineas>) MedidorEntreLineas
+				.obtenerMedidoresEntreLineas();
 		listaRutas = new ArrayList<String>();
 		listaRutas.add("Todas");
-		List<AsignacionRuta> rutasUsuario = AsignacionRuta.obtenerTodasLasRutas();
-		for(AsignacionRuta asignRuta : rutasUsuario)
-		{
-			listaRutas.add(""+asignRuta.Ruta);
+		List<AsignacionRuta> rutasUsuario = AsignacionRuta
+				.obtenerTodasLasRutas();
+		for (AsignacionRuta asignRuta : rutasUsuario) {
+			listaRutas.add("" + asignRuta.Ruta);
 		}
 		asignarDatos();
 		selectorRuta = (Spinner) findViewById(R.id.select_ruta);
-		ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,  R.layout.spinner_item,R.id.lbl_opcion_item, listaRutas);
+		ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,
+				R.layout.spinner_item, R.id.lbl_opcion_item, listaRutas);
 		selectorRuta.setAdapter(adapter_state);
 		selectorRuta.setOnItemSelectedListener(new OnItemSelectedListener() {
 
 			@Override
-			public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
-					int position, long id) {
+			public void onItemSelected(AdapterView<?> parentView,
+					View selectedItemView, int position, long id) {
 				String ruta = listaRutas.get(position);
-				if(ruta.equals("Todas"))
-				{
-					listaLecturas = (ArrayList<Lectura>) Lectura.obtenerTodasLasLecturas();
-				}
-				else
-				{
-					listaLecturas = (ArrayList<Lectura>)Lectura.obtenerLecturasDeRuta(Integer.parseInt((ruta)));
+				if (ruta.equals("Todas")) {
+					listaLecturas = (ArrayList<Lectura>) Lectura
+							.obtenerTodasLasLecturas();
+				} else {
+					listaLecturas = (ArrayList<Lectura>) Lectura
+							.obtenerLecturasDeRuta(Integer.parseInt((ruta)));
 				}
 				asignarDatos();
 			}
@@ -85,9 +86,8 @@ public class ResumenLecturas extends Activity {
 		});
 	}
 
-	public void asignarDatos()
-	{
-		txtNumLecturas.setText(""+listaLecturas.size());
+	public void asignarDatos() {
+		txtNumLecturas.setText("" + listaLecturas.size());
 		int lecturasRealizadas = 0;
 		int lecturasPendientes = 0;
 		int lecturasNormales = 0;
@@ -97,76 +97,73 @@ public class ResumenLecturas extends Activity {
 		int lecturasReintentar = 0;
 		int lecturasTotales = 0;
 
-		for(Lectura lectura : listaLecturas)
-		{
-			switch(lectura.getEstadoLectura().getEstadoEntero())
+		for (Lectura lectura : listaLecturas) {
+			switch (lectura.getEstadoLectura().getEstadoEntero()) {
+			case (0): // pendiente
 			{
-				case (0): //pendiente
-				{
-					lecturasPendientes++;
-					break;
-				}
-				case (1): //leida
-				{
-					lecturasRealizadas++;
-					lecturasNormales++;
-					lecturasTotales++;
-					break;
-				}
-				case (2): //impedida
-				{
-					lecturasRealizadas++;
-					lecturasImpedidas++;
-					lecturasTotales++;
-					break;
-				}
-				case (3): //postergada
-				{
-					lecturasPostergadas++;
-					lecturasTotales++;
-					break;
-				}
-				case (4): //reintentar
-				{
-					lecturasReintentar++;
-					lecturasTotales++;
-					break;
-				}
+				lecturasPendientes++;
+				break;
+			}
+			case (1): // leida
+			{
+				lecturasRealizadas++;
+				lecturasNormales++;
+				lecturasTotales++;
+				break;
+			}
+			case (2): // impedida
+			{
+				lecturasRealizadas++;
+				lecturasImpedidas++;
+				lecturasTotales++;
+				break;
+			}
+			case (3): // postergada
+			{
+				lecturasPostergadas++;
+				lecturasTotales++;
+				break;
+			}
+			case (4): // reintentar
+			{
+				lecturasReintentar++;
+				lecturasTotales++;
+				break;
+			}
 			}
 		}
-		
+
 		lecturasEntreLineas = listaLecturasEntreLineas.size();
-		lecturasRealizadas+=lecturasEntreLineas;
-		lecturasTotales+=lecturasEntreLineas;
-		txtLecturasRealizadas.setText(""+lecturasRealizadas);
-		txtLecturasPendientes.setText(""+lecturasPendientes);
-		txtLecturasNormales.setText(""+lecturasNormales);
-		txtLecturasEntreLineas.setText(""+lecturasEntreLineas);
-		txtLecturasImpedidas.setText(""+lecturasImpedidas);
-		txtLecturasPostergadas.setText(""+lecturasPostergadas);
-		txtLecturasReintentar.setText(""+lecturasReintentar);
-		txtLecturasTotales.setText(""+lecturasTotales);
+		lecturasRealizadas += lecturasEntreLineas;
+		lecturasTotales += lecturasEntreLineas;
+		txtLecturasRealizadas.setText("" + lecturasRealizadas);
+		txtLecturasPendientes.setText("" + lecturasPendientes);
+		txtLecturasNormales.setText("" + lecturasNormales);
+		txtLecturasEntreLineas.setText("" + lecturasEntreLineas);
+		txtLecturasImpedidas.setText("" + lecturasImpedidas);
+		txtLecturasPostergadas.setText("" + lecturasPostergadas);
+		txtLecturasReintentar.setText("" + lecturasReintentar);
+		txtLecturasTotales.setText("" + lecturasTotales);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.resumen_lecturas, menu);
 		return true;
 	}
-	
-	public void btnInicioClick(View view)
-	{ 
+
+	public void btnInicioClick(View view) {
 		Intent intent = new Intent(this, MenuPrincipal.class);
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	    startActivity(intent);
-		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out); 
+		startActivity(intent);
+		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
 	}
-	
+
 	@Override
 	public void onBackPressed() {
-	    finish();//go back to the previous Activity
-	    overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);  
+		finish();// go back to the previous Activity
+		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
 	}
 
 }

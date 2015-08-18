@@ -33,7 +33,7 @@ public class DialogoFiltrarLecturas extends AlertDialog {
 	private FiltroLecturas filtroLecturas;
 
 	public DialogoFiltrarLecturas(Context context, FiltroLecturas filtroLecturas) {
-		super(context, R.style.DialogElfecTheme);
+		super(context);
 		this.context = context;
 		this.filtroLecturas = filtroLecturas;
 	}

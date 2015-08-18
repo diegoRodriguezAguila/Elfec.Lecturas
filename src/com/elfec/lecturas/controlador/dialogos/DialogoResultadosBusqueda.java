@@ -26,7 +26,7 @@ public class DialogoResultadosBusqueda extends AlertDialog {
 
 	public DialogoResultadosBusqueda(BuscarLectura context,
 			List<Lectura> listaResultadosLecs) {
-		super(context, R.style.DialogElfecTheme);
+		super(context);
 		this.context = context;
 		listaLecturas = (ArrayList<Lectura>) listaResultadosLecs;
 	}

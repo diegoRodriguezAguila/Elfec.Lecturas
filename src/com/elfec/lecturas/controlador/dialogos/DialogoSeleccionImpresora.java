@@ -25,7 +25,7 @@ public class DialogoSeleccionImpresora extends AlertDialog {
 	private ArrayList<OnItemClickListener> itemClickListeners;
 
 	public DialogoSeleccionImpresora(Activity actividad) {
-		super(actividad, R.style.DialogElfecTheme);
+		super(actividad);
 		listaDispositivos = ManejadorImpresora
 				.obtenerDispositivosSincronizados(actividad);
 		adapter = new DispositivoBluetoothAdapter(actividad,

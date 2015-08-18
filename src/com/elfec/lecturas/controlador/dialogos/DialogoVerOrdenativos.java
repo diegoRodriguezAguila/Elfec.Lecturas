@@ -25,7 +25,7 @@ public class DialogoVerOrdenativos extends AlertDialog {
 	private Button btnSalir;
 
 	public DialogoVerOrdenativos(Context cont, Lectura lectura) {
-		super(cont, R.style.DialogElfecTheme);
+		super(cont);
 		lecturaActual = lectura;
 		this.context = cont;
 		listaOrdLect = (ArrayList<OrdenativoLectura>) lecturaActual

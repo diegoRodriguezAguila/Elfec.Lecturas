@@ -3,11 +3,11 @@ package com.elfec.lecturas.controlador;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
@@ -15,7 +15,7 @@ import android.widget.EditText;
 import com.elfec.lecturas.acceso_remoto_datos.LectorConfigBD;
 import com.lecturas.elfec.R;
 
-public class Configurar extends Activity {
+public class Configurar extends AppCompatActivity {
 
 	private EditText txtIp;
 	private EditText txtPuerto;

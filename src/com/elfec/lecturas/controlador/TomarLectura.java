@@ -9,12 +9,12 @@ import java.util.List;
 import java.util.Locale;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -73,7 +73,7 @@ import com.elfec.lecturas.settings.ui.AdminUI;
 import com.elfec.lecturas.settings.ui.OpcionesPreferenciasUI;
 import com.lecturas.elfec.R;
 
-public class TomarLectura extends Activity implements ISwipeListener,
+public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		NavegacionListener<Lectura> {
 
 	public static final String ARG_ID_LECTURA = "IdLecturaSeleccionada";

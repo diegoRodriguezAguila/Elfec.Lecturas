@@ -3,18 +3,28 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <style name="ElfecTheme" parent="@style/_ElfecTheme" />
+    <style name="ElfecTheme" parent="ElfecTheme.Base" />
 
-    <style name="_ElfecTheme" parent="android:Theme.Light">
+    <style name="ElfecTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/elfectheme_color</item>
+        <item name="colorPrimaryDark">@color/highlight_elfectheme_color</item>
+        <item name="colorAccent">@color/highlight_elfectheme_color</item>
+        <item name="colorControlActivated">@color/elfectheme_color</item>
+        <item name="colorControlNormal">@color/black_wet_asphalt</item>
+        <item name="colorControlHighlight">@color/highlight_elfectheme_color</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:windowContentOverlay">@null</item>
+        <item name="icon">@drawable/ic_launcher</item>
+        <item name="actionBarStyle">@style/ActionBarElfecTheme</item>
         <item name="android:editTextStyle">@style/EditTextElfecTheme</item>
+        <item name="editTextStyle">@style/EditTextElfecTheme</item>
         <item name="android:textColorHighlight">#99416190</item>
         <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewElfecTheme</item>
         <item name="android:checkboxStyle">@style/CheckBoxElfecTheme</item>
         <item name="android:radioButtonStyle">@style/RadioButtonElfecTheme</item>
-        <item name="android:buttonStyle">@style/ButtonElfecTheme</item>
+        <item name="buttonStyle">@style/ButtonElfecTheme</item>
         <item name="android:imageButtonStyle">@style/ImageButtonElfecTheme</item>
         <item name="android:spinnerStyle">@style/SpinnerElfecTheme</item>
         <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemElfecTheme</item>
@@ -27,9 +37,8 @@
         <item name="android:listViewStyle">@style/ListViewElfecTheme</item>
         <item name="android:listViewWhiteStyle">@style/ListViewElfecTheme.White</item>
         <item name="android:spinnerItemStyle">@style/SpinnerItemElfecTheme</item>
-        <item name="android:alertDialogStyle">@style/DialogElfecTheme</item>
-        
         <item name="alertDialogProTheme">@style/AppStyle.Dialog.FlavoredMaterialLight</item>
+        <item name="alertDialogTheme">@style/AppStyle.AlertDialog</item>
     </style>
 
 </resources>
