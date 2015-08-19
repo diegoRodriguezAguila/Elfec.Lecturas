@@ -1071,19 +1071,15 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	 */
 	public void verificarAsignacionImpresora(final AvisoCobranza avisoCobranza) {
 		if (!ManejadorImpresora.impresoraPredefinidaFueAsignada()) {
-			DialogoSeleccionImpresora dialogo = new DialogoSeleccionImpresora(
-					this);
-			dialogo.setCancelable(false);
-			dialogo.show();
-			dialogo.esconderBotonSalir();
-			dialogo.addOnItemClickListener(new OnItemClickListener() {
+			new DialogoSeleccionImpresora(this).addOnItemClickListener(
+					new OnItemClickListener() {
 
-				@Override
-				public void onItemClick(AdapterView<?> adapter, View v,
-						int pos, long arg3) {
-					iniciarImpresion(avisoCobranza);
-				}
-			});
+						@Override
+						public void onItemClick(AdapterView<?> adapter, View v,
+								int pos, long arg3) {
+							iniciarImpresion(avisoCobranza);
+						}
+					}).show();
 		} else {
 			iniciarImpresion(avisoCobranza);
 		}

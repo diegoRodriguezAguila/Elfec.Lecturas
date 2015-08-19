@@ -154,18 +154,14 @@ public class MenuPrincipal extends AppCompatActivity {
 	 */
 	public void mostrarDialogoSeleccionarImpresora(
 			final DetalleResumenGenerico resumenAImprimir) {
-		DialogoSeleccionImpresora dialogo = new DialogoSeleccionImpresora(
-				MenuPrincipal.this);
-		dialogo.setCancelable(false);
-		dialogo.show();
-		dialogo.esconderBotonSalir();
-		dialogo.addOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				iniciarImpresionResumen(resumenAImprimir);
-			}
-		});
+		new DialogoSeleccionImpresora(MenuPrincipal.this)
+				.addOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> arg0, View arg1,
+							int arg2, long arg3) {
+						iniciarImpresionResumen(resumenAImprimir);
+					}
+				}).show();
 	}
 
 	/**

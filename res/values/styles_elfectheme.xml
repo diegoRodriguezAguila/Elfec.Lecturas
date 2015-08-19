@@ -153,8 +153,6 @@
         <item name="colorAccent">@color/highlight_elfectheme_color</item>
         <item name="colorControlActivated">@color/elfectheme_color</item>
         <item name="colorControlNormal">@color/black_wet_asphalt</item>
-        <item name="colorControlHighlight">@color/highlight_elfectheme_color</item>
-        <item name="colorButtonNormal">?attr/colorPrimary</item>
     </style>
 
 </resources>

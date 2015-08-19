@@ -1,43 +1,44 @@
 package com.elfec.lecturas.controlador.adaptadores;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import com.lecturas.elfec.R;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.graphics.Color;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
+
+import com.elfec.lecturas.controlador.adaptadores.viewholders.DispositivoBluetoothViewHolder;
+import com.lecturas.elfec.R;
 
 /**
- * Sirve para crear la lista de dispositivos bluetooth, es el adaptador que se encarga de ajustar la vista
+ * Sirve para crear la lista de dispositivos bluetooth, es el adaptador que se
+ * encarga de ajustar la vista
+ * 
  * @author drodriguez
  *
  */
 public class DispositivoBluetoothAdapter extends ArrayAdapter<BluetoothDevice> {
-
-	private ArrayList<BluetoothDevice> lDispositivos;
 	private static LayoutInflater inflater = null;
 	private int dispSeleccionado;
+	private int selectableBgId;
 
-	public DispositivoBluetoothAdapter(Context activity,
-			int textViewResourceId, ArrayList<BluetoothDevice> dispositivos) {
-		super(activity, textViewResourceId, dispositivos);
-		try {
-			this.lDispositivos = dispositivos;
-			inflater = (LayoutInflater) activity
-					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			dispSeleccionado = -1;
-		} catch (Exception e) {
-
-		}
+	public DispositivoBluetoothAdapter(Context context, int textViewResourceId,
+			List<BluetoothDevice> dispositivos) {
+		super(context, textViewResourceId, dispositivos);
+		inflater = (LayoutInflater) context
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		dispSeleccionado = -1;
+		TypedValue outValue = new TypedValue();
+		context.getTheme().resolveAttribute(R.attr.selectableItemBackground,
+				outValue, true);
+		selectableBgId = outValue.resourceId;
 	}
 
 	public void setSeleccionado(int seleccionado) {
-
 		this.dispSeleccionado = seleccionado;
 		this.notifyDataSetChanged();
 	}
@@ -47,34 +48,22 @@ public class DispositivoBluetoothAdapter extends ArrayAdapter<BluetoothDevice> {
 	}
 
 	@Override
-	public int getCount() {
-		return lDispositivos.size();
-	}
-
-	@Override
-	public BluetoothDevice getItem(int position) {
-		return lDispositivos.get(position);
-	}
-
-	@Override
-	public long getItemId(int position) {
-		return position;
-	}
-
-	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		View vi = convertView;
-		vi = inflater.inflate(R.layout.list_item_dispositivo, null);
-		if (dispSeleccionado == position) {
-			vi.setBackgroundColor(Color.parseColor("#215b92"));
-			((TextView) vi.findViewById(R.id.lbl_nombre_dispositivo)).setTextColor(Color.parseColor("#FFFFFF"));
-			((TextView) vi.findViewById(R.id.lbl_mac_dispositivo)).setTextColor(Color.parseColor("#FFFFFF"));
-		}
-		BluetoothDevice dispositivoBluetooth = lDispositivos.get(position);
-		((TextView) vi.findViewById(R.id.lbl_nombre_dispositivo)).setText(""
-				+ dispositivoBluetooth.getName());
-		((TextView) vi.findViewById(R.id.lbl_mac_dispositivo))
-				.setText(dispositivoBluetooth.getAddress());
-		return vi;
+		DispositivoBluetoothViewHolder viewHolder;
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.list_item_dispositivo,
+					parent, false);
+			viewHolder = new DispositivoBluetoothViewHolder(convertView);
+			convertView.setTag(viewHolder);
+		} else
+			viewHolder = (DispositivoBluetoothViewHolder) convertView.getTag();
+		boolean dispEsSelec = dispSeleccionado == position;
+		if (dispEsSelec)
+			convertView.setBackgroundColor(Color.parseColor("#215b92"));
+		else
+			convertView.setBackgroundResource(selectableBgId);
+		convertView.setPadding(10, 10, 10, 10);
+		viewHolder.bindDispositivo(getItem(position), dispEsSelec);
+		return convertView;
 	}
 }
