@@ -141,7 +141,7 @@
         <Button
             android:id="@+id/btn_confirmar_lectura"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="44dp"
             android:layout_alignRight="@+id/txt_nueva_lectura"
             android:layout_below="@+id/txt_nueva_lectura"
             android:layout_marginTop="10dp"
@@ -349,26 +349,25 @@
         <Button
             android:id="@+id/btn_postergar_lectura"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="44dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
             android:layout_marginBottom="6dp"
-            android:layout_marginLeft="-8dp"
-            android:background="@drawable/purple_btn_default_holo_light"
-            android:onClick="btnPostergarLecturaClick"
+            android:theme="@style/AppStyle.Button.Purple"
             android:text="@string/postergar_lectura" />
 
         <Button
             android:id="@+id/btn_reintentar_lectura"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="44dp"
             android:layout_alignBaseline="@+id/btn_postergar_lectura"
             android:layout_alignBottom="@+id/btn_postergar_lectura"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="6dp"
             android:layout_toRightOf="@+id/btn_postergar_lectura"
-            android:background="@drawable/orange_btn_default_holo_light"
-            android:onClick="btnReintentarLecturaClick"
+            android:layout_toEndOf="@+id/btn_postergar_lectura"
+            android:theme="@style/AppStyle.Button.Orange"
             android:text="@string/reintentar_lectura" />
 
         <ImageButton

@@ -19,7 +19,6 @@ public class AppPreferences {
 	private final String ORDENATIVOS_IMPORTADOS = "ordenativosImportados";
 	private final String BASES_CALCULO_CPTOS_IMPORTADOS = "conceptCalculationBasesImportados";
 	private final String BASES_CALCULO_IMPORTADOS = "printCalculationBasesImportados";
-	private final String CATEGORIAS_IMPORTADOS = "categoriesImportados";
 	private final String CONCEPTOS_IMPORTADOS = "conceptosImportados";
 	private final String CONCEPTOS_CATEG_IMPORTADOS = "conceptosCategImportados";
 	private final String CONCEPTOS_TARIFA_IMPORTADOS = "conceptosCategImportados";
@@ -88,7 +87,7 @@ public class AppPreferences {
 	 * 
 	 * @return true si es que ya se importó toda
 	 */
-	public boolean estaAllOnceReqDataImportados() {
+	public boolean estaInfoReqUnaVezImportados() {
 		return preferences.getBoolean(ALL_ONCE_REQUIRED_DATA_IMPORTADOS, false);
 	}
 
@@ -98,7 +97,7 @@ public class AppPreferences {
 	 * 
 	 * @return la instancia actual de PreferencesManager
 	 */
-	public AppPreferences setAllOnceReqDataImportados(boolean estaImportados) {
+	public AppPreferences setInfoReqUnaVezImportados(boolean estaImportados) {
 		preferences.edit()
 				.putBoolean(ALL_ONCE_REQUIRED_DATA_IMPORTADOS, estaImportados)
 				.commit();
@@ -188,26 +187,6 @@ public class AppPreferences {
 	}
 
 	/**
-	 * Indica si las CATEGORIAS han sido importadas
-	 * 
-	 * @return true si es que ya se importó
-	 */
-	public boolean estaCategoriesImportados() {
-		return preferences.getBoolean(CATEGORIAS_IMPORTADOS, false);
-	}
-
-	/**
-	 * Asigna si las CATEGORIAS han sido importadas
-	 * 
-	 * @return la instancia actual de PreferencesManager
-	 */
-	public AppPreferences setCategoriesImportados(boolean estaImportados) {
-		preferences.edit().putBoolean(CATEGORIAS_IMPORTADOS, estaImportados)
-				.commit();
-		return this;
-	}
-
-	/**
 	 * Indica si los CONCEPTOS han sido importados
 	 * 
 	 * @return true si es que ya se importó
@@ -274,15 +253,15 @@ public class AppPreferences {
 	 * Borra las preferencias guardadas de la información que se debe importar
 	 * solo una vez
 	 */
-	public void wipeOnceRequiredDataPreferences() {
+	public void eliminarPrefernciasDeInfoReqUnaVez() {
 		preferences.edit().remove(ALL_ONCE_REQUIRED_DATA_IMPORTADOS)
 				.remove(PARAMETRIZABLES_IMPORTADOS)
-				.remove(ORDENATIVOS_IMPORTADOS)
-				.remove(BASES_CALCULO_CPTOS_IMPORTADOS)
-				.remove(BASES_CALCULO_IMPORTADOS).remove(CATEGORIAS_IMPORTADOS)
-				.remove(CONCEPTOS_IMPORTADOS)
+				.remove(ORDENATIVOS_IMPORTADOS).remove(CONCEPTOS_IMPORTADOS)
+				.remove(CONCEPTOS_CATEG_IMPORTADOS)
 				.remove(CONCEPTOS_TARIFA_IMPORTADOS)
-				.remove(CONCEPTOS_CATEG_IMPORTADOS).commit();
+				.remove(BASES_CALCULO_IMPORTADOS)
+				.remove(BASES_CALCULO_CPTOS_IMPORTADOS)
+				.remove(RECLASIF_CATEG_IMPORTADOS).commit();
 	}
 
 	/**

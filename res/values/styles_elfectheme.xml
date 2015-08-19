@@ -3,6 +3,18 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <style name="AppStyle.Button.Orange" parent="Widget.AppCompat.Button">
+        <item name="colorButtonNormal">@color/orange_carrot</item>
+        <item name="colorControlHighlight">@color/orange_carrot_pressed</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    
+    <style name="AppStyle.Button.Purple" parent="Widget.AppCompat.Button">
+        <item name="colorButtonNormal">@color/purple_wisteria</item>
+        <item name="colorControlHighlight">@color/purple_wisteria_pressed</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
     <style name="ActionBarElfecTheme" parent="Widget.AppCompat.ActionBar.Solid">
         <item name="contentInsetStart">8dp</item>
         <item name="elevation">0dp</item>
@@ -133,13 +145,16 @@
         <item name="colorAccent">@color/highlight_elfectheme_color</item>
         <item name="colorControlActivated">@color/elfectheme_color</item>
     </style>
-    
+
     <!-- Alert Dialog AppCompat -->
     <style name="AppStyle.AlertDialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorPrimary">@color/elfectheme_color</item>
         <item name="colorPrimaryDark">@color/highlight_elfectheme_color</item>
         <item name="colorAccent">@color/highlight_elfectheme_color</item>
         <item name="colorControlActivated">@color/elfectheme_color</item>
+        <item name="colorControlNormal">@color/black_wet_asphalt</item>
+        <item name="colorControlHighlight">@color/highlight_elfectheme_color</item>
+        <item name="colorButtonNormal">?attr/colorPrimary</item>
     </style>
 
 </resources>

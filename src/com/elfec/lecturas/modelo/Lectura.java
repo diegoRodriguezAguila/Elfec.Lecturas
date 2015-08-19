@@ -10,9 +10,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import android.database.Cursor;
 import android.location.Location;
 import android.os.Handler;
 
+import com.activeandroid.Cache;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Column.ForeignKeyAction;
@@ -21,7 +23,6 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 import com.elfec.lecturas.controlador.TomarLectura;
 import com.elfec.lecturas.helpers.ManejadorDeCamara;
-import com.elfec.lecturas.logica_negocio.GestionadorBDSQLite;
 import com.elfec.lecturas.logica_negocio.web_services.ManejadorConexionRemota;
 import com.elfec.lecturas.modelo.backuptexto.IModeloBackupableTexto;
 import com.elfec.lecturas.modelo.estados.lectura.EstadoLecturaFactory;
@@ -488,7 +489,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 			AsignacionRuta asignacionRuta) {
 		new Delete()
 				.from(Lectura.class)
-				.where("LEMRUT = ? AND LEMARE = ? AND LEMMES = ? AND LEMANO = ?",
+				.where("LEMRUT = ? AND LEMDIA = ? AND LEMMES = ? AND LEMANO = ?",
 						asignacionRuta.Ruta, asignacionRuta.Dia,
 						asignacionRuta.Mes, asignacionRuta.Anio)
 				.where("LEMCTAANT BETWEEN "
@@ -1004,9 +1005,18 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	 * @return true, si no existe ninguna lectura pendiente ni postergada
 	 */
 	public static boolean seRealizaronTodasLasLecturas() {
-		return (GestionadorBDSQLite.datosDiariosFueronCargados() && (new Select()
-				.from(Lectura.class)
-				.where("EstadoLectura=0 OR EstadoLectura=3").execute()).size() == 0);
+		Cursor mCount = Cache
+				.openDatabase()
+				.rawQuery(
+						"SELECT COUNT(1) FROM "
+								+ "(select count(*) NUM from Lecturas WHERE EstadoLectura NOT IN (0, 3)) AS LEIDAS, "
+								+ "(select count(*) NUM from Lecturas) AS TODAS "
+								+ "WHERE LEIDAS.NUM=TODAS.NUM AND TODAS.NUM>0",
+						null);
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count == 1;
 	}
 
 	@Override

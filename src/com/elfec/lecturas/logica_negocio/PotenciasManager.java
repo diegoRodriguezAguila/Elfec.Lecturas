@@ -78,20 +78,27 @@ public class PotenciasManager {
 	private ResultadoTipado<List<Potencia>> importarPotenciasDeRuta(
 			final ConectorBDOracle conector,
 			final AsignacionRuta assignedRoute, final String inClausula) {
-		Potencia.eliminarPotenciasDeRutaAsignada(assignedRoute, inClausula);
-		return new DataImporter().importData(new ImportSource<Potencia>() {
-			@Override
-			public List<Potencia> requestData() throws ConnectException,
-					SQLException {
-				return conector.obtenerPotenciasPorRuta(assignedRoute.Ruta,
-						inClausula);
-			}
+		ResultadoTipado<List<Potencia>> resultado = new ResultadoTipado<List<Potencia>>();
+		try {
+			Potencia.eliminarPotenciasDeRutaAsignada(assignedRoute, inClausula);
+			resultado = new DataImporter()
+					.importData(new ImportSource<Potencia>() {
+						@Override
+						public List<Potencia> requestData()
+								throws ConnectException, SQLException {
+							return conector.obtenerPotenciasPorRuta(
+									assignedRoute.Ruta, inClausula);
+						}
 
-			@Override
-			public void preSaveData(Potencia data) {
-			}
-		});
-
+						@Override
+						public void preSaveData(Potencia data) {
+						}
+					});
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultado.agregarError(e);
+		}
+		return resultado;
 	}
 
 	/**

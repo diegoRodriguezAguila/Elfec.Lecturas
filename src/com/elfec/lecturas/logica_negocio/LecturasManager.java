@@ -76,18 +76,26 @@ public class LecturasManager {
 	 */
 	private ResultadoTipado<List<Lectura>> importarLecturasDeRuta(
 			final ConectorBDOracle conector, final AsignacionRuta assignedRoute) {
-		Lectura.eliminarLecturasDeRutaAsignada(assignedRoute);
-		return new DataImporter().importData(new ImportSource<Lectura>() {
-			@Override
-			public List<Lectura> requestData() throws ConnectException,
-					SQLException {
-				return conector.obtenerLecturasPorRuta(assignedRoute);
-			}
+		ResultadoTipado<List<Lectura>> resultado = new ResultadoTipado<List<Lectura>>();
+		try {
+			Lectura.eliminarLecturasDeRutaAsignada(assignedRoute);
+			resultado = new DataImporter()
+					.importData(new ImportSource<Lectura>() {
+						@Override
+						public List<Lectura> requestData()
+								throws ConnectException, SQLException {
+							return conector
+									.obtenerLecturasPorRuta(assignedRoute);
+						}
 
-			@Override
-			public void preSaveData(Lectura data) {
-			}
-		});
-
+						@Override
+						public void preSaveData(Lectura data) {
+						}
+					});
+		} catch (Exception e) {
+			e.printStackTrace();
+			resultado.agregarError(e);
+		}
+		return resultado;
 	}
 }

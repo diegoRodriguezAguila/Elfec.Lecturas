@@ -28,7 +28,7 @@ import com.elfec.lecturas.controlador.observers.IDataImportationObserver;
 import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.helpers.utils.text.MessageListFormatter;
 import com.elfec.lecturas.logica_negocio.AsignacionRutaManager;
-import com.elfec.lecturas.logica_negocio.GestionadorBDSQLite;
+import com.elfec.lecturas.logica_negocio.EliminacionDatosManager;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.SesionUsuario;
@@ -301,13 +301,13 @@ public class Inicio extends AppCompatActivity implements
 	 * fueron cargados todos los datos
 	 */
 	public void obtenerEstadoBotonCargar() {
-		boolean datosDiariosCargados = GestionadorBDSQLite
-				.datosDiariosFueronCargados();
+		boolean todasRutasCargadas = AsignacionRuta
+				.seCargaronTodasLasRutasAsignadas();
 		asignarEstadoBotonCargar(
-				datosDiariosCargados,
-				!datosDiariosCargados,
+				todasRutasCargadas,
+				!todasRutasCargadas,
 				(getResources()
-						.getString(datosDiariosCargados ? R.string.info_datos_cargados_lbl
+						.getString(todasRutasCargadas ? R.string.info_datos_cargados_lbl
 								: R.string.info_datos_no_cargados_lbl)));
 	}
 
@@ -446,7 +446,7 @@ public class Inicio extends AppCompatActivity implements
 			ConectorBDOracle conexion = new ConectorBDOracle(context, true);
 			Boolean resp = conexion.exportarInformacionAlServidor();
 			if (resp) {
-				GestionadorBDSQLite.eliminarTodosLosDatos();
+				new EliminacionDatosManager().eliminarTodosLosDatos();
 			}
 			return resp;
 		}
@@ -502,7 +502,7 @@ public class Inicio extends AppCompatActivity implements
 								.getUsuarioLogeado());
 				new AsignacionRutaManager().restaurarAsignacionDeRutas(
 						conexion, listaRutas);
-				GestionadorBDSQLite.eliminarTodosLosDatos();
+				new EliminacionDatosManager().eliminarTodosLosDatos();
 				return true;
 			} catch (Exception e) {
 				Log.e("Eliminación de datos", e.getMessage());
@@ -535,7 +535,7 @@ public class Inicio extends AppCompatActivity implements
 				progressDialog = new ProgressDialogPro(Inicio.this,
 						R.style.AppStyle_Dialog_FlavoredMaterialLight);
 				progressDialog.setCancelable(false);
-				progressDialog.setIcon(R.drawable.cargar_datos);
+				progressDialog.setIcon(R.drawable.import_from_server_d);
 				progressDialog
 						.setMessage(getText(R.string.msg_inicializando_importacion));
 				progressDialog.setTitle(R.string.titulo_cargando_datos);
@@ -596,6 +596,8 @@ public class Inicio extends AppCompatActivity implements
 				mostrarMensajeUsuario(R.string.datos_cargados_exito);
 			}
 		});
+		obtenerEstadoBotonCargar();
+		asignarLabelDeRutas();
 	}
 	// #endregion
 }

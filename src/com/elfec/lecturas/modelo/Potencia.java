@@ -167,7 +167,7 @@ public class Potencia extends Model {
 			AsignacionRuta asignacionRuta, String nusClausulaIN) {
 		new Delete()
 				.from(Potencia.class)
-				.where("LEMRUT = ? AND LEMARE = ? AND LEMMES = ? AND LEMANO = ?",
+				.where("LEMRUT = ? AND LEMDIA = ? AND LEMMES = ? AND LEMANO = ?",
 						asignacionRuta.Ruta, asignacionRuta.Dia,
 						asignacionRuta.Mes, asignacionRuta.Anio)
 				.where("LEMSUM IN " + nusClausulaIN).execute();

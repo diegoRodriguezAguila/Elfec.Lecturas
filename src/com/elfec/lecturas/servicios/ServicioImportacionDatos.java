@@ -154,7 +154,7 @@ public class ServicioImportacionDatos extends Service {
 			ConectorBDOracle conector,
 			ImportacionDatosListener importacionDatosListener) {
 		ResultadoVoid result = new ResultadoVoid();
-		if (!AppPreferences.instance().estaAllOnceReqDataImportados()) {
+		if (!AppPreferences.instance().estaInfoReqUnaVezImportados()) {
 			strMsgId = R.string.msg_importando_parametrizables;
 			result = new ParametrizablesManager().importarParametrizables(
 					conector, importacionDatosListener);
@@ -196,7 +196,7 @@ public class ServicioImportacionDatos extends Service {
 						.importarReclasificacionCategorias(conector,
 								importacionDatosListener);
 			}
-			AppPreferences.instance().setAllOnceReqDataImportados(
+			AppPreferences.instance().setInfoReqUnaVezImportados(
 					result.tieneErrores());
 		}
 		return result;

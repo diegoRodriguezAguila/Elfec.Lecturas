@@ -6,6 +6,9 @@ import java.util.List;
 
 import org.joda.time.DateTime;
 
+import android.database.Cursor;
+
+import com.activeandroid.Cache;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -127,6 +130,16 @@ public class AsignacionRuta extends Model {
 	}
 
 	/**
+	 * Obtiene todas las rutas cargadas
+	 * 
+	 * @return lista de rutas asignadas
+	 */
+	public static List<AsignacionRuta> obtenerRutasImportadas() {
+		return new Select().from(AsignacionRuta.class)
+				.where("Estado IN (2, 7)").execute();
+	}
+
+	/**
 	 * Indica si la ruta tiene algún estado de asignada. Su status es igual a
 	 * {@link EstadoAsignacionRuta#ASIGNADA} o
 	 * {@link EstadoAsignacionRuta#RELECTURA_ASIGNADA}
@@ -163,6 +176,33 @@ public class AsignacionRuta extends Model {
 		new Delete().from(AsignacionRuta.class)
 				.where("UsuarioAsignado = ?", assignedUser)
 				.where("Estado IN (1, 6)").execute();
+	}
+
+	/**
+	 * Verifica si todas las rutas fueron cargadas exitosamente es decir si
+	 * todas tienen alguno de los estados:
+	 * {@link EstadoAsignacionRuta#IMPORTADA} o
+	 * {@link EstadoAsignacionRuta#RELECTURA_IMPORTADA}
+	 * 
+	 * @return true si fueron
+	 */
+	public static boolean seCargaronTodasLasRutasAsignadas() {
+		Cursor mCount = Cache
+				.openDatabase()
+				.rawQuery(
+						"SELECT COUNT(1) FROM "
+								+ "(select count(*) NUM from AsignacionesRutas WHERE Estado IN (?, ?)) AS CARGADAS, "
+								+ "(select count(*) NUM from AsignacionesRutas) AS TODAS "
+								+ "WHERE CARGADAS.NUM=TODAS.NUM AND TODAS.NUM>0",
+						new String[] {
+								"" + EstadoAsignacionRuta.IMPORTADA.toShort(),
+								""
+										+ EstadoAsignacionRuta.RELECTURA_IMPORTADA
+												.toShort() });
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count == 1;
 	}
 
 	/**

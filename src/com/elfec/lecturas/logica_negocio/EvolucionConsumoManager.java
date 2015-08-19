@@ -9,7 +9,6 @@ import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataImporter;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.EvolucionConsumo;
-import com.elfec.lecturas.modelo.Potencia;
 import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
@@ -75,7 +74,8 @@ public class EvolucionConsumoManager {
 	private ResultadoTipado<List<EvolucionConsumo>> importarEvConsumosDeRuta(
 			final ConectorBDOracle conector,
 			final AsignacionRuta assignedRoute, final String inClausula) {
-		Potencia.eliminarPotenciasDeRutaAsignada(assignedRoute, inClausula);
+		EvolucionConsumo.eliminarEvConsumosDeRutaAsignada(assignedRoute,
+				inClausula);
 		return new DataImporter()
 				.importData(new ImportSource<EvolucionConsumo>() {
 					@Override

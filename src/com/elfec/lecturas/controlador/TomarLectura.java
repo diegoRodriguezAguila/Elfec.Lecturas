@@ -129,6 +129,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 				inicializarCampos();
 				asignarLista();
 				btnPrimeroClick(null);
+				ponerClickListeners();
 				ponerClickListenerAObservacion();
 				asignarTouchListenerATxtLecturaNueva();
 				crearSwipeListener();
@@ -170,6 +171,24 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		btnReintentarLectura = (Button) findViewById(R.id.btn_reintentar_lectura);
 		btnAgergarOrdenativo = (ImageButton) findViewById(R.id.btn_agregar_ordenativo);
 		btnRecordatorios = (ImageButton) findViewById(R.id.btn_recordatorio);
+	}
+
+	/**
+	 * Pone click listeners al boton reintentar y postergar
+	 */
+	protected void ponerClickListeners() {
+		btnPostergarLectura.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				btnPostergarLecturaClick(v);
+			}
+		});
+		btnReintentarLectura.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				btnReintentarLecturaClick(v);
+			}
+		});
 	}
 
 	/**

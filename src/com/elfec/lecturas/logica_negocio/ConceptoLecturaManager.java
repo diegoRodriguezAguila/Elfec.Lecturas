@@ -11,7 +11,6 @@ import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.BaseCalculoConcepto;
 import com.elfec.lecturas.modelo.ConceptoLectura;
 import com.elfec.lecturas.modelo.Lectura;
-import com.elfec.lecturas.modelo.Potencia;
 import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
@@ -76,7 +75,8 @@ public class ConceptoLecturaManager {
 	private ResultadoTipado<List<ConceptoLectura>> importarConceptosLecturasDeRuta(
 			final ConectorBDOracle conector,
 			final AsignacionRuta assignedRoute, final String inClausula) {
-		Potencia.eliminarPotenciasDeRutaAsignada(assignedRoute, inClausula);
+		ConceptoLectura.eliminarConceptosLecturasDeRutaAsignada(assignedRoute,
+				inClausula);
 		return new DataImporter()
 				.importData(new ImportSource<ConceptoLectura>() {
 					@Override
