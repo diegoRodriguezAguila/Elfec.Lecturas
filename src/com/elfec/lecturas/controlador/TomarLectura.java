@@ -62,6 +62,7 @@ import com.elfec.lecturas.modelo.Potencia;
 import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.avisocobranza.AvisoCobranza;
 import com.elfec.lecturas.modelo.eventos.OnFiltroAplicadoListener;
+import com.elfec.lecturas.modelo.eventos.OnImpresionConfirmadaListener;
 import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
 import com.elfec.lecturas.modelo.seguridad.Restricciones;
 import com.elfec.lecturas.modelo.validaciones.IValidacionLectura;
@@ -1018,21 +1019,13 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	 */
 	public void mostrarDialogoConfirmacionImpresion(
 			final AvisoCobranza avisoCobranza) {
-		final DialogoConfirmacionImpresion dialogo = new DialogoConfirmacionImpresion(
-				this);
-		dialogo.setButton(AlertDialog.BUTTON_POSITIVE,
-				getText(R.string.btn_si),
-				new DialogInterface.OnClickListener() {
+		new DialogoConfirmacionImpresion(this,
+				new OnImpresionConfirmadaListener() {
 					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialogo.guardarPreferenciaMostrarDialogo();
+					public void onImpresionConfirmada() {
 						verificarAsignacionImpresora(avisoCobranza);
 					}
-				});
-		dialogo.setButton(AlertDialog.BUTTON_NEGATIVE,
-				getText(R.string.btn_no),
-				(DialogInterface.OnClickListener) null);
-		dialogo.show();
+				}).show();
 	}
 
 	/**
