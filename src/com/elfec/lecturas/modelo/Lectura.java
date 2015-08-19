@@ -793,20 +793,10 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	 * @return el valor de la demanda estimada
 	 */
 	public BigDecimal obtenerLecturaDemandaEstimada() {
+		// cambiar esto en caso de que se cambie la forma de estimacion
 		return (new BigDecimal(ConsumoFacturado).divide(
 				(FactorCarga.multiply(new BigDecimal(HoraMesPotencia))), 10,
-				RoundingMode.HALF_UP)).setScale(0, RoundingMode.HALF_EVEN);// cambiar
-																			// esto
-																			// en
-																			// caso
-																			// de
-																			// que
-																			// se
-																			// cambie
-																			// la
-																			// forma
-																			// de
-																			// estimacion
+				RoundingMode.HALF_UP)).setScale(0, RoundingMode.HALF_EVEN);
 	}
 
 	/**
@@ -1017,6 +1007,40 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 		int count = mCount.getInt(0);
 		mCount.close();
 		return count == 1;
+	}
+
+	/**
+	 * Realiza un count de las lecturas que tienen uno o mas estados
+	 * 
+	 * @param ruta
+	 *            si es -1 se hace de todas las rutas
+	 * @param estados
+	 * @return
+	 */
+	public static int countLecturasPorEstadoYRuta(int ruta, int... estados) {
+		boolean hayEstados = estados.length > 0;
+		String[] estadosStr = new String[estados.length];
+		StringBuilder inClause = new StringBuilder("(");
+		if (hayEstados) {
+			for (int i = 0; i < estados.length; i++) {
+				estadosStr[i] = "" + estados[i];
+				inClause.append((i == (estados.length - 1) ? "?" : "?, "));
+			}
+			inClause.append(")");
+		}
+		Cursor mCount = Cache
+				.openDatabase()
+				.rawQuery(
+						"SELECT COUNT(*) FROM Lecturas "
+								+ (hayEstados ? ("WHERE EstadoLectura IN " + inClause.toString())
+										: "")
+								+ (ruta != -1 ? ((hayEstados ? " AND"
+										: " WHERE") + " LEMRUT=" + ruta) : ""),
+						(hayEstados ? estadosStr : null));
+		mCount.moveToFirst();
+		int count = mCount.getInt(0);
+		mCount.close();
+		return count;
 	}
 
 	@Override

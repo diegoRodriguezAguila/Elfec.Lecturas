@@ -49,9 +49,8 @@
 
      <Spinner
          android:id="@+id/select_ruta"
-         android:layout_width="wrap_content"
+         android:layout_width="100dp"
          android:layout_height="wrap_content"
-         android:layout_alignParentRight="true"
          android:layout_alignTop="@+id/separator_1"
          android:layout_marginTop="7dp"
         android:paddingTop="0dp"

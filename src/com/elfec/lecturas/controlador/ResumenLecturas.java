@@ -32,118 +32,67 @@ public class ResumenLecturas extends AppCompatActivity {
 	private TextView txtLecturasReintentar;
 	private TextView txtLecturasTotales;
 
-	private ArrayList<Lectura> listaLecturas;
-	private ArrayList<String> listaRutas;
-	private ArrayList<MedidorEntreLineas> listaLecturasEntreLineas;
+	private List<AsignacionRuta> listaRutas;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_resumen_lecturas);
-		txtNumLecturas = (TextView) findViewById(R.id.txt_numero_lecturas);
-		txtLecturasRealizadas = (TextView) findViewById(R.id.txt_lecturas_realizadas);
-		txtLecturasPendientes = (TextView) findViewById(R.id.txt_lecturas_pendientes);
-		txtLecturasNormales = (TextView) findViewById(R.id.txt_lecturas_normales);
-		txtLecturasEntreLineas = (TextView) findViewById(R.id.txt_lecturas_entre_lineas);
-		txtLecturasImpedidas = (TextView) findViewById(R.id.txt_lecturas_impedidas);
-		txtLecturasPostergadas = (TextView) findViewById(R.id.txt_lecturas_postergadas);
-		txtLecturasReintentar = (TextView) findViewById(R.id.txt_lecturas_reintentar);
-		txtLecturasTotales = (TextView) findViewById(R.id.txt_lecturas_totales);
-		listaLecturas = (ArrayList<Lectura>) Lectura.obtenerTodasLasLecturas();
-		listaLecturasEntreLineas = (ArrayList<MedidorEntreLineas>) MedidorEntreLineas
-				.obtenerMedidoresEntreLineas();
-		listaRutas = new ArrayList<String>();
-		listaRutas.add("Todas");
-		List<AsignacionRuta> rutasUsuario = AsignacionRuta
-				.obtenerTodasLasRutas();
-		for (AsignacionRuta asignRuta : rutasUsuario) {
-			listaRutas.add("" + asignRuta.Ruta);
-		}
-		asignarDatos();
-		selectorRuta = (Spinner) findViewById(R.id.select_ruta);
-		ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(this,
-				R.layout.spinner_item, R.id.lbl_opcion_item, listaRutas);
-		selectorRuta.setAdapter(adapter_state);
-		selectorRuta.setOnItemSelectedListener(new OnItemSelectedListener() {
-
+		new Thread(new Runnable() {
 			@Override
-			public void onItemSelected(AdapterView<?> parentView,
-					View selectedItemView, int position, long id) {
-				String ruta = listaRutas.get(position);
-				if (ruta.equals("Todas")) {
-					listaLecturas = (ArrayList<Lectura>) Lectura
-							.obtenerTodasLasLecturas();
-				} else {
-					listaLecturas = (ArrayList<Lectura>) Lectura
-							.obtenerLecturasDeRuta(Integer.parseInt((ruta)));
-				}
-				asignarDatos();
+			public void run() {
+				asignarCampos();
+				obtenerSpinnerRutas();
+				ponerItemSelectedListenerRutas();
+				obtenerDatos(-1);
 			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-			}
-		});
+		}).start();
 	}
 
-	public void asignarDatos() {
-		txtNumLecturas.setText("" + listaLecturas.size());
-		int lecturasRealizadas = 0;
-		int lecturasPendientes = 0;
-		int lecturasNormales = 0;
-		int lecturasEntreLineas = 0;
-		int lecturasImpedidas = 0;
-		int lecturasPostergadas = 0;
-		int lecturasReintentar = 0;
-		int lecturasTotales = 0;
-
-		for (Lectura lectura : listaLecturas) {
-			switch (lectura.getEstadoLectura().getEstadoEntero()) {
-			case (0): // pendiente
-			{
-				lecturasPendientes++;
-				break;
-			}
-			case (1): // leida
-			{
-				lecturasRealizadas++;
-				lecturasNormales++;
-				lecturasTotales++;
-				break;
-			}
-			case (2): // impedida
-			{
-				lecturasRealizadas++;
-				lecturasImpedidas++;
-				lecturasTotales++;
-				break;
-			}
-			case (3): // postergada
-			{
-				lecturasPostergadas++;
-				lecturasTotales++;
-				break;
-			}
-			case (4): // reintentar
-			{
-				lecturasReintentar++;
-				lecturasTotales++;
-				break;
-			}
-			}
-		}
-
-		lecturasEntreLineas = listaLecturasEntreLineas.size();
+	/**
+	 * Obtiene los datos de la ruta
+	 * 
+	 * @param ruta
+	 *            -1 para todas las rutas
+	 */
+	public void obtenerDatos(int ruta) {
+		int numLecturas = Lectura.countLecturasPorEstadoYRuta(ruta);
+		int lecturasRealizadas = Lectura
+				.countLecturasPorEstadoYRuta(ruta, 1, 2);
+		int lecturasPendientes = Lectura.countLecturasPorEstadoYRuta(ruta, 0);
+		int lecturasNormales = Lectura.countLecturasPorEstadoYRuta(ruta, 1);
+		int lecturasEntreLineas = MedidorEntreLineas.countTotalLecturas();
+		int lecturasImpedidas = Lectura.countLecturasPorEstadoYRuta(ruta, 2);
+		int lecturasPostergadas = Lectura.countLecturasPorEstadoYRuta(ruta, 3);
+		int lecturasReintentar = Lectura.countLecturasPorEstadoYRuta(ruta, 4);
+		int lecturasTotales = Lectura.countLecturasPorEstadoYRuta(ruta, 1, 2,
+				3, 4);
 		lecturasRealizadas += lecturasEntreLineas;
 		lecturasTotales += lecturasEntreLineas;
-		txtLecturasRealizadas.setText("" + lecturasRealizadas);
-		txtLecturasPendientes.setText("" + lecturasPendientes);
-		txtLecturasNormales.setText("" + lecturasNormales);
-		txtLecturasEntreLineas.setText("" + lecturasEntreLineas);
-		txtLecturasImpedidas.setText("" + lecturasImpedidas);
-		txtLecturasPostergadas.setText("" + lecturasPostergadas);
-		txtLecturasReintentar.setText("" + lecturasReintentar);
-		txtLecturasTotales.setText("" + lecturasTotales);
+		asignarDatos(numLecturas, lecturasRealizadas, lecturasPendientes,
+				lecturasNormales, lecturasEntreLineas, lecturasImpedidas,
+				lecturasPostergadas, lecturasReintentar, lecturasTotales);
+	}
+
+	private void asignarDatos(final int numLecturas,
+			final int lecturasRealizadas, final int lecturasPendientes,
+			final int lecturasNormales, final int lecturasEntreLineas,
+			final int lecturasImpedidas, final int lecturasPostergadas,
+			final int lecturasReintentar, final int lecturasTotales) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				txtNumLecturas.setText("" + numLecturas);
+				txtLecturasRealizadas.setText("" + lecturasRealizadas);
+				txtLecturasPendientes.setText("" + lecturasPendientes);
+				txtLecturasNormales.setText("" + lecturasNormales);
+				txtLecturasEntreLineas.setText("" + lecturasEntreLineas);
+				txtLecturasImpedidas.setText("" + lecturasImpedidas);
+				txtLecturasPostergadas.setText("" + lecturasPostergadas);
+				txtLecturasReintentar.setText("" + lecturasReintentar);
+				txtLecturasTotales.setText("" + lecturasTotales);
+			}
+		});
 	}
 
 	@Override
@@ -164,6 +113,72 @@ public class ResumenLecturas extends AppCompatActivity {
 	public void onBackPressed() {
 		finish();// go back to the previous Activity
 		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
+	}
+
+	/**
+	 * Asigna los campos a las variables
+	 */
+	private void asignarCampos() {
+		txtNumLecturas = (TextView) findViewById(R.id.txt_numero_lecturas);
+		txtLecturasRealizadas = (TextView) findViewById(R.id.txt_lecturas_realizadas);
+		txtLecturasPendientes = (TextView) findViewById(R.id.txt_lecturas_pendientes);
+		txtLecturasNormales = (TextView) findViewById(R.id.txt_lecturas_normales);
+		txtLecturasEntreLineas = (TextView) findViewById(R.id.txt_lecturas_entre_lineas);
+		txtLecturasImpedidas = (TextView) findViewById(R.id.txt_lecturas_impedidas);
+		txtLecturasPostergadas = (TextView) findViewById(R.id.txt_lecturas_postergadas);
+		txtLecturasReintentar = (TextView) findViewById(R.id.txt_lecturas_reintentar);
+		txtLecturasTotales = (TextView) findViewById(R.id.txt_lecturas_totales);
+		selectorRuta = (Spinner) findViewById(R.id.select_ruta);
+	}
+
+	private void obtenerSpinnerRutas() {
+		listaRutas = AsignacionRuta.obtenerTodasLasRutas();
+		List<String> listaRutasStr = new ArrayList<String>();
+		listaRutasStr.add("Todas");
+		for (AsignacionRuta asignRuta : listaRutas) {
+			listaRutasStr.add("" + asignRuta.Ruta);
+		}
+		setRutas(listaRutasStr);
+	}
+
+	/**
+	 * Asigna las rutas del spinner
+	 * 
+	 * @param listaRutas
+	 */
+	private void setRutas(final List<String> listaRutas) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				selectorRuta.setAdapter(new ArrayAdapter<String>(
+						ResumenLecturas.this, R.layout.spinner_item,
+						R.id.lbl_opcion_item, listaRutas));
+			}
+		});
+	}
+
+	/**
+	 * Asigna el item selected listener
+	 */
+	private void ponerItemSelectedListenerRutas() {
+		selectorRuta.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> parentView,
+					View selectedItemView, final int position, long id) {
+				new Thread(new Runnable() {
+					@Override
+					public void run() {
+						obtenerDatos(position == 0 ? -1 : (listaRutas
+								.get(position - 1).Ruta));
+					}
+				}).start();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+			}
+		});
 	}
 
 }
