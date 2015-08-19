@@ -44,8 +44,6 @@ import com.elfec.lecturas.controlador.dialogos.DialogoPotencia;
 import com.elfec.lecturas.controlador.dialogos.DialogoRecordatorio;
 import com.elfec.lecturas.controlador.dialogos.DialogoSeleccionImpresora;
 import com.elfec.lecturas.controlador.dialogos.DialogoVerOrdenativos;
-import com.elfec.lecturas.controlador.filtroslecturas.CriterioEstado;
-import com.elfec.lecturas.controlador.filtroslecturas.CriterioRuta;
 import com.elfec.lecturas.controlador.filtroslecturas.FiltroLecturas;
 import com.elfec.lecturas.helpers.ManejadorDeCamara;
 import com.elfec.lecturas.helpers.ManejadorEstadosHW;
@@ -63,6 +61,7 @@ import com.elfec.lecturas.modelo.OrdenativoLectura;
 import com.elfec.lecturas.modelo.Potencia;
 import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.avisocobranza.AvisoCobranza;
+import com.elfec.lecturas.modelo.eventos.OnFiltroAplicadoListener;
 import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
 import com.elfec.lecturas.modelo.seguridad.Restricciones;
 import com.elfec.lecturas.modelo.validaciones.IValidacionLectura;
@@ -754,39 +753,13 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	 * Abre un dialogo para filtrar las lecturas que se estan viendo actualmente
 	 */
 	private void mostrarDialogoFiltrarLecturas() {
-		final DialogoFiltrarLecturas dialogo = new DialogoFiltrarLecturas(this,
-				filtroLecturas);
-		dialogo.setButton(AlertDialog.BUTTON_POSITIVE,
-				getText(R.string.btn_ok),
-				new DialogInterface.OnClickListener() {
-
+		new DialogoFiltrarLecturas(this, filtroLecturas,
+				new OnFiltroAplicadoListener() {
 					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						new Thread(new Runnable() {
-							@Override
-							public void run() {
-								if (dialogo.criterioEstado != null)
-									filtroLecturas
-											.agregarCriterioAFiltro(dialogo.criterioEstado);
-								else
-									filtroLecturas
-											.quitarCriterioDeFiltro(CriterioEstado.class);
-
-								if (dialogo.criterioRuta != null)
-									filtroLecturas
-											.agregarCriterioAFiltro(dialogo.criterioRuta);
-								else
-									filtroLecturas
-											.quitarCriterioDeFiltro(CriterioRuta.class);
-								asignarLista();
-							}
-						}).start();
+					public void onFiltroAplicado(FiltroLecturas filtroLecturas) {
+						asignarLista();
 					}
-				});
-		dialogo.setButton(AlertDialog.BUTTON_NEGATIVE,
-				getText(R.string.btn_cancel),
-				(DialogInterface.OnClickListener) null);
-		dialogo.show();
+				}).show();
 	}
 
 	// ----------------------------- DIALOGO MEDIDOR ENTRE LINEAS

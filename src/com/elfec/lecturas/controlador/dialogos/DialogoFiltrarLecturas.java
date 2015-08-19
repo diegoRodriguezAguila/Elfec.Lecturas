@@ -3,9 +3,12 @@ package com.elfec.lecturas.controlador.dialogos;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -18,39 +21,66 @@ import com.elfec.lecturas.controlador.filtroslecturas.FiltroLecturas;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.estados.lectura.EstadoLecturaFactory;
 import com.elfec.lecturas.modelo.estados.lectura.IEstadoLectura;
+import com.elfec.lecturas.modelo.eventos.OnFiltroAplicadoListener;
 import com.lecturas.elfec.R;
 
-public class DialogoFiltrarLecturas extends AlertDialog {
+public class DialogoFiltrarLecturas {
+	private AlertDialog mDialog;
+	private View rootView;
 	private Spinner selectorTipoLectura;
 	private Spinner selectorRuta;
-	private Context context;
 	private List<String> listaEstados;
 	private List<String> listaRutas;
 	private List<IEstadoLectura> estadosLecturas;
 	private List<AsignacionRuta> rutasUsuario;
 	public CriterioEstado criterioEstado;
 	public CriterioRuta criterioRuta;
-	private FiltroLecturas filtroLecturas;
+	private FiltroLecturas mFiltroLecturas;
+	private OnFiltroAplicadoListener mListener;
 
-	public DialogoFiltrarLecturas(Context context, FiltroLecturas filtroLecturas) {
-		super(context);
-		this.context = context;
-		this.filtroLecturas = filtroLecturas;
-	}
+	@SuppressLint("InflateParams")
+	public DialogoFiltrarLecturas(Context context,
+			FiltroLecturas filtroLecturas, OnFiltroAplicadoListener listener) {
+		this.mFiltroLecturas = filtroLecturas;
+		this.mListener = listener;
+		rootView = LayoutInflater.from(context).inflate(
+				R.layout.dialogo_filtrar_lecturas, null, false);
+		mDialog = new AlertDialog.Builder(context).setView(rootView)
+				.setTitle(R.string.titulo_filtrar_lecturas)
+				.setIcon(R.drawable.filtrar_lecturas_d)
+				.setNegativeButton(R.string.btn_cancel, null)
+				.setPositiveButton(R.string.btn_ok, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						new Thread(new Runnable() {
+							@Override
+							public void run() {
+								if (criterioEstado != null)
+									mFiltroLecturas
+											.agregarCriterioAFiltro(criterioEstado);
+								else
+									mFiltroLecturas
+											.quitarCriterioDeFiltro(CriterioEstado.class);
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.dialogo_filtrar_lecturas);
-		setTitle(R.string.titulo_filtrar_lecturas);
-		setIcon(R.drawable.filtrar_lecturas);
+								if (criterioRuta != null)
+									mFiltroLecturas
+											.agregarCriterioAFiltro(criterioRuta);
+								else
+									mFiltroLecturas
+											.quitarCriterioDeFiltro(CriterioRuta.class);
+								if (mListener != null)
+									mListener.onFiltroAplicado(mFiltroLecturas);
+							}
+						}).start();
+					}
+				}).create();
 		listaRutas = new ArrayList<String>();
 		listaRutas.add("Todas");
 		rutasUsuario = AsignacionRuta.obtenerTodasLasRutas();
 		for (AsignacionRuta asignRuta : rutasUsuario) {
 			listaRutas.add("" + asignRuta.Ruta);
 		}
-		selectorRuta = (Spinner) findViewById(R.id.select_ruta);
+		selectorRuta = (Spinner) rootView.findViewById(R.id.select_ruta);
 		ArrayAdapter<String> adapter_state = new ArrayAdapter<String>(context,
 				R.layout.spinner_item, R.id.lbl_opcion_item, listaRutas);
 		selectorRuta.setAdapter(adapter_state);
@@ -63,7 +93,8 @@ public class DialogoFiltrarLecturas extends AlertDialog {
 		for (IEstadoLectura estado : estadosLecturas) {
 			listaEstados.add(estado.getEstadoCadena() + "s");
 		}
-		selectorTipoLectura = (Spinner) findViewById(R.id.select_mostrar_tipo_lectura);
+		selectorTipoLectura = (Spinner) rootView
+				.findViewById(R.id.select_mostrar_tipo_lectura);
 		ArrayAdapter<String> adapter_state2 = new ArrayAdapter<String>(context,
 				R.layout.spinner_item, R.id.lbl_opcion_item, listaEstados);
 		selectorTipoLectura.setAdapter(adapter_state2);
@@ -78,7 +109,7 @@ public class DialogoFiltrarLecturas extends AlertDialog {
 	 * por defecto a todas;
 	 */
 	private void asignarTipoLecturaSeleccionado() {
-		CriterioEstado criterioEstado = (CriterioEstado) filtroLecturas
+		CriterioEstado criterioEstado = (CriterioEstado) mFiltroLecturas
 				.obtenerCriterioDeFiltro(CriterioEstado.class);
 		int posSeleccionada = 0;
 		if (criterioEstado != null) {
@@ -95,12 +126,19 @@ public class DialogoFiltrarLecturas extends AlertDialog {
 	}
 
 	/**
+	 * Muestra el dialogo
+	 */
+	public void show() {
+		mDialog.show();
+	}
+
+	/**
 	 * Asigna la ruta que fue seleccionada previamente segun el criterio del
 	 * filtro <b>FiltroLecturas</b> si el criterio es null, pone por defecto a
 	 * todas;
 	 */
 	private void asignarRutaSeleccionada() {
-		CriterioRuta criterioRuta = (CriterioRuta) filtroLecturas
+		CriterioRuta criterioRuta = (CriterioRuta) mFiltroLecturas
 				.obtenerCriterioDeFiltro(CriterioRuta.class);
 		int posSeleccionada = 0;
 		if (criterioRuta != null) {

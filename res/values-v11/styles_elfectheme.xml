@@ -22,15 +22,6 @@
         <item name="android:background">@drawable/elfectheme_edit_text_holo_light</item>
     </style>
 
-    <style name="ImageButtonElfecTheme" parent="android:Widget.Holo.Light.ImageButton">
-        <item name="android:background">@drawable/elfectheme_btn_default_holo_light</item>
-    </style>
-
-    <style name="SpinnerElfecTheme" parent="android:Widget.Holo.Light.Spinner">
-        <item name="android:background">@drawable/elfectheme_spinner_background_holo_light</item>
-        <item name="android:dropDownSelector">@drawable/elfectheme_list_selector_holo_light</item>
-    </style>
-
     <style name="ProgressBarElfecTheme" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/elfectheme_progress_horizontal_holo_light</item>
         <item name="android:indeterminateDrawable">@drawable/elfectheme_progress_indeterminate_horizontal_holo_light</item>

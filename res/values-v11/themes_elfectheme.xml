@@ -5,8 +5,6 @@
 
     <style name="ElfecTheme" parent="ElfecTheme.Base">
         <item name="android:actionBarStyle">@style/ActionBarElfecTheme</item>
-        <item name="android:editTextBackground">@drawable/elfectheme_edit_text_holo_light</item>
-        <item name="android:listChoiceBackgroundIndicator">@drawable/elfectheme_list_selector_holo_light</item>
         <item name="android:fastScrollThumbDrawable">@drawable/elfectheme_fastscroll_thumb_holo</item>
     </style>
 
