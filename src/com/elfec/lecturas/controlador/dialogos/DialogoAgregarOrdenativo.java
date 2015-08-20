@@ -2,133 +2,126 @@ package com.elfec.lecturas.controlador.dialogos;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
+import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.SparseArray;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnTouchListener;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
 
-import com.elfec.lecturas.controlador.TomarLectura;
 import com.elfec.lecturas.controlador.adaptadores.OrdenativoAdapter;
-import com.elfec.lecturas.helpers.ui.Animador;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.Ordenativo;
 import com.elfec.lecturas.modelo.OrdenativoLectura;
+import com.elfec.lecturas.modelo.eventos.OnObservacionGuardadaListener;
 import com.lecturas.elfec.R;
 
-public class DialogoAgregarOrdenativo extends AlertDialog {
+public class DialogoAgregarOrdenativo {
 
-	public DialogoAgregarOrdenativo(Context context, Lectura lectura) {
-		super(context);
-		this.context = context;
-		this.lecturaActual = lectura;
-		hashConvertirCodAPos = new SparseArray<Integer>();
-		listaOrdenativos = (ArrayList<Ordenativo>) lecturaActual
-				.obtenerOrdenativosNoUsadosLectura();
-		adapter = new OrdenativoAdapter(context, R.layout.list_item_ordenativo,
-				listaOrdenativos);
-	}
+	private AlertDialog mDialog;
+	private View rootView;
 
-	public DialogoAgregarOrdenativo(Context context, Lectura lectura,
-			int tituloId, ArrayList<Ordenativo> listaOrdenativos) {
-		super(context);
-		this.context = context;
-		this.lecturaActual = lectura;
-		hashConvertirCodAPos = new SparseArray<Integer>();
-		this.listaOrdenativos = listaOrdenativos;
-		adapter = new OrdenativoAdapter(context, R.layout.list_item_ordenativo,
-				listaOrdenativos);
-		this.tituloId = tituloId;
-	}
+	private OnObservacionGuardadaListener mListener;
 
 	private Context context;
 	private Lectura lecturaActual;
 	private ListView listViewOrdenativos;
 	private boolean textoManual = true;
-	private ArrayList<Ordenativo> listaOrdenativos;
+	private List<Ordenativo> listaOrdenativos;
 	private SparseArray<Integer> hashConvertirCodAPos;
 	private EditText txtCodOrd;
-	private TextView lblInfoTip;
 	private Button btnGuardar;
-	private Button btnSalir;
-	private RelativeLayout layoutProhibirAgregar;
+	private View layoutProhibirAgregar;
 	private OrdenativoAdapter adapter;
-	private int tituloId = -1;
+	private int tituloId;
 	private ArrayList<View.OnClickListener> guardarListeners;
 	public OrdenativoLectura nuevoOrdLect;
-	public View.OnClickListener onDialogExit;
 
-	@Override
-	protected void onCreate(android.os.Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.dialogo_agregar_ordenativo);
-		txtCodOrd = (EditText) findViewById(R.id.txt_cod_obs);
-		lblInfoTip = (TextView) findViewById(R.id.info_tip);
-		listViewOrdenativos = (ListView) findViewById(R.id.list_view_ordenativos);
-		btnGuardar = (Button) findViewById(R.id.btn_guardar_obs);
-		btnSalir = (Button) findViewById(R.id.btn_salir_dialogo);
+	public DialogoAgregarOrdenativo(Context context, Lectura lectura,
+			OnObservacionGuardadaListener listener) {
+		this(context, lectura, -1, lectura.obtenerOrdenativosNoUsadosLectura(),
+				listener);
+	}
+
+	public DialogoAgregarOrdenativo(Context context, Lectura lectura,
+			int tituloId, List<Ordenativo> listaOrdenativos,
+			OnObservacionGuardadaListener listener) {
+		this.context = context;
+		this.lecturaActual = lectura;
+		this.mListener = listener;
+		hashConvertirCodAPos = new SparseArray<Integer>();
+		this.listaOrdenativos = listaOrdenativos;
+		adapter = new OrdenativoAdapter(context, R.layout.list_item_ordenativo,
+				listaOrdenativos);
+		this.tituloId = tituloId;
+		inicializarVistas();
+	}
+
+	/**
+	 * Asigna un dismiss listener
+	 * 
+	 * @param listener
+	 */
+	public void setOnDismissListener(DialogInterface.OnDismissListener listener) {
+		mDialog.setOnDismissListener(listener);
+	}
+
+	/**
+	 * Asigna el icono drwabl
+	 * 
+	 * @param iconDrawbleId
+	 */
+	public void setIcon(int iconDrawbleId) {
+		mDialog.setIcon(R.drawable.impedir_lectura);
+	}
+
+	@SuppressLint("InflateParams")
+	protected void inicializarVistas() {
+		rootView = LayoutInflater.from(context).inflate(
+				R.layout.dialogo_agregar_ordenativo, null, false);
+		mDialog = new AlertDialog.Builder(context)
+				.setView(rootView)
+				.setTitle(
+						(tituloId == -1 ? R.string.titulo_agregar_ordenativo
+								: tituloId))
+				.setNegativeButton(R.string.salida_btn, null).create();
+		txtCodOrd = (EditText) rootView.findViewById(R.id.txt_cod_obs);
+		listViewOrdenativos = (ListView) rootView
+				.findViewById(R.id.list_view_ordenativos);
+		btnGuardar = (Button) rootView.findViewById(R.id.btn_guardar_obs);
 		if (!lecturaActual.sePuedeAgregarOrdenativos()) {
 			prohibirAgregarOrdenativos();
 		}
-		setTitle((tituloId == -1 ? R.string.titulo_agregar_ordenativo
-				: tituloId));
 		ponerTextListener();
-		asignarCierreTecladoConOk();
 		listViewOrdenativos.setFastScrollEnabled(true);
 		listViewOrdenativos.setAdapter(adapter);
 		ponerItemClickListenerAO();
 		llenarHash();
 		setBotonGuardarListener();
-		setBotonSalirListener();
+	}
+
+	public void show() {
+		mDialog.show();
 	}
 
 	/**
 	 * Prohibe agregar ordenativos
 	 */
 	private void prohibirAgregarOrdenativos() {
-		layoutProhibirAgregar = (RelativeLayout) findViewById(R.id.layout_prohibir_agregar);
+		layoutProhibirAgregar = rootView
+				.findViewById(R.id.layout_prohibir_agregar);
 		layoutProhibirAgregar.setVisibility(View.VISIBLE);
-		layoutProhibirAgregar.setOnTouchListener(new OnTouchListener() {
-			@SuppressLint("ClickableViewAccessibility")
-			@Override
-			public boolean onTouch(View v, MotionEvent e) {
-				return true;
-			}
-		});
-	}
-
-	@Override
-	public void onBackPressed() {
-		dismiss();// go back to the previous Activity
-		if (onDialogExit != null) {
-			onDialogExit.onClick(btnSalir);
-		}
-	}
-
-	private void setBotonSalirListener() {
-		btnSalir.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				onBackPressed();
-			}
-		});
+		layoutProhibirAgregar.requestFocus();
 	}
 
 	private void setBotonGuardarListener() {
@@ -162,25 +155,11 @@ public class DialogoAgregarOrdenativo extends AlertDialog {
 			nuevoOrdLect.guardarYEnviarPor3G();
 			lecturaActual.ObservacionLectura = ordSelec.Codigo;
 			lecturaActual.save();
-			dismiss();
-			((TomarLectura) context).asignarDatos();
+			mDialog.dismiss();
+			if (mListener != null)
+				mListener.onObservacionGuardada(nuevoOrdLect);
 
 		}
-	}
-
-	private void asignarCierreTecladoConOk() {
-		txtCodOrd.setOnEditorActionListener(new OnEditorActionListener() {
-			@Override
-			public boolean onEditorAction(TextView v, int actionId,
-					KeyEvent event) {
-				if (actionId == EditorInfo.IME_ACTION_DONE) {
-					InputMethodManager m = (InputMethodManager) context
-							.getSystemService(Context.INPUT_METHOD_SERVICE);
-					m.hideSoftInputFromWindow(txtCodOrd.getWindowToken(), 0);
-				}
-				return false;
-			}
-		});
 	}
 
 	public void llenarHash() {
@@ -196,7 +175,6 @@ public class DialogoAgregarOrdenativo extends AlertDialog {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int pos,
 					long id) {
-				view.setBackgroundColor(Color.parseColor("#EBEBEB"));
 				adapter.setSeleccionado(pos);
 				int codigoObs = listaOrdenativos.get(pos).Codigo;
 				String codString = "" + codigoObs;
@@ -216,39 +194,16 @@ public class DialogoAgregarOrdenativo extends AlertDialog {
 					int cod = (Integer.parseInt(s.toString()));
 					Integer pos = hashConvertirCodAPos.get(cod);
 					if (pos != null) {
-						adapter.setSeleccionado(pos);
 						if (textoManual) {
+							adapter.setSeleccionado(pos);
 							listViewOrdenativos.smoothScrollToPosition(pos);
-							Ordenativo ord = listaOrdenativos.get(pos);
-							lblInfoTip.setText(ord.Descripcion);
-							if (animarCierre != null) {
-								txtCodOrd.removeCallbacks(animarCierre);
-							}
-							Animador.expand(lblInfoTip);
-							esconderVistaLblInfoTip();
-						} else {
-							lblInfoTip.setVisibility(View.GONE);
 						}
 					} else {
 						adapter.setSeleccionado(-1);
-						lblInfoTip.setVisibility(View.GONE);
 					}
 				} else {
 					adapter.setSeleccionado(-1);
-					lblInfoTip.setVisibility(View.GONE);
 				}
-			}
-
-			private Runnable animarCierre;
-
-			private void esconderVistaLblInfoTip() {
-				animarCierre = new Runnable() {
-					@Override
-					public void run() {
-						Animador.collapse(lblInfoTip);
-					}
-				};
-				txtCodOrd.postDelayed(animarCierre, 5000);
 			}
 
 			@Override

@@ -219,6 +219,7 @@
     <string name="titulo_agregar_ordenativo">Agregar Ordenativo</string>
     <string name="cod_obs_lbl">Cód. Observ:</string>
     <string name="prohibir_agregar_msg">Usted a excedido el número de ordenativos máximo para esta lectura!</string>
+    <string name="btn_agregar">Agregar</string>
 
     <!-- Dialogo Ver Ordenativos -->
     <string name="titulo_ver_ordenativos">Ver Ordenativos</string>

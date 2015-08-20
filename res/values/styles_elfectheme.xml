@@ -3,6 +3,12 @@
 <!-- Generated with http://android-holo-colors.com -->
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <style name="AppStyle.ActionMode" parent="Widget.AppCompat.ActionMode">
+        <item name="background">?attr/colorPrimary</item>
+        <item name="elevation">0dp</item>
+        <item name="titleTextStyle">@style/AppStyle.ActionBar.TextStyle</item>
+    </style>
+    
     <style name="AppStyle.Button.Orange" parent="Widget.AppCompat.Button">
         <item name="colorButtonNormal">@color/orange_carrot</item>
         <item name="colorControlHighlight">@color/orange_carrot_pressed</item>

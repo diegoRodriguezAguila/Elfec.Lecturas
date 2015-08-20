@@ -63,6 +63,7 @@ import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.avisocobranza.AvisoCobranza;
 import com.elfec.lecturas.modelo.eventos.OnFiltroAplicadoListener;
 import com.elfec.lecturas.modelo.eventos.OnImpresionConfirmadaListener;
+import com.elfec.lecturas.modelo.eventos.OnObservacionGuardadaListener;
 import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
 import com.elfec.lecturas.modelo.seguridad.Restricciones;
 import com.elfec.lecturas.modelo.validaciones.IValidacionLectura;
@@ -479,19 +480,25 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	 */
 	private void agregarOrdenativosLecturaCiclico() {
 		DialogoAgregarOrdenativo pd = new DialogoAgregarOrdenativo(this,
-				lecturaActual);
+				lecturaActual, new OnObservacionGuardadaListener() {
+					@Override
+					public void onObservacionGuardada(
+							OrdenativoLectura ordenativoLectura) {
+						asignarDatos();
+					}
+				});
 		pd.addOnGuardarClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				agregarOrdenativosLecturaCiclico();
 			}
 		});
-		pd.onDialogExit = new OnClickListener() {
+		pd.setOnDismissListener(new OnDismissListener() {
 			@Override
-			public void onClick(View v) {
+			public void onDismiss(DialogInterface dialog) {
 				actualizarLecturasYFiltro(true);
 			}
-		};
+		});
 		pd.show();
 	}
 
@@ -682,9 +689,15 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 
 	public void btnAgregarOrdenativoClick(View view) {
 		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
-			DialogoAgregarOrdenativo pd = new DialogoAgregarOrdenativo(
-					TomarLectura.this, navegacionAdapter.getActual());
-			pd.show();
+			new DialogoAgregarOrdenativo(TomarLectura.this,
+					navegacionAdapter.getActual(),
+					new OnObservacionGuardadaListener() {
+						@Override
+						public void onObservacionGuardada(
+								OrdenativoLectura ordenativoLectura) {
+							asignarDatos();
+						}
+					}).show();
 		}
 	}
 
@@ -930,7 +943,14 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 				TomarLectura.this, lecturaActual,
 				R.string.titulo_impedir_lectura,
 				(ArrayList<Ordenativo>) Ordenativo
-						.obtenerOrdenativosDeImpedimento());
+						.obtenerOrdenativosDeImpedimento(),
+				new OnObservacionGuardadaListener() {
+					@Override
+					public void onObservacionGuardada(
+							OrdenativoLectura ordenativoLectura) {
+						asignarDatos();
+					}
+				});
 		pd.setIcon(R.drawable.impedir_lectura);
 		pd.addOnGuardarClickListener(new View.OnClickListener() {
 			@Override

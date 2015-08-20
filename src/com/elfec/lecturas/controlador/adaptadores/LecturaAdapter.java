@@ -23,7 +23,7 @@ public class LecturaAdapter extends ArrayAdapter<Lectura> {
 
 	private boolean esDialogo;
 	private List<Lectura> lLecturas;
-	private static LayoutInflater inflater = null;
+	private LayoutInflater inflater = null;
 
 	public LecturaAdapter(Context context, int textViewResourceId,
 			List<Lectura> lecturas) {

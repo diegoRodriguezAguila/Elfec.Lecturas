@@ -29,6 +29,11 @@
         <item name="android:buttonStyleToggle">@style/ToggleElfecTheme</item>
         <item name="alertDialogProTheme">@style/AppStyle.Dialog.FlavoredMaterialLight</item>
         <item name="alertDialogTheme">@style/AppStyle.AlertDialog</item>
+        <item name="actionModeStyle">@style/AppStyle.ActionMode</item>
+        <item name="android:textSelectHandleLeft">@drawable/text_select_handle_left_material</item>
+        <item name="android:textSelectHandleRight">@drawable/text_select_handle_right_material</item>
+        <item name="android:textSelectHandle">@drawable/text_select_handle_middle_material</item>
+        <item name="selectableItemBackground">@drawable/select_background_material</item>
     </style>
 
 </resources>

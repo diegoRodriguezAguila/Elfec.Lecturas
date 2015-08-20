@@ -22,7 +22,7 @@ import com.lecturas.elfec.R;
  *
  */
 public class DispositivoBluetoothAdapter extends ArrayAdapter<BluetoothDevice> {
-	private static LayoutInflater inflater = null;
+	private LayoutInflater inflater = null;
 	private int dispSeleccionado;
 	private int selectableBgId;
 
