@@ -1,72 +1,60 @@
 package com.elfec.lecturas.controlador.dialogos;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.elfec.lecturas.controlador.BuscarLectura;
 import com.elfec.lecturas.controlador.adaptadores.LecturaAdapter;
 import com.elfec.lecturas.modelo.Lectura;
+import com.elfec.lecturas.modelo.eventos.OnLecturaSeleccionadaListener;
 import com.lecturas.elfec.R;
 
-public class DialogoResultadosBusqueda extends AlertDialog {
+public class DialogoResultadosBusqueda {
 
-	private BuscarLectura context;
-	private Button btnSalir;
-	private ListView listViewLecturas;
-	private TextView lblNumLecturas;
-	private ArrayList<Lectura> listaLecturas;
+	private AlertDialog mDialog;
 
-	public DialogoResultadosBusqueda(BuscarLectura context,
-			List<Lectura> listaResultadosLecs) {
-		super(context);
-		this.context = context;
-		listaLecturas = (ArrayList<Lectura>) listaResultadosLecs;
-	}
-
-	@Override
-	protected void onCreate(android.os.Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.dialogo_resultados_busqueda);
-		setTitle(R.string.titulo_resultados_busqueda);
-		setIcon(R.drawable.resultados_busqueda);
-		lblNumLecturas = (TextView) findViewById(R.id.lbl_num_lecturas_lista);
-		listViewLecturas = (ListView) findViewById(R.id.list_lecturas);
-		listViewLecturas.setFastScrollEnabled(true);
+	@SuppressLint("InflateParams")
+	public DialogoResultadosBusqueda(Context context,
+			List<Lectura> listaLecturas,
+			final OnLecturaSeleccionadaListener listener) {
+		View rootView = LayoutInflater.from(context).inflate(
+				R.layout.dialogo_resultados_busqueda, null, false);
+		mDialog = new AlertDialog.Builder(context).setView(rootView)
+				.setTitle(R.string.titulo_resultados_busqueda)
+				.setIcon(R.drawable.resultados_busqueda)
+				.setNegativeButton(R.string.salida_btn, null).create();
+		TextView lblNumLecturas = (TextView) rootView
+				.findViewById(R.id.lbl_num_lecturas_lista);
+		ListView listViewLecturas = (ListView) rootView
+				.findViewById(R.id.list_lecturas);
 		listViewLecturas.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
 			public void onItemClick(AdapterView<?> adapter, View view, int pos,
 					long id) {
-				dismiss();
-				Lectura lecturaSelec = listaLecturas.get(pos);
-				context.irALecturaEncontrada(lecturaSelec);
+				mDialog.dismiss();
+				if (listener != null)
+					listener.onLecturaSeleccionada((Lectura) adapter
+							.getItemAtPosition(pos));
 			}
 		});
-		LecturaAdapter adapter = new LecturaAdapter(context,
-				R.layout.list_item_lectura, listaLecturas, true); // the adapter
-																	// is a
-																	// member
-																	// field in
-																	// the
-																	// activity
-		listViewLecturas.setAdapter(adapter);
+		listViewLecturas.setAdapter(new LecturaAdapter(context,
+				R.layout.list_item_lectura, listaLecturas, true));
 		lblNumLecturas.setText("" + listaLecturas.size());
+	}
 
-		btnSalir = (Button) findViewById(R.id.btn_salir_dialogo);
-		btnSalir.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				dismiss();
-			}
-		});
+	/**
+	 * Muestra el dialogo
+	 */
+	public void show() {
+		mDialog.show();
 	}
 
 }

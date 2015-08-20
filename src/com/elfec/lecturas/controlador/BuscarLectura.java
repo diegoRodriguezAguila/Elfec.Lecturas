@@ -19,6 +19,7 @@ import com.elfec.lecturas.controlador.dialogos.DialogoResultadosBusqueda;
 import com.elfec.lecturas.helpers.ui.TecladoHelper;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
+import com.elfec.lecturas.modelo.eventos.OnLecturaSeleccionadaListener;
 import com.lecturas.elfec.R;
 
 public class BuscarLectura extends AppCompatActivity {
@@ -175,9 +176,13 @@ public class BuscarLectura extends AppCompatActivity {
 			if (lecturasEncontradas.size() == 1)
 				irALecturaEncontrada(lecturasEncontradas.get(0));
 			else {
-				DialogoResultadosBusqueda dialog = new DialogoResultadosBusqueda(
-						this, lecturasEncontradas);
-				dialog.show();
+				new DialogoResultadosBusqueda(this, lecturasEncontradas,
+						new OnLecturaSeleccionadaListener() {
+							@Override
+							public void onLecturaSeleccionada(Lectura lectura) {
+								irALecturaEncontrada(lectura);
+							}
+						}).show();
 			}
 		} else {
 			mostrarDialogoNoResultados();
