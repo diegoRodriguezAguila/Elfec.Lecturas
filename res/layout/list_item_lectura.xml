@@ -11,17 +11,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="14dp"
+        android:layout_toEndOf="@+id/lbl_cuenta_item"
         android:layout_toRightOf="@+id/lbl_cuenta_item"
         android:text="@string/sample_cuenta"
-        android:textSize="20sp"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/lbl_medidor_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/lbl_cuenta_item"
         android:layout_marginTop="8dp"
         android:text="@string/medidor_lbl"
@@ -34,16 +37,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/lbl_num_cuenta_item"
         android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_toEndOf="@+id/lbl_medidor_item"
         android:layout_toRightOf="@+id/lbl_medidor_item"
         android:text="@string/sample_num_medidor"
-        android:textSize="15sp"
-        android:layout_marginTop="2dp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/lbl_estado_lectura"
         android:layout_width="85dp"
         android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="12dp"
@@ -59,6 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="19dp"
         android:text="@string/cuenta_lbl"
@@ -71,8 +78,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/lbl_estado_lectura"
         android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="17dp"
         android:layout_toRightOf="@+id/img_ruta"
+         android:layout_toEndOf="@+id/img_ruta"
         android:text="@string/sample_ruta"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textStyle="bold" />
@@ -82,6 +91,7 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_alignLeft="@+id/lbl_estado_lectura"
+        android:layout_alignStart="@+id/lbl_estado_lectura" 
         android:layout_below="@+id/lbl_estado_lectura"
         android:layout_marginTop="12dp"
         android:background="@color/blue_peter_river"
@@ -93,6 +103,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/lbl_medidor_item"
         android:layout_marginTop="8dp"
         android:text="@string/nus_lbl"
@@ -105,10 +116,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/lbl_num_medidor_item"
         android:layout_marginLeft="4dp"
-        android:layout_toRightOf="@+id/lbl_nus_item"
-        android:text="@string/sample_nus"
-        android:textSize="15sp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_toRightOf="@+id/lbl_nus_item"
+        android:layout_toEndOf="@+id/lbl_nus_item"
+        android:text="@string/sample_nus"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="15sp" />
 
 </RelativeLayout>

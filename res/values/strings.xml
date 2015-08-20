@@ -214,7 +214,8 @@
     <string name="cancelar_btn">Cancelar</string>
     <string name="demanda_lbl">Demanda:</string>
     <string name="no_potencia_mensaje">La lectura no tiene potencia ni energía reactiva</string>
-
+<string name="msg_no_se_puede_guardar_potencia">Para guardar la potencia debe llenar
+        los campos correspondientes!</string>
     <!-- Dialogo Agregar Ordenativo -->
     <string name="titulo_agregar_ordenativo">Agregar Ordenativo</string>
     <string name="cod_obs_lbl">Cód. Observ:</string>

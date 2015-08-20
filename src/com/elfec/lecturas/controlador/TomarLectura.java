@@ -65,6 +65,7 @@ import com.elfec.lecturas.modelo.eventos.OnFiltroAplicadoListener;
 import com.elfec.lecturas.modelo.eventos.OnImpresionConfirmadaListener;
 import com.elfec.lecturas.modelo.eventos.OnMedidorEntreLineasGuardadoListener;
 import com.elfec.lecturas.modelo.eventos.OnObservacionGuardadaListener;
+import com.elfec.lecturas.modelo.eventos.OnPotenciaGuardadaListener;
 import com.elfec.lecturas.modelo.eventos.OnRecordatorioGuardadoListener;
 import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
 import com.elfec.lecturas.modelo.seguridad.Restricciones;
@@ -550,9 +551,14 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	public void procederConProcesoDeGuardado() {
 		// si lee potencia o reactiva
 		if (lecturaActual.LeePotencia == 1 || lecturaActual.LeeReactiva == 1) {
-			DialogoPotencia dialog = new DialogoPotencia(this, lecturaActual,
-					false);
-			dialog.show();
+			new DialogoPotencia(this, lecturaActual, false,
+					new OnPotenciaGuardadaListener() {
+						@Override
+						public void onPotenciaGuardada(Lectura lectura,
+								Potencia potencia) {
+							guardarLectura();
+						}
+					}).show();
 		} else {
 			guardarLectura();
 		}
@@ -976,14 +982,10 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	// -------------------------------------
 	private void mostrarDialogoVerPotencia() {
 		Lectura lecturaActual = navegacionAdapter.getActual();
+		// si lee potencia o reactiva
 		if (lecturaActual.LeePotencia == 1 || lecturaActual.LeeReactiva == 1
-				|| lecturaActual.TagCalculaPotencia == 1)// si lee potencia o
-															// reactiva
-		{
-
-			DialogoPotencia dialog = new DialogoPotencia(this, lecturaActual,
-					true);
-			dialog.show();
+				|| lecturaActual.TagCalculaPotencia == 1) {
+			new DialogoPotencia(this, lecturaActual, true).show();
 		} else {
 			new AlertDialog.Builder(this)
 					.setMessage(R.string.no_potencia_mensaje)
