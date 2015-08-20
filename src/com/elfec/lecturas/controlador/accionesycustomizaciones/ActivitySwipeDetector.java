@@ -1,7 +1,6 @@
 package com.elfec.lecturas.controlador.accionesycustomizaciones;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -62,9 +61,6 @@ public class ActivitySwipeDetector implements OnTouchListener {
 						return true;
 					}
 				} else {
-					Log.i(logTag,
-							"Horizontal Swipe was only " + Math.abs(deltaX)
-									+ " long, need at least " + MIN_DISTANCE);
 					return false; // We don't consume the event
 				}
 			}
@@ -81,8 +77,6 @@ public class ActivitySwipeDetector implements OnTouchListener {
 						return true;
 					}
 				} else {
-					Log.i(logTag, "Vertical Swipe was only " + Math.abs(deltaX)
-							+ " long, need at least " + MIN_DISTANCE);
 					return false; // We don't consume the event
 				}
 			}

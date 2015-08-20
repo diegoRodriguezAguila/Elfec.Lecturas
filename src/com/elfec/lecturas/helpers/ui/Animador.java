@@ -2,65 +2,46 @@ package com.elfec.lecturas.helpers.ui;
 
 import android.view.View;
 import android.view.animation.Animation;
-import android.view.animation.Transformation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
+
+import com.lecturas.elfec.R;
+
 /**
- * Se encarga de contraer o expandir un control, es un ayudante para la animación de controles
+ * Se encarga de contraer o expandir un control, es un ayudante para la
+ * animación de controles
+ * 
  * @author drodriguez
  *
  */
 public class Animador {
-	
+
 	public static void expand(final View v) {
-	    v.measure(android.view.ViewGroup.LayoutParams.MATCH_PARENT, android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-	    final int targtetHeight = v.getMeasuredHeight();
-
-	    v.getLayoutParams().height = 0;
-	    v.setVisibility(View.VISIBLE);
-	    Animation a = new Animation()
-	    {
-	        @Override
-	        protected void applyTransformation(float interpolatedTime, Transformation t) {
-	            v.getLayoutParams().height = interpolatedTime == 1
-	                    ? android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-	                    : (int)(targtetHeight * interpolatedTime);
-	            v.requestLayout();
-	        }
-
-	        @Override
-	        public boolean willChangeBounds() {
-	            return true;
-	        }
-	    };
-
-	    // 1dp/ms
-	    a.setDuration(300);
-	    v.startAnimation(a);
+		Animation heightAnim = AnimationUtils.loadAnimation(v.getContext(),
+				R.anim.scale_fade_in);
+		v.setVisibility(View.VISIBLE);
+		v.startAnimation(heightAnim);
 	}
-	
+
 	public static void collapse(final View v) {
-	    final int initialHeight = v.getMeasuredHeight();
+		Animation heightAnim = AnimationUtils.loadAnimation(v.getContext(),
+				R.anim.scale_fade_out);
+		AnimationListener collapselistener = new AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) {
+			}
 
-	    Animation a = new Animation()
-	    {
-	        @Override
-	        protected void applyTransformation(float interpolatedTime, Transformation t) {
-	            if(interpolatedTime == 1){
-	                v.setVisibility(View.GONE);
-	            }else{
-	                v.getLayoutParams().height = initialHeight - (int)(initialHeight * interpolatedTime);
-	                v.requestLayout();
-	            }
-	        }
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+			}
 
-	        @Override
-	        public boolean willChangeBounds() {
-	            return true;
-	        }
-	    };
-
-	    // 1dp/ms
-	    a.setDuration(300);
-	    v.startAnimation(a);
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				v.setVisibility(View.GONE);
+			}
+		};
+		heightAnim.setAnimationListener(collapselistener);
+		v.startAnimation(heightAnim);
 	}
 
 }

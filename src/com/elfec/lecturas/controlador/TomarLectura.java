@@ -63,6 +63,7 @@ import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.avisocobranza.AvisoCobranza;
 import com.elfec.lecturas.modelo.eventos.OnFiltroAplicadoListener;
 import com.elfec.lecturas.modelo.eventos.OnImpresionConfirmadaListener;
+import com.elfec.lecturas.modelo.eventos.OnMedidorEntreLineasGuardadoListener;
 import com.elfec.lecturas.modelo.eventos.OnObservacionGuardadaListener;
 import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
 import com.elfec.lecturas.modelo.seguridad.Restricciones;
@@ -779,16 +780,14 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	// ----------------------------- DIALOGO MEDIDOR ENTRE LINEAS
 	// -----------------------------------------------
 	private void mostrarDialogoMedidorEntreLineas() {
-		final DialogoMedidorEntreLineas dialogo = new DialogoMedidorEntreLineas(
-				this);
-		dialogo.setOnDismissListener(new OnDismissListener() {
-			@Override
-			public void onDismiss(DialogInterface dialog) {
-				if (dialogo.medEntreLineas != null)
-					mostrarDialogoFotoEntreLineas(dialogo.medEntreLineas);
-			}
-		});
-		dialogo.show();
+		new DialogoMedidorEntreLineas(this,
+				new OnMedidorEntreLineasGuardadoListener() {
+					@Override
+					public void onMedidorEntreLineasGuardado(
+							MedidorEntreLineas medidorEntreLineas) {
+						mostrarDialogoFotoEntreLineas(medidorEntreLineas);
+					}
+				}).show();
 	}
 
 	// ----------------------------- DIALOGO RECORDATORIOS LECTOR

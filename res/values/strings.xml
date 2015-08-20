@@ -269,6 +269,8 @@
     <string name="con_potencia_chk">Con potencia</string>
     <string name="demanda_entre_lineas_lbl">Demanda:</string>
     <string name="reactiva_entre_lineas_lbl">Reactiva:</string>
+    <string name="msg_no_se_puede_guardar_medidor_entre_lineas">Para guardar el medidor entre lineas debe llenar
+        los campos correspondientes!</string>
     <string name="medidor_entre_lineas_guardado_msg">Medidor entre lineas guardado exitosamente!</string>
 
     <!-- Dialogo Detalle Impedidas -->

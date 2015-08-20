@@ -1,179 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:paddingBottom="5dp"
+    android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin" >
+    android:paddingTop="5dp" >
 
-    <TextView
-        android:id="@+id/lbl_num_medidor"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/num_medidor_lbl"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/txt_num_medidor_entre_lineas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/lbl_num_medidor"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/lbl_num_medidor"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="8"
-        android:textAppearance="?android:attr/textAppearanceMedium" >
-
-        <requestFocus />
-        <requestFocus />
-
-    </EditText>
-
-    <TextView
-        android:id="@+id/lbl_lectura_entre_lineas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/lbl_num_medidor"
-        android:layout_marginTop="18dp"
-        android:text="@string/lectura_entre_lineas_lbl"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <EditText
-        android:id="@+id/txt_lectura_entre_lineas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/lbl_lectura_entre_lineas"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/lbl_lectura_entre_lineas"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="6"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <RelativeLayout
-        android:id="@+id/layout_con_potencia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="10dp" 
-        android:paddingBottom="5dp" 
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/chk_con_potencia">
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/lbl_demanda_entre_lineas"
+            android:id="@+id/lbl_num_medidor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:text="@string/demanda_entre_lineas_lbl"
+            android:text="@string/num_medidor_lbl"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/txt_demanda_entre_lineas"
+            android:id="@+id/txt_num_medidor_entre_lineas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignBaseline="@+id/lbl_demanda_entre_lineas"
-            android:layout_toRightOf="@+id/lbl_demanda_entre_lineas"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
             android:ems="10"
-            android:maxLength="15"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:inputType="numberDecimal" />
-        
-        <TextView
-            android:id="@+id/lbl_reactiva_entre_lineas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/lbl_demanda_entre_lineas"
-            android:layout_marginTop="18dp"
-            android:text="@string/reactiva_entre_lineas_lbl"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-            android:id="@+id/txt_reactiva_entre_lineas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/lbl_reactiva_entre_lineas"
-            android:layout_toRightOf="@+id/lbl_reactiva_entre_lineas"
-            android:layout_alignParentRight="true"
-            android:ems="10"
-            android:inputType="numberDecimal"
+            android:inputType="number"
             android:maxLength="8"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
 
-        <View
-            android:id="@+id/separator2"
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/lbl_reactiva_entre_lineas"
-            android:layout_marginTop="12dp"
-            android:background="#ffffff" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/lbl_lectura_entre_lineas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lectura_entre_lineas_lbl"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <View
-        android:id="@+id/separator"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/btn_guardar_medidor_entre_lineas"
-        android:layout_marginTop="12dp"
-        android:background="@android:color/darker_gray" />
-
-    <Button
-        android:id="@+id/btn_guardar_medidor_entre_lineas"
-        android:layout_width="140dp"
-        android:layout_height="45dp"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/layout_con_potencia"
-        android:drawableLeft="@drawable/save"
-        android:onClick="btnGuardarClick"
-        android:layout_marginTop="4dp"
-        android:text="@string/guardar_btn" />
-
-    <Button
-        android:id="@+id/btn_salir_dialogo_medidor_entre_lineas"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="6dp"
-        android:layout_below="@+id/separator"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:text="@string/salida_btn" />
+        <EditText
+            android:id="@+id/txt_lectura_entre_lineas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="6"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
 
     <CheckBox
         android:id="@+id/chk_con_potencia"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/lbl_lectura_entre_lineas"
         android:text="@string/con_potencia_chk" />
 
-    <Spinner
-        android:id="@+id/select_ruta"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layout_con_potencia"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btn_guardar_medidor_entre_lineas"
-        android:layout_toLeftOf="@+id/btn_guardar_medidor_entre_lineas"
-        android:layout_toRightOf="@+id/lbl_ruta_entre_lineas" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/lbl_ruta_entre_lineas"
-        android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/lbl_demanda_entre_lineas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/demanda_entre_lineas_lbl"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/txt_demanda_entre_lineas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:maxLength="15"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/lbl_reactiva_entre_lineas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reactiva_entre_lineas_lbl"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/txt_reactiva_entre_lineas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginStart="4dp"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:maxLength="8"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignBaseline="@+id/btn_guardar_medidor_entre_lineas"
-        android:text="@string/ruta_lbl"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginTop="5dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/lbl_ruta_entre_lineas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ruta_lbl"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Spinner
+            android:id="@+id/select_ruta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp" />
+    </LinearLayout>
+
+</LinearLayout>
