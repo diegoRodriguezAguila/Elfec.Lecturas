@@ -65,6 +65,7 @@ import com.elfec.lecturas.modelo.eventos.OnFiltroAplicadoListener;
 import com.elfec.lecturas.modelo.eventos.OnImpresionConfirmadaListener;
 import com.elfec.lecturas.modelo.eventos.OnMedidorEntreLineasGuardadoListener;
 import com.elfec.lecturas.modelo.eventos.OnObservacionGuardadaListener;
+import com.elfec.lecturas.modelo.eventos.OnRecordatorioGuardadoListener;
 import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
 import com.elfec.lecturas.modelo.seguridad.Restricciones;
 import com.elfec.lecturas.modelo.validaciones.IValidacionLectura;
@@ -798,9 +799,13 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	 * actual
 	 */
 	private void mostrarDialogoRecordatorioLector() {
-		DialogoRecordatorio dialogo = new DialogoRecordatorio(this,
-				navegacionAdapter.getActual());
-		dialogo.show();
+		new DialogoRecordatorio(this, navegacionAdapter.getActual(),
+				new OnRecordatorioGuardadoListener() {
+					@Override
+					public void onRecordatorioGuardado(Lectura lectura) {
+						btnRecordatorios.setEnabled(lectura.tieneRecordatorio());
+					}
+				}).show();
 	}
 
 	// ----------------------------- DIALOGO MODIFICAR LECTURA
