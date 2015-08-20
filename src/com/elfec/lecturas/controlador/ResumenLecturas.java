@@ -3,6 +3,8 @@ package com.elfec.lecturas.controlador;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +49,11 @@ public class ResumenLecturas extends AppCompatActivity {
 				obtenerDatos(-1);
 			}
 		}).start();
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
 	}
 
 	/**

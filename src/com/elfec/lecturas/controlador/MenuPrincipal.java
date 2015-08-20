@@ -1,5 +1,7 @@
 package com.elfec.lecturas.controlador;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
@@ -45,6 +47,11 @@ public class MenuPrincipal extends AppCompatActivity {
 				}
 			}
 		}).start();
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
 	}
 
 	/**

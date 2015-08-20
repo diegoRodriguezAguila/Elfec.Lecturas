@@ -3,6 +3,8 @@ package com.elfec.lecturas.controlador;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -66,6 +68,11 @@ public class BuscarLectura extends AppCompatActivity {
 		selectorRuta.setAdapter(adapter_state);
 		selectorRuta.setSelection(posicionSeleccionada);
 		ponerTextListenerCuenta();
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
 	}
 
 	/**

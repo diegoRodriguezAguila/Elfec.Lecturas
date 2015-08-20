@@ -2,10 +2,13 @@ package com.elfec.lecturas.controlador;
 
 import java.util.Date;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
@@ -42,16 +45,39 @@ public class Login extends AppCompatActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
+		getSupportActionBar().setTitle(R.string.titulo_login);
 		txtUsuario = (TextView) findViewById(R.id.txt_usuario);
 		txtUsuario.setText("ecampos");
 		txtPassword = (TextView) findViewById(R.id.txt_password);
 		txtPassword.setText("123");
+		setVersionTitle();
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
+	}
+
+	/**
+	 * Asigna la versión al titulo
+	 */
+	private void setVersionTitle() {
+		try {
+			PackageInfo pinfo = getPackageManager().getPackageInfo(
+					getPackageName(), 0);
+			((TextView) findViewById(R.id.title_app_full_name)).setText(String
+					.format(getString(R.string.app_full_name),
+							pinfo.versionName));
+		} catch (NameNotFoundException e) {
+			((TextView) findViewById(R.id.title_app_full_name)).setText(String
+					.format(getString(R.string.app_full_name), "desconocida"));
+		}
 	}
 
 	/**

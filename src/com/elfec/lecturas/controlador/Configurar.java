@@ -3,6 +3,8 @@ package com.elfec.lecturas.controlador;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
@@ -45,6 +47,11 @@ public class Configurar extends AppCompatActivity {
 					.setTitle(R.string.titulo_mensajes_error)
 					.setPositiveButton(R.string.btn_ok, null).show();
 		}
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
 	}
 
 	@Override

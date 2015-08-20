@@ -3,7 +3,9 @@ package com.elfec.lecturas.controlador;
 import java.util.ArrayList;
 import java.util.List;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -83,6 +85,11 @@ public class ListaLecturas extends AppCompatActivity {
 				cargarLecturasPorEstado(-1);
 			}
 		}).start();
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
 	}
 
 	private void cargarEstadosLecturas() {

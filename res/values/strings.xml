@@ -3,11 +3,11 @@
 
     <string name="elfec_app_name">Elfec Lecturas</string>
     <string name="app_name">Elfec Lecturas</string>
-    <string name="app_title">&#160;&#160;Elfec Lecturas v. 1.15.05.08</string>
+    <string name="app_full_name">Elfec Lecturas v. %s</string>
     <string name="action_settings">Settings</string>
 
     <!-- Login -->
-    <string name="titulo_login">Iniciar Sesión</string>
+    <string name="titulo_login">&#160;Ingreso al sistema</string>
     <string name="usuario_lbl">Usuario:</string>
     <string name="usuario_hint">usuario&#8230;</string>
     <string name="password_lbl">Password:</string>
@@ -22,7 +22,7 @@
     <string name="titulo_cuadro_tarif">Cuadro tarifario incorrecto</string>
     <string name="cuadro_tarif_msg">Se encontraron datos en el telefono que corresponden a un cuadro tarifario que no es el actual, se eliminaran para poder proceder con el ingreso al sistema!</string>
     <!-- Inicio -->
-    <string name="titulo_inicio">Inicio</string>
+    <string name="titulo_inicio">&#160;Inicio</string>
     <string name="nom_usuario_lbl">Usuario: </string>
     <string name="ruta_lbl">Ruta: </string>
     <string name="imei_lbl">IMEI: </string>
@@ -72,7 +72,7 @@
     <string name="eliminar_datos_msg">¡Se eliminaran todos los datos incluyendo los datos mensuales, diarios y lecturas realizadas!, después se cerrará su sesión</string>
 
     <!-- Menu principal -->
-    <string name="titulo_menu_principal">Menu Principal</string>
+    <string name="titulo_menu_principal">&#160;Menu principal</string>
     <string name="tomar_lecturas_btn">Tomar Lecturas</string>
     <string name="resumen_lecturas_btn">Resumen Lecturas</string>
     <string name="detalle_impedidas_btn">Detalle Impedidas</string>
@@ -88,7 +88,7 @@
     <string name="detalle_entre_lineas_btn_info">imprimir resumen</string>
 
     <!-- Tomar Lecturas -->
-    <string name="titulo_tomar_lecturas">Toma de Lecturas</string>
+    <string name="titulo_tomar_lecturas">&#160;Tomar lecturas</string>
     <string name="datos_cliente_lbl">Datos del Cliente</string>
     <string name="nombre_lbl">Nombre: </string>
     <string name="direccion_lbl">Dirección: </string>
@@ -138,7 +138,7 @@
     <string name="no_mostrar_info">Puede volver a habilitar esta opción en Inicio dentro el menu de opciones, en la opción Personalizar UI</string>
 
     <!-- Busqueda Lectura -->
-    <string name="titulo_buscar_lectura">Buscar Lectura</string>
+    <string name="titulo_buscar_lectura">&#160;Buscar lectura</string>
     <string name="buscar_btn">Buscar</string>
     <string name="buscar_por_cuenta_lbl">Buscar por Cuenta</string>
     <string name="buscar_por_medidor_lbl">Buscar por Medidor</string>
@@ -150,7 +150,7 @@
     <string name="resultados_lbl">Encontrados:</string>
 
     <!-- Resumen Lecturas -->
-    <string name="titulo_resumen_lecturas">Resumen de Lecturas</string>
+    <string name="titulo_resumen_lecturas">&#160;Resumen de lecturas</string>
     <string name="numero_lecturas_lbl">Número de Lecturas:</string>
     <string name="lecturas_realizadas_lbl">Lecturas Realizadas:</string>
     <string name="lecturas_pendientes_lbl">Lecturas Pendientes:</string>
@@ -162,7 +162,7 @@
     <string name="lecturas_totales_lbl">Total Lecturas:</string>
 
     <!-- Lista Lecturas -->
-    <string name="titulo_lista_lecturas">Lista de Lecturas</string>
+    <string name="titulo_lista_lecturas">&#160;Lista de lecturas</string>
     <string name="mostrar_lbl">Mostrar:</string>
     <string name="lbl_cargando_lecturas">Espere, se estan cargando las lecturas&#8230;</string>
     <string name="lbl_no_lecturas">No se encontró ninguna lectura que coincida con los filtros solicitados.</string>
@@ -185,7 +185,7 @@
     <string name="menu_eliminar_datos">Eliminar Datos</string>
 
     <!-- Configuracion -->
-    <string name="titulo_configurar">Configurar</string>
+    <string name="titulo_configurar">&#160;Configurar servidor</string>
     <string name="servidor_bd_lbl">Servidor de la base de datos</string>
     <string name="ip_lbl">Ip:</string>
     <string name="puerto_lbl">Puerto:</string>
@@ -214,7 +214,7 @@
     <string name="cancelar_btn">Cancelar</string>
     <string name="demanda_lbl">Demanda:</string>
     <string name="no_potencia_mensaje">La lectura no tiene potencia ni energía reactiva</string>
-<string name="msg_no_se_puede_guardar_potencia">Para guardar la potencia debe llenar
+    <string name="msg_no_se_puede_guardar_potencia">Para guardar la potencia debe llenar
         los campos correspondientes!</string>
     <!-- Dialogo Agregar Ordenativo -->
     <string name="titulo_agregar_ordenativo">Agregar Ordenativo</string>

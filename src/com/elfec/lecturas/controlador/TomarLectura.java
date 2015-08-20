@@ -8,7 +8,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
@@ -140,6 +142,11 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 				inicializarVariablesDeEntorno();
 			}
 		}).start();
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
 	}
 
 	@Override

@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -72,6 +73,11 @@ public class Inicio extends AppCompatActivity implements
 		lblNomUsuario = (TextView) findViewById(R.id.lbl_nom_usuario);
 		lblFecha = (TextView) findViewById(R.id.lbl_fecha);
 		lblNumIMEI = (TextView) findViewById(R.id.lbl_num_imei);
+	}
+
+	@Override
+	protected void attachBaseContext(Context newBase) {
+		super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
 	}
 
 	@Override
