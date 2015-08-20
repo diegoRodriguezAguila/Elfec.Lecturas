@@ -1,117 +1,68 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingTop="@dimen/activity_vertical_top_margin"
     tools:context=".BuscarLectura" >
-
-    <TextView
-        android:id="@+id/lbl_titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:text="@string/titulo_buscar_lectura"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <View
-        android:id="@+id/separator_1"
-        android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lbl_titulo"
-        android:background="@android:color/darker_gray" />
-
-    <Button
-        android:id="@+id/btn_buscar"
-        android:layout_width="150dp"
-        android:layout_height="54dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" 
-        android:layout_alignParentEnd="true"
-        android:drawableLeft="@drawable/search_btn"
-        android:drawableStart="@drawable/search_btn"
-        android:text="@string/buscar_btn"
-        android:onClick="btnBuscarClick" />
 
     <TextView
         android:id="@+id/lbl_buscar_por_cuenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/separator_1"
         android:layout_marginTop="15dp"
         android:text="@string/buscar_por_cuenta_lbl"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/lbl_cuenta_info"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lbl_buscar_por_cuenta"
-        android:layout_marginTop="15dp"
-        android:text="@string/cuenta_lbl"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/lbl_medidor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lbl_buscar_por_medidor"
-        android:layout_marginTop="15dp"
-        android:text="@string/medidor_lbl"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/lbl_cuenta_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/cuenta_lbl"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
-        android:id="@+id/txt_cuenta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/lbl_cuenta_info"
-        android:layout_alignBottom="@+id/lbl_cuenta_info"
-        android:layout_alignParentRight="true" 
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/lbl_guion"
-        android:layout_toEndOf="@+id/lbl_guion"
-        android:digits="0123456789-"
-        android:ems="6"
-        android:inputType="number"
-        android:maxLength="6" >
+        <Spinner
+            android:id="@+id/select_ruta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp" />
 
-                <requestFocus />
-    </EditText>
+        <TextView
+            android:id="@+id/lbl_guion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:text="@string/guion"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
-        android:id="@+id/txt_medidor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/lbl_medidor"
-        android:layout_alignBottom="@+id/lbl_medidor"
-        android:layout_alignParentRight="true" 
-        android:layout_alignParentEnd="true"
-        android:ems="10"
-        android:maxLength="15"
-        android:inputType="text" />
+        <EditText
+            android:id="@+id/txt_cuenta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_marginStart="2dp"
+            android:layout_weight="1"
+            android:digits="0123456789-"
+            android:ems="6"
+            android:inputType="number"
+            android:maxLength="6" />
+    </LinearLayout>
 
     <View
-        android:id="@+id/separator_2"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true" 
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/txt_cuenta"
         android:layout_marginTop="25dp"
         android:background="@android:color/darker_gray" />
 
@@ -119,22 +70,39 @@
         android:id="@+id/lbl_buscar_por_medidor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/separator_2"
         android:layout_marginTop="15dp"
         android:text="@string/buscar_por_medidor_lbl"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/lbl_medidor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/medidor_lbl"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/txt_medidor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="text"
+            android:maxLength="15" />
+    </LinearLayout>
+
     <View
-        android:id="@+id/separator_3"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/txt_medidor"
-        android:layout_alignEnd="@+id/txt_medidor"
-        android:layout_below="@+id/txt_medidor"
         android:layout_marginTop="25dp"
         android:background="@android:color/darker_gray" />
 
@@ -142,57 +110,50 @@
         android:id="@+id/lbl_buscar_por_nus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/separator_3"
         android:layout_marginTop="15dp"
         android:text="@string/buscar_por_nus_lbl"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <TextView
-        android:id="@+id/lbl_bus_nus"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true" 
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/lbl_buscar_por_nus"
-        android:text="@string/nus_lbl"
-        android:layout_marginTop="15dp"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <EditText
-        android:id="@+id/txt_bus_nus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/lbl_bus_nus"
-        android:layout_alignBottom="@+id/lbl_bus_nus"
-        android:layout_alignParentRight="true" 
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/lbl_bus_nus"
-        android:layout_toEndOf="@+id/lbl_bus_nus"
-        android:ems="10"
-        android:inputType="number"
-        android:maxLength="8" />
-
-        <Spinner
-            android:id="@+id/select_ruta"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/lbl_buscar_por_medidor"
-            android:layout_alignEnd="@+id/lbl_buscar_por_medidor"
-            android:layout_below="@+id/lbl_buscar_por_cuenta"
-            android:layout_marginTop="3dp"
-            android:layout_toRightOf="@+id/lbl_cuenta_info"
-            android:layout_toEndOf="@+id/lbl_cuenta_info" />
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
         <TextView
-            android:id="@+id/lbl_guion"
+            android:id="@+id/lbl_bus_nus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/lbl_cuenta_info"
-            android:layout_toRightOf="@+id/select_ruta"
-            android:layout_toEndOf="@+id/select_ruta"
-            android:text="@string/guion"
+            android:text="@string/nus_lbl"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</RelativeLayout>
+        <EditText
+            android:id="@+id/txt_bus_nus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number"
+            android:maxLength="8" />
+    </LinearLayout>
+
+    <android.support.v4.widget.Space
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btn_buscar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:drawableEnd="@drawable/btn_search"
+        android:drawableRight="@drawable/btn_search"
+        android:onClick="btnBuscarClick"
+        android:text="@string/buscar_btn" />
+
+</LinearLayout>
