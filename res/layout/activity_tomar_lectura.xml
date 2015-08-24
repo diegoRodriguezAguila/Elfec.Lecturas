@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/datos_cliente_lbl"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="18sp"
                 android:textColor="?attr/colorPrimary" />
 
             <TextView
@@ -49,9 +49,9 @@
                 android:background="@color/green_nephritis"
                 android:gravity="center"
                 android:text="@string/sample_estado_medidor"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textAppearance="@style/TextAppearance.CustomFont.Medium"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nombre_lbl"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_nombre_cliente"
@@ -75,8 +75,8 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
                 android:text="@string/sample_nombre"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/direccion_lbl"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_direccion_cliente"
@@ -100,8 +100,8 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
                 android:text="@string/sample_direccion"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -116,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nus_lbl"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_nus_cliente"
@@ -126,15 +126,15 @@
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:text="@string/sample_nus"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_tarifa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/tarifa_lbl"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_tarifa_cliente"
@@ -143,8 +143,8 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
                 android:text="@string/sample_tarifa"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -159,7 +159,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cuenta_lbl"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_cuenta_cliente"
@@ -169,15 +169,15 @@
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:text="@string/sample_cuenta"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_orden"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/orden_lbl"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_orden_cliente"
@@ -186,8 +186,8 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
                 android:text="@string/sample_orden"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -204,7 +204,7 @@
                 android:layout_weight="2"
                 android:minWidth="120dp"
                 android:text="@string/datos_medidor_lbl"
-                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="18sp"
                 android:textColor="?attr/colorPrimary" />
 
             <ImageButton
@@ -235,7 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/numero_lbl"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_numero_medidor"
@@ -245,17 +245,16 @@
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
                 android:text="@string/sample_num_medidor"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textStyle="bold" />
+                android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_info_digitos_medidor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/info_digitos_lbl"
-                android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="?attr/colorPrimary"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -270,8 +269,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/observacion_lbl"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textColorHighlight="@color/blue_peter_river" />
+                android:textColorHighlight="@color/blue_peter_river"
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/lbl_obs_medidor"
@@ -280,9 +279,9 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
                 android:text="@string/sample_obs"
-                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textAppearance="@style/TextAppearance.CustomFont.Medium"
                 android:textColorHighlight="@color/blue_peter_river"
-                android:textStyle="bold" />
+                android:textSize="14sp" />
 
             <ImageButton
                 android:id="@+id/btn_agregar_ordenativo"
@@ -309,7 +308,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/nueva_lectura_lbl"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/txt_nueva_lectura"
@@ -327,8 +326,8 @@
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
                 android:text="@string/sample_lectura"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textStyle="bold"
+                android:textSize="18sp"
+                android:textAppearance="@style/TextAppearance.CustomFont.Medium"
                 android:visibility="gone" />
         </LinearLayout>
     </LinearLayout>

@@ -7,7 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_top_margin"
-    tools:context=".Inicio" >
+    tools:context=".Inicio"
+    tools:ignore="UselessParent" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -117,46 +118,53 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="horizontal" >
+            android:gravity="start"
+            android:orientation="vertical" >
 
-            <Button
-                android:id="@+id/btn_cargar_datos"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableTop="@drawable/import_from_server"
-                android:enabled="false"
-                android:onClick="btnCargarDatosClick"
-                android:text="@string/cargar_datos_btn"
-                android:textSize="14sp" />
+                android:orientation="horizontal" >
 
-            <Button
-                android:id="@+id/btn_descargar_datos"
+                <Button
+                    android:id="@+id/btn_cargar_datos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:drawableTop="@drawable/import_from_server"
+                    android:enabled="false"
+                    android:onClick="btnCargarDatosClick"
+                    android:text="@string/cargar_datos_btn"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/btn_descargar_datos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:drawableTop="@drawable/export_to_server"
+                    android:enabled="false"
+                    android:onClick="btnDescargarDatosClick"
+                    android:text="@string/descargar_datos_btn"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/lbl_info_carga_datos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:drawableTop="@drawable/export_to_server"
-                android:enabled="false"
-                android:onClick="btnDescargarDatosClick"
-                android:text="@string/descargar_datos_btn"
-                android:textSize="14sp" />
+                android:layout_marginTop="2dp"
+                android:text="@string/info_datos_no_cargados_lbl"
+                android:textSize="12sp" />
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/lbl_info_carga_datos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
-            android:text="@string/info_datos_no_cargados_lbl"
-            android:textSize="12sp" />
     </LinearLayout>
 
 </LinearLayout>

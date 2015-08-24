@@ -1,266 +1,278 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="0dp"
+    android:paddingTop="@dimen/activity_vertical_top_margin"
     tools:context=".ResumenLecturas" >
 
-    <TextView
-        android:id="@+id/lbl_titulo"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/btn_inicio"
-        android:text="@string/titulo_resumen_lecturas"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/btn_inicio"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/separator_1"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:contentDescription="@string/volver_al_menu_principal"
-        android:scaleType="fitCenter"
-        android:background="@drawable/state_list_drawable"
-        android:onClick="btnInicioClick"
-        />
+        <TextView
+            android:id="@+id/lbl_ruta_res"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ruta_lbl"
+            android:textSize="18sp" />
 
-     <View
-        android:id="@+id/separator_1"
-        android:layout_width="fill_parent"
+        <Spinner
+            android:id="@+id/select_ruta"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_weight="2" />
+
+        <android.support.v4.widget.Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/lbl_num_lecturas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numero_lecturas_lbl"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_numero_lecturas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/sample_num_lecturas"
+            android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/lbl_lecturas_realizadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lecturas_realizadas_lbl"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_lecturas_realizadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/sample_num_lecturas"
+            android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/lbl_lecturas_pendientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lecturas_pendientes_lbl"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_lecturas_pendientes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/sample_num_lecturas"
+            android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/btn_inicio"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
         android:background="@android:color/darker_gray" />
 
-     <TextView
-         android:id="@+id/lbl_ruta_res"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/separator_1"
-         android:layout_marginTop="12dp"
-         android:text="@string/ruta_lbl"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-     <Spinner
-         android:id="@+id/select_ruta"
-         android:layout_width="100dp"
-         android:layout_height="wrap_content"
-         android:layout_alignTop="@+id/separator_1"
-         android:layout_marginTop="7dp"
-        android:paddingTop="0dp"
-        android:paddingBottom="0dp"
-         android:layout_toRightOf="@+id/lbl_ruta_res" />
+        <TextView
+            android:id="@+id/lbl_lecturas_normales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lecturas_normales_lbl"
+            android:textSize="18sp" />
 
-     <TextView
-         android:id="@+id/lbl_lecturas_totales"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentBottom="true"
-         android:layout_alignParentLeft="true"
-         android:text="@string/lecturas_totales_lbl"
-         android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/txt_lecturas_normales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/sample_num_lecturas"
+            android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-     <TextView
-         android:id="@+id/lbl_lecturas_normales"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/separator_2"
-         android:layout_marginTop="18dp"
-         android:text="@string/lecturas_normales_lbl"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-     <TextView
-         android:id="@+id/lbl_lecturas_entre_lineas"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/lbl_lecturas_normales"
-         android:text="@string/lecturas_entre_lineas_lbl"
-         android:layout_marginTop="8dp"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/lbl_lecturas_entre_lineas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lecturas_entre_lineas_lbl"
+            android:textSize="18sp" />
 
-     <TextView
-         android:id="@+id/lbl_lecturas_impedidas"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/lbl_lecturas_entre_lineas"
-         android:text="@string/lecturas_impedidas_lbl"
-         android:layout_marginTop="8dp"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/txt_lecturas_entre_lineas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/sample_num_lecturas"
+            android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-     <TextView
-         android:id="@+id/lbl_lecturas_postergadas"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/lbl_lecturas_impedidas"
-         android:text="@string/lecturas_postergadas_lbl"
-         android:layout_marginTop="8dp"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-     <TextView
-         android:id="@+id/lbl_lecturas_reintentar"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/lbl_lecturas_postergadas"
-         android:text="@string/lecturas_reintentar_lbl"
-         android:layout_marginTop="8dp"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/lbl_lecturas_impedidas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lecturas_impedidas_lbl"
+            android:textSize="18sp" />
 
-     <TextView
-         android:id="@+id/lbl_num_lecturas"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/lbl_ruta_res"
-         android:text="@string/numero_lecturas_lbl"
-         android:layout_marginTop="8dp"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/txt_lecturas_impedidas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/sample_num_lecturas"
+            android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-     <TextView
-         android:id="@+id/lbl_lecturas_realizadas"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/lbl_num_lecturas"
-         android:text="@string/lecturas_realizadas_lbl"
-         android:layout_marginTop="8dp"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
-     
-     <TextView
-         android:id="@+id/lbl_lecturas_pendientes"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/lbl_lecturas_realizadas"
-         android:text="@string/lecturas_pendientes_lbl"
-         android:layout_marginTop="8dp"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-     <View
-         android:id="@+id/separator_2"
-         android:layout_width="fill_parent"
-         android:layout_height="1dp"
-         android:layout_alignParentLeft="true"
-         android:layout_below="@+id/lbl_lecturas_pendientes"
-         android:layout_marginTop="18dp"
-         android:background="@android:color/darker_gray" />
+        <TextView
+            android:id="@+id/lbl_lecturas_postergadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lecturas_postergadas_lbl"
+            android:textSize="18sp" />
 
-     <TextView
-         android:id="@+id/txt_lecturas_normales"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/lbl_lecturas_normales"
-         android:layout_alignBottom="@+id/lbl_lecturas_normales"
-         android:layout_toRightOf="@+id/lbl_lecturas_normales"
-         android:text="@string/sample_num_lecturas"
-         android:layout_marginLeft="5dp"
-         android:textStyle="bold"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/txt_lecturas_postergadas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/sample_num_lecturas"
+            android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-     <TextView
-         android:id="@+id/txt_lecturas_entre_lineas"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/lbl_lecturas_entre_lineas"
-         android:layout_alignBottom="@+id/lbl_lecturas_entre_lineas"
-         android:layout_marginLeft="5dp"
-         android:textStyle="bold"
-         android:layout_toRightOf="@+id/lbl_lecturas_entre_lineas"
-         android:text="@string/sample_num_lecturas"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-     <TextView
-         android:id="@+id/txt_lecturas_impedidas"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/lbl_lecturas_impedidas"
-         android:layout_alignBottom="@+id/lbl_lecturas_impedidas"
-         android:layout_marginLeft="5dp"
-         android:textStyle="bold"
-         android:layout_toRightOf="@+id/lbl_lecturas_impedidas"
-         android:text="@string/sample_num_lecturas"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/lbl_lecturas_reintentar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lecturas_reintentar_lbl"
+            android:textSize="18sp" />
 
-     <TextView
-         android:id="@+id/txt_lecturas_postergadas"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/lbl_lecturas_postergadas"
-         android:layout_alignBottom="@+id/lbl_lecturas_postergadas"
-         android:layout_toRightOf="@+id/lbl_lecturas_postergadas"
-         android:text="@string/sample_num_lecturas"
-         android:layout_marginLeft="5dp"
-         android:textStyle="bold"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/txt_lecturas_reintentar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/sample_num_lecturas"
+            android:textAppearance="@style/TextAppearance.CustomFont.Medium"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-     <TextView
-         android:id="@+id/txt_lecturas_reintentar"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/lbl_lecturas_reintentar"
-         android:layout_alignBottom="@+id/lbl_lecturas_reintentar"
-         android:layout_toRightOf="@+id/lbl_lecturas_reintentar"
-         android:text="@string/sample_num_lecturas"
-         android:layout_marginLeft="5dp"
-         android:textStyle="bold"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+    <android.support.v4.widget.Space
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="invisible" />
 
-     <TextView
-         android:id="@+id/txt_lecturas_pendientes"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/lbl_lecturas_pendientes"
-         android:layout_alignBottom="@+id/lbl_lecturas_pendientes"
-         android:layout_toRightOf="@+id/lbl_lecturas_pendientes"
-         android:text="@string/sample_num_lecturas"
-         android:layout_marginLeft="5dp"
-         android:textStyle="bold"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
 
-     <TextView
-         android:id="@+id/txt_lecturas_realizadas"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/lbl_lecturas_realizadas"
-         android:layout_alignBottom="@+id/lbl_lecturas_realizadas"
-         android:layout_marginLeft="5dp"
-         android:layout_toRightOf="@+id/lbl_lecturas_realizadas"
-         android:text="@string/sample_num_lecturas"
-         android:textAppearance="?android:attr/textAppearanceMedium"
-         android:textStyle="bold" />
+        <TextView
+            android:id="@+id/lbl_lecturas_totales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lecturas_totales_lbl"
+            android:textAppearance="@style/TextAppearance.CustomFont.Light"
+            android:textSize="22sp" />
 
-     <TextView
-         android:id="@+id/txt_numero_lecturas"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/lbl_num_lecturas"
-         android:layout_alignBottom="@+id/lbl_num_lecturas"
-         android:layout_toRightOf="@+id/lbl_num_lecturas"
-         android:text="@string/sample_num_lecturas"
-         android:layout_marginLeft="5dp"
-         android:textStyle="bold"
-         android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/txt_lecturas_totales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginStart="4dp"
+            android:text="@string/sample_num_lecturas"
+            android:textAppearance="@style/TextAppearance.CustomFont.Light"
+            android:textSize="24sp" />
+    </LinearLayout>
 
-     <TextView
-         android:id="@+id/txt_lecturas_totales"
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:layout_alignBaseline="@+id/lbl_lecturas_totales"
-         android:layout_alignBottom="@+id/lbl_lecturas_totales"
-         android:layout_marginLeft="5dp"
-         android:layout_toRightOf="@+id/lbl_lecturas_totales"
-         android:text="@string/sample_num_lecturas"
-         android:textAppearance="?android:attr/textAppearanceLarge"
-         android:textStyle="bold" />
-
-</RelativeLayout>
+</LinearLayout>
