@@ -99,7 +99,7 @@
     <string name="datos_medidor_lbl">Datos del Medidor</string>
     <string name="numero_lbl">Número: </string>
     <string name="estado_lbl">Estado: </string>
-    <string name="info_digitos_lbl">El medidor es de N dígitos</string>
+    <string name="info_digitos_lbl">El medidor es de %d dígitos</string>
     <string name="observacion_lbl">Observación: </string>
     <string name="nueva_lectura_lbl">Nueva Lectura: </string>
     <string name="lectura_lbl">Lectura: </string>
@@ -116,6 +116,7 @@
     <string name="bluetooth_no_encendido">No se encendió el bluetooth, note que no podrá seleccionar una impresora para imprimir.</string>
     <string name="servicios_ubicacion_apagados">Tiene que habilitar los sevicios de ubicación para poder tomar lecturas, activelos y luego presione atras para volver a la aplicación</string>
     <string name="bateria_nivel_critico">La batería está en un nivel muy bajo, se le recomienda apagar el GPS y los Datos Móviles 3G.</string>
+    <string name="msg_debe_llenar_campos_lectura">Debe llenar el campo de la lectura para poder guardarla!</string>
     <!-- Tomar Lecturas : Dialogos -->
     <string name="postergar_mensaje">Confirma que desea postergar la lectura?</string>
     <string name="reintentar_mensaje">Confirma que desea poner la lectura en estado para reintentarla al dia siguiente?</string>

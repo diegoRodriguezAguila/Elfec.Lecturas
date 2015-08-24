@@ -1,12 +1,10 @@
 package com.elfec.lecturas.modelo.estados.lectura;
 
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 import android.content.Context;
 import android.view.View;
 
 import com.elfec.lecturas.controlador.TomarLectura;
+import com.elfec.lecturas.helpers.ui.FloatingActionButtonAnimator;
 import com.elfec.lecturas.modelo.Lectura;
 import com.lecturas.elfec.R;
 
@@ -35,17 +33,17 @@ public class Impedida implements IEstadoLectura {
 		tomarLectura.lblEstadoLectura.setText(getEstadoCadena());
 		tomarLectura.lblLecturaActual.setText("" + lecturaActual.LecturaNueva);
 		tomarLectura.lblLecturaActual.setVisibility(View.VISIBLE);
-		tomarLectura.txtLecturaNueva.setVisibility(View.INVISIBLE);
+		tomarLectura.txtLecturaNueva.setVisibility(View.GONE);
 		tomarLectura.lblNuevaLectura.setText(tomarLectura.getResources()
 				.getString(R.string.lectura_lbl));
 		tomarLectura.lblEstadoLectura
 				.setBackgroundColor(getColor(tomarLectura));
-		tomarLectura.lblFechaLectura.setText(new SimpleDateFormat(
-				"dd/MMM/yyyy", Locale.getDefault())
-				.format(lecturaActual.FechaLecturaActual));
-		tomarLectura.btnConfirmarLectura.setVisibility(View.INVISIBLE);
-		tomarLectura.btnPostergarLectura.setVisibility(View.INVISIBLE);
-		tomarLectura.btnReintentarLectura.setVisibility(View.INVISIBLE);
+		if (tomarLectura.btnConfirmarLectura.getVisibility() == View.VISIBLE
+				|| FloatingActionButtonAnimator
+						.isAnimating(tomarLectura.btnConfirmarLectura))
+			FloatingActionButtonAnimator.hide(tomarLectura.btnConfirmarLectura);
+		tomarLectura.btnPostergarLectura.setVisibility(View.GONE);
+		tomarLectura.btnReintentarLectura.setVisibility(View.GONE);
 		tomarLectura.btnAgergarOrdenativo.setVisibility(View.VISIBLE);
 	}
 

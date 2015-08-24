@@ -6,6 +6,9 @@
     <style name="TextAppearance.CustomFont.Light" parent="TextAppearance.AppCompat">
         <item name="fontPath">fonts/helvetica_neue_light.otf</item>
     </style>
+    <style name="TextAppearance.CustomFont.Medium" parent="TextAppearance.AppCompat">
+        <item name="fontPath">fonts/helvetica_neue_medium.otf</item>
+    </style>
 
     <style name="TextAppearance.CustomFont.Title" parent="TextAppearance.AppCompat">
         <item name="fontPath">fonts/helvetica_neue_light.otf</item>

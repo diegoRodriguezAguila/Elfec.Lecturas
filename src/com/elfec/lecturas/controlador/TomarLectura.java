@@ -3,7 +3,6 @@ package com.elfec.lecturas.controlador;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -12,9 +11,11 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
@@ -29,7 +30,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -86,7 +87,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	public static final int LISTA_LECTURAS = 1;
 	public static final int BUSCAR_LECTURA = 2;
 
-	private RelativeLayout lecturaLayout;
+	private LinearLayout lecturaLayout;
 	private View layoutCargaListaLecturas;
 
 	private TextView lblNombre;
@@ -103,9 +104,8 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	public TextView lblNuevaLectura;
 	public EditText txtLecturaNueva;
 	public TextView lblLecturaActual;
-	public TextView lblFechaLectura;
 	public ImageButton btnAgergarOrdenativo;
-	public Button btnConfirmarLectura;
+	public FloatingActionButton btnConfirmarLectura;
 	public Button btnPostergarLectura;
 	public Button btnReintentarLectura;
 	public ImageButton btnRecordatorios;
@@ -159,7 +159,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	 * Inicializa los campos
 	 */
 	private void inicializarCampos() {
-		lecturaLayout = (RelativeLayout) findViewById(R.id.datos_de_lectura);
+		lecturaLayout = (LinearLayout) findViewById(R.id.datos_de_lectura);
 		layoutCargaListaLecturas = findViewById(R.id.layout_carga_lista_lecturas);
 
 		lblNombre = (TextView) findViewById(R.id.lbl_nombre_cliente);
@@ -176,8 +176,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		txtLecturaNueva = (EditText) findViewById(R.id.txt_nueva_lectura);
 		lblNuevaLectura = (TextView) findViewById(R.id.lbl_nueva_lectura);
 		lblLecturaActual = (TextView) findViewById(R.id.lbl_lectura);
-		lblFechaLectura = (TextView) findViewById(R.id.lbl_fecha_lectura);
-		btnConfirmarLectura = (Button) findViewById(R.id.btn_confirmar_lectura);
+		btnConfirmarLectura = (FloatingActionButton) findViewById(R.id.btn_confirmar_lectura);
 		btnPostergarLectura = (Button) findViewById(R.id.btn_postergar_lectura);
 		btnReintentarLectura = (Button) findViewById(R.id.btn_reintentar_lectura);
 		btnAgergarOrdenativo = (ImageButton) findViewById(R.id.btn_agregar_ordenativo);
@@ -317,8 +316,9 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 				lblNumMedidor.setText("" + lecturaActual.NumeroMedidor);
 				lecturaActual.mostrarLecturaEnTomarLectura(TomarLectura.this);
 				lecturaActual.mostrarMenuEnTomarLectura(TomarLectura.this);
-				lblNumDigitos.setText("El medidor es de "
-						+ lecturaActual.NumDigitosMedidor + " dígitos");
+				lblNumDigitos.setText(String.format(
+						getString(R.string.info_digitos_lbl),
+						lecturaActual.NumDigitosMedidor));
 				txtLecturaNueva
 						.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
 								lecturaActual.NumDigitosMedidor) });
@@ -413,14 +413,6 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
 	}
 
-	public void btnInicioClick(View view) {
-		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
-			finish();
-			overridePendingTransition(R.anim.slide_right_in,
-					R.anim.slide_right_out);
-		}
-	}
-
 	private Lectura lecturaActual;
 
 	public void btnConfirmarLecturaClick(View view) {
@@ -438,7 +430,9 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 				} else {
 					procederConProcesoDeGuardado();
 				}
-			}
+			} else
+				Toast.makeText(this, R.string.msg_debe_llenar_campos_lectura,
+						Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -503,9 +497,9 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 				agregarOrdenativosLecturaCiclico();
 			}
 		});
-		pd.setOnDismissListener(new OnDismissListener() {
+		pd.setOnCancelListener(new OnCancelListener() {
 			@Override
-			public void onDismiss(DialogInterface dialog) {
+			public void onCancel(DialogInterface dialog) {
 				actualizarLecturasYFiltro(true);
 			}
 		});
@@ -959,8 +953,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		final DialogoAgregarOrdenativo pd = new DialogoAgregarOrdenativo(
 				TomarLectura.this, lecturaActual,
 				R.string.titulo_impedir_lectura,
-				(ArrayList<Ordenativo>) Ordenativo
-						.obtenerOrdenativosDeImpedimento(),
+				Ordenativo.obtenerOrdenativosDeImpedimento(),
 				new OnObservacionGuardadaListener() {
 					@Override
 					public void onObservacionGuardada(

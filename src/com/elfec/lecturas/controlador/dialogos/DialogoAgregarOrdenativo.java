@@ -41,7 +41,6 @@ public class DialogoAgregarOrdenativo {
 	private SparseArray<Integer> hashConvertirCodAPos;
 	private EditText txtCodOrd;
 	private Button btnGuardar;
-	private View layoutProhibirAgregar;
 	private OrdenativoAdapter adapter;
 	private int tituloId;
 	private ArrayList<View.OnClickListener> guardarListeners;
@@ -74,6 +73,15 @@ public class DialogoAgregarOrdenativo {
 	 */
 	public void setOnDismissListener(DialogInterface.OnDismissListener listener) {
 		mDialog.setOnDismissListener(listener);
+	}
+
+	/**
+	 * Asigna un dismiss listener
+	 * 
+	 * @param listener
+	 */
+	public void setOnCancelListener(DialogInterface.OnCancelListener listener) {
+		mDialog.setOnCancelListener(listener);
 	}
 
 	/**
@@ -118,10 +126,13 @@ public class DialogoAgregarOrdenativo {
 	 * Prohibe agregar ordenativos
 	 */
 	private void prohibirAgregarOrdenativos() {
-		layoutProhibirAgregar = rootView
-				.findViewById(R.id.layout_prohibir_agregar);
-		layoutProhibirAgregar.setVisibility(View.VISIBLE);
-		layoutProhibirAgregar.requestFocus();
+		rootView.findViewById(R.id.layout_prohibir_agregar).setVisibility(
+				View.VISIBLE);
+		rootView.findViewById(R.id.layout_campos_agregar_ord).setVisibility(
+				View.GONE);
+		rootView.findViewById(R.id.separator).setVisibility(View.GONE);
+		rootView.findViewById(R.id.list_view_ordenativos).setVisibility(
+				View.GONE);
 	}
 
 	private void setBotonGuardarListener() {

@@ -94,7 +94,7 @@
         android:layout_alignStart="@+id/lbl_estado_lectura" 
         android:layout_below="@+id/lbl_estado_lectura"
         android:layout_marginTop="12dp"
-        android:background="@color/blue_peter_river"
+        android:background="?attr/colorPrimary"
         android:contentDescription="@string/blank"
         android:src="@drawable/ruta" />
 
