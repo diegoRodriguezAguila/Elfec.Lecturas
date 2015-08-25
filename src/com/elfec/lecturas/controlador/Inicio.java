@@ -190,9 +190,9 @@ public class Inicio extends AppCompatActivity implements
 	 */
 	private void eliminarDatos() {
 		new AlertDialog.Builder(this)
-				.setTitle(R.string.titulo_mensajes_advertencia)
-				.setMessage(R.string.eliminar_datos_msg)
-				.setIcon(R.drawable.warning)
+				.setTitle(R.string.titulo_eliminar_todos_los_datos)
+				.setMessage(R.string.msg_wipe_all_data_confirm)
+				.setIcon(R.drawable.eliminar_todos_los_datos_d)
 				.setPositiveButton(R.string.btn_ok,
 						new DialogInterface.OnClickListener() {
 							@Override
@@ -454,9 +454,9 @@ public class Inicio extends AppCompatActivity implements
 			progressDialog = new ProgressDialogPro(Inicio.this,
 					R.style.AppStyle_Dialog_FlavoredMaterialLight);
 			progressDialog.setCancelable(false);
-			progressDialog.setIcon(R.drawable.borrar_datos);
-			progressDialog.setMessage(getText(R.string.eliminando_datos_msg));
-			progressDialog.setTitle(R.string.titulo_eliminar_datos);
+			progressDialog.setIcon(R.drawable.eliminar_todos_los_datos_d);
+			progressDialog.setMessage(getText(R.string.msg_wiping_all_data));
+			progressDialog.setTitle(R.string.titulo_eliminar_todos_los_datos);
 			progressDialog.show();
 		}
 
@@ -483,7 +483,7 @@ public class Inicio extends AppCompatActivity implements
 				obtenerEstadoBotonCargar();
 				progressDialog.dismiss();
 				if (result) {
-					mostrarMensajeUsuario(R.string.datos_eliminados_exito);
+					mostrarMensajeUsuario(R.string.msg_all_data_wiped_successfully);
 					onBackPressed();
 				} else {
 					mostrarMensajeUsuario(R.string.datos_eliminados_error);

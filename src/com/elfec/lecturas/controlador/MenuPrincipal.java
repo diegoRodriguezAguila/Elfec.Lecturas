@@ -77,7 +77,6 @@ public class MenuPrincipal extends AppCompatActivity {
 				new AlertDialog.Builder(MenuPrincipal.this)
 						.setMessage(R.string.no_variables_msg)
 						.setTitle(R.string.titulo_no_variables)
-						.setIcon(R.drawable.error)
 						.setCancelable(false)
 						.setPositiveButton(R.string.btn_ok,
 								new OnClickListener() {

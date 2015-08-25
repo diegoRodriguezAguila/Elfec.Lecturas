@@ -16,8 +16,8 @@
     <string name="logo">Logo</string>
     <string name="fecha_no_cambiada">La fecha y hora no fueron cambiadas&#8230;</string>
     <!-- Login : Dialogo -->
-    <string name="titulo_login_usuario">Validando usuario&#8230;</string>
-    <string name="login_usuario_msg">Se esta validando la información de usuario proporcionada, espere por favor</string>
+    <string name="titulo_login_usuario">Validando usuario</string>
+    <string name="login_usuario_msg">Se esta validando la información de usuario proporcionada, espere por favor&#8230;</string>
     <!-- Login : Dialogo Advertencia Cuadro Tarifario -->
     <string name="titulo_cuadro_tarif">Cuadro tarifario incorrecto</string>
     <string name="cuadro_tarif_msg">Se encontraron datos en el telefono que corresponden a un cuadro tarifario que no es el actual, se eliminaran para poder proceder con el ingreso al sistema!</string>
@@ -68,11 +68,8 @@
     <string name="msg_exportacion_exitosa">Se completó la descarga de datos exitosamente!</string>
     <string name="titulo_error_exportacion">Error en la descarga de datos</string>
     <!-- Dialogo Eliminar datos -->
-    <string name="titulo_eliminar_datos">Eliminando todos los datos&#8230;</string>
-    <string name="eliminando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
-    <string name="datos_eliminados_exito">Datos eliminados exitosamente!</string>
+    <string name="titulo_eliminar_todos_los_datos">Eliminar todos los datos</string>
     <string name="datos_eliminados_error">Ocurrió un problema al eliminar los datos!</string>
-    <string name="title_wipe_all_data">Eliminar todos los datos</string>
     <string name="msg_restoring_route_assignments">Restaurando asignación de rutas&#8230;</string>
     <string name="msg_wiping_all_data">Eliminando toda la información local&#8230;</string>
     <string name="msg_wipe_all_data_confirm">Se procederá a restaurar el estado de todas las rutas, de todos los usuarios, que fueron importadas al teléfono. Luego se eliminará toda la información local y se cerrará su sesión, confirme si desea continuar!</string>
@@ -107,19 +104,19 @@
 
     <!-- Tomar Lecturas -->
     <string name="titulo_tomar_lecturas">&#160;Tomar lecturas</string>
-    <string name="datos_cliente_lbl">Datos del Cliente</string>
+    <string name="datos_cliente_lbl">Datos del cliente</string>
     <string name="nombre_lbl">Nombre: </string>
     <string name="direccion_lbl">Dirección: </string>
     <string name="nus_lbl">NUS: </string>
     <string name="orden_lbl">Orden: </string>
     <string name="cuenta_lbl">Cuenta: </string>
     <string name="tarifa_lbl">Tarifa: </string>
-    <string name="datos_medidor_lbl">Datos del Medidor</string>
+    <string name="datos_medidor_lbl">Datos del medidor</string>
     <string name="numero_lbl">Número: </string>
     <string name="estado_lbl">Estado: </string>
     <string name="info_digitos_lbl">El medidor es de %d dígitos</string>
     <string name="observacion_lbl">Observación: </string>
-    <string name="nueva_lectura_lbl">Nueva Lectura: </string>
+    <string name="nueva_lectura_lbl">Nueva lectura: </string>
     <string name="lectura_lbl">Lectura: </string>
     <string name="confirmar_lectura_btn">Confirmar</string>
     <string name="volver_al_menu_principal">Volver al menu principal</string>
@@ -215,6 +212,7 @@
     <string name="guardar_btn">Guardar</string>
     <string name="config_guardado_exito">Configuración guardada correctamente.</string>
     <string name="config_no_guardada">La configuración no se pudo guardar.</string>
+    <string name="titulo_config_invalida">La configuración es invalida</string>
     <string name="config_invalida">El archivo de configuración no existe o es inválido</string>
 
     <!-- Dialogo Tomar Foto -->

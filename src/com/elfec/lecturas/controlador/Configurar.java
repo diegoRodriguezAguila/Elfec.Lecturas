@@ -43,8 +43,7 @@ public class Configurar extends AppCompatActivity {
 			txtRol.setText(config.getString("rol"));
 		} catch (JSONException e) {
 			new AlertDialog.Builder(this).setMessage(R.string.config_invalida)
-					.setIcon(R.drawable.error)
-					.setTitle(R.string.titulo_mensajes_error)
+					.setTitle(R.string.titulo_config_invalida)
 					.setPositiveButton(R.string.btn_ok, null).show();
 		}
 	}

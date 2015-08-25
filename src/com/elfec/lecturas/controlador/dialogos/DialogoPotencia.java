@@ -57,7 +57,7 @@ public class DialogoPotencia {
 				.setTitle(
 						modoSoloLectura ? R.string.titulo_ver_potencia
 								: R.string.titulo_registro_potencia)
-				.setIcon(R.drawable.visualizar_potencia)
+				.setIcon(R.drawable.visualizar_potencia_d)
 				.setNegativeButton(
 						modoSoloLectura ? R.string.salida_btn
 								: R.string.btn_cancel, null);

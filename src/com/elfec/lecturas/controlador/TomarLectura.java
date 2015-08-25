@@ -843,7 +843,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 			new AlertDialog.Builder(this)
 					.setMessage(R.string.limite_modificaciones_mensaje)
 					.setTitle(R.string.titulo_limite_modificaciones)
-					.setIcon(R.drawable.error)
+					.setIcon(R.drawable.error_modificar_lectura)
 					.setPositiveButton(R.string.btn_ok, null).show();
 		}
 	}
@@ -1100,7 +1100,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		new AlertDialog.Builder(this)
 				.setMessage(R.string.limite_impresion_mensaje)
 				.setTitle(R.string.titulo_limite_impresion)
-				.setIcon(R.drawable.error)
+				.setIcon(R.drawable.error_imprimir)
 				.setPositiveButton(R.string.btn_ok, null).show();
 	}
 

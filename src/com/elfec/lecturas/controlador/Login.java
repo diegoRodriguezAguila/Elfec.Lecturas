@@ -147,7 +147,6 @@ public class Login extends AppCompatActivity {
 		new AlertDialog.Builder(this)
 				.setMessage(resultadoValidacion.obtenerMensaje())
 				.setTitle(R.string.titulo_mensajes_error)
-				.setIcon(R.drawable.error)
 				.setPositiveButton(R.string.btn_ok, null).show();
 		txtPassword.setText("");
 	}
@@ -161,7 +160,6 @@ public class Login extends AppCompatActivity {
 			final IEstadoSincronizacion estadoSinc) {
 		new AlertDialog.Builder(this).setTitle(R.string.titulo_mensajes_error)
 				.setMessage(estadoSinc.obtenerMensaje())
-				.setIcon(R.drawable.error)
 				.setPositiveButton(R.string.btn_ok, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -215,7 +213,7 @@ public class Login extends AppCompatActivity {
 				progressDialog = new ProgressDialogPro(Login.this,
 						R.style.AppStyle_Dialog_FlavoredMaterialLight);
 				progressDialog.setCancelable(false);
-				progressDialog.setIcon(R.drawable.login_usuario);
+				progressDialog.setIcon(R.drawable.login_user);
 				progressDialog.setMessage(getResources().getText(
 						R.string.login_usuario_msg));
 				progressDialog.setTitle(R.string.titulo_login_usuario);
