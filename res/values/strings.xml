@@ -79,17 +79,24 @@
     <string name="title_wipe_all_data_errors">Error en la eliminación de datos</string>
     <string name="msg_all_data_wiped_successfully">Se eliminaron todos los datos locales exitosamente!</string>
     <!-- Inicio: Dialogos -->
-    <string name="forzar_descarga_msg">Se descargarán las lecturas existentes (Leidas, Impedidas y Reintentar), despuéss se procederá a eliminar todos los datos y cerrar su sesión, confirma que desea hacerlo?</string>
+    <string name="forzar_descarga_msg"><b>ADVERTENCIA:</b> Si fuerza la descarga se descargarán sólamente aquellas lecturas realizadas hasta este punto
+        <i>(con estados: Leida, Impedida y Reintentar)</i>, lecturas entre líneas y ordenativos. 
+        Nótese que no podrá continuar realizando las lecturas que tenga pendientes, 
+            pues se eliminarán todos los datos locales y se cerrará su sesión. 
+            Tampoco se podrán reasignar las lecturas que quedaron <b>Pendientes</b>
+              <i>(para ello puede utilizar la opción de poner a Reintentar en cada lectura)</i>, 
+           confirma que desea forzar la descarga?</string>
+    <string name="titulo_forzar_descarga">Forzar descarga</string>
     <string name="eliminar_datos_msg">¡Se eliminaran todos los datos incluyendo los datos mensuales, diarios y lecturas realizadas!, después se cerrará su sesión</string>
 
     <!-- Menu principal -->
     <string name="titulo_menu_principal">&#160;Menu principal</string>
-    <string name="tomar_lecturas_btn">Tomar Lecturas</string>
-    <string name="resumen_lecturas_btn">Resumen Lecturas</string>
-    <string name="detalle_impedidas_btn">Detalle Impedidas</string>
-    <string name="detalle_lecturas_btn">Detalle Lecturas</string>
-    <string name="detalle_ordenativos_btn">Detalle Ordenativos</string>
-    <string name="detalle_entre_lineas_btn">Detalle Entre Lineas</string>
+    <string name="tomar_lecturas_btn">Tomar lecturas</string>
+    <string name="resumen_lecturas_btn">Resumen lecturas</string>
+    <string name="detalle_impedidas_btn">Detalle impedidas</string>
+    <string name="detalle_lecturas_btn">Detalle lecturas</string>
+    <string name="detalle_ordenativos_btn">Detalle ordenativos</string>
+    <string name="detalle_entre_lineas_btn">Detalle entre lineas</string>
     <!-- Menu Principal : Botones Info -->
     <string name="tomar_lecturas_btn_info">comenzar a realizar lecturas o continuar desde donde estaba</string>
     <string name="resumen_lecturas_btn_info">ver resumen general</string>
@@ -131,20 +138,21 @@
     <!-- Tomar Lecturas : Dialogos -->
     <string name="postergar_mensaje">Confirma que desea postergar la lectura?</string>
     <string name="reintentar_mensaje">Confirma que desea poner la lectura en estado para reintentarla al dia siguiente?</string>
+    <string name="titulo_estimar_lectura">Estimar lectura</string>
     <string name="estimar_mensaje">Confirma que desea estimar la lectura?, se la marcará como leída y se pondrá el ordenativo de lectura estimada!</string>
     <string name="advertencia_filtros">No existe ninguna lectura que cumpla con los criterios de filtro que estableció, se mostrarán todas las lecturas!</string>
     <!-- Tomar Lecturas : Menu -->
-    <string name="visualizar_potencia">Visualizar Potencia</string>
-    <string name="tomar_foto">Tomar Foto</string>
-    <string name="modificar_lectura">Modificar Lectura</string>
-    <string name="filtrar_lecturas">Filtrar Lecturas</string>
-    <string name="estimar_lectura">Estimar Lectura</string>
-    <string name="impedir_lectura">Impedir Lectura</string>
-    <string name="re_imprimir">ReImprimir Aviso Cobranza</string>
-    <string name="recordatorio_lector">Recordatorio Lector</string>
-    <string name="menu_medidor_entre_lineas">Medidor Entre Lineas</string>
+    <string name="visualizar_potencia">Visualizar potencia</string>
+    <string name="tomar_foto">Tomar fotogragía</string>
+    <string name="modificar_lectura">Modificar lectura</string>
+    <string name="filtrar_lecturas">Filtrar lecturas</string>
+    <string name="estimar_lectura">Estimar lectura</string>
+    <string name="impedir_lectura">Impedir lectura</string>
+    <string name="re_imprimir">Reimprimir aviso cobranza</string>
+    <string name="recordatorio_lector">Recordatorio lector</string>
+    <string name="menu_medidor_entre_lineas">Medidor entre lineas</string>
     <!-- Tomar Lecturas : Dialogo Confirmación Impresion -->
-    <string name="titulo_confirmar_impresion">Confirmar Impresión</string>
+    <string name="titulo_confirmar_impresion">Confirmar impresión</string>
     <string name="confirmar_impresion_msg">¿Desea imprimir el aviso de cobro?</string>
     <string name="no_mostrar_chk">No volver a mostrar este mensaje</string>
     <string name="no_mostrar_info">Puede volver a habilitar esta opción en Inicio dentro el menu de opciones, en la opción Personalizar UI</string>
@@ -152,13 +160,13 @@
     <!-- Busqueda Lectura -->
     <string name="titulo_buscar_lectura">&#160;Buscar lectura</string>
     <string name="buscar_btn">Buscar</string>
-    <string name="buscar_por_cuenta_lbl">Buscar por Cuenta</string>
-    <string name="buscar_por_medidor_lbl">Buscar por Medidor</string>
+    <string name="buscar_por_cuenta_lbl">Buscar por cuenta</string>
+    <string name="buscar_por_medidor_lbl">Buscar por medidor</string>
     <string name="buscar_por_nus_lbl">Buscar por NUS</string>
     <string name="medidor_lbl">Medidor:</string>
     <string name="res_fallido_busqueda">Su búsqueda no produjo ningún resultado!</string>
     <!-- Busqueda Lectura : Dialogo Resultados -->
-    <string name="titulo_resultados_busqueda">Resultados Búsqueda</string>
+    <string name="titulo_resultados_busqueda">Resultados búsqueda</string>
     <string name="resultados_lbl">Encontrados:</string>
 
     <!-- Resumen Lecturas -->
@@ -191,7 +199,7 @@
     <string name="blank"></string>
 
     <!-- Opciones de Menu -->
-    <string name="menu_configurar">Configurar Servidor</string>
+    <string name="menu_configurar">Configurar servidor</string>
     <string name="menu_seleccionar_impresora">Seleccionar Impresora</string>
     <string name="menu_forzar_descarga">Forzar Descarga</string>
     <string name="menu_eliminar_datos">Eliminar Datos</string>
@@ -210,7 +218,7 @@
     <string name="config_invalida">El archivo de configuración no existe o es inválido</string>
 
     <!-- Dialogo Tomar Foto -->
-    <string name="tomar_foto_titulo">Tomar Fotografía</string>
+    <string name="tomar_foto_titulo">Tomar fotografía</string>
     <string name="preguntar_tomar_foto_lectura">Desea tomar una fotografía asociada a la lectura?</string>
     <string name="preguntar_tomar_foto_ordenativo">Desea tomar una fotografía asociada al ordenativo de la lectura?</string>
     <string name="preguntar_tomar_foto_entre_lineas">Desea tomar una fotografía asociada a la lectura del medidor entre lineas?</string>
@@ -219,40 +227,40 @@
     <string name="camara_cancelada">No se guardó ninguna fotografía&#8230;</string>
     <string name="foto_tomada">Fotografía guardada correctamente</string>
     <!-- Dialogo Potencia -->
-    <string name="titulo_registro_potencia">Registro Potencia</string>
-    <string name="titulo_ver_potencia">Visualizar Potencia</string>
+    <string name="titulo_registro_potencia">Registro potencia</string>
+    <string name="titulo_ver_potencia">Visualizar potencia</string>
     <string name="potencia_lbl">Potencia:</string>
-    <string name="energia_reactiva_lbl">Energía Reactiva:</string>
+    <string name="energia_reactiva_lbl">Energía reactiva:</string>
     <string name="cancelar_btn">Cancelar</string>
     <string name="demanda_lbl">Demanda:</string>
     <string name="no_potencia_mensaje">La lectura no tiene potencia ni energía reactiva</string>
     <string name="msg_no_se_puede_guardar_potencia">Para guardar la potencia debe llenar
         los campos correspondientes!</string>
     <!-- Dialogo Agregar Ordenativo -->
-    <string name="titulo_agregar_ordenativo">Agregar Ordenativo</string>
+    <string name="titulo_agregar_ordenativo">Agregar ordenativo</string>
     <string name="cod_obs_lbl">Cód. Observ:</string>
     <string name="prohibir_agregar_msg">Usted a excedido el número de ordenativos máximo para esta lectura!</string>
     <string name="btn_agregar">Agregar</string>
 
     <!-- Dialogo Ver Ordenativos -->
-    <string name="titulo_ver_ordenativos">Ver Ordenativos</string>
+    <string name="titulo_ver_ordenativos">Ver ordenativos</string>
     <string name="agregado_el">Agregado el</string>
     <string name="a_las">a las</string>
     <string name="no_ordenativos_lbl">La lectura no tiene ordenativos.</string>
 
     <!-- Dialogo Filtrar Lecturas -->
-    <string name="titulo_filtrar_lecturas">Filtrar Lecturas</string>
+    <string name="titulo_filtrar_lecturas">Filtrar lecturas</string>
 
     <!-- Dialogo Impedir Lectura -->
-    <string name="titulo_impedir_lectura">Impedidas</string>
+    <string name="titulo_impedir_lectura">Impedir lectura</string>
 
     <!-- Dialogo Seleccionar Impresora -->
-    <string name="titulo_seleccionar_impresora">Seleccionar Impresora</string>
+    <string name="titulo_seleccionar_impresora">Seleccionar impresora</string>
     <string name="lbl_info_no_dispositivos">No se encontraron dispositivos sincronizados, vaya a las configuraciones del telefono
         y revise los dispositivos sincronizados con el telefono.</string>
 
     <!-- Dialogo Reimprimir Aviso Cobranza -->
-    <string name="titulo_reimprimir">Re imprimir Aviso de Cobranza</string>
+    <string name="titulo_reimprimir">Reimprimir aviso de cobranza</string>
     <string name="reimprimir_mensaje">Esta seguro que desea reimprimir el aviso de cobranza?</string>
 
     <!-- Dialogo Limite de Impresión -->
@@ -264,19 +272,20 @@
     <string name="limite_modificaciones_mensaje">Usted a llegado al límite de modificaciones para esta lectura.</string>
 
     <!-- Dialogo Modificar Lectura -->
-    <string name="modificar_lectura_mensaje">Esta seguro que desea modifcar la lectura?, se pondra la lectura en estado pendiente y se eliminaran 
-        todos los datos que se hayan ingresado previamente, asi como también las fotos y ordenativos asociados a ella.</string>
+    <string name="titulo_modificar_lectura">Modificar lectura</string>
+    <string name="modificar_lectura_mensaje"><b>ADVERTENCIA:</b> Se pondra la lectura en estado pendiente y se <b>eliminaran</b> 
+        todos los datos que se hayan ingresado previamente, asi como también las fotos y ordenativos asociados a ella. ¿Confirma que desea modifcar la lectura?</string>
 
     <!-- Dialogo Recordatorio Lector -->
     <string name="titulo_recordatorio">Recordatorios</string>
-    <string name="recordatorio_actual_title_lbl">Recordatorio Actual</string>
+    <string name="recordatorio_actual_title_lbl">Recordatorio <b>actual</b></string>
     <string name="recordatorio_actual_lbl">La lectura no tiene un recordatorio actualmente.</string>
-    <string name="recordatorio_nuevo_title_lbl">Recordatorio Nuevo</string>
+    <string name="recordatorio_nuevo_title_lbl">Recordatorio <b>nuevo</b></string>
     <string name="recordatorio_info_lbl">Cuando guarda un recordatorio nuevo, el anterior se sobreescribe.</string>
     <string name="recordatorio_guardado_msg">Recordatorio guardado exitosamente!</string>
 
     <!-- Dialogo Medidor Entre Lineas -->
-    <string name="titulo_medidor_entre_lineas">Medidor Entre Lineas</string>
+    <string name="titulo_medidor_entre_lineas">Medidor entre lineas</string>
     <string name="num_medidor_lbl">Num. Medidor:</string>
     <string name="lectura_entre_lineas_lbl">Lectura:</string>
     <string name="con_potencia_chk">Con potencia</string>
@@ -287,19 +296,19 @@
     <string name="medidor_entre_lineas_guardado_msg">Medidor entre lineas guardado exitosamente!</string>
 
     <!-- Dialogo Detalle Impedidas -->
-    <string name="titulo_detalle_impedidas">Imprimir Detalle de Impedidas</string>
+    <string name="titulo_detalle_impedidas">Imprimir detalle de impedidas</string>
     <string name="detalle_impedidas_msg">Confirma que desea imprimir el resumen de detalle de lecturas impedidas?</string>
 
     <!-- Dialogo Detalle Lecturas -->
-    <string name="titulo_detalle_lecturas">Imprimir Detalle de Lecturas</string>
+    <string name="titulo_detalle_lecturas">Imprimir detalle de lecturas</string>
     <string name="detalle_lecturas_msg">Confirma que desea imprimir el resumen de detalle de lecturas?</string>
 
     <!-- Dialogo Detalle Ordenativos -->
-    <string name="titulo_detalle_ordenativos">Imprimir Detalle de Ordenativos</string>
+    <string name="titulo_detalle_ordenativos">Imprimir detalle de ordenativos</string>
     <string name="detalle_ordenativos_msg">Confirma que desea imprimir el resumen de detalle de ordenativos?</string>
 
     <!-- Dialogo Detalle Lecturas Entre Lineas -->
-    <string name="titulo_detalle_entre_lineas">Imprimir Detalle de Entre Lineas</string>
+    <string name="titulo_detalle_entre_lineas">Imprimir detalle de entre lineas</string>
     <string name="detalle_entre_lineas_msg">Confirma que desea imprimir el resumen de detalle de lecturas entre lineas?</string>
 
     <!-- Dialogo No Variables de Entorno -->

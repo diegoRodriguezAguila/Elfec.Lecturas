@@ -9,12 +9,13 @@
 
     <TextView
         android:id="@+id/layout_prohibir_agregar"
+        style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:padding="10dp"
+        android:layout_height="wrap_content"
+        android:paddingLeft="?attr/dialogPreferredPadding"
+        android:paddingRight="?attr/dialogPreferredPadding"
+        android:paddingTop="@dimen/abc_dialog_padding_top_material"
         android:text="@string/prohibir_agregar_msg"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:visibility="gone" />
 
     <LinearLayout

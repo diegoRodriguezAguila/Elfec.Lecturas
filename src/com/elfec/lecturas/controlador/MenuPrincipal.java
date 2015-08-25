@@ -141,7 +141,7 @@ public class MenuPrincipal extends AppCompatActivity {
 	public void mostrarDialogoImprimirResumen(int idStringMensaje,
 			int idStringTitulo, final DetalleResumenGenerico resumenAImprimir) {
 		new AlertDialog.Builder(this).setMessage(idStringMensaje)
-				.setIcon(R.drawable.imprimir).setTitle(idStringTitulo)
+				.setIcon(R.drawable.imprimir_d).setTitle(idStringTitulo)
 				.setPositiveButton(R.string.btn_ok, new OnClickListener() {
 
 					@Override

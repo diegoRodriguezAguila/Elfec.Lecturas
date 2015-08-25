@@ -50,8 +50,8 @@ import com.elfec.lecturas.settings.VariablesDeSesion;
 public class Lectura extends Model implements EventoAlObtenerUbicacion,
 		EventoAlObtenerResultado, IModeloBackupableTexto, IExportable {
 
-	private static final String INSERT_QUERY = "INSERT INTO ERP_ELFEC.SGC_MOVIL_LECTURAS VALUES (%d, %d, %d, %d, %d, %s, %d, %s, %s, "
-			+ "TO_DATE('%s', 'dd/mm/yyyy hh24:mi:ss', %f, %f, UPPER('%s'), %d, %s, USER, SYSDATE, %s, %d)";
+	private static final String INSERT_QUERY = "INSERT INTO ERP_ELFEC.SGC_MOVIL_LECTURAS VALUES (%d, %d, %d, %d, %d, '%s', %d, %s, %s, "
+			+ "TO_DATE('%s', 'dd/mm/yyyy hh24:mi:ss'), %f, %f, UPPER('%s'), %d, %s, USER, SYSDATE, %s, %d)";
 	private IEstadoLectura EstadoLectura;
 
 	// Atributos nuevos
@@ -431,7 +431,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 						(Recordatorio == null ? "NULL"
 								: ("'" + Recordatorio + "'")),
 						(ImporteTotal != null ? ImporteTotal.toString()
-								: "NULL"), ((PotenciaLectura == null) ? "-1"
+								: "NULL"), ((PotenciaLectura == null) ? -1
 								: PotenciaLectura.ConsumoFacturado));
 	}
 

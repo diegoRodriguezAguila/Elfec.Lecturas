@@ -4,19 +4,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <include layout="@layout/list_item_ordenativo" 
+    <include
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="-10dp"/>
+        android:layout_marginBottom="-10dp"
+        layout="@layout/list_item_ordenativo" />
 
     <LinearLayout
         android:id="@+id/seccion_fecha"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
+        android:gravity="end"
         android:paddingBottom="10dp"
-        android:gravity="end" >
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
 
         <TextView
             android:id="@+id/lbl_agregado_el"
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="@string/agregado_el"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/blue_peter_river"
+            android:textColor="?attr/colorPrimary"
             android:textSize="12sp" />
 
         <TextView
@@ -42,11 +43,11 @@
             android:id="@+id/lbl_a_las"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/a_las"
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
+            android:text="@string/a_las"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/blue_peter_river"
+            android:textColor="?attr/colorPrimary"
             android:textSize="12sp" />
 
         <TextView

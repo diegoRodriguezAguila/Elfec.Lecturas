@@ -376,9 +376,9 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 			@Override
 			public void onClick(View v) {
 				lblObservacion.setTextColor(getResources().getColor(
-						R.color.blue_peter_river));
+						R.color.elfectheme_color));
 				lblObsNum.setTextColor(getResources().getColor(
-						R.color.blue_peter_river));
+						R.color.elfectheme_color));
 				abrirDialogoVerOrdenativos();
 			}
 		};
@@ -826,8 +826,8 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		if (lectura.NumModificaciones < VariablesDeEntorno.limiteModificacionesLectura) {
 			new AlertDialog.Builder(this)
 					.setMessage(R.string.modificar_lectura_mensaje)
-					.setTitle(R.string.titulo_mensajes_advertencia)
-					.setIcon(R.drawable.warning)
+					.setTitle(R.string.titulo_modificar_lectura)
+					.setIcon(R.drawable.modificar_lectura_d)
 					.setPositiveButton(R.string.btn_ok,
 							new DialogInterface.OnClickListener() {
 								@Override
@@ -858,7 +858,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	private void mostrarDialogoReImprimir() {
 		new AlertDialog.Builder(this)
 				.setMessage(R.string.reimprimir_mensaje)
-				.setIcon(R.drawable.imprimir)
+				.setIcon(R.drawable.imprimir_d)
 				.setTitle(R.string.titulo_reimprimir)
 				.setPositiveButton(R.string.btn_ok,
 						new DialogInterface.OnClickListener() {
@@ -880,8 +880,8 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	private void mostrarDialogoEstimarLectura() {
 		new AlertDialog.Builder(this)
 				.setMessage(R.string.estimar_mensaje)
-				.setIcon(R.drawable.estimar_lectura)
-				.setTitle(R.string.titulo_mensajes_confirmar)
+				.setIcon(R.drawable.estimar_lectura_d)
+				.setTitle(R.string.titulo_estimar_lectura)
 				.setPositiveButton(R.string.btn_ok,
 						new DialogInterface.OnClickListener() {
 							@Override
@@ -961,7 +961,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 						asignarDatos();
 					}
 				});
-		pd.setIcon(R.drawable.impedir_lectura);
+		pd.setIcon(R.drawable.impedir_lectura_d);
 		pd.addOnGuardarClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -1144,7 +1144,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		if (lecturaActual.NumFotosTomadas < VariablesDeEntorno.numMaxFotosPorLectura) {
 			new AlertDialog.Builder(this)
 					.setTitle(R.string.tomar_foto_titulo)
-					.setIcon(R.drawable.camera)
+					.setIcon(R.drawable.camera_d)
 					.setMessage(R.string.preguntar_tomar_foto_lectura)
 					.setPositiveButton("Si",
 							new DialogInterface.OnClickListener() {
@@ -1173,9 +1173,9 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		if (navegacionAdapter.getActual().NumFotosTomadas < VariablesDeEntorno.numMaxFotosPorLectura) {
 			new AlertDialog.Builder(this)
 					.setTitle(R.string.tomar_foto_titulo)
-					.setIcon(R.drawable.camera)
+					.setIcon(R.drawable.camera_d)
 					.setMessage(R.string.preguntar_tomar_foto_ordenativo)
-					.setPositiveButton("Si",
+					.setPositiveButton(R.string.btn_si,
 							new DialogInterface.OnClickListener() {
 
 								@Override
@@ -1201,17 +1201,20 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	 */
 	private void mostrarDialogoFotoEntreLineas(
 			final MedidorEntreLineas medEntreLineas) {
-		new AlertDialog.Builder(this).setTitle(R.string.tomar_foto_titulo)
-				.setIcon(R.drawable.camera)
+		new AlertDialog.Builder(this)
+				.setTitle(R.string.tomar_foto_titulo)
+				.setIcon(R.drawable.camera_d)
 				.setMessage(R.string.preguntar_tomar_foto_entre_lineas)
-				.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+				.setPositiveButton(R.string.btn_si,
+						new DialogInterface.OnClickListener() {
 
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						ManejadorDeCamara.tomarFotoEntreLineas(
-								TomarLectura.this, medEntreLineas);
-					}
-				}).setNegativeButton("No", null).show();
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								ManejadorDeCamara.tomarFotoEntreLineas(
+										TomarLectura.this, medEntreLineas);
+							}
+						}).setNegativeButton(R.string.btn_no, null).show();
 	}
 
 	/**

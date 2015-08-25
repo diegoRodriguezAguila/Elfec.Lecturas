@@ -90,6 +90,7 @@
         </receiver>
         
          <service android:name="com.elfec.lecturas.servicios.ServicioImportacionDatos" />
+         <service android:name="com.elfec.lecturas.servicios.ServicioExportacionDatos" />
         
     </application>
 

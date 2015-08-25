@@ -90,7 +90,7 @@ public class DialogoAgregarOrdenativo {
 	 * @param iconDrawbleId
 	 */
 	public void setIcon(int iconDrawbleId) {
-		mDialog.setIcon(R.drawable.impedir_lectura);
+		mDialog.setIcon(iconDrawbleId);
 	}
 
 	@SuppressLint("InflateParams")

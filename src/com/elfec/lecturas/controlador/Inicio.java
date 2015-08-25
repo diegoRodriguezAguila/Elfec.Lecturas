@@ -212,9 +212,9 @@ public class Inicio extends AppCompatActivity implements
 	 */
 	private void forzarDescarga() {
 		new AlertDialog.Builder(this)
-				.setTitle(R.string.titulo_mensajes_advertencia)
+				.setTitle(R.string.titulo_forzar_descarga)
 				.setMessage(R.string.forzar_descarga_msg)
-				.setIcon(R.drawable.warning)
+				.setIcon(R.drawable.warning_export_to_server)
 				.setPositiveButton(R.string.btn_ok,
 						new DialogInterface.OnClickListener() {
 							@Override
@@ -340,14 +340,10 @@ public class Inicio extends AppCompatActivity implements
 
 	public void obtenerEstadoBotonDescargar() {
 		btnDescargarHabilitado = Lectura.seRealizaronTodasLasLecturas();
-		asignarEstadoBotonDescargar();
-	}
-
-	public void asignarEstadoBotonDescargar() {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				btnDescargarDatos.setEnabled(btnDescargarHabilitado);
+				btnDescargarDatos.setEnabled(true);
 			}
 		});
 	}

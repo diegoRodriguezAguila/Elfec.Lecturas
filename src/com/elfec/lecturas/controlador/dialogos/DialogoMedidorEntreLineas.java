@@ -61,7 +61,7 @@ public class DialogoMedidorEntreLineas {
 				R.layout.dialogo_medidor_entre_lineas, null, false);
 		mDialog = new AlertDialog.Builder(context).setView(rootView)
 				.setTitle(R.string.titulo_medidor_entre_lineas)
-				.setIcon(R.drawable.nuevo_medidor)
+				.setIcon(R.drawable.medidor_entre_lineas_d)
 				.setNegativeButton(R.string.salida_btn, null)
 				.setPositiveButton(R.string.guardar_btn, null).create();
 		conPotenciaLayout = (LinearLayout) rootView

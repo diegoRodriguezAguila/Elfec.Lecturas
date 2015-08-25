@@ -37,7 +37,7 @@ public class DialogoRecordatorio {
 				R.layout.dialogo_recordatorio_lector, null, false);
 		mDialog = new AlertDialog.Builder(context).setView(rootView)
 				.setTitle(R.string.titulo_recordatorio)
-				.setIcon(R.drawable.recordatorio_lector)
+				.setIcon(R.drawable.recordatorio_lector_d)
 				.setNegativeButton(R.string.salida_btn, null)
 				.setPositiveButton(R.string.guardar_btn, new OnClickListener() {
 					@Override

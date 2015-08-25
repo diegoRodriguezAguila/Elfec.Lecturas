@@ -9,18 +9,20 @@
     <ListView
         android:id="@+id/list_view_ord_lect"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_height="match_parent" 
-        android:fastScrollEnabled="true">
+        android:fastScrollEnabled="true" >
     </ListView>
 
     <TextView
         android:id="@+id/lbl_info_lectura_no_ordenativos"
+        style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:paddingLeft="?attr/dialogPreferredPadding"
+        android:paddingRight="?attr/dialogPreferredPadding"
+        android:paddingTop="@dimen/abc_dialog_padding_top_material"
         android:text="@string/no_ordenativos_lbl"
-        android:textAppearance="?android:attr/textAppearanceMedium"
         android:visibility="gone" />
 
 </LinearLayout>
