@@ -12,7 +12,7 @@ import com.elfec.lecturas.helpers.ManejadorImpresora;
 import com.elfec.lecturas.modelo.ConceptoLectura;
 import com.elfec.lecturas.modelo.EvolucionConsumo;
 import com.elfec.lecturas.modelo.Lectura;
-import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
+import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaException;
 import com.elfec.lecturas.settings.VariablesDeEntorno;
 
 /**
@@ -81,10 +81,10 @@ public class AvisoCobranza {
 	 * Analisa las variables de entorno para saber que tipo de impresora se seleccionó. Si no se seleccionó impresora
 	 * lanza la exepcion 
 	 * las iMZ320 y RW420deberian tener el prefijo asignado en las VariablesDeEntorno en el nombre de dispositivo bluetooth
-	 * @throws ImpresoraPredefinidaNoAsignadaExcepcion
+	 * @throws ImpresoraPredefinidaNoAsignadaException
 	 * @return aviso de cobranza en lenguaje CPCL
 	 */
-	public String obtenerImprimible() throws ImpresoraPredefinidaNoAsignadaExcepcion
+	public String obtenerImprimible() throws ImpresoraPredefinidaNoAsignadaException
 	{
 		if(ManejadorImpresora.impresoraPredefinidaFueAsignada())
 		{
@@ -99,7 +99,7 @@ public class AvisoCobranza {
 		}
 		else
 		{
-			throw new ImpresoraPredefinidaNoAsignadaExcepcion();
+			throw new ImpresoraPredefinidaNoAsignadaException();
 		}
 	}
 

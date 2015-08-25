@@ -9,6 +9,7 @@ import java.util.Locale;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.alertdialogpro.ProgressDialogPro;
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.controlador.dialogos.DialogoSeleccionImpresora;
+import com.elfec.lecturas.controlador.observers.IDataExportationObserver;
 import com.elfec.lecturas.controlador.observers.IDataImportationObserver;
 import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.helpers.utils.text.MessageListFormatter;
@@ -34,7 +36,9 @@ import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.SesionUsuario;
 import com.elfec.lecturas.modelo.seguridad.Permisos;
+import com.elfec.lecturas.servicios.ServicioExportacionDatos;
 import com.elfec.lecturas.servicios.ServicioImportacionDatos;
+import com.elfec.lecturas.servicios.receivers.DataExportationReceiver;
 import com.elfec.lecturas.servicios.receivers.DataImportationReceiver;
 import com.elfec.lecturas.settings.AdministradorSeguridad;
 import com.elfec.lecturas.settings.VariablesDeSesion;
@@ -48,7 +52,13 @@ import com.lecturas.elfec.R;
  *
  */
 public class Inicio extends AppCompatActivity implements
-		IDataImportationObserver {
+		IDataImportationObserver, IDataExportationObserver {
+
+	/**
+	 * Habilita o deshabilita el boton de Descargar datos, verificando que se
+	 * hayan realizado todas las lecturas
+	 */
+	private boolean btnDescargarHabilitado;
 
 	private TextView lblNomUsuario;
 	private TextView lblFecha;
@@ -210,9 +220,7 @@ public class Inicio extends AppCompatActivity implements
 							@Override
 							public void onClick(DialogInterface dialog,
 									int which) {
-								DescargaDeDatos descargaDeDatos = new DescargaDeDatos(
-										Inicio.this);
-								descargaDeDatos.execute((Void[]) null);
+								iniciarExportacionDatos();
 							}
 						}).setNegativeButton(R.string.btn_cancel, null).show();
 	}
@@ -330,12 +338,6 @@ public class Inicio extends AppCompatActivity implements
 		});
 	}
 
-	/**
-	 * Habilita o deshabilita el boton de Descargar datos, verificando que se
-	 * hayan realizado todas las lecturas
-	 */
-	private boolean btnDescargarHabilitado;
-
 	public void obtenerEstadoBotonDescargar() {
 		btnDescargarHabilitado = Lectura.seRealizaronTodasLasLecturas();
 		asignarEstadoBotonDescargar();
@@ -345,10 +347,7 @@ public class Inicio extends AppCompatActivity implements
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				btnDescargarDatos.setEnabled(true);
-				btnDescargarDatos
-						.setBackgroundResource(btnDescargarHabilitado ? R.drawable.elfectheme_btn_default_holo_light
-								: R.drawable.elfectheme_btn_default_disabled_holo_light);
+				btnDescargarDatos.setEnabled(btnDescargarHabilitado);
 			}
 		});
 	}
@@ -379,7 +378,7 @@ public class Inicio extends AppCompatActivity implements
 	/**
 	 * Inicia el servicio de importación de datos
 	 */
-	public void iniciarImportacionDatos() {
+	private void iniciarImportacionDatos() {
 		startService(new Intent(this, ServicioImportacionDatos.class));
 		new DataImportationReceiver(
 				Arrays.asList((IDataImportationObserver) this), this)
@@ -395,13 +394,32 @@ public class Inicio extends AppCompatActivity implements
 	public void btnDescargarDatosClick(View view) {
 		if (ClicksBotonesHelper.sePuedeClickearBoton()) {
 			if (btnDescargarHabilitado) {
-				DescargaDeDatos descargaDeDatos = new DescargaDeDatos(this);
-				descargaDeDatos.execute((Void[]) null);
-			} else {
+				new AlertDialog.Builder(this)
+						.setTitle(R.string.titulo_exportar_datos)
+						.setIcon(R.drawable.export_to_server_d)
+						.setMessage(R.string.msg_confirmar_exportacion)
+						.setNegativeButton(R.string.btn_cancel, null)
+						.setPositiveButton(R.string.btn_ok,
+								new OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										iniciarExportacionDatos();
+									}
+								}).show();
+			} else
 				mostrarMensajeUsuario(R.string.descarga_inhabilitada);
-			}
-			asignarLabelDeRutas();
 		}
+	}
+
+	/**
+	 * Inicia el servicio de exportación de datos
+	 */
+	private void iniciarExportacionDatos() {
+		startService(new Intent(this, ServicioExportacionDatos.class));
+		new DataExportationReceiver(
+				Arrays.asList((IDataExportationObserver) this), this)
+				.startReceiving();
 	}
 
 	/**
@@ -418,59 +436,6 @@ public class Inicio extends AppCompatActivity implements
 						.show();
 			}
 		});
-	}
-
-	/**
-	 * Es la tarea asincrona encargada de descargar los datos del telefono a la
-	 * base de datos ERP_ELFEC, tamién elimina los datos una vez descargados,
-	 * elimina datos diarios y verifica si el dia siguiente es cambio de mes
-	 * para borrar los datos mensuales.
-	 * 
-	 * @author drodriguez
-	 *
-	 */
-	private class DescargaDeDatos extends AsyncTask<Void, Void, Boolean> {
-		private Context context;
-
-		public DescargaDeDatos(Context context) {
-			this.context = context;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			progressDialog = new ProgressDialogPro(Inicio.this,
-					R.style.AppStyle_Dialog_FlavoredMaterialLight);
-			progressDialog.setCancelable(false);
-			progressDialog.setIcon(R.drawable.descargar_datos);
-			progressDialog.setMessage(getText(R.string.descargando_datos_msg));
-			progressDialog.setTitle(R.string.titulo_descargando_datos);
-			progressDialog.show();
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... params) {
-			ConectorBDOracle conexion = new ConectorBDOracle(context, true);
-			Boolean resp = conexion.exportarInformacionAlServidor();
-			if (resp) {
-				new EliminacionDatosManager().eliminarTodosLosDatos();
-			}
-			return resp;
-		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			if (progressDialog != null) {
-				progressDialog.dismiss();
-				if (result) {
-					obtenerEstadoBotonCargar();
-					mostrarMensajeUsuario(R.string.datos_descargados_exito);
-					onBackPressed();
-				} else {
-					mostrarMensajeUsuario(R.string.error_descarga_datos);
-				}
-			}
-		}
-
 	}
 
 	/**
@@ -605,5 +570,77 @@ public class Inicio extends AppCompatActivity implements
 		obtenerEstadoBotonCargar();
 		asignarLabelDeRutas();
 	}
+
 	// #endregion
+
+	@Override
+	public void showExportationWaiting() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				progressDialog = new ProgressDialogPro(Inicio.this,
+						R.style.AppStyle_Dialog_FlavoredMaterialLight);
+				progressDialog.setMessage(getResources().getText(
+						R.string.msg_inicializando_exportacion));
+				progressDialog.setCancelable(false);
+				progressDialog.setIndeterminate(true);
+				progressDialog.setIcon(R.drawable.export_to_server_d);
+				progressDialog.setTitle(R.string.titulo_exportar_datos);
+				progressDialog
+						.setProgressStyle(ProgressDialogPro.STYLE_HORIZONTAL);
+				progressDialog.setCanceledOnTouchOutside(false);
+				progressDialog.show();
+			}
+		});
+	}
+
+	@Override
+	public void updateExportationWaiting(final int strId, final int totalData) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (progressDialog != null) {
+					progressDialog.setIndeterminate(false);
+					progressDialog.setMax(totalData);
+					progressDialog.setMessage(getResources().getString(strId));
+				}
+			}
+		});
+	}
+
+	@Override
+	public void updateExportationWaiting(final int strId) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (progressDialog != null) {
+					progressDialog.setMax(0);
+					progressDialog.setIndeterminate(true);
+					progressDialog.setMessage(getResources().getString(strId));
+				}
+			}
+		});
+	}
+
+	@Override
+	public void updateExportationProgress(final int dataCount, int totalData) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				if (progressDialog != null)
+					progressDialog.setProgress(dataCount);
+			}
+		});
+	}
+
+	@Override
+	public void notifySuccessfulExportation() {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				mostrarMensajeUsuario(R.string.msg_exportacion_exitosa);
+			}
+		});
+		onBackPressed();
+	}
 }

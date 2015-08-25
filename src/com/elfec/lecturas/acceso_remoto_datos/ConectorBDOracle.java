@@ -320,186 +320,42 @@ public class ConectorBDOracle {
 	}
 
 	/**
-	 * Se conecta a la base de datos Oracle y descarga en ella las lecturas,
-	 * medidores entre lineas y ordenativos y actualiza el estado de las rutas
-	 * al estado correspondiente segun las lecturas realizadas
+	 * Exporta una lectura al servidor, no guarda ni realiza cambios localmente,
+	 * se debería actualizar su estado en caso de exportarse exitosamente
 	 * 
-	 * @return
+	 * @param lec
+	 * @throws SQLException
+	 * @return 1 si el insert se hizo correctamente
 	 */
-	public boolean exportarInformacionAlServidor() {
-		try {
-			exportarLecturas();
-			exportarOrdenativos();
-			exportarLecturasEntreLineas();
-			List<AsignacionRuta> listaRutas = AsignacionRuta
-					.obtenerTodasLasRutas();
-			int tam = listaRutas.size();
-			for (int i = 0; i < tam; i++) {
-				listaRutas.get(i).asignarEstadoActualRuta();
-			}
-			actualizarEstadoRutas(listaRutas, true);
-			actualizarEquivalentesReintentar(listaRutas);
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+	public int exportarLectura(Lectura lec) throws SQLException {
+		return stmt.executeUpdate(lec.toRemoteInsertQuery());
 	}
 
 	/**
-	 * Exporta las lecturas a la tabla ERP_ELFEC.SGC_MOVIL_LECTURAS
+	 * Exporta un simple ordenativo, no guarda ni realiza cambios localmente, se
+	 * debería actualizar su estado en caso de exportarse exitosamente
 	 * 
+	 * @param ordLec
+	 * @return 1 si se importó exitosamente
 	 * @throws SQLException
 	 */
-	private void exportarLecturas() throws SQLException {
-		List<Lectura> lecturas = Lectura.obtenerLecturasNoEnviadas3G();
-		for (Lectura lec : lecturas) {
-			DateFormat df = new SimpleDateFormat("dd/MM/yyyy",
-					Locale.getDefault());
-			String fechaHora = df.format(lec.FechaLecturaActual) + " "
-					+ lec.HoraLectura;
-			String query = "INSERT INTO ERP_ELFEC.SGC_MOVIL_LECTURAS VALUES "
-					+ "("
-					+ lec.Ruta
-					+ ", "
-					+ lec.Anio
-					+ ", "
-					+ lec.Mes
-					+ ", "
-					+ lec.Dia
-					+ ", "
-					+ lec.Suministro
-					+ ", '"
-					+ lec.NumeroMedidor
-					+ "', "
-					+ lec.LecturaNueva
-					+ ", "
-					+ ((lec.PotenciaLectura == null || lec.PotenciaLectura.LecturaNuevaPotencia == null) ? "NULL"
-							: lec.PotenciaLectura.LecturaNuevaPotencia
-									.toPlainString())
-					+ ", "
-					+ ((lec.PotenciaLectura == null || lec.PotenciaLectura.Reactiva == null) ? "NULL"
-							: lec.PotenciaLectura.Reactiva.toPlainString())
-					+ ", TO_DATE('"
-					+ fechaHora
-					+ "', 'dd/mm/yyyy hh24:mi:ss'), "
-					+ lec.GPSLatitud
-					+ ", "
-					+ lec.GPSLongitud
-					+ ", UPPER('"
-					+ lec.UsuarioAuditoria
-					+ "'), "
-					+ lec.getEstadoLectura().getEstadoEntero()
-					+ ", "
-					+ (lec.Recordatorio == null ? "NULL" : ("'"
-							+ lec.Recordatorio + "'"))
-					+ ", "
-					+ "USER , SYSDATE, "
-					+ (lec.ImporteTotal != null ? lec.ImporteTotal.toString()
-							: "NULL")
-					+ ", "
-					+ ((lec.PotenciaLectura == null) ? "-1"
-							: lec.PotenciaLectura.ConsumoFacturado) + ")";
-			stmt.executeUpdate(query);
-			lec.Enviado3G = 2;// 2 se envió al servidor, no necesariamente por
-								// 3G
-			lec.save();
-		}
+	public int exportarOrdenativoLectura(OrdenativoLectura ordLec)
+			throws SQLException {
+		return stmt.executeUpdate(ordLec.toRemoteInsertQuery());
 	}
 
 	/**
-	 * Exporta los ordenativos de las lecturas a la tabla
-	 * ERP_ELFEC.SGC_MOVIL_ORDENATIVOS
+	 * Exporta una lectura entre lineas al servidor, no guarda ni realiza
+	 * cambios localmente, se debería actualizar su estado en caso de exportarse
+	 * exitosamente
 	 * 
+	 * @param lec
 	 * @throws SQLException
+	 * @return 1 si el insert se hizo correctamente
 	 */
-	private void exportarOrdenativos() throws SQLException {
-		List<OrdenativoLectura> ordslecturas = OrdenativoLectura
-				.obtenerLecturasConOrdenativosNoEnviados3G();
-		for (OrdenativoLectura ordLec : ordslecturas) {
-			DateFormat df = new SimpleDateFormat("dd/MM/yyyy",
-					Locale.getDefault());
-			String fechaHora = df.format(ordLec.Fecha) + " " + ordLec.Hora;
-			String query = "INSERT INTO ERP_ELFEC.SGC_MOVIL_ORDENATIVOS VALUES "
-					+ "("
-					+ ordLec.Lectura.Ruta
-					+ ", "
-					+ ordLec.Lectura.Anio
-					+ ", "
-					+ ordLec.Lectura.Mes
-					+ ", "
-					+ ordLec.Lectura.Dia
-					+ ", "
-					+ ordLec.Lectura.Suministro
-					+ ", "
-					+ ordLec.Ordenativo.Codigo
-					+ ", TO_DATE('"
-					+ fechaHora
-					+ "', 'dd/mm/yyyy hh24:mi:ss'), UPPER('"
-					+ ordLec.UsuarioAuditoria + "'), USER , SYSDATE)";
-			stmt.executeUpdate(query);
-			ordLec.Enviado3G = 2;// 2 se envió al servidor, no necesariamente
-									// por 3G
-			ordLec.save();
-		}
-	}
-
-	/**
-	 * Exporta las lecturas de medidores entre lineas a la tabla
-	 * ERP_ELFEC.SGC_MOVIL_LECT_ENTRE_LINEAS
-	 * 
-	 * @throws SQLException
-	 */
-	private void exportarLecturasEntreLineas() throws SQLException {
-		List<MedidorEntreLineas> lecturasEntreLineas = MedidorEntreLineas
-				.obtenerMedidoresEntreLineasNoEnviados3G();
-		for (MedidorEntreLineas lecEL : lecturasEntreLineas) {
-			Calendar calendar = Calendar.getInstance();
-			calendar.setTime(lecEL.FechaLectura);
-			int anio = calendar.get(Calendar.YEAR), mes = (calendar
-					.get(Calendar.MONTH) + 1), dia = calendar
-					.get(Calendar.DAY_OF_MONTH);
-			DateFormat df = new SimpleDateFormat("dd/MM/yyyy",
-					Locale.getDefault());
-			String fechaHora = df.format(lecEL.FechaLectura) + " "
-					+ lecEL.HoraLectura;
-			String query = "INSERT INTO ERP_ELFEC.SGC_MOVIL_LECT_ENTRE_LINEAS VALUES "
-					+ "("
-					+ lecEL.Ruta
-					+ ", "
-					+ anio
-					+ ", "
-					+ mes
-					+ ", "
-					+ dia
-					+ ", NULL"
-					+ ", '"
-					+ lecEL.NumeroMedidor
-					+ "', "
-					+ lecEL.LecturaNueva
-					+ ", "
-					+ (lecEL.LecturaPotencia == null ? "NULL"
-							: lecEL.LecturaPotencia.toPlainString())
-					+ ", "
-					+ (lecEL.Reactiva == null ? "NULL" : lecEL.Reactiva
-							.toPlainString())
-					+ ", TO_DATE('"
-					+ fechaHora
-					+ "', 'dd/mm/yyyy hh24:mi:ss'), "
-					+ lecEL.GPSLatitud
-					+ ", "
-					+ lecEL.GPSLongitud
-					+ ", UPPER('"
-					+ lecEL.UsuarioAuditoria
-					+ "'), USER , SYSDATE)";
-			stmt.executeUpdate(query);
-			lecEL.Enviado3G = 2;// 2 se envió al servidor, no necesariamente por
-								// 3G
-			lecEL.save();
-		}
+	public int exportarLecturaEntreLineas(MedidorEntreLineas lecEL)
+			throws SQLException {
+		return stmt.executeUpdate(lecEL.toRemoteInsertQuery());
 	}
 
 	/**
@@ -789,8 +645,8 @@ public class ConectorBDOracle {
 	 * @param listaRutas
 	 * @throws SQLException
 	 */
-	private void actualizarEquivalentesReintentar(
-			List<AsignacionRuta> listaRutas) throws SQLException {
+	public void actualizarEquivalentesReintentar(List<AsignacionRuta> listaRutas)
+			throws SQLException {
 		List<AsignacionRuta> listaRutasEquivalentes = new ArrayList<AsignacionRuta>();
 		for (AsignacionRuta ruta : listaRutas) {
 			if (ruta.getEstado() == EstadoAsignacionRuta.RELECTURA_EXPORTADA) {

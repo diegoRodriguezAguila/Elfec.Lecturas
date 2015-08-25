@@ -6,13 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
+import com.elfec.lecturas.logica_negocio.intercambio_datos.DataExporter;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataImporter;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
+import com.elfec.lecturas.modelo.eventos.ExportacionDatosListener;
 import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.excepciones.RutaAsignadaSinLecturasException;
+import com.elfec.lecturas.modelo.intercambio_datos.ExportSpecs;
 import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
+import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 
 /**
  * Se encarga de la lógica de negocio de lecturas
@@ -97,5 +101,27 @@ public class LecturasManager {
 			resultado.agregarError(e);
 		}
 		return resultado;
+	}
+
+	/**
+	 * Exporta todas las lecturas tomadas
+	 * 
+	 * @return resultado del acceso remoto a datos
+	 */
+	public ResultadoVoid exportarLecturasTomadas(
+			final ConectorBDOracle conector, ExportacionDatosListener exportListener) {
+		return new DataExporter().exportData(new ExportSpecs<Lectura>() {
+
+			@Override
+			public int exportData(Lectura lecturaTomada)
+					throws ConnectException, SQLException {
+				return conector.exportarLectura(lecturaTomada);
+			}
+
+			@Override
+			public List<Lectura> requestDataToExport() {
+				return Lectura.obtenerLecturasNoEnviadas3G();
+			}
+		}, exportListener);
 	}
 }

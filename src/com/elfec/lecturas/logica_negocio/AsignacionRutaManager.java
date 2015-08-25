@@ -7,6 +7,7 @@ import java.util.List;
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataImporter;
 import com.elfec.lecturas.modelo.AsignacionRuta;
+import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.enums.EstadoAsignacionRuta;
 import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.excepciones.NoHayRutasAsignadasException;
@@ -79,6 +80,41 @@ public class AsignacionRutaManager {
 					ruta.save();
 				}
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			result.agregarError(e);
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.agregarError(e);
+		}
+		return result;
+	}
+
+	/**
+	 * Asigna remota y localmente el estado de DESCARGADAS a la lista de rutas.
+	 * Si ocurre un error al realizar el update remoto aquellas rutas que se
+	 * hayan logrado guardar estarán marcadas como exportadas localmente
+	 * 
+	 * @param rutas
+	 * @return {@link ResultadoVoid} lista de errores del proceso
+	 */
+	public ResultadoVoid setRutasExportadasExitosamente(
+			final ConectorBDOracle conector, List<AsignacionRuta> rutas) {
+		ResultadoVoid result = new ResultadoVoid();
+		try {
+			for (AsignacionRuta ruta : rutas) {
+				if (ruta.estaImportada()) {
+					ruta.setEstado(ruta.getEstado() == EstadoAsignacionRuta.IMPORTADA ? (ruta
+							.tieneRelecturas() ? EstadoAsignacionRuta.EXPORTADA_CON_RELECTURAS
+							: EstadoAsignacionRuta.EXPORTADA)
+							: EstadoAsignacionRuta.RELECTURA_EXPORTADA);
+					ruta.cantLecturasEnviadas = Lectura
+							.countLecturasPorEstadoYRuta(ruta.Ruta, 1, 2);
+					conector.actualizarEstadoRuta(ruta, true);
+					ruta.save();
+				}
+			}
+			conector.actualizarEquivalentesReintentar(rutas);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			result.agregarError(e);

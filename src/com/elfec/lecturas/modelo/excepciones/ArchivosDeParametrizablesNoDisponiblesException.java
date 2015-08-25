@@ -5,11 +5,11 @@ package com.elfec.lecturas.modelo.excepciones;
  * @author drodriguez
  *
  */
-public class ArchivosDeParametrizablesNoDisponiblesExcepcion extends
+public class ArchivosDeParametrizablesNoDisponiblesException extends
 		ExceptionInInitializerError {
 	private static final long serialVersionUID = 1L;
 	private String archivo;
-	public ArchivosDeParametrizablesNoDisponiblesExcepcion(String archivoOrigenError) {
+	public ArchivosDeParametrizablesNoDisponiblesException(String archivoOrigenError) {
 		this.archivo = archivoOrigenError;
 	}
 	@Override

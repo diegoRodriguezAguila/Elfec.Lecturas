@@ -57,16 +57,27 @@
 
     <!-- Inicio: Descarga de datos -->
     <string name="descargar_datos_btn">DESCARGAR DATOS</string>
-    <string name="titulo_descargando_datos">Descargando datos&#8230;</string>
-    <string name="descargando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
-    <string name="datos_descargados_exito">Datos descargados exitosamente! Se cerró su sesión, gracias.</string>
-    <string name="error_descarga_datos">Ocurrió un problema al descargar los datos!</string>
-    <string name="descarga_inhabilitada">Aún no se completaron las lecturas, no puede descargar los datos</string>
+    <string name="descarga_inhabilitada">Aún no se completaron todas las lecturas, no puede descargar los datos</string>
+    <string name="titulo_exportar_datos">Descarga de datos</string>
+    <string name="msg_confirmar_exportacion">Se procederá a iniciar el proceso de descarga de datos, luego se eliminará toda la información local y se cerrará su sesión ¿Desea continuar?</string>
+    <string name="msg_inicializando_exportacion">Inicializando la exportación de datos al servidor&#8230;</string>
+    <string name="msg_exportando_lecturas">Descargando lecturas tomadas (SGC_MOVIL_LECTURAS)&#8230;</string>
+    <string name="msg_exportando_lecturas_entre_lineas">Descargando lecturas entre lineas (SGC_MOVIL_LECT_ENTRE_LINEAS)&#8230;</string>
+    <string name="msg_exportando_ordenativos">Descargando ordenativos de lecturas (SGC_MOVIL_ORDENATIVOS)&#8230;</string>
+    <string name="msg_finalizando_exportacion">Finalizando la descarga de datos&#8230;</string>
+    <string name="msg_exportacion_exitosa">Se completó la descarga de datos exitosamente!</string>
+    <string name="titulo_error_exportacion">Error en la descarga de datos</string>
     <!-- Dialogo Eliminar datos -->
     <string name="titulo_eliminar_datos">Eliminando todos los datos&#8230;</string>
     <string name="eliminando_datos_msg">Espere porfavor, no salga de la aplicación ni apague el teléfono.</string>
     <string name="datos_eliminados_exito">Datos eliminados exitosamente!</string>
     <string name="datos_eliminados_error">Ocurrió un problema al eliminar los datos!</string>
+    <string name="title_wipe_all_data">Eliminar todos los datos</string>
+    <string name="msg_restoring_route_assignments">Restaurando asignación de rutas&#8230;</string>
+    <string name="msg_wiping_all_data">Eliminando toda la información local&#8230;</string>
+    <string name="msg_wipe_all_data_confirm">Se procederá a restaurar el estado de todas las rutas, de todos los usuarios, que fueron importadas al teléfono. Luego se eliminará toda la información local y se cerrará su sesión, confirme si desea continuar!</string>
+    <string name="title_wipe_all_data_errors">Error en la eliminación de datos</string>
+    <string name="msg_all_data_wiped_successfully">Se eliminaron todos los datos locales exitosamente!</string>
     <!-- Inicio: Dialogos -->
     <string name="forzar_descarga_msg">Se descargarán las lecturas existentes (Leidas, Impedidas y Reintentar), despuéss se procederá a eliminar todos los datos y cerrar su sesión, confirma que desea hacerlo?</string>
     <string name="eliminar_datos_msg">¡Se eliminaran todos los datos incluyendo los datos mensuales, diarios y lecturas realizadas!, después se cerrará su sesión</string>

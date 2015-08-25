@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import com.activeandroid.util.Log;
 import com.elfec.lecturas.helpers.ManejadorJSON;
-import com.elfec.lecturas.modelo.excepciones.ArchivosDeParametrizablesNoDisponiblesExcepcion;
+import com.elfec.lecturas.modelo.excepciones.ArchivosDeParametrizablesNoDisponiblesException;
 
 /**
  * Guarda todos los parametrizables de las tablas de parametros
@@ -185,7 +185,7 @@ public class VariablesDeEntorno {
 			nivelBateriaCritico = (float) params.getInt("BATERIA_CRITICA");
 		} catch (Exception e) {
 			Log.d(e.getClass().getName(), e.getMessage());
-			throw new ArchivosDeParametrizablesNoDisponiblesExcepcion(
+			throw new ArchivosDeParametrizablesNoDisponiblesException(
 					ConstantesDeEntorno.archivoParametrosGrales);
 		}
 	}
@@ -203,7 +203,7 @@ public class VariablesDeEntorno {
 			}
 		} catch (Exception e) {
 			Log.d(e.getClass().getName(), e.getMessage());
-			throw new ArchivosDeParametrizablesNoDisponiblesExcepcion(
+			throw new ArchivosDeParametrizablesNoDisponiblesException(
 					ConstantesDeEntorno.archivoCodsResumenOrdenativos);
 		}
 	}
@@ -221,7 +221,7 @@ public class VariablesDeEntorno {
 			}
 		} catch (Exception e) {
 			Log.d(e.getClass().getName(), e.getMessage());
-			throw new ArchivosDeParametrizablesNoDisponiblesExcepcion(
+			throw new ArchivosDeParametrizablesNoDisponiblesException(
 					ConstantesDeEntorno.archivoCategsNoMostrarCargoFijo);
 		}
 	}

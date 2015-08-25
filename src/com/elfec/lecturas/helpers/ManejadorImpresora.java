@@ -9,7 +9,7 @@ import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Looper;
 
-import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
+import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaException;
 import com.zebra.android.comm.BluetoothPrinterConnection;
 import com.zebra.sdk.comm.Connection;
 import com.zebra.sdk.comm.ConnectionException;
@@ -40,14 +40,14 @@ public class ManejadorImpresora {
 	 * 
 	 * @param textoCPCL
 	 *            , texto en lenguaje CPCL
-	 * @throws ImpresoraPredefinidaNoAsignadaExcepcion
+	 * @throws ImpresoraPredefinidaNoAsignadaException
 	 *             , cuando no se asignó la impresoraPredefinida y se llama al
 	 *             metodo
 	 */
 	public static void imprimir(String textoCPCL)
-			throws ImpresoraPredefinidaNoAsignadaExcepcion {
+			throws ImpresoraPredefinidaNoAsignadaException {
 		if (impresoraPredefinida == null) {
-			throw new ImpresoraPredefinidaNoAsignadaExcepcion();
+			throw new ImpresoraPredefinidaNoAsignadaException();
 		}
 		enviarAImprimirPorBluetooth(textoCPCL);
 	}

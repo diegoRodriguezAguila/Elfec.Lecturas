@@ -20,7 +20,7 @@ public class EliminacionDatosManager {
 		ResultadoVoid result = new ResultadoVoid();
 		try {
 			GestionadorBDSQLite.eliminarTodosLosDatos();
-			AppPreferences.instance().eliminarPrefernciasDeInfoReqUnaVez();
+			AppPreferences.instance().eliminarPreferenciasDeInfoReqUnaVez();
 		} catch (Exception e) {
 			e.printStackTrace();
 			result.agregarError(new RuntimeException(

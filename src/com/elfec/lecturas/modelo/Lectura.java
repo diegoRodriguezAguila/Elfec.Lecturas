@@ -25,10 +25,12 @@ import com.elfec.lecturas.controlador.TomarLectura;
 import com.elfec.lecturas.helpers.ManejadorDeCamara;
 import com.elfec.lecturas.logica_negocio.web_services.ManejadorConexionRemota;
 import com.elfec.lecturas.modelo.backuptexto.IModeloBackupableTexto;
+import com.elfec.lecturas.modelo.enums.EstadoExportacion;
 import com.elfec.lecturas.modelo.estados.lectura.EstadoLecturaFactory;
 import com.elfec.lecturas.modelo.estados.lectura.IEstadoLectura;
 import com.elfec.lecturas.modelo.eventos.EventoAlObtenerResultado;
 import com.elfec.lecturas.modelo.eventos.EventoAlObtenerUbicacion;
+import com.elfec.lecturas.modelo.interfaces.IExportable;
 import com.elfec.lecturas.modelo.validaciones.AdvConsumoBajo;
 import com.elfec.lecturas.modelo.validaciones.AdvConsumoElevado;
 import com.elfec.lecturas.modelo.validaciones.AdvIndiceMenorActual;
@@ -46,8 +48,10 @@ import com.elfec.lecturas.settings.VariablesDeSesion;
  */
 @Table(name = "Lecturas")
 public class Lectura extends Model implements EventoAlObtenerUbicacion,
-		EventoAlObtenerResultado, IModeloBackupableTexto {
+		EventoAlObtenerResultado, IModeloBackupableTexto, IExportable {
 
+	private static final String INSERT_QUERY = "INSERT INTO ERP_ELFEC.SGC_MOVIL_LECTURAS VALUES (%d, %d, %d, %d, %d, %s, %d, %s, %s, "
+			+ "TO_DATE('%s', 'dd/mm/yyyy hh24:mi:ss', %f, %f, UPPER('%s'), %d, %s, USER, SYSDATE, %s, %d)";
 	private IEstadoLectura EstadoLectura;
 
 	// Atributos nuevos
@@ -398,6 +402,38 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 
 	@Column(name = "LEMKWHADI")
 	public int KhwAdicionales;
+
+	/**
+	 * Obtiene la insert query SQL remota de la lectura
+	 * 
+	 * @return query {@link Lectura#INSERT_QUERY}
+	 */
+	public String toRemoteInsertQuery() {
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+		String fechaHora = df.format(FechaLecturaActual) + " " + HoraLectura;
+		return String
+				.format(Locale.getDefault(),
+						INSERT_QUERY,
+						Ruta,
+						Anio,
+						Mes,
+						Dia,
+						Suministro,
+						NumeroMedidor,
+						LecturaNueva,
+						((PotenciaLectura == null || PotenciaLectura.LecturaNuevaPotencia == null) ? "NULL"
+								: PotenciaLectura.LecturaNuevaPotencia
+										.toPlainString()),
+						((PotenciaLectura == null || PotenciaLectura.Reactiva == null) ? "NULL"
+								: PotenciaLectura.Reactiva.toPlainString()),
+						fechaHora, GPSLatitud, GPSLongitud, UsuarioAuditoria,
+						getEstadoLectura().getEstadoEntero(),
+						(Recordatorio == null ? "NULL"
+								: ("'" + Recordatorio + "'")),
+						(ImporteTotal != null ? ImporteTotal.toString()
+								: "NULL"), ((PotenciaLectura == null) ? "-1"
+								: PotenciaLectura.ConsumoFacturado));
+	}
 
 	/**
 	 * Obtiene el estado de la lectura en cadena
@@ -1090,5 +1126,15 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	@Override
 	public String obtenerCabeceraBackup() {
 		return "Ruta|Anio|Mes|Dia|Suministro|Cuenta|Numero Medidor|Lectura Activa|Lectura Reactiva|Lectura Potencia|Fecha y Hora Lectura|Estado|Usuario";
+	}
+
+	@Override
+	public void setExportStatus(EstadoExportacion estadoExportacion) {
+		Enviado3G = estadoExportacion == EstadoExportacion.EXPORTADO ? 2 : 0;
+	}
+
+	@Override
+	public String getRegistryResume() {
+		return "Lectura con suministro: <b>" + Suministro + "</b>";
 	}
 }

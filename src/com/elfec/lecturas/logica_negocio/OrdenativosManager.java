@@ -5,10 +5,15 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
+import com.elfec.lecturas.logica_negocio.intercambio_datos.DataExporter;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataImporter;
 import com.elfec.lecturas.modelo.Ordenativo;
+import com.elfec.lecturas.modelo.OrdenativoLectura;
+import com.elfec.lecturas.modelo.eventos.ExportacionDatosListener;
 import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
+import com.elfec.lecturas.modelo.intercambio_datos.ExportSpecs;
 import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
+import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.settings.AppPreferences;
 
@@ -58,4 +63,31 @@ public class OrdenativosManager {
 		return result;
 	}
 
+	/**
+	 * Exporta todos los ordenativos de las lecturas tomadas
+	 * 
+	 * @return resultado del acceso remoto a datos
+	 * @param conector
+	 * @param exportListener
+	 */
+	public ResultadoTipado<Boolean> exportarOrdenativosLecturas(
+			final ConectorBDOracle conector, ExportacionDatosListener exportListener) {
+		return new DataExporter().exportData(
+				new ExportSpecs<OrdenativoLectura>() {
+
+					@Override
+					public int exportData(OrdenativoLectura ordenativoLectura)
+							throws ConnectException, SQLException {
+						return conector
+								.exportarOrdenativoLectura(ordenativoLectura);
+					}
+
+					@Override
+					public List<OrdenativoLectura> requestDataToExport() {
+						return OrdenativoLectura
+								.obtenerLecturasConOrdenativosNoEnviados3G();
+
+					}
+				}, exportListener);
+	}
 }

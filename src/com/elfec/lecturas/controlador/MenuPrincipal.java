@@ -23,7 +23,7 @@ import com.elfec.lecturas.modelo.detallesresumenes.DetalleLecturas;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleLecturasEntreLineas;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleOrdenativos;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleResumenGenerico;
-import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
+import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaException;
 import com.elfec.lecturas.settings.VariablesDeEntorno;
 import com.lecturas.elfec.R;
 
@@ -179,7 +179,7 @@ public class MenuPrincipal extends AppCompatActivity {
 	public void iniciarImpresionResumen(DetalleResumenGenerico resumenAImprimir) {
 		try {
 			ManejadorImpresora.imprimir(resumenAImprimir.obtenerImprimible());
-		} catch (ImpresoraPredefinidaNoAsignadaExcepcion e) {
+		} catch (ImpresoraPredefinidaNoAsignadaException e) {
 			Toast.makeText(MenuPrincipal.this, e.getMessage(),
 					Toast.LENGTH_LONG).show();
 		}

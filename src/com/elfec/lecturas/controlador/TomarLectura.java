@@ -70,7 +70,7 @@ import com.elfec.lecturas.modelo.eventos.OnMedidorEntreLineasGuardadoListener;
 import com.elfec.lecturas.modelo.eventos.OnObservacionGuardadaListener;
 import com.elfec.lecturas.modelo.eventos.OnPotenciaGuardadaListener;
 import com.elfec.lecturas.modelo.eventos.OnRecordatorioGuardadoListener;
-import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaExcepcion;
+import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaException;
 import com.elfec.lecturas.modelo.seguridad.Restricciones;
 import com.elfec.lecturas.modelo.validaciones.IValidacionLectura;
 import com.elfec.lecturas.settings.AdministradorSeguridad;
@@ -1086,7 +1086,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		try {
 			ManejadorImpresora.imprimir(avisoCobranza.obtenerImprimible());
 			impresionExitosa = true;
-		} catch (ImpresoraPredefinidaNoAsignadaExcepcion e) {
+		} catch (ImpresoraPredefinidaNoAsignadaException e) {
 			Toast.makeText(TomarLectura.this, e.getMessage(), Toast.LENGTH_LONG)
 					.show();
 		}

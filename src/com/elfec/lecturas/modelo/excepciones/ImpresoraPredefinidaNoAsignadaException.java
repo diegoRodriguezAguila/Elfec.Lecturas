@@ -5,7 +5,7 @@ package com.elfec.lecturas.modelo.excepciones;
  * @author drodriguez
  *
  */
-public class ImpresoraPredefinidaNoAsignadaExcepcion extends Exception {
+public class ImpresoraPredefinidaNoAsignadaException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 	@Override

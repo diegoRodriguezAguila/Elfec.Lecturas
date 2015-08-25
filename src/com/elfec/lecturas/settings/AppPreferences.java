@@ -13,8 +13,8 @@ import android.preference.PreferenceManager;
 public class AppPreferences {
 
 	private final String LOGGED_USERNAME = "loggedUsername";
-	// ONCE IMPORT DATA
-	private final String ALL_ONCE_REQUIRED_DATA_IMPORTADOS = "allOnceReqDataImportados";
+	// ONCE IMPORT DATOS
+	private final String ALL_ONCE_REQUIRED_DATOS_IMPORTADOS = "allOnceReqDataImportados";
 	private final String PARAMETRIZABLES_IMPORTADOS = "parametrizablesImportados";
 	private final String ORDENATIVOS_IMPORTADOS = "ordenativosImportados";
 	private final String BASES_CALCULO_CPTOS_IMPORTADOS = "conceptCalculationBasesImportados";
@@ -88,7 +88,8 @@ public class AppPreferences {
 	 * @return true si es que ya se importó toda
 	 */
 	public boolean estaInfoReqUnaVezImportados() {
-		return preferences.getBoolean(ALL_ONCE_REQUIRED_DATA_IMPORTADOS, false);
+		return preferences
+				.getBoolean(ALL_ONCE_REQUIRED_DATOS_IMPORTADOS, false);
 	}
 
 	/**
@@ -99,7 +100,7 @@ public class AppPreferences {
 	 */
 	public AppPreferences setInfoReqUnaVezImportados(boolean estaImportados) {
 		preferences.edit()
-				.putBoolean(ALL_ONCE_REQUIRED_DATA_IMPORTADOS, estaImportados)
+				.putBoolean(ALL_ONCE_REQUIRED_DATOS_IMPORTADOS, estaImportados)
 				.commit();
 		return this;
 	}
@@ -253,8 +254,8 @@ public class AppPreferences {
 	 * Borra las preferencias guardadas de la información que se debe importar
 	 * solo una vez
 	 */
-	public void eliminarPrefernciasDeInfoReqUnaVez() {
-		preferences.edit().remove(ALL_ONCE_REQUIRED_DATA_IMPORTADOS)
+	public void eliminarPreferenciasDeInfoReqUnaVez() {
+		preferences.edit().remove(ALL_ONCE_REQUIRED_DATOS_IMPORTADOS)
 				.remove(PARAMETRIZABLES_IMPORTADOS)
 				.remove(ORDENATIVOS_IMPORTADOS).remove(CONCEPTOS_IMPORTADOS)
 				.remove(CONCEPTOS_CATEG_IMPORTADOS)

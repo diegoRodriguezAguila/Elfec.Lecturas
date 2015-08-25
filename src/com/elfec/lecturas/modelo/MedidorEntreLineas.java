@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.joda.time.DateTime;
+
 import android.database.Cursor;
 import android.location.Location;
 
@@ -17,8 +19,10 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 import com.elfec.lecturas.logica_negocio.web_services.ManejadorConexionRemota;
 import com.elfec.lecturas.modelo.backuptexto.IModeloBackupableTexto;
+import com.elfec.lecturas.modelo.enums.EstadoExportacion;
 import com.elfec.lecturas.modelo.eventos.EventoAlObtenerResultado;
 import com.elfec.lecturas.modelo.eventos.EventoAlObtenerUbicacion;
+import com.elfec.lecturas.modelo.interfaces.IExportable;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
@@ -28,7 +32,7 @@ import com.elfec.lecturas.settings.VariablesDeSesion;
  * @author drodriguez
  */
 @Table(name = "MedidoresEntreLineas")
-public class MedidorEntreLineas extends Model implements
+public class MedidorEntreLineas extends Model implements IExportable,
 		EventoAlObtenerUbicacion, EventoAlObtenerResultado,
 		IModeloBackupableTexto {
 
@@ -70,6 +74,9 @@ public class MedidorEntreLineas extends Model implements
 	 */
 	@Column(name = "UsuarioAuditoria")
 	public String UsuarioAuditoria;
+
+	private static final String INSERT_QUERY = "INSERT INTO ERP_ELFEC.SGC_MOVIL_LECT_ENTRE_LINEAS VALUES (%d, %d, %d, %d, %s, NULL, '%s', %d, %s, %s,"
+			+ "TO_DATE('%d', 'dd/mm/yyyy hh24:mi:ss'), %d, %d, UPPER('%s'), USER , SYSDATE)";
 
 	public MedidorEntreLineas(String numMedidor, int ruta, int lecturaNueva,
 			BigDecimal lecturaPotencia, BigDecimal energiaReactiva, Date fecha) {
@@ -179,4 +186,37 @@ public class MedidorEntreLineas extends Model implements
 		return "Ruta|Anio|Mes|Dia|Numero Medidor|Lectura Activa|Lectura Reactiva|Lectura Potencia|Fecha y Hora Lectura|Usuario";
 	}
 
+	@Override
+	public void setExportStatus(EstadoExportacion estadoExportacion) {
+		Enviado3G = estadoExportacion == EstadoExportacion.EXPORTADO ? 2 : 0;
+	}
+
+	@Override
+	public String getRegistryResume() {
+		return "Lectura entre lineas de la ruta: <b>" + Ruta
+				+ "</b> con número de medidor: <b>" + NumeroMedidor + "</b>";
+	}
+
+	/**
+	 * Obtiene la insert query SQL remota de la lectura entre lineas
+	 * 
+	 * @return query {@link Lectura#INSERT_QUERY}
+	 */
+	public String toRemoteInsertQuery() {
+		DateTime fechaLec = new DateTime(FechaLectura.getTime());
+		String fechaHora = fechaLec.toString("dd/MM/yyyy") + " " + HoraLectura;
+		return String.format(
+				Locale.getDefault(),
+				INSERT_QUERY,
+				Ruta,
+				fechaLec.getYear(),
+				fechaLec.getMonthOfYear(),
+				fechaLec.getDayOfMonth(),
+				NumeroMedidor,
+				LecturaNueva,
+				(LecturaPotencia == null ? "NULL" : LecturaPotencia
+						.toPlainString()), (Reactiva == null ? "NULL"
+						: Reactiva.toPlainString()), fechaHora, GPSLatitud,
+				GPSLongitud, UsuarioAuditoria);
+	}
 }

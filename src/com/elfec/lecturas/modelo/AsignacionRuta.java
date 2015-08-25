@@ -130,6 +130,15 @@ public class AsignacionRuta extends Model {
 	}
 
 	/**
+	 * Verifica si la ruta tiene relecturas
+	 * 
+	 * @return true si es que tiene
+	 */
+	public boolean tieneRelecturas() {
+		return Lectura.countLecturasPorEstadoYRuta(Ruta, 4) > 0;
+	}
+
+	/**
 	 * Obtiene todas las rutas cargadas
 	 * 
 	 * @return lista de rutas asignadas
