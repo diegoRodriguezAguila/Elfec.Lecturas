@@ -41,18 +41,21 @@ public class DialogoVerOrdenativos {
 	/**
 	 * Obtiene los ordenativos de la lectura
 	 */
-	public void obtenerOrdenativosLectura(final Lectura lecturaActual) {
+	private void obtenerOrdenativosLectura(final Lectura lecturaActual) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
+
 				listViewOrdLect = (ListView) rootView
 						.findViewById(R.id.list_view_ord_lect);
 				asignarOrdenativos(lecturaActual.obtenerOrdenativosLectura());
+
 			}
 		}).start();
+
 	}
 
-	public void asignarOrdenativos(final List<OrdenativoLectura> ordenativos) {
+	private void asignarOrdenativos(final List<OrdenativoLectura> ordenativos) {
 		mHandler.post(new Runnable() {
 			@Override
 			public void run() {

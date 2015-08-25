@@ -13,11 +13,13 @@ import android.text.TextWatcher;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.elfec.lecturas.controlador.adaptadores.OrdenativoAdapter;
 import com.elfec.lecturas.modelo.Lectura;
@@ -156,9 +158,9 @@ public class DialogoAgregarOrdenativo {
 	}
 
 	private void guardarObservacion() {
-		int pos = adapter.getSeleccionado();
-		if (pos != -1)// si es que se selecciono alguno
-		{
+		int pos = listViewOrdenativos.getCheckedItemPosition();
+		// si es que se selecciono alguno
+		if (pos != AbsListView.INVALID_POSITION) {
 			Ordenativo ordSelec = listaOrdenativos.get(pos);
 			Date fechaActual = new Date();
 			nuevoOrdLect = new OrdenativoLectura(ordSelec, lecturaActual,
@@ -170,7 +172,9 @@ public class DialogoAgregarOrdenativo {
 			if (mListener != null)
 				mListener.onObservacionGuardada(nuevoOrdLect);
 
-		}
+		} else
+			Toast.makeText(context, R.string.msg_seleccionar_ordenativo,
+					Toast.LENGTH_SHORT).show();
 	}
 
 	public void llenarHash() {
@@ -182,17 +186,15 @@ public class DialogoAgregarOrdenativo {
 
 	private void ponerItemClickListenerAO() {
 		listViewOrdenativos.setOnItemClickListener(new OnItemClickListener() {
-
 			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int pos,
-					long id) {
-				adapter.setSeleccionado(pos);
-				int codigoObs = listaOrdenativos.get(pos).Codigo;
-				String codString = "" + codigoObs;
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				String codString = "" + listaOrdenativos.get(position).Codigo;
 				textoManual = false;
 				txtCodOrd.setText(codString);
 				textoManual = true;
 				txtCodOrd.setSelection(codString.length());
+
 			}
 		});
 	}
@@ -206,14 +208,14 @@ public class DialogoAgregarOrdenativo {
 					Integer pos = hashConvertirCodAPos.get(cod);
 					if (pos != null) {
 						if (textoManual) {
-							adapter.setSeleccionado(pos);
+							listViewOrdenativos.setItemChecked(pos, true);
 							listViewOrdenativos.smoothScrollToPosition(pos);
 						}
 					} else {
-						adapter.setSeleccionado(-1);
+						listViewOrdenativos.setItemChecked(-1, true);
 					}
 				} else {
-					adapter.setSeleccionado(-1);
+					listViewOrdenativos.setItemChecked(-1, true);
 				}
 			}
 

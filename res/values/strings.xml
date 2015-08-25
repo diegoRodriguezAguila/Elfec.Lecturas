@@ -237,6 +237,7 @@
     <!-- Dialogo Agregar Ordenativo -->
     <string name="titulo_agregar_ordenativo">Agregar ordenativo</string>
     <string name="cod_obs_lbl">Cód. Observ:</string>
+    <string name="msg_seleccionar_ordenativo">Debe seleccionar o escribir un ordenativo válido para poder agregarlo!</string>
     <string name="prohibir_agregar_msg">Usted a excedido el número de ordenativos máximo para esta lectura!</string>
     <string name="btn_agregar">Agregar</string>
 

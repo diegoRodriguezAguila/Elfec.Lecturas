@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:gravity="top"
-    android:padding="10dp"
+    android:background="@drawable/select_background_material"
+    android:baselineAligned="false"
     android:orientation="horizontal">
 
     <TextView
@@ -12,18 +13,18 @@
         android:layout_height="35dp"
         android:text="@string/sample_obs"
         android:background="?attr/colorPrimary"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/lbl_descripcion"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/sample_desc_ord"
-        android:gravity="center_vertical"
         android:layout_marginLeft="6dp"
         android:layout_marginStart="6dp"
+        android:layout_weight="1"
+        android:text="@string/sample_desc_ord"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>
