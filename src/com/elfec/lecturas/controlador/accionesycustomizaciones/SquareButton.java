@@ -85,6 +85,7 @@ public class SquareButton extends LinearLayout {
 	@Override
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
+		backgroundLayout.setEnabled(enabled);
 		ViewBackgroundCompat.setBackground(backgroundLayout,
 				enabled ? background : backgroundDisabled);
 	}
