@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="green_color">#5b9221</color>
+    <color name="green_color_pressed">#6F9F3C</color>
     <color name="elfectheme_color">#215b92</color>
     <color name="highlight_elfectheme_color">#4481C0</color>
     <color name="red_alizarin">#E74C3C</color>

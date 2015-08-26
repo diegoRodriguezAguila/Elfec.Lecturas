@@ -12,6 +12,7 @@ import com.elfec.lecturas.logica_negocio.MedidoresEntreLineasManager;
 import com.elfec.lecturas.logica_negocio.OrdenativosManager;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.eventos.ExportacionDatosListener;
+import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.lecturas.elfec.R;
 
@@ -61,8 +62,6 @@ public class ServicioExportacionDatos extends Service {
 			@Override
 			public void run() {
 				sendExportationMessage(EXPORTATION_STARTING);
-				ConectorBDOracle conector = new ConectorBDOracle(
-						ServicioExportacionDatos.this, true);
 				ExportacionDatosListener exportListener = new ExportacionDatosListener() {
 					@Override
 					public void onExportacionInicializada(int totalElements) {
@@ -79,9 +78,16 @@ public class ServicioExportacionDatos extends Service {
 					public void onExportacionFinalizada() {
 					}
 				};
-				strMsgId = R.string.msg_exportando_lecturas;
-				ResultadoVoid result = new LecturasManager()
-						.exportarLecturasTomadas(conector, exportListener);
+				ResultadoVoid result = null;
+				ResultadoTipado<ConectorBDOracle> conectResult = ConectorBDOracle
+						.crear(ServicioExportacionDatos.this, true);
+				result = conectResult;
+				ConectorBDOracle conector = conectResult.getResultado();
+				if (!result.tieneErrores()) {
+					strMsgId = R.string.msg_exportando_lecturas;
+					result = new LecturasManager().exportarLecturasTomadas(
+							conector, exportListener);
+				}
 				if (!result.tieneErrores()) {
 					strMsgId = R.string.msg_exportando_lecturas_entre_lineas;
 					result = new MedidoresEntreLineasManager()

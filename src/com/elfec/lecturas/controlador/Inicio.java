@@ -15,7 +15,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +34,8 @@ import com.elfec.lecturas.logica_negocio.EliminacionDatosManager;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.SesionUsuario;
+import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
+import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.modelo.seguridad.Permisos;
 import com.elfec.lecturas.servicios.ServicioExportacionDatos;
 import com.elfec.lecturas.servicios.ServicioImportacionDatos;
@@ -434,64 +435,6 @@ public class Inicio extends AppCompatActivity implements
 		});
 	}
 
-	/**
-	 * Es la tarea asincrona encargada de eliminar los datos de la base de datos
-	 * SQLite del telefono y actualizar el estado de las rutas en la asignacion
-	 * de rutas de oracle en MOVILES.USUARIO_ASIGNACION
-	 * 
-	 * @author drodriguez
-	 *
-	 */
-	private class EliminacionDeDatos extends AsyncTask<Void, Void, Boolean> {
-		private Context context;
-
-		public EliminacionDeDatos(Context context) {
-			this.context = context;
-		}
-
-		@Override
-		protected void onPreExecute() {
-			progressDialog = new ProgressDialogPro(Inicio.this,
-					R.style.AppStyle_Dialog_FlavoredMaterialLight);
-			progressDialog.setCancelable(false);
-			progressDialog.setIcon(R.drawable.eliminar_todos_los_datos_d);
-			progressDialog.setMessage(getText(R.string.msg_wiping_all_data));
-			progressDialog.setTitle(R.string.titulo_eliminar_todos_los_datos);
-			progressDialog.show();
-		}
-
-		@Override
-		protected Boolean doInBackground(Void... voids) {
-			try {
-				ConectorBDOracle conexion = new ConectorBDOracle(context, true);
-				List<AsignacionRuta> listaRutas = AsignacionRuta
-						.obtenerRutasDeUsuario(VariablesDeSesion
-								.getUsuarioLogeado());
-				new AsignacionRutaManager().restaurarAsignacionDeRutas(
-						conexion, listaRutas);
-				new EliminacionDatosManager().eliminarTodosLosDatos();
-				return true;
-			} catch (Exception e) {
-				Log.e("Eliminación de datos", e.getMessage());
-				return false;
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Boolean result) {
-			if (progressDialog != null) {
-				obtenerEstadoBotonCargar();
-				progressDialog.dismiss();
-				if (result) {
-					mostrarMensajeUsuario(R.string.msg_all_data_wiped_successfully);
-					onBackPressed();
-				} else {
-					mostrarMensajeUsuario(R.string.datos_eliminados_error);
-				}
-			}
-		}
-	}
-
 	// #region Observer methods
 
 	@Override
@@ -567,8 +510,6 @@ public class Inicio extends AppCompatActivity implements
 		asignarLabelDeRutas();
 	}
 
-	// #endregion
-
 	@Override
 	public void showExportationWaiting() {
 		runOnUiThread(new Runnable() {
@@ -639,4 +580,69 @@ public class Inicio extends AppCompatActivity implements
 		});
 		onBackPressed();
 	}
+
+	// #endregion
+
+	// #region Eliminacion Datos
+	/**
+	 * Es la tarea asincrona encargada de eliminar los datos de la base de datos
+	 * SQLite del telefono y actualizar el estado de las rutas en la asignacion
+	 * de rutas de oracle en MOVILES.USUARIO_ASIGNACION
+	 * 
+	 * @author drodriguez
+	 *
+	 */
+	private class EliminacionDeDatos extends
+			AsyncTask<Void, Void, ResultadoVoid> {
+		private Context context;
+
+		public EliminacionDeDatos(Context context) {
+			this.context = context;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			progressDialog = new ProgressDialogPro(Inicio.this,
+					R.style.AppStyle_Dialog_FlavoredMaterialLight);
+			progressDialog.setCancelable(false);
+			progressDialog.setIcon(R.drawable.eliminar_todos_los_datos_d);
+			progressDialog
+					.setMessage(getText(R.string.msg_restoring_route_assignments));
+			progressDialog.setTitle(R.string.titulo_eliminar_todos_los_datos);
+			progressDialog.show();
+		}
+
+		@Override
+		protected ResultadoVoid doInBackground(Void... voids) {
+			List<AsignacionRuta> listaRutas = AsignacionRuta
+					.obtenerRutasImportadas();
+			ResultadoVoid result = null;
+			ResultadoTipado<ConectorBDOracle> conectResult = ConectorBDOracle
+					.crear(context, true);
+			result = conectResult;
+			if (!result.tieneErrores()) {
+				result = new AsignacionRutaManager()
+						.restaurarAsignacionDeRutas(
+								conectResult.getResultado(), listaRutas);
+			}
+			if (!result.tieneErrores()) {
+				updateImportationWaiting(R.string.msg_wiping_all_data);
+				new EliminacionDatosManager().eliminarTodosLosDatos();
+			}
+			return result;
+		}
+
+		@Override
+		protected void onPostExecute(ResultadoVoid result) {
+			hideWaiting();
+			showErrors(R.string.title_wipe_all_data_errors,
+					R.drawable.eliminar_todos_los_datos_d, result.getErrores());
+			if (!result.tieneErrores()) {
+				mostrarMensajeUsuario(R.string.msg_all_data_wiped_successfully);
+				onBackPressed();
+			}
+		}
+	}
+	// #endregion
+
 }

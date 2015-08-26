@@ -45,7 +45,6 @@ public class DialogoVerOrdenativos {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-
 				listViewOrdLect = (ListView) rootView
 						.findViewById(R.id.list_view_ord_lect);
 				asignarOrdenativos(lecturaActual.obtenerOrdenativosLectura());

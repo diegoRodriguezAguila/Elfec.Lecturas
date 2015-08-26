@@ -24,14 +24,14 @@ import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
+import com.elfec.lecturas.servicios.receivers.DataImportationReceiver;
 import com.elfec.lecturas.settings.AppPreferences;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 import com.lecturas.elfec.R;
 
 /**
  * Servicio android que corre en segundo plano para realizar la importación de
- * datos del servidor, notifica eventos de UI a
- * {@link DataImportationReceiver}
+ * datos del servidor, notifica eventos de UI a {@link DataImportationReceiver}
  * 
  * @author drodriguez
  *
@@ -71,8 +71,6 @@ public class ServicioImportacionDatos extends Service {
 			@Override
 			public void run() {
 				sendImportationAction(IMPORTATION_STARTING);
-				ConectorBDOracle conector = new ConectorBDOracle(
-						ServicioImportacionDatos.this, true);
 				ImportacionDatosListener importacionDatosListener = new ImportacionDatosListener() {
 					@Override
 					public void onImportacionIniciada() {
@@ -83,8 +81,13 @@ public class ServicioImportacionDatos extends Service {
 					public void onImportacionFinalizada(ResultadoVoid result) {
 					}
 				};
-				ResultadoVoid result = importarDatosRequeridosUnaVez(conector,
-						importacionDatosListener);
+				ResultadoVoid result = null;
+				ResultadoTipado<ConectorBDOracle> conectResult = ConectorBDOracle
+						.crear(ServicioImportacionDatos.this, true);
+				result = conectResult;
+				ConectorBDOracle conector = conectResult.getResultado();
+				result = importarDatosRequeridosUnaVez(conector,
+						importacionDatosListener, result);
 				result = importarDatosRutas(conector, importacionDatosListener,
 						result);
 				sendImportationFinished(result);
@@ -148,16 +151,19 @@ public class ServicioImportacionDatos extends Service {
 	 * 
 	 * @param conector
 	 * @param importacionDatosListener
+	 * @param result
 	 * @return resultado
 	 */
 	private ResultadoVoid importarDatosRequeridosUnaVez(
 			ConectorBDOracle conector,
-			ImportacionDatosListener importacionDatosListener) {
-		ResultadoVoid result = new ResultadoVoid();
+			ImportacionDatosListener importacionDatosListener,
+			ResultadoVoid result) {
 		if (!AppPreferences.instance().estaInfoReqUnaVezImportados()) {
-			strMsgId = R.string.msg_importando_parametrizables;
-			result = new ParametrizablesManager().importarParametrizables(
-					conector, importacionDatosListener);
+			if (!result.tieneErrores()) {
+				strMsgId = R.string.msg_importando_parametrizables;
+				result = new ParametrizablesManager().importarParametrizables(
+						conector, importacionDatosListener);
+			}
 			if (!result.tieneErrores()) {
 				strMsgId = R.string.msg_importando_ordenativos;
 				result = new OrdenativosManager().importarOrdenativos(conector,

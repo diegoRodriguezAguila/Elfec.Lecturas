@@ -35,8 +35,9 @@
                 android:onClick="btnTomarLecturasClick"
                 android:visibility="invisible"
                 app:bottomIcon="@drawable/tomar_lectura"
-                app:buttonBackground="@drawable/green_btn_default_holo_light"
                 app:principalText="@string/tomar_lecturas_btn"
+                app:colorSquareButton="@color/green_color"
+                app:colorSquareButtonPressed="@color/green_color_pressed"
                 app:subText="@string/tomar_lecturas_btn_info" />
         </LinearLayout>
 

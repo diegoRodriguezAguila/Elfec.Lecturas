@@ -1,5 +1,6 @@
 package com.elfec.lecturas.acceso_remoto_datos;
 
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,7 +20,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.util.Log;
+import android.nfc.FormatException;
 
 import com.elfec.lecturas.helpers.ManejadorJSON;
 import com.elfec.lecturas.modelo.AsignacionRuta;
@@ -41,6 +42,9 @@ import com.elfec.lecturas.modelo.ReclasificacionCategoria;
 import com.elfec.lecturas.modelo.TokenServicioWeb;
 import com.elfec.lecturas.modelo.Usuario;
 import com.elfec.lecturas.modelo.enums.EstadoAsignacionRuta;
+import com.elfec.lecturas.modelo.excepciones.OracleBDConexionException;
+import com.elfec.lecturas.modelo.excepciones.OracleBDConfiguracionException;
+import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.settings.ConstantesDeEntorno;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 
@@ -61,16 +65,22 @@ public class ConectorBDOracle {
 	 * Crea una nueva conexion con la base de datos Oracle, usando la
 	 * información de conexión del archivo JSON de configuración que se
 	 * encuentra en la carpeta <b>assets</b> o con la configuración configurada
-	 * desde el dispositivo
+	 * desde el dispositivo. Para crear una nueva conexión debe usar el método
+	 * {@link ConectorBDOracle#crear(Context, boolean)}
 	 * 
 	 * @param contexto
-	 *            , la actividad de la que se llama el conector, necesaria para
-	 *            poder acceder a la carpeta <b>assets</b>
+	 *            contexto, necesario para poder acceder a la carpeta
+	 *            <b>assets</b>
 	 * @param habilitarRol
 	 *            , indica si se debe habilitar o no el rol de lecturas para
 	 *            esta conexión
+	 * @throws JSONException
+	 * @throws OracleBDConexionException
+	 * @throws FormatException
+	 * @throws ConnectException
 	 */
-	public ConectorBDOracle(Context contexto, boolean habilitarRol) {
+	private ConectorBDOracle(Context contexto, boolean habilitarRol)
+			throws OracleBDConexionException, OracleBDConfiguracionException {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			JSONObject configBD = LectorConfigBD.obtenerConfiguracion(contexto);
@@ -83,14 +93,38 @@ public class ConectorBDOracle {
 			stmt = conn.createStatement();
 			if (habilitarRol)
 				habilitarRolLecturas(contexto);
-		} catch (SQLException e) {
-			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			throw new OracleBDConexionException();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new OracleBDConexionException();
 		} catch (JSONException e) {
 			e.printStackTrace();
+			throw new OracleBDConfiguracionException();
 		}
+	}
 
+	/**
+	 * Crea una nueva instancia de el conector a la base de datos, no es un
+	 * singletone, es un factory
+	 * 
+	 * @param contexto
+	 * @param habilitarRol
+	 * @return {@link ResultadoTipado} que contiene como resultado el
+	 *         {@link ConectorBDOracle}
+	 */
+	public static ResultadoTipado<ConectorBDOracle> crear(Context contexto,
+			boolean habilitarRol) {
+		ResultadoTipado<ConectorBDOracle> result = new ResultadoTipado<ConectorBDOracle>();
+		try {
+			result.setResultado(new ConectorBDOracle(contexto, habilitarRol));
+		} catch (FormatException e) {
+			result.agregarError(e);
+		} catch (OracleBDConexionException e) {
+			result.agregarError(e);
+		}
+		return result;
 	}
 
 	/**
@@ -102,9 +136,13 @@ public class ConectorBDOracle {
 	 * @param contexto
 	 *            , la actividad de la que se llama el conector, necesaria para
 	 *            poder acceder a la carpeta <b>assets</b>
+	 * @throws FormatException
+	 * @throws SQLException
 	 * @throws JSONException
 	 */
-	private void habilitarRolLecturas(Context contexto) throws JSONException {
+	private void habilitarRolLecturas(Context contexto)
+			throws OracleBDConfiguracionException, OracleBDConexionException {
+		String errorWhileEnablingRole = "Error al activar el rol: ";
 		try {
 			JSONObject configBD = LectorConfigBD.obtenerConfiguracion(contexto);
 			String query = "SET ROLE "
@@ -114,7 +152,10 @@ public class ConectorBDOracle {
 									+ configBD.getString("password") + "\""));
 			stmt.executeUpdate(query);
 		} catch (SQLException e) {
-			Log.d("com.elfec.lecturas", e.getCause() + ": " + e.getMessage());
+			throw new OracleBDConexionException(errorWhileEnablingRole);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			throw new OracleBDConfiguracionException(errorWhileEnablingRole);
 		}
 	}
 
