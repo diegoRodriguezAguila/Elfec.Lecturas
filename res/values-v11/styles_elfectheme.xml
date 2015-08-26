@@ -20,7 +20,6 @@
 
     <style name="AutoCompleteTextViewElfecTheme" parent="android:Widget.Holo.Light.AutoCompleteTextView">
         <item name="android:dropDownSelector">@drawable/elfectheme_list_selector_holo_light</item>
-        <item name="android:background">@drawable/elfectheme_edit_text_holo_light</item>
     </style>
 
     <style name="ProgressBarElfecTheme" parent="android:Widget.Holo.Light.ProgressBar.Horizontal">

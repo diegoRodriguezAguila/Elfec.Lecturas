@@ -6,6 +6,7 @@
     <style name="TextAppearance.CustomFont.Light" parent="TextAppearance.AppCompat">
         <item name="fontPath">fonts/helvetica_neue_light.otf</item>
     </style>
+
     <style name="TextAppearance.CustomFont.Medium" parent="TextAppearance.AppCompat">
         <item name="fontPath">fonts/helvetica_neue_medium.otf</item>
     </style>
@@ -15,19 +16,20 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">20sp</item>
     </style>
+
     <style name="AppStyle.ActionMode" parent="Widget.AppCompat.ActionMode">
         <item name="background">?attr/colorPrimary</item>
         <item name="elevation">0dp</item>
         <item name="titleTextStyle">@style/AppStyle.ActionBar.TextStyle</item>
     </style>
-    
+
     <style name="AppStyle.Button.Orange" parent="Widget.AppCompat.Button">
         <item name="colorButtonNormal">@color/orange_carrot</item>
         <item name="colorControlHighlight">@color/orange_carrot_pressed</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="fontPath">fonts/helvetica_neue_light.otf</item>
     </style>
-    
+
     <style name="AppStyle.Button.Purple" parent="Widget.AppCompat.Button">
         <item name="colorButtonNormal">@color/purple_wisteria</item>
         <item name="colorControlHighlight">@color/purple_wisteria_pressed</item>
@@ -45,22 +47,22 @@
     <style name="AppStyle.ActionBar.TextStyle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">@dimen/txt_size_action_bar</item>
-         <item name="fontPath">fonts/helvetica_neue_light.otf</item>
+        <item name="fontPath">fonts/helvetica_neue_light.otf</item>
     </style>
 
     <style name="AutoCompleteTextViewElfecTheme" parent="android:Widget.AutoCompleteTextView">
         <item name="android:dropDownSelector">@drawable/elfectheme_list_selector_holo_light</item>
-        <item name="android:background">@drawable/elfectheme_edit_text_holo_light</item>
         <item name="android:textColor">#000000</item>
     </style>
 
     <style name="ButtonElfecTheme" parent="Widget.AppCompat.Button">
-        <item name="android:textColor">@android:color/white</item>      
+        <item name="android:textColor">@android:color/white</item>
         <item name="fontPath">fonts/helvetica_neue_light.otf</item>
     </style>
 
-    <style name="ImageButtonElfecTheme" parent="android:Widget.ImageButton">
-        <item name="android:background">@drawable/elfectheme_btn_default_holo_light</item>
+    <style name="ImageButtonElfecTheme" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="fontPath">fonts/helvetica_neue_light.otf</item>
     </style>
 
     <style name="TabElfecTheme">
