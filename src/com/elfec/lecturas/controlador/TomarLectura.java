@@ -489,14 +489,9 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 					public void onObservacionGuardada(
 							OrdenativoLectura ordenativoLectura) {
 						asignarDatos();
+						agregarOrdenativosLecturaCiclico();
 					}
 				});
-		pd.addOnGuardarClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				agregarOrdenativosLecturaCiclico();
-			}
-		});
 		pd.setOnCancelListener(new OnCancelListener() {
 			@Override
 			public void onCancel(DialogInterface dialog) {
@@ -958,23 +953,18 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 					@Override
 					public void onObservacionGuardada(
 							OrdenativoLectura ordenativoLectura) {
+						estimarLectura();
+						lecturaActual.setEstadoLectura(2);// impedida
+						lecturaActual.save();
+						ManejadorBackupTexto.guardarBackupModelo(lecturaActual);
+						asignarDatos();
+						if (ordenativoLectura != null)
+							mostrarDialogoFotoOrdenativo(ordenativoLectura);
+						actualizarLecturasYFiltro(true);
 						asignarDatos();
 					}
 				});
 		pd.setIcon(R.drawable.impedir_lectura_d);
-		pd.addOnGuardarClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				estimarLectura();
-				lecturaActual.setEstadoLectura(2);// impedida
-				lecturaActual.save();
-				ManejadorBackupTexto.guardarBackupModelo(lecturaActual);
-				asignarDatos();
-				if (pd.nuevoOrdLect != null)
-					mostrarDialogoFotoOrdenativo(pd.nuevoOrdLect);
-				actualizarLecturasYFiltro(true);
-			}
-		});
 		pd.show();
 	}
 

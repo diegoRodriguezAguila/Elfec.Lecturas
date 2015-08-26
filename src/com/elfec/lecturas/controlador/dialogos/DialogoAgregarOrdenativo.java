@@ -1,6 +1,5 @@
 package com.elfec.lecturas.controlador.dialogos;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -45,8 +44,6 @@ public class DialogoAgregarOrdenativo {
 	private Button btnGuardar;
 	private OrdenativoAdapter adapter;
 	private int tituloId;
-	private ArrayList<View.OnClickListener> guardarListeners;
-	public OrdenativoLectura nuevoOrdLect;
 
 	public DialogoAgregarOrdenativo(Context context, Lectura lectura,
 			OnObservacionGuardadaListener listener) {
@@ -142,19 +139,8 @@ public class DialogoAgregarOrdenativo {
 			@Override
 			public void onClick(View view) {
 				guardarObservacion();
-				if (guardarListeners != null) {
-					for (View.OnClickListener listener : guardarListeners) {
-						listener.onClick(view);
-					}
-				}
 			}
 		});
-	}
-
-	public void addOnGuardarClickListener(View.OnClickListener listener) {
-		if (guardarListeners == null)
-			guardarListeners = new ArrayList<View.OnClickListener>();
-		guardarListeners.add(listener);
 	}
 
 	private void guardarObservacion() {
@@ -163,8 +149,8 @@ public class DialogoAgregarOrdenativo {
 		if (pos != AbsListView.INVALID_POSITION) {
 			Ordenativo ordSelec = listaOrdenativos.get(pos);
 			Date fechaActual = new Date();
-			nuevoOrdLect = new OrdenativoLectura(ordSelec, lecturaActual,
-					fechaActual);
+			OrdenativoLectura nuevoOrdLect = new OrdenativoLectura(ordSelec,
+					lecturaActual, fechaActual);
 			nuevoOrdLect.guardarYEnviarPor3G();
 			lecturaActual.ObservacionLectura = ordSelec.Codigo;
 			lecturaActual.save();

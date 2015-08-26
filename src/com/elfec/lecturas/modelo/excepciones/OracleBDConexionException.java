@@ -24,6 +24,6 @@ public class OracleBDConexionException extends Exception {
 	@Override
 	public String getMessage() {
 		return preMensaje
-				+ "No se pudo establecer conexión con el servidor, revise su nombre de usuario y contraseña. ¡Asegurese que esté conectado a la red de la empresa!";
+				+ "No se pudo establecer conexión con el servidor o ésta se interrumpió. ¡Asegurese de estar conectado a la red de la empresa!";
 	}
 }
