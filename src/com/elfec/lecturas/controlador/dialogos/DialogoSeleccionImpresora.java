@@ -19,9 +19,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.adaptadores.DispositivoBluetoothAdapter;
 import com.elfec.lecturas.helpers.ManejadorImpresora;
-import com.lecturas.elfec.R;
 
 public class DialogoSeleccionImpresora {
 	private AlertDialog mDialog;

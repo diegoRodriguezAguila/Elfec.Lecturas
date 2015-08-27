@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alertdialogpro.ProgressDialogPro;
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.helpers.ui.ClicksBotonesHelper;
 import com.elfec.lecturas.logica_negocio.SincronizadorServidor;
 import com.elfec.lecturas.modelo.SesionUsuario;
@@ -28,7 +29,6 @@ import com.elfec.lecturas.modelo.validaciones.IValidacionUsuario;
 import com.elfec.lecturas.modelo.validaciones.sincronizacion.IEstadoSincronizacion;
 import com.elfec.lecturas.settings.AdministradorSeguridad;
 import com.elfec.lecturas.settings.VariablesDeSesion;
-import com.lecturas.elfec.R;
 
 /**
  * Controlador de la actividad de Login, esta es la primera pantalla del sistema

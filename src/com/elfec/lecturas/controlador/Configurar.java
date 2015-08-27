@@ -14,8 +14,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.acceso_remoto_datos.LectorConfigBD;
-import com.lecturas.elfec.R;
 
 public class Configurar extends AppCompatActivity {
 

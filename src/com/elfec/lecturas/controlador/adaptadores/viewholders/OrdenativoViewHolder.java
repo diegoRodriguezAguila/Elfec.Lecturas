@@ -3,8 +3,8 @@ package com.elfec.lecturas.controlador.adaptadores.viewholders;
 import android.view.View;
 import android.widget.TextView;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.modelo.Ordenativo;
-import com.lecturas.elfec.R;
 
 /**
  * Viewholder para ordenativos

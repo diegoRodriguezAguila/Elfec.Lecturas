@@ -9,10 +9,10 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.adaptadores.viewholders.OrdenativoLecturaViewHolder;
 import com.elfec.lecturas.helpers.ui.Animador;
 import com.elfec.lecturas.modelo.OrdenativoLectura;
-import com.lecturas.elfec.R;
 
 public class OrdenativoLecturaAdapter extends ArrayAdapter<OrdenativoLectura> {
 

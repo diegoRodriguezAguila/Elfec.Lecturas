@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Toast;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton;
 import com.elfec.lecturas.controlador.dialogos.DialogoSeleccionImpresora;
 import com.elfec.lecturas.helpers.ManejadorImpresora;
@@ -25,7 +26,6 @@ import com.elfec.lecturas.modelo.detallesresumenes.DetalleOrdenativos;
 import com.elfec.lecturas.modelo.detallesresumenes.DetalleResumenGenerico;
 import com.elfec.lecturas.modelo.excepciones.ImpresoraPredefinidaNoAsignadaException;
 import com.elfec.lecturas.settings.VariablesDeEntorno;
-import com.lecturas.elfec.R;
 
 public class MenuPrincipal extends AppCompatActivity {
 

@@ -16,10 +16,10 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.MedidorEntreLineas;
-import com.lecturas.elfec.R;
 
 public class ResumenLecturas extends AppCompatActivity {
 

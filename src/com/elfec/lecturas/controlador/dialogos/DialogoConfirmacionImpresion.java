@@ -12,11 +12,11 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.modelo.eventos.OnImpresionConfirmadaListener;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 import com.elfec.lecturas.settings.ui.AdminUI;
 import com.elfec.lecturas.settings.ui.OpcionesPreferenciasUI;
-import com.lecturas.elfec.R;
 
 public class DialogoConfirmacionImpresion {
 

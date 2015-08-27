@@ -17,12 +17,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.dialogos.DialogoResultadosBusqueda;
 import com.elfec.lecturas.helpers.ui.TecladoHelper;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.eventos.OnLecturaSeleccionadaListener;
-import com.lecturas.elfec.R;
 
 public class BuscarLectura extends AppCompatActivity {
 

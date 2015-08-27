@@ -11,8 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.adaptadores.viewholders.DispositivoBluetoothViewHolder;
-import com.lecturas.elfec.R;
 
 /**
  * Sirve para crear la lista de dispositivos bluetooth, es el adaptador que se

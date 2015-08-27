@@ -3,10 +3,10 @@ package com.elfec.lecturas.modelo.estados.lectura;
 import android.content.Context;
 import android.view.View;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.TomarLectura;
 import com.elfec.lecturas.helpers.ui.FloatingActionButtonAnimator;
 import com.elfec.lecturas.modelo.Lectura;
-import com.lecturas.elfec.R;
 
 public class ReIntentar implements IEstadoLectura {
 

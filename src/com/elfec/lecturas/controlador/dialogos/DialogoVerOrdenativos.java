@@ -11,10 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ListView;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.adaptadores.OrdenativoLecturaAdapter;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.OrdenativoLectura;
-import com.lecturas.elfec.R;
 
 public class DialogoVerOrdenativos {
 

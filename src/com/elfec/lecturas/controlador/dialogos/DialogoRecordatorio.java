@@ -11,9 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.eventos.OnRecordatorioGuardadoListener;
-import com.lecturas.elfec.R;
 
 public class DialogoRecordatorio {
 

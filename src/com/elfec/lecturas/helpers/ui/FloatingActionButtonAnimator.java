@@ -6,7 +6,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 
-import com.lecturas.elfec.R;
+import com.elfec.lecturas.R;
 
 /**
  * Helper que sirve para animar los botones flotantes con sus metodos de salida

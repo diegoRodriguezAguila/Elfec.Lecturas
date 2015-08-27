@@ -4,7 +4,6 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 
 import com.activeandroid.app.Application;
 import com.elfec.lecturas.settings.AppPreferences;
-import com.lecturas.elfec.R;
 
 public class ElfecApp extends Application {
 	@Override

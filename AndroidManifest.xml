@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lecturas.elfec"
+    package="com.elfec.lecturas"
     android:versionCode="2"
     android:versionName="1.15.08.27" xmlns:tools="http://schemas.android.com/tools">
 

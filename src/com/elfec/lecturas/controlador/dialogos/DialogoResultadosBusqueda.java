@@ -12,10 +12,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.adaptadores.LecturaAdapter;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.eventos.OnLecturaSeleccionadaListener;
-import com.lecturas.elfec.R;
 
 public class DialogoResultadosBusqueda {
 

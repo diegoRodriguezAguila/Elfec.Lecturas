@@ -17,8 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.helpers.ui.ViewBackgroundCompat;
-import com.lecturas.elfec.R;
 
 public class SquareButton extends LinearLayout {
 

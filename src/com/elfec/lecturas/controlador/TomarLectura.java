@@ -34,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.ActivitySwipeDetector;
 import com.elfec.lecturas.controlador.accionesycustomizaciones.ISwipeListener;
 import com.elfec.lecturas.controlador.adaptadores.NavegacionAdapter;
@@ -78,7 +79,6 @@ import com.elfec.lecturas.settings.VariablesDeEntorno;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 import com.elfec.lecturas.settings.ui.AdminUI;
 import com.elfec.lecturas.settings.ui.OpcionesPreferenciasUI;
-import com.lecturas.elfec.R;
 
 public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		NavegacionListener<Lectura> {

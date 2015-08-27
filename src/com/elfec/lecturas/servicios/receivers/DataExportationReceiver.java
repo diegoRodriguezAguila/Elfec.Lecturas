@@ -9,10 +9,10 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.HandlerThread;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.observers.IDataExportationObserver;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.servicios.ServicioExportacionDatos;
-import com.lecturas.elfec.R;
 
 /**
  * Servicio de presenter que se encarga de escuchar los mensajes del servicio de

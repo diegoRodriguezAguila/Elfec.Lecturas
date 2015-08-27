@@ -20,12 +20,12 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.adaptadores.OrdenativoAdapter;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.Ordenativo;
 import com.elfec.lecturas.modelo.OrdenativoLectura;
 import com.elfec.lecturas.modelo.eventos.OnObservacionGuardadaListener;
-import com.lecturas.elfec.R;
 
 public class DialogoAgregarOrdenativo {
 

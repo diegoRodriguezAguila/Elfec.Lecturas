@@ -18,11 +18,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.adaptadores.LecturaAdapter;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.estados.lectura.EstadoLecturaFactory;
 import com.elfec.lecturas.modelo.estados.lectura.IEstadoLectura;
-import com.lecturas.elfec.R;
 import com.quentindommerc.superlistview.SuperListview;
 
 public class ListaLecturas extends AppCompatActivity {

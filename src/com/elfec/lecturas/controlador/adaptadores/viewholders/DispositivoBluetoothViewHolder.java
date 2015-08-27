@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.view.View;
 import android.widget.TextView;
 
-import com.lecturas.elfec.R;
+import com.elfec.lecturas.R;
 
 /**
  * Viewholder dispositivos bluetooth

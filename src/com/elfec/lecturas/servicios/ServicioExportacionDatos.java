@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.logica_negocio.AsignacionRutaManager;
 import com.elfec.lecturas.logica_negocio.EliminacionDatosManager;
@@ -14,7 +15,6 @@ import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.eventos.ExportacionDatosListener;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
-import com.lecturas.elfec.R;
 
 /**
  * Servicio android que corre en segundo plano para realizar la exportación de

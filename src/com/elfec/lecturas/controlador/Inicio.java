@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alertdialogpro.ProgressDialogPro;
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.controlador.dialogos.DialogoSeleccionImpresora;
 import com.elfec.lecturas.controlador.observers.IDataExportationObserver;
@@ -43,7 +44,6 @@ import com.elfec.lecturas.servicios.receivers.DataExportationReceiver;
 import com.elfec.lecturas.servicios.receivers.DataImportationReceiver;
 import com.elfec.lecturas.settings.AdministradorSeguridad;
 import com.elfec.lecturas.settings.VariablesDeSesion;
-import com.lecturas.elfec.R;
 
 /**
  * Controlador de la actividad de Inicio, esta es la segunda pantalla a la que

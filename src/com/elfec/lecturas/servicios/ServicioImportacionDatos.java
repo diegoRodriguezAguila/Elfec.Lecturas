@@ -6,6 +6,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.helpers.utils.text.AttributePicker;
 import com.elfec.lecturas.helpers.utils.text.ObjectListToSQL;
@@ -27,7 +28,6 @@ import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.servicios.receivers.DataImportationReceiver;
 import com.elfec.lecturas.settings.AppPreferences;
 import com.elfec.lecturas.settings.VariablesDeSesion;
-import com.lecturas.elfec.R;
 
 /**
  * Servicio android que corre en segundo plano para realizar la importación de

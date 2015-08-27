@@ -5,7 +5,7 @@ import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 
-import com.lecturas.elfec.R;
+import com.elfec.lecturas.R;
 
 /**
  * Se encarga de contraer o expandir un control, es un ayudante para la

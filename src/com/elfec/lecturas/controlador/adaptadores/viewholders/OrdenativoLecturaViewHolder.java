@@ -5,8 +5,8 @@ import org.joda.time.DateTime;
 import android.view.View;
 import android.widget.TextView;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.modelo.OrdenativoLectura;
-import com.lecturas.elfec.R;
 
 /**
  * Viewholder para los ordenativos de una lectura

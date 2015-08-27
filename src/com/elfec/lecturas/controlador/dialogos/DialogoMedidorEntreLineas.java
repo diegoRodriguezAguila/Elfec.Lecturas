@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.elfec.lecturas.R;
 import com.elfec.lecturas.helpers.ManejadorUbicacion;
 import com.elfec.lecturas.helpers.ui.Animador;
 import com.elfec.lecturas.logica_negocio.ManejadorBackupTexto;
@@ -27,7 +28,6 @@ import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.MedidorEntreLineas;
 import com.elfec.lecturas.modelo.eventos.OnMedidorEntreLineasGuardadoListener;
 import com.elfec.lecturas.settings.VariablesDeEntorno;
-import com.lecturas.elfec.R;
 
 public class DialogoMedidorEntreLineas {
 
