@@ -47,9 +47,9 @@ public class Login extends AppCompatActivity {
 		setContentView(R.layout.activity_login);
 		getSupportActionBar().setTitle(R.string.titulo_login);
 		txtUsuario = (TextView) findViewById(R.id.txt_usuario);
-		txtUsuario.setText("ecampos");
+		// txtUsuario.setText("ecampos");
 		txtPassword = (TextView) findViewById(R.id.txt_password);
-		txtPassword.setText("123");
+		// txtPassword.setText("123");
 		setVersionTitle();
 	}
 
