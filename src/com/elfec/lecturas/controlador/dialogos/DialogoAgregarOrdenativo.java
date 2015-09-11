@@ -6,6 +6,7 @@ import java.util.List;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -101,7 +102,12 @@ public class DialogoAgregarOrdenativo {
 				.setTitle(
 						(tituloId == -1 ? R.string.titulo_agregar_ordenativo
 								: tituloId))
-				.setNegativeButton(R.string.salida_btn, null).create();
+				.setNegativeButton(R.string.salida_btn, new OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+					}
+				}).create();
 		txtCodOrd = (EditText) rootView.findViewById(R.id.txt_cod_obs);
 		listViewOrdenativos = (ListView) rootView
 				.findViewById(R.id.list_view_ordenativos);

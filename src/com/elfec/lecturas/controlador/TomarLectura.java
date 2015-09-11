@@ -904,9 +904,8 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		Ordenativo ord = Ordenativo.obtenerOrdenativoLecturaEstimada();
 		OrdenativoLectura ordLect = new OrdenativoLectura(ord, lecturaActual,
 				fechaActual);
-		lecturaActual.ObservacionLectura = ord.Codigo;// le asigna el codigo de
-														// ordenativo lectura
-														// estimada
+		// le asigna el codigo de ordenativo lectura estimada
+		lecturaActual.ObservacionLectura = ord.Codigo;
 		if (lecturaActual.TagCalculaPotencia == 1
 				|| lecturaActual.LeePotencia == 1)// si debe calcular potencia
 		{
@@ -918,10 +917,8 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		imprimirLectura(lecturaActual);
 		ManejadorUbicacion.obtenerUbicacionActual(TomarLectura.this,
 				lecturaActual);
-		if (VariablesDeEntorno.tipoGuardadoUbicacion == 0)// no se guarda gps,
-															// se guarda
-															// directamente la
-															// lectura
+		// no se guarda gps, se guarda directamente la lectura
+		if (VariablesDeEntorno.tipoGuardadoUbicacion == 0)
 			ManejadorConexionRemota.guardarLectura(lecturaActual);
 	}
 
@@ -1001,12 +998,9 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	 * @param lecturaActual
 	 */
 	public void imprimirLectura(Lectura lecturaActual) {
+		// si imprime aviso cobro
 		if (lecturaActual.TagImpresionAviso == 1
-				&& lecturaActual.ImpresionesAvisoCobro <= VariablesDeEntorno.limiteImpresiones)// si
-																								// imprime
-																								// aviso
-																								// cobro
-		{
+				&& lecturaActual.ImpresionesAvisoCobro <= VariablesDeEntorno.limiteImpresiones) {
 			final AvisoCobranza avisoCobranza = new AvisoCobranza(lecturaActual);
 			impresionExitosa = false;
 			AdminUI adminUI = AdminUI.instanciar(VariablesDeSesion
