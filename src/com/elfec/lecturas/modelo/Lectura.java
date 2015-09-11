@@ -51,7 +51,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 		EventoAlObtenerResultado, IModeloBackupableTexto, IExportable {
 
 	private static final String INSERT_QUERY = "INSERT INTO ERP_ELFEC.SGC_MOVIL_LECTURAS VALUES (%d, %d, %d, %d, %d, '%s', %d, %s, %s, "
-			+ "TO_DATE('%s', 'dd/mm/yyyy hh24:mi:ss'), %f, %f, UPPER('%s'), %d, %s, USER, SYSDATE, %s, %d)";
+			+ "TO_DATE('%s', 'dd/mm/yyyy hh24:mi:ss'), %s, %s, UPPER('%s'), %d, %s, USER, SYSDATE, %s, %d)";
 	private IEstadoLectura EstadoLectura;
 
 	// Atributos nuevos
@@ -423,15 +423,18 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 						LecturaNueva,
 						((PotenciaLectura == null || PotenciaLectura.LecturaNuevaPotencia == null) ? "NULL"
 								: PotenciaLectura.LecturaNuevaPotencia
-										.toPlainString()),
+										.toPlainString().replace(',', '.')),
 						((PotenciaLectura == null || PotenciaLectura.Reactiva == null) ? "NULL"
-								: PotenciaLectura.Reactiva.toPlainString()),
-						fechaHora, GPSLatitud, GPSLongitud, UsuarioAuditoria,
-						getEstadoLectura().getEstadoEntero(),
+								: PotenciaLectura.Reactiva.toPlainString()
+										.replace(',', '.')), fechaHora,
+						(("" + GPSLatitud).replace(',', '.')),
+						(("" + GPSLongitud).replace(',', '.')),
+						UsuarioAuditoria, getEstadoLectura().getEstadoEntero(),
 						(Recordatorio == null ? "NULL"
 								: ("'" + Recordatorio + "'")),
-						(ImporteTotal != null ? ImporteTotal.toString()
-								: "NULL"), ((PotenciaLectura == null) ? -1
+						(ImporteTotal != null ? ImporteTotal.toPlainString()
+								.replace(',', '.') : "NULL"),
+						((PotenciaLectura == null) ? -1
 								: PotenciaLectura.ConsumoFacturado));
 	}
 
