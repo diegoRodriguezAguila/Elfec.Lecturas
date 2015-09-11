@@ -177,12 +177,12 @@ public class ServicioImportacionDatos extends Service {
 			}
 			if (!result.tieneErrores()) {
 				strMsgId = R.string.msg_importando_conceptos_categ;
-				result = cptManager.importarConceptos(conector,
+				result = cptManager.importarConceptosCategorias(conector,
 						importacionDatosListener);
 			}
 			if (!result.tieneErrores()) {
 				strMsgId = R.string.msg_importando_conceptos_tarifa;
-				result = cptManager.importarConceptos(conector,
+				result = cptManager.importarConceptosTarifas(conector,
 						importacionDatosListener);
 			}
 			BasesCalculoManager basesCalcManager = new BasesCalculoManager();

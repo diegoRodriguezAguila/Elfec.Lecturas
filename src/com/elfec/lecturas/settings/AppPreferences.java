@@ -21,7 +21,7 @@ public class AppPreferences {
 	private final String BASES_CALCULO_IMPORTADOS = "printCalculationBasesImportados";
 	private final String CONCEPTOS_IMPORTADOS = "conceptosImportados";
 	private final String CONCEPTOS_CATEG_IMPORTADOS = "conceptosCategImportados";
-	private final String CONCEPTOS_TARIFA_IMPORTADOS = "conceptosCategImportados";
+	private final String CONCEPTOS_TARIFA_IMPORTADOS = "conceptosTarifaImportados";
 	private final String RECLASIF_CATEG_IMPORTADOS = "reclasificacionCategoriaImportados";
 
 	private SharedPreferences preferences;

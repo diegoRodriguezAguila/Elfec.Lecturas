@@ -63,6 +63,7 @@ public class DataImporter {
 			List<T> dataList = importSource.requestData();
 			ActiveAndroid.beginTransaction();
 			for (T data : dataList) {
+				importSource.preSaveData(data);
 				data.save();
 			}
 			ActiveAndroid.setTransactionSuccessful();
