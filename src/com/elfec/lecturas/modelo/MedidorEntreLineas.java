@@ -75,8 +75,8 @@ public class MedidorEntreLineas extends Model implements IExportable,
 	@Column(name = "UsuarioAuditoria")
 	public String UsuarioAuditoria;
 
-	private static final String INSERT_QUERY = "INSERT INTO ERP_ELFEC.SGC_MOVIL_LECT_ENTRE_LINEAS VALUES (%d, %d, %d, %d, %s, NULL, '%s', %d, %s, %s,"
-			+ "TO_DATE('%d', 'dd/mm/yyyy hh24:mi:ss'), %d, %d, UPPER('%s'), USER , SYSDATE)";
+	private static final String INSERT_QUERY = "INSERT INTO ERP_ELFEC.SGC_MOVIL_LECT_ENTRE_LINEAS VALUES (%d, %d, %d, %d, NULL, '%s', %d, %s, %s,"
+			+ "TO_DATE('%s', 'dd/mm/yyyy hh24:mi:ss'), %s, %s, UPPER('%s'), USER , SYSDATE)";
 
 	public MedidorEntreLineas(String numMedidor, int ruta, int lecturaNueva,
 			BigDecimal lecturaPotencia, BigDecimal energiaReactiva, Date fecha) {
@@ -215,8 +215,10 @@ public class MedidorEntreLineas extends Model implements IExportable,
 				NumeroMedidor,
 				LecturaNueva,
 				(LecturaPotencia == null ? "NULL" : LecturaPotencia
-						.toPlainString()), (Reactiva == null ? "NULL"
-						: Reactiva.toPlainString()), fechaHora, GPSLatitud,
-				GPSLongitud, UsuarioAuditoria);
+						.toPlainString().replace(',', '.')),
+				(Reactiva == null ? "NULL" : Reactiva.toPlainString().replace(
+						',', '.')), fechaHora, (("" + GPSLatitud).replace(',',
+						'.')), (("" + GPSLongitud).replace(',', '.')),
+				UsuarioAuditoria);
 	}
 }
