@@ -61,8 +61,8 @@ public class FloatingActionButtonAnimator {
 			final AnimationListener listener) {
 		fab.setEnabled(true);
 		if (anim == null) {
-			anim = AnimationUtils
-					.loadAnimation(fab.getContext(), R.anim.fab_in);
+			anim = AnimationUtils.loadAnimation(fab.getContext(),
+					R.anim.design_fab_in);
 			anim.setDuration(150);
 		}
 		anim.setAnimationListener(new AnimationListener() {
@@ -123,7 +123,7 @@ public class FloatingActionButtonAnimator {
 		fab.setEnabled(false);
 		if (anim == null) {
 			anim = AnimationUtils.loadAnimation(fab.getContext(),
-					R.anim.fab_out);
+					R.anim.design_fab_out);
 			anim.setDuration(150);
 		}
 		anim.setAnimationListener(new AnimationListener() {

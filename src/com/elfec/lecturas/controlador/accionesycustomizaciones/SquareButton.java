@@ -53,22 +53,24 @@ public class SquareButton extends LinearLayout {
 				R.styleable.SquareButtonOptions_subTextSize, -1);
 		background = ContextCompat.getDrawable(getContext(),
 				R.drawable.abc_btn_default_mtrl_shape);
-		background.setColorFilter(a.getColor(
-				R.styleable.SquareButtonOptions_colorSquareButton, getContext()
-						.getResources().getColor(R.color.elfectheme_color)),
+		background.setColorFilter(
+				a.getColor(R.styleable.SquareButtonOptions_colorSquareButton,
+						ContextCompat.getColor(getContext(),
+								R.color.elfectheme_color)),
 				PorterDuff.Mode.SRC_ATOP);
 		backgroundPressed = ContextCompat.getDrawable(getContext(),
 				R.drawable.abc_btn_default_mtrl_shape);
 		backgroundPressed.setColorFilter(a.getColor(
 				R.styleable.SquareButtonOptions_colorSquareButtonPressed,
-				getContext().getResources().getColor(
+				ContextCompat.getColor(getContext(),
 						R.color.highlight_elfectheme_color)),
 				PorterDuff.Mode.SRC_ATOP);
 		backgroundDisabled = ContextCompat.getDrawable(getContext(),
 				R.drawable.abc_btn_default_mtrl_shape);
-		backgroundDisabled.setColorFilter(a.getColor(
-				R.styleable.SquareButtonOptions_colorSquareButton, getContext()
-						.getResources().getColor(R.color.elfectheme_color)),
+		backgroundDisabled.setColorFilter(
+				a.getColor(R.styleable.SquareButtonOptions_colorSquareButton,
+						ContextCompat.getColor(getContext(),
+								R.color.elfectheme_color)),
 				PorterDuff.Mode.SRC_ATOP);
 		backgroundDisabled.setAlpha(50);
 		a.recycle();

@@ -1,6 +1,7 @@
 package com.elfec.lecturas.modelo.estados.lectura;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.elfec.lecturas.R;
@@ -26,7 +27,7 @@ public class Leida implements IEstadoLectura {
 
 	@Override
 	public int getColor(Context context) {
-		return context.getResources().getColor(R.color.green_nephritis);
+		return ContextCompat.getColor(context, R.color.green_nephritis);
 	}
 
 	@Override

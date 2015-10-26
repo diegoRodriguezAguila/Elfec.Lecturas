@@ -16,6 +16,7 @@ import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputFilter;
@@ -375,10 +376,10 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 
 			@Override
 			public void onClick(View v) {
-				lblObservacion.setTextColor(getResources().getColor(
-						R.color.elfectheme_color));
-				lblObsNum.setTextColor(getResources().getColor(
-						R.color.elfectheme_color));
+				lblObservacion.setTextColor(ContextCompat.getColor(
+						TomarLectura.this, R.color.elfectheme_color));
+				lblObsNum.setTextColor(ContextCompat.getColor(
+						TomarLectura.this, R.color.elfectheme_color));
 				abrirDialogoVerOrdenativos();
 			}
 		};
@@ -715,10 +716,10 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 
 			@Override
 			public void onDismiss(DialogInterface dialog) {
-				lblObservacion.setTextColor(getResources().getColor(
-						android.R.color.black));
-				lblObsNum.setTextColor(getResources().getColor(
-						android.R.color.black));
+				lblObservacion.setTextColor(ContextCompat.getColor(
+						TomarLectura.this, android.R.color.black));
+				lblObsNum.setTextColor(ContextCompat.getColor(
+						TomarLectura.this, android.R.color.black));
 			}
 		});
 		dvo.show();

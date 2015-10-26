@@ -1,6 +1,7 @@
 package com.elfec.lecturas.modelo.estados.lectura;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 
 import com.elfec.lecturas.R;
@@ -25,7 +26,7 @@ public class Impedida implements IEstadoLectura {
 
 	@Override
 	public int getColor(Context context) {
-		return context.getResources().getColor(R.color.red_pomegranate);
+		return ContextCompat.getColor(context, R.color.red_pomegranate);
 	}
 
 	@Override
