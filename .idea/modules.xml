@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Lecturas.Elfec.iml" filepath="$PROJECT_DIR$/Lecturas.Elfec.iml" />
       <module fileurl="file://$PROJECT_DIR$/lecturasElfec/lecturasElfec.iml" filepath="$PROJECT_DIR$/lecturasElfec/lecturasElfec.iml" />
-      <module fileurl="file://$PROJECT_DIR$/superListViewlib/superListViewlib.iml" filepath="$PROJECT_DIR$/superListViewlib/superListViewlib.iml" />
     </modules>
   </component>
 </project>

@@ -8,7 +8,7 @@ android {
         applicationId "com.elfec.lecturas"
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 3
+        versionCode 4
         versionName "1.16.01.13"
     }
 
@@ -21,15 +21,15 @@ android {
 }
 
 dependencies {
-    compile project(':superListViewlib')
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
-    // For not having to change all that code using older lib
-    compile 'com.google.android.gms:play-services:5.0.89'
+
+    compile 'com.google.android.gms:play-services-location:8.3.0'
 
     compile 'com.github.fengdai:alertdialogpro-theme-material:0.2.4'
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     compile 'net.danlew:android.joda:2.8.2'
+    compile 'com.quentindommerc.superlistview:library:1.5.2'
 }
