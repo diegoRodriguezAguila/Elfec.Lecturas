@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Menu Principal : Botones Info-->
+    	<string name="tomar_lecturas_btn_info">comenzar a realizar lecturas o continuar desde donde estaba</string>
+	    <string name="resumen_lecturas_btn_info">ver resumen general</string>
+	    <string name="detalle_impedidas_btn_info">imprimir resumen impedidas</string>
+	    <string name="detalle_lecturas_btn_info">imprimir resumen de lecturas</string>
+	    <string name="detalle_ordenativos_btn_info">imprimir lecturas con ordenativos</string>
+	    <string name="detalle_entre_lineas_btn_info">imprimir resumen</string>
+</resources>

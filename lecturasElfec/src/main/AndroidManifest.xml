@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.elfec.lecturas" >
+ 
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+ 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+	<uses-permission android:name="android.permission.BLUETOOTH"/>
+	<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+	<uses-permission android:name="android.permission.WAKE_LOCK"/>
+	<uses-permission android:name="android.permission.CAMERA" />
+
+	<uses-feature android:name="android.hardware.camera" android:required="true" />
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/elfec_app_name"
+        android:theme="@style/ElfecTheme" android:name="com.elfec.lecturas.ElfecApp">
+        <meta-data android:name="com.google.android.gms.version"
+       android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="Lecturas.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="53" />
+        <activity
+            android:name="com.elfec.lecturas.controlador.Login"
+            android:label="@string/app_name" >
+           <intent-filter android:label="@string/elfec_app_name">
+               <action android:name="android.intent.action.MAIN" />
+               <category android:name="android.intent.category.LAUNCHER" />
+           </intent-filter> 
+        </activity>
+        <activity
+            android:name="com.elfec.lecturas.controlador.Inicio"
+            android:label="@string/titulo_inicio" >
+        </activity>
+        <activity
+            android:name="com.elfec.lecturas.controlador.MenuPrincipal"
+            android:label="@string/titulo_menu_principal" >
+        </activity>
+        <activity
+            android:name="com.elfec.lecturas.controlador.TomarLectura"
+            android:label="@string/titulo_tomar_lecturas" >
+        </activity>
+        <activity
+            android:name="com.elfec.lecturas.controlador.BuscarLectura"
+            android:label="@string/titulo_buscar_lectura" >
+        </activity>
+        <activity
+            android:name="com.elfec.lecturas.controlador.ResumenLecturas"
+            android:label="@string/titulo_resumen_lecturas" >
+        </activity>
+        <activity
+            android:name="com.elfec.lecturas.controlador.ListaLecturas"
+            android:label="@string/titulo_lista_lecturas" >
+        </activity>
+        <activity
+            android:name="com.elfec.lecturas.controlador.Configurar"
+            android:label="@string/titulo_configurar" >
+        </activity>
+        
+        <receiver android:name="com.elfec.lecturas.controlador.receptoreseventos.ReceptorEstado3GDatosMoviles" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" >
+                </action>
+            </intent-filter>
+        </receiver>
+        
+        <receiver android:name="com.elfec.lecturas.controlador.receptoreseventos.ReceptorEstadoServiciosUbicacion" >
+            <intent-filter>
+                <action android:name="android.location.PROVIDERS_CHANGED" >
+                </action>
+            </intent-filter>
+        </receiver>
+        
+         <service android:name="com.elfec.lecturas.servicios.ServicioImportacionDatos" />
+         <service android:name="com.elfec.lecturas.servicios.ServicioExportacionDatos" />
+        
+    </application>
+
+</manifest>

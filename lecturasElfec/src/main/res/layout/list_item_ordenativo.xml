@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:gravity="top"
+    android:background="@drawable/select_background_material"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/lbl_codigo"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:text="@string/sample_obs"
+        android:background="?attr/colorPrimary"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/lbl_descripcion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_marginStart="6dp"
+        android:layout_weight="1"
+        android:text="@string/sample_desc_ord"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+</LinearLayout>

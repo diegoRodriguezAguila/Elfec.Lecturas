@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<lint>
+    <issue id="DefaultLocale">
+        <ignore path="src/com/lecturas/elfec/helpers/ConectorBDOracle.java" />
+        <ignore path="src/com/lecturas/elfec/modelo/Usuario.java" />
+    </issue>
+    <issue id="NestedWeights" severity="informational" />
+    <issue id="SmallSp" severity="informational" />
+    <issue id="TrulyRandom">
+        <ignore path="src/com/lecturas/elfec/modelo/SesionUsuario.java" />
+    </issue>
+    <issue id="UseSparseArrays" severity="ignore" />
+    <issue id="WorldReadableFiles">
+        <ignore path="src/com/lecturas/elfec/helpers/ManejadorJSON.java" />
+    </issue>
+</lint>

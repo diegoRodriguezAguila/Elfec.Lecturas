@@ -1,0 +1,101 @@
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_salir"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context=".MenuPrincipal" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp" >
+
+            <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
+                android:id="@+id/btn_resumen_lecturas"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:onClick="btnResumenLecturasClick"
+                app:bottomIcon="@drawable/resumen_lecturas"
+                app:principalText="@string/resumen_lecturas_btn"
+                app:subText="@string/resumen_lecturas_btn_info" />
+
+            <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
+                android:id="@+id/btn_tomar_lecturas"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:onClick="btnTomarLecturasClick"
+                android:visibility="invisible"
+                app:bottomIcon="@drawable/tomar_lectura"
+                app:principalText="@string/tomar_lecturas_btn"
+                app:colorSquareButton="@color/green_color"
+                app:colorSquareButtonPressed="@color/green_color_pressed"
+                app:subText="@string/tomar_lecturas_btn_info" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+           android:layout_height="0dp"
+            android:layout_weight="1" >
+
+            <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
+                android:id="@+id/btn_detalle_impedidas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="btnDetalleImpedidasClick"
+                app:bottomIcon="@drawable/detalle_impedidas"
+                app:principalText="@string/detalle_impedidas_btn"
+                app:subText="@string/detalle_impedidas_btn_info" />
+
+            <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
+                android:id="@+id/btn_detalle_lecturas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="btnDetalleLecturasClick"
+                app:bottomIcon="@drawable/detalle_lecturas"
+                app:principalText="@string/detalle_lecturas_btn"
+                app:subText="@string/detalle_lecturas_btn_info" />
+
+            <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
+                android:id="@+id/btn_detalle_ordenativos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="btnDetalleOrdenativosClick"
+                app:bottomIcon="@drawable/detalle_ordenativos"
+                app:principalText="@string/detalle_ordenativos_btn"
+                app:subText="@string/detalle_ordenativos_btn_info" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+           android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <com.elfec.lecturas.controlador.accionesycustomizaciones.SquareButton
+                android:id="@+id/btn_detalle_entre_lineas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="btnDetalleEntreLineasClick"
+                app:bottomIcon="@drawable/nuevo_medidor"
+                app:principalText="@string/detalle_entre_lineas_btn"                
+                app:subText="@string/detalle_entre_lineas_btn_info" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+        </LinearLayout>
+
+</LinearLayout>
