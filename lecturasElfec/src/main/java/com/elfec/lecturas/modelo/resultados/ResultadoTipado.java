@@ -11,19 +11,16 @@ import java.util.ArrayList;
  * @param <TResult>
  */
 public class ResultadoTipado<TResult> extends ResultadoVoid {
-	/**
-	 * Serial
-	 */
-	private static final long serialVersionUID = 8475461808008087175L;
+
 	protected transient TResult resultado;
 
 	public ResultadoTipado() {
-		listaErrores = new ArrayList<Exception>();
+		listaErrores = new ArrayList<>();
 	}
 
 	public ResultadoTipado(TResult result) {
 		this.resultado = result;
-		listaErrores = new ArrayList<Exception>();
+		listaErrores = new ArrayList<>();
 	}
 
 	/**

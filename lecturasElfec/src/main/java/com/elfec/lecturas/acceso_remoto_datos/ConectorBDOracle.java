@@ -390,7 +390,7 @@ public class ConectorBDOracle {
 	 * cambios localmente, se deberÃ­a actualizar su estado en caso de exportarse
 	 * exitosamente
 	 * 
-	 * @param lec
+	 * @param lecEL
 	 * @throws SQLException
 	 * @return 1 si el insert se hizo correctamente
 	 */

@@ -18,8 +18,7 @@ public class EstadoManejadorUbicacionFactory {
 	 */
 	static {
 		registrarEstado(0, new NoLeeUbicacion());
-		registrarEstado(1, new LeeUbicacionInternet());
-		registrarEstado(2, new LeeUbicacionGPS());
+		registrarEstado(1, new LeeUbicacionGPS());
 	}
 
 	/**

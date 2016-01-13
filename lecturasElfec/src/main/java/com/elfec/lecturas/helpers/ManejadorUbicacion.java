@@ -70,6 +70,7 @@ public class ManejadorUbicacion {
 				.crearEstado(tipoGuardadoUbicacion, context);
 		if (estadoManejadorUbicacion.leeUbicacion()
 				&& !ManejadorEstadosHW.bateriaEstaEnNivelCritico(context)) {
+
 			if (!estadoManejadorUbicacion.proveedorEstaHabilitado()) {
 				Toast.makeText(context, R.string.servicios_ubicacion_apagados,
 						Toast.LENGTH_LONG).show();

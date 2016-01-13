@@ -13,10 +13,7 @@ import java.util.List;
  *
  */
 public class ResultadoVoid implements Serializable {
-	/**
-	 * Serial
-	 */
-	private static final long serialVersionUID = -212209775088608052L;
+
 	protected List<Exception> listaErrores;
 
 	public ResultadoVoid() {
@@ -44,7 +41,7 @@ public class ResultadoVoid implements Serializable {
 	/**
 	 * Agrega multiples errores a la lita de errores
 	 * 
-	 * @param errors
+	 * @param errores
 	 */
 	public void agregarErrores(List<Exception> errores) {
 		listaErrores.addAll(errores);

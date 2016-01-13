@@ -28,7 +28,7 @@ dependencies {
 
     compile 'com.google.android.gms:play-services-location:8.3.0'
 
-    compile 'com.github.fengdai:alertdialogpro-theme-material:0.2.4'
+    compile 'com.github.fengdai:alertdialogpro-theme-material:0.2.6'
     compile 'uk.co.chrisjenx:calligraphy:2.1.0'
     compile 'net.danlew:android.joda:2.8.2'
     compile 'com.quentindommerc.superlistview:library:1.5.2'
