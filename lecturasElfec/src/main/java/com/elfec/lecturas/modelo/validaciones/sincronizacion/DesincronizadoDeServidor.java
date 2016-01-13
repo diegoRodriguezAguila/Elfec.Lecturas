@@ -7,7 +7,7 @@ import java.util.Locale;
 
 /**
  * Es utilizada cuando el telefono no esta sincronizado con el servidor
- * <b>cÛdigo VS-003</b>
+ * <b>c√≥digo VS-003</b>
  * @author drodriguez
  */
 public class DesincronizadoDeServidor implements IEstadoSincronizacion {
@@ -27,7 +27,7 @@ public class DesincronizadoDeServidor implements IEstadoSincronizacion {
 
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm",Locale.getDefault());
 		String fechaHora = df.format(fechaServidor);
-		return "La fecha y hora del telefono est·n desincronizadas del servidor, corrijala e intente nuevamente" +
+		return "La fecha y hora del telefono est√°n desincronizadas del servidor, corrijala e intente nuevamente" +
 				"la fecha y hora del servidor es: "+fechaHora;
 	}
 

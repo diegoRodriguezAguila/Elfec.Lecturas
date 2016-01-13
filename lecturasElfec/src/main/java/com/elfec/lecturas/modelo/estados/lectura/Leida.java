@@ -22,7 +22,7 @@ public class Leida implements IEstadoLectura {
 
 	@Override
 	public String getEstadoCadena() {
-		return "Leída";
+		return "LeÃ­da";
 	}
 
 	@Override

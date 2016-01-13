@@ -4,7 +4,7 @@ import com.elfec.lecturas.modelo.Ordenativo;
 
 /**
  * Es utilizada cuando el consumo registrado es elevado.
- * <b>código VL-004</b>
+ * <b>cÃ³digo VL-004</b>
  * @author drodriguez
  */
 public class AdvConsumoElevado implements IValidacionLectura {

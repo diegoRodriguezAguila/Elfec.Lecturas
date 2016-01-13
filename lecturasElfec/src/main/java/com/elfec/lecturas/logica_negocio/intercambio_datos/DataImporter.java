@@ -11,7 +11,7 @@ import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 
 /**
- * Se encarga de importar cualquier tipo de información
+ * Se encarga de importar cualquier tipo de informaciÃ³n
  * 
  * @author drodriguez
  *
@@ -19,7 +19,7 @@ import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 public class DataImporter {
 
 	/**
-	 * Importa cualquier tipo de información que debe ser importada una sola vez
+	 * Importa cualquier tipo de informaciÃ³n que debe ser importada una sola vez
 	 * 
 	 * @param importSource
 	 * @return {@link ResultadoVoid}
@@ -51,7 +51,7 @@ public class DataImporter {
 	}
 
 	/**
-	 * Importa cualquier tipo de información
+	 * Importa cualquier tipo de informaciÃ³n
 	 * 
 	 * @param importSpecs
 	 * @return {@link TypedResult}

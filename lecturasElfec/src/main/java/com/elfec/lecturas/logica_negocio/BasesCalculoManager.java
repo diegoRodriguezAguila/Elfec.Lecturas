@@ -15,7 +15,7 @@ import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.settings.AppPreferences;
 
 /**
- * Se encarga de la l�gica de negocio de bases de calculo
+ * Se encarga de la lÃ³gica de negocio de bases de calculo
  * 
  * @author drodriguez
  *
@@ -24,7 +24,7 @@ public class BasesCalculoManager {
 	/**
 	 * Importa las bases de calculo de ERP_ELFEC.GBASES_CALC_IMP si es que no se
 	 * importaron ya previamente.<br>
-	 * <b>Nota.-</b> La importaci�n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username
@@ -63,7 +63,7 @@ public class BasesCalculoManager {
 	/**
 	 * Importa las bases de calculo de ERP_ELFEC.GBASES_CALC_CPTOS si es que no
 	 * se importaron ya previamente.<br>
-	 * <b>Nota.-</b> La importaci�n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username

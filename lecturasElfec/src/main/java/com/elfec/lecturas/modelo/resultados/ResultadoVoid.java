@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Representa el resultado de realizar una acción en un gestionador de la capa
- * de lógica de negocio u otra que lo requiera sin tipo de retorno, solo con
+ * Representa el resultado de realizar una acciÃ³n en un gestionador de la capa
+ * de lÃ³gica de negocio u otra que lo requiera sin tipo de retorno, solo con
  * lista de errores
  * 
  * @author drodriguez

@@ -12,7 +12,7 @@ public interface ICriterioFiltroLectura {
 
 	/**
 	 * Metodo que obtiene la cadena del filtro, la cadena del filtro debe tener el formato de una
-	 * consulta <b>SQL</b> de una condici�n <b>WHERE</b>, caso contrario fallar�
+	 * consulta <b>SQL</b> de una condiciÃ³n <b>WHERE</b>, caso contrario fallarÃ¡
 	 * @return
 	 */
 	public String obtenerCadenaDeFiltro();

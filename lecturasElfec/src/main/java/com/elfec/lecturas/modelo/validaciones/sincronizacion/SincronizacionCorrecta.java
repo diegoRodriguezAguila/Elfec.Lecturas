@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * Es utilizada cuando la sincronizacion con el servidor es correcta
- * <b>código VS-002</b>
+ * <b>cÃ³digo VS-002</b>
  * @author drodriguez
  */
 public class SincronizacionCorrecta implements

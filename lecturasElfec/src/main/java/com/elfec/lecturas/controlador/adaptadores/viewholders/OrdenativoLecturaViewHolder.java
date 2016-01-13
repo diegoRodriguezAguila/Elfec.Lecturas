@@ -32,7 +32,7 @@ public class OrdenativoLecturaViewHolder {
 	}
 
 	/**
-	 * Asigna la informaci�n a los campos de la vista
+	 * Asigna la informaciÃ³n a los campos de la vista
 	 * 
 	 * @param ordenativo
 	 * @param esSeleccionado

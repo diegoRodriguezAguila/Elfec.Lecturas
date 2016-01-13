@@ -13,7 +13,7 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 /**
- * Almacena la información sobre la potencia de las lecturas, de la tabla
+ * Almacena la informaciÃ³n sobre la potencia de las lecturas, de la tabla
  * MOVILES.LECTURASP de la BD Moviles de Oracle
  * 
  * @author drodriguez
@@ -111,7 +111,7 @@ public class Potencia extends Model {
 	 * @param suministro
 	 * @param mes
 	 * @param anio
-	 * @return La potencia que coincida con esos parámetros
+	 * @return La potencia que coincida con esos parÃ¡metros
 	 */
 	public static Potencia obtenerPotencia(long suministro, int mes, int anio) {
 		return new Select().from(Potencia.class).where("LEMSUM=?", suministro)
@@ -157,8 +157,8 @@ public class Potencia extends Model {
 	}
 
 	/**
-	 * Elimina toda la información general de lecturas que pertenezcan a la
-	 * asignación de ruta dada
+	 * Elimina toda la informaciÃ³n general de lecturas que pertenezcan a la
+	 * asignaciÃ³n de ruta dada
 	 * 
 	 * @param asignacionRuta
 	 * @param nusClausulaIN

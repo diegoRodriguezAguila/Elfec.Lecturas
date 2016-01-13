@@ -57,7 +57,7 @@ public class VariablesDeEntorno {
 	 */
 	public static int puertoServicioWeb;
 	/**
-	 * La acciÛn soap del servicio web, dejar en blanco por defecto
+	 * La acci√≥n soap del servicio web, dejar en blanco por defecto
 	 */
 	public static String accionSoap;
 	/**
@@ -66,16 +66,16 @@ public class VariablesDeEntorno {
 	public static String nombreEspacio;
 
 	/**
-	 * Indica el nivel de bateria considerado como crÌtico, cuando el nivel de
-	 * bateria es igual o por debajo del crÌtico no se obliga al usuario a tener
+	 * Indica el nivel de bateria considerado como cr√≠tico, cuando el nivel de
+	 * bateria es igual o por debajo del cr√≠tico no se obliga al usuario a tener
 	 * encendidos los servicios de 3G o GPS para tomar lecturas
 	 */
 	public static float nivelBateriaCritico;
 
-	// Parametros para el guardado de ubicaciÛn 3G GPS etc
+	// Parametros para el guardado de ubicaci√≥n 3G GPS etc
 	/**
-	 * Indica que tipo de guardado de ubicaciÛn se utilizar·, para mas
-	 * informaciÛn vea los estados de ubicacion <b>0=no guarda, 1=guarda 3g y
+	 * Indica que tipo de guardado de ubicaci√≥n se utilizar√°, para mas
+	 * informaci√≥n vea los estados de ubicacion <b>0=no guarda, 1=guarda 3g y
 	 * gps (google services) , 2=guarda gps</b>
 	 * 
 	 * @see com.elfec.lecturas.modelo.estados.ubicacion.IEstadoManejadorUbicacion
@@ -83,7 +83,7 @@ public class VariablesDeEntorno {
 	public static int tipoGuardadoUbicacion;// 0=no guarda, 1=guarda 3g ,
 											// 2=guarda gps
 	/**
-	 * Es el tiempo maximo de espera para recibir una ubicaciÛn
+	 * Es el tiempo maximo de espera para recibir una ubicaci√≥n
 	 */
 	public static int timeoutGuardadoUbicacion;
 
@@ -115,7 +115,7 @@ public class VariablesDeEntorno {
 	}
 
 	/**
-	 * InicializaciÛn simbÛlica que obliga a llamar al constructor est·tico
+	 * Inicializaci√≥n simb√≥lica que obliga a llamar al constructor est√°tico
 	 */
 	public static void inicializar() {
 		if (!estaInicializado) {
@@ -171,7 +171,7 @@ public class VariablesDeEntorno {
 					.getString("OBSERVACIONESORECOMENDACIONES") + "\r\n";// se
 																			// le
 																			// debe
-																			// aÒadir
+																			// a√±adir
 																			// salto
 																			// de
 																			// linea

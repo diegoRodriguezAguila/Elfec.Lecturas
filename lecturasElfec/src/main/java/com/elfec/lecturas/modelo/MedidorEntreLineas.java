@@ -26,7 +26,7 @@ import com.elfec.lecturas.modelo.interfaces.IExportable;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
- * Guarda información de las lecturas de medidores entre lineas realizadas, esta
+ * Guarda informaciÃ³n de las lecturas de medidores entre lineas realizadas, esta
  * tabla se descarga a la tabla ERP_ELFEC.SGC_MOVIL_LECT_ENTRE_LINEAS
  * 
  * @author drodriguez
@@ -70,7 +70,7 @@ public class MedidorEntreLineas extends Model implements IExportable,
 	@Column(name = "Enviado3G")
 	public int Enviado3G;
 	/**
-	 * El usuario que insertó la lectura entre lineas
+	 * El usuario que insertÃ³ la lectura entre lineas
 	 */
 	@Column(name = "UsuarioAuditoria")
 	public String UsuarioAuditoria;
@@ -194,7 +194,7 @@ public class MedidorEntreLineas extends Model implements IExportable,
 	@Override
 	public String getRegistryResume() {
 		return "Lectura entre lineas de la ruta: <b>" + Ruta
-				+ "</b> con número de medidor: <b>" + NumeroMedidor + "</b>";
+				+ "</b> con nÃºmero de medidor: <b>" + NumeroMedidor + "</b>";
 	}
 
 	/**

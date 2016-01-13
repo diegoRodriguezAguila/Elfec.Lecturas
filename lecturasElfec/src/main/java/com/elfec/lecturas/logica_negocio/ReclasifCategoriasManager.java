@@ -13,7 +13,7 @@ import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.settings.AppPreferences;
 
 /**
- * Capa de lógica de negocio para las reclasificaciones de categorias
+ * Capa de lÃ³gica de negocio para las reclasificaciones de categorias
  * 
  * @author drodriguez
  *
@@ -22,7 +22,7 @@ public class ReclasifCategoriasManager {
 	/**
 	 * Importa las bases de calculo de ERP_ELFEC.CATEG_RECLASIF si es que no se
 	 * importaron ya previamente.<br>
-	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username

@@ -78,7 +78,7 @@ public class AvisoCobranza {
 
 	/**
 	 * Obtiene todos los parametros del aviso de cobranza y crea una cadena en lenguaje CPCL para poder ser impresa.
-	 * Analisa las variables de entorno para saber que tipo de impresora se seleccionÛ. Si no se seleccionÛ impresora
+	 * Analisa las variables de entorno para saber que tipo de impresora se seleccion√≥. Si no se seleccion√≥ impresora
 	 * lanza la exepcion 
 	 * las iMZ320 y RW420deberian tener el prefijo asignado en las VariablesDeEntorno en el nombre de dispositivo bluetooth
 	 * @throws ImpresoraPredefinidaNoAsignadaException
@@ -335,7 +335,7 @@ public class AvisoCobranza {
 	}	
 	/**
 	 * Pone saltos de linea \r\n a las cadenas
-	 * @param cadena , la cadena a la que se pondr·n los saltos de linea
+	 * @param cadena , la cadena a la que se pondr√°n los saltos de linea
 	 * @param maximo , maximo numero de caracteres por linea
 	 * @return
 	 */
@@ -583,7 +583,7 @@ public class AvisoCobranza {
 		return montoLiteral;
 	}
 	/**
-	 * Le agrega giones al monto literal en caso de ser mas pequeÒo que el <b>maxEstablecido</b> de largo
+	 * Le agrega giones al monto literal en caso de ser mas peque√±o que el <b>maxEstablecido</b> de largo
 	 * @param montoLiteral
 	 * @param maxEstablecido
 	 * @return

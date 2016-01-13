@@ -18,7 +18,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 
 /**
- * Se encarga de la interacci�n con la c�mara del dispositivo
+ * Se encarga de la interacciÃ³n con la cÃ¡mara del dispositivo
  * @author drodriguez
  *
  */

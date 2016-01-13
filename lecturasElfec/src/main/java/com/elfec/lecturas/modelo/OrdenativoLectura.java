@@ -21,7 +21,7 @@ import com.elfec.lecturas.settings.VariablesDeEntorno;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
- * Almacena la información sobre los ordenativos que se asignaron a las
+ * Almacena la informaciÃ³n sobre los ordenativos que se asignaron a las
  * lecturas, esta tabla se descarga en la tabla ERP_ELFEC.SGC_MOVIL_ORDENATIVOS
  * de la base de datos ORACLE
  * 
@@ -66,7 +66,7 @@ public class OrdenativoLectura extends Model implements
 	@Column(name = "Enviado3G")
 	public int Enviado3G;
 	/**
-	 * El usuario que asignó el ordenativo a la lectura
+	 * El usuario que asignÃ³ el ordenativo a la lectura
 	 */
 	@Column(name = "UsuarioAuditoria")
 	public String UsuarioAuditoria;
@@ -130,7 +130,7 @@ public class OrdenativoLectura extends Model implements
 	 * Guarda el ordenativo en la base de datos sqlite e intenta enviarlo por
 	 * 3G, tambien lo guarda en el archivo de texto de backup
 	 * 
-	 * @return retorna el Id que se le asignó
+	 * @return retorna el Id que se le asignÃ³
 	 */
 	public Long guardarYEnviarPor3G() {
 		UsuarioAuditoria = VariablesDeSesion.getUsuarioLogeado();

@@ -7,19 +7,19 @@ import com.elfec.lecturas.modelo.validaciones.ErrorUsuarioPasswordIncorrectos;
 import com.elfec.lecturas.modelo.validaciones.ValidacionUsuarioCorrecta;
 
 /**
- * Define el paso de validaciÛn en el que se verifican la existencia del IMEI del telefono
+ * Define el paso de validaci√≥n en el que se verifican la existencia del IMEI del telefono
  * como valido en la base de datos Oracle
  * fueron cargados.
- * <br><br><b>CÛdigo: PVU-1.1.1.1</b>
+ * <br><br><b>C√≥digo: PVU-1.1.1.1</b>
  * @author drodriguez
  */
 public class PasoVerifExistenciaIMEI extends PasoValidacionUsuario {
 
 	/**
 	 * Utiliza la conexion a la base de datos oracle creada en el paso <b>PasoObtenerUsuarioOracle</b> y
-	 * verifica si el IMEI del telefono est· habilitado para utilizar la aplicaciÛn.<br>
+	 * verifica si el IMEI del telefono est√° habilitado para utilizar la aplicaci√≥n.<br>
 	 * En caso de que si asigna  la validacion correcta a <b>resultadoValidacion</b> y guarda al usuario en la BD local.<br>
-	 * Caso contrario asigna el error de asignacion de mÛvil.
+	 * Caso contrario asigna el error de asignacion de m√≥vil.
 	 * @see ValidacionUsuarioCorrecta
 	 * @see ErrorDeAsignacionDeMovil
 	 */

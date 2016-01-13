@@ -23,9 +23,9 @@ import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
  */
 public class ConceptoLecturaManager {
 	/**
-	 * Importa toda la informaci�n de LECTURASCONCEPTOS de las rutas asignadas
+	 * Importa toda la informaciÃ³n de LECTURASCONCEPTOS de las rutas asignadas
 	 * al usuario para la fecha actual.<br>
-	 * <b>Nota.-</b> La importaci�n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username
@@ -62,7 +62,7 @@ public class ConceptoLecturaManager {
 	}
 
 	/**
-	 * Importa la informac�n de LECTURASCONCEPTOS de una ruta asignada
+	 * Importa la informacÃ³n de LECTURASCONCEPTOS de una ruta asignada
 	 * 
 	 * @param username
 	 * @param password

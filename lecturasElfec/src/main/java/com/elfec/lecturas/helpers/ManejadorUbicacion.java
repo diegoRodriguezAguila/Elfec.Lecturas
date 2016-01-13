@@ -19,7 +19,7 @@ import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
  * Se encarga de realizar las conexiones con satelite o 3g para obtener la
- * ubicaci�n
+ * ubicaciÃ³n
  * 
  * @author drodriguez
  *
@@ -30,13 +30,13 @@ public class ManejadorUbicacion {
 
 	/**
 	 * Obtiene la ubicacion actual dependiendo de la variable parametrizable
-	 * tipoGuardadoUbicacion, se usar� distinitos medios para obtener la
+	 * tipoGuardadoUbicacion, se usarÃ¡ distinitos medios para obtener la
 	 * ubicacion o no se obtendra en el caso de que sea NoLeeUbicacion
 	 * 
 	 * @param context
 	 *            , la actividad desde donde se llama al metodo
 	 * @param evento
-	 *            , evento que se lanzar� una vez encontrada la ubicacion
+	 *            , evento que se lanzarÃ¡ una vez encontrada la ubicacion
 	 */
 	public static void obtenerUbicacionActual(final Context context,
 			final EventoAlObtenerUbicacion evento) {
@@ -45,8 +45,8 @@ public class ManejadorUbicacion {
 	}
 
 	/**
-	 * Verifica que los servicios de ubicaci�n esten activos seg�n el parametro
-	 * de tipo de guardado de ubicaci�n de la tabla de parametros, en caso de
+	 * Verifica que los servicios de ubicaciÃ³n esten activos segÃºn el parametro
+	 * de tipo de guardado de ubicaciÃ³n de la tabla de parametros, en caso de
 	 * que no esten activos, muestra el dialogo
 	 * 
 	 * @param context
@@ -57,9 +57,9 @@ public class ManejadorUbicacion {
 	}
 
 	/**
-	 * Verifica que los servicios de ubicaci�n esten activos seg�n el parametro
-	 * de tipo de guardado de ubicaci�n pasado, en caso de que no esten activos,
-	 * muestra el dialogo para activar los servicios de ubicaci�n
+	 * Verifica que los servicios de ubicaciÃ³n esten activos segÃºn el parametro
+	 * de tipo de guardado de ubicaciÃ³n pasado, en caso de que no esten activos,
+	 * muestra el dialogo para activar los servicios de ubicaciÃ³n
 	 * 
 	 * @param context
 	 * @param tipoGuardadoUbicacion
@@ -82,14 +82,14 @@ public class ManejadorUbicacion {
 	}
 
 	/**
-	 * Obtiene la ubicacion actual dependiendo del par�metro
-	 * tipoGuardadoUbicacion, se usar� distinitos medios para obtener la
+	 * Obtiene la ubicacion actual dependiendo del parÃ¡metro
+	 * tipoGuardadoUbicacion, se usarÃ¡ distinitos medios para obtener la
 	 * ubicacion o no se obtendra en el caso de que sea NoLeeUbicacion
 	 * 
 	 * @param context
 	 *            , la actividad desde donde se llama al metodo
 	 * @param evento
-	 *            , evento que se lanzar� una vez encontrada la ubicacion
+	 *            , evento que se lanzarÃ¡ una vez encontrada la ubicacion
 	 */
 	public static void obtenerUbicacionActual(final Context context,
 			final EventoAlObtenerUbicacion evento, int tipoGuardadoUbicacion) {

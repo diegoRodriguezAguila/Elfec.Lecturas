@@ -16,7 +16,7 @@ import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 
 /**
- * Se encarga de la l�gica de negocio de las asignaciones de rutas
+ * Se encarga de la lÃ³gica de negocio de las asignaciones de rutas
  * 
  * @author drodriguez
  *
@@ -24,7 +24,7 @@ import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 public class AsignacionRutaManager {
 	/**
 	 * Importa las rutas asignadas al usuario para la fecha actual.<br>
-	 * <b>Nota.-</b> La importaci�n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username
@@ -63,7 +63,7 @@ public class AsignacionRutaManager {
 	/**
 	 * Asigna remota y localmente el estado de CARGADAS a la lista de rutas. Si
 	 * ocurre un error al realizar el update remoto aquellas rutas que se hayan
-	 * logrado guardar estar�n marcadas como exportadas localmente
+	 * logrado guardar estarÃ¡n marcadas como exportadas localmente
 	 * 
 	 * @param rutasAsignadas
 	 * @return {@link ResultadoVoid} lista de errores del proceso
@@ -93,7 +93,7 @@ public class AsignacionRutaManager {
 	/**
 	 * Asigna remota y localmente el estado de DESCARGADAS a la lista de rutas.
 	 * Si ocurre un error al realizar el update remoto aquellas rutas que se
-	 * hayan logrado guardar estar�n marcadas como exportadas localmente
+	 * hayan logrado guardar estarÃ¡n marcadas como exportadas localmente
 	 * 
 	 * @param rutas
 	 * @return {@link ResultadoVoid} lista de errores del proceso
@@ -126,7 +126,7 @@ public class AsignacionRutaManager {
 	}
 
 	/**
-	 * Restaura el estado que ten�an las rutas antes de ser importadas al
+	 * Restaura el estado que tenÃ­an las rutas antes de ser importadas al
 	 * telefono local y remotamente
 	 * 
 	 * @param rutas

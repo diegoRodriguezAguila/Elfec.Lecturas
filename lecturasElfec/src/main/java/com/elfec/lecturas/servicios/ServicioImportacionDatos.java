@@ -30,7 +30,7 @@ import com.elfec.lecturas.settings.AppPreferences;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
- * Servicio android que corre en segundo plano para realizar la importación de
+ * Servicio android que corre en segundo plano para realizar la importaciÃ³n de
  * datos del servidor, notifica eventos de UI a {@link DataImportationReceiver}
  * 
  * @author drodriguez
@@ -39,19 +39,19 @@ import com.elfec.lecturas.settings.VariablesDeSesion;
 public class ServicioImportacionDatos extends Service {
 
 	/**
-	 * Acción del broadcast
+	 * AcciÃ³n del broadcast
 	 */
 	public static final String BROADCAST_ACTION = "com.elfec.lecturas.importEvent";
 	/**
-	 * Mensaje de inicio de importación
+	 * Mensaje de inicio de importaciÃ³n
 	 */
 	public static final int IMPORTATION_STARTING = 1;
 	/**
-	 * Mensaje de actualización de un paso de importación
+	 * Mensaje de actualizaciÃ³n de un paso de importaciÃ³n
 	 */
 	public static final int UPDATE_WAITING = 2;
 	/**
-	 * Mensajde de fin de la importación
+	 * Mensajde de fin de la importaciÃ³n
 	 */
 	public static final int IMPORTATION_FINISHED = 3;
 
@@ -102,7 +102,7 @@ public class ServicioImportacionDatos extends Service {
 	 * Envia un mensaje al broadcaster
 	 * 
 	 * @param action
-	 *            acción
+	 *            acciÃ³n
 	 */
 	private void sendImportationAction(int action) {
 		sendImportationAction(action, -1);
@@ -112,7 +112,7 @@ public class ServicioImportacionDatos extends Service {
 	 * Envia un mensaje al broadcaster
 	 * 
 	 * @param action
-	 *            acción
+	 *            acciÃ³n
 	 * @param strMsgId
 	 *            stringId del mensaje
 	 */
@@ -124,8 +124,8 @@ public class ServicioImportacionDatos extends Service {
 	}
 
 	/**
-	 * Envia un mensaje al broadcaster de que se finalizó de realizar la
-	 * importación o esta se interrumpió
+	 * Envia un mensaje al broadcaster de que se finalizÃ³ de realizar la
+	 * importaciÃ³n o esta se interrumpiÃ³
 	 * 
 	 * @param result
 	 */
@@ -147,7 +147,7 @@ public class ServicioImportacionDatos extends Service {
 	}
 
 	/**
-	 * Importado los datos que solo son necesarios una vez por sesión
+	 * Importado los datos que solo son necesarios una vez por sesiÃ³n
 	 * 
 	 * @param conector
 	 * @param importacionDatosListener
@@ -260,7 +260,7 @@ public class ServicioImportacionDatos extends Service {
 	}
 
 	/**
-	 * Obtiene la clausula In de la información general de lecturas
+	 * Obtiene la clausula In de la informaciÃ³n general de lecturas
 	 * 
 	 * @param lecturas
 	 * @return clausula IN SQL de suministros de lecturas

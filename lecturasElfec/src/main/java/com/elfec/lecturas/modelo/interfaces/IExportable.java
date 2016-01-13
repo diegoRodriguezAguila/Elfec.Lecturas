@@ -10,7 +10,7 @@ import com.elfec.lecturas.modelo.enums.EstadoExportacion;
  */
 public interface IExportable {
 	/**
-	 * Asigna el estado de exportación
+	 * Asigna el estado de exportaciÃ³n
 	 * 
 	 * @param estadoExportacion
 	 */

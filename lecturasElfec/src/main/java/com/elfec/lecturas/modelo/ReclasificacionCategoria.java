@@ -12,7 +12,7 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 /**
- * Almacena la información sobre las reclasificaciones de categorias, de la
+ * Almacena la informaciÃ³n sobre las reclasificaciones de categorias, de la
  * tabla ERP_ELFEC.CATEG_RECLASIF de la BD Oracle
  * 
  * @author drodriguez
@@ -98,7 +98,7 @@ public class ReclasificacionCategoria extends Model {
 	}
 
 	/**
-	 * Provee una interfaz de operadores lógicos para ser usada en el método
+	 * Provee una interfaz de operadores lÃ³gicos para ser usada en el mÃ©todo
 	 * <b>esNecesarioRecategorizar</b>
 	 * 
 	 * @author drodriguez

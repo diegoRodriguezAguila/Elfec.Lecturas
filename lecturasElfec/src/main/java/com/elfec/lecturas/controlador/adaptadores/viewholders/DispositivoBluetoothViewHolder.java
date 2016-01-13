@@ -24,7 +24,7 @@ public class DispositivoBluetoothViewHolder {
 	}
 
 	/**
-	 * Asigna la informaci�n a los campos de la vista
+	 * Asigna la informaciÃ³n a los campos de la vista
 	 * 
 	 * @param dispositivoBluetooth
 	 * @param esSeleccionado

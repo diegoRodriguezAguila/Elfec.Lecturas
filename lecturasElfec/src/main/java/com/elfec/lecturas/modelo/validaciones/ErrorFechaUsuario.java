@@ -8,7 +8,7 @@ import java.util.Locale;
 /**
  * Es utilizada cuando un usuario se intenta logear y la fecha del movil
  * no corresponde a la fecha resultado de la sincronizacion con el servidor
- * <b>código VU-005</b>
+ * <b>cÃ³digo VU-005</b>
  * @author drodriguez
  *
  */
@@ -31,9 +31,9 @@ public class ErrorFechaUsuario implements IValidacionUsuario {
 		
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy",Locale.getDefault());
 		String fecha = df.format(fechaServidor);
-		return "La fecha del dispositivo no corresponde con la que se sincronizó con el servidor, la fecha sincronizada es: "+fecha
-				+". Este error puede ocurrir cuando el dispositivo se quedó sin bateria y la fecha no coincide. También puede ser que "+
-		"no se hayan descargado los datos del día anterior, para ello contacte con un administrador";
+		return "La fecha del dispositivo no corresponde con la que se sincronizÃ³ con el servidor, la fecha sincronizada es: "+fecha
+				+". Este error puede ocurrir cuando el dispositivo se quedÃ³ sin bateria y la fecha no coincide. TambiÃ©n puede ser que "+
+		"no se hayan descargado los datos del dÃ­a anterior, para ello contacte con un administrador";
 	}
 
 	@Override

@@ -1,8 +1,5 @@
 package com.elfec.lecturas.controlador;
 
-import java.util.Date;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -29,6 +26,10 @@ import com.elfec.lecturas.modelo.validaciones.IValidacionUsuario;
 import com.elfec.lecturas.modelo.validaciones.sincronizacion.IEstadoSincronizacion;
 import com.elfec.lecturas.settings.AdministradorSeguridad;
 import com.elfec.lecturas.settings.VariablesDeSesion;
+
+import java.util.Date;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Controlador de la actividad de Login, esta es la primera pantalla del sistema
@@ -65,7 +66,7 @@ public class Login extends AppCompatActivity {
 	}
 
 	/**
-	 * Asigna la versi�n al titulo
+	 * Asigna la versiÃ³n al titulo
 	 */
 	private void setVersionTitle() {
 		try {
@@ -82,7 +83,7 @@ public class Login extends AppCompatActivity {
 
 	/**
 	 * Se invoca al apretar el boton de ingresar, se encarga de llamar a las
-	 * rutinas de validaci�n de sincronizaci�n y de usuario.
+	 * rutinas de validaciÃ³n de sincronizaciÃ³n y de usuario.
 	 * 
 	 * @param view
 	 */
@@ -193,7 +194,7 @@ public class Login extends AppCompatActivity {
 	/**
 	 * Dialogo de progreso que se muestra mientras se autentica al usuario
 	 * conectando con la base de datos oracle no se muestra cuando ya se tiene
-	 * al usuario en el tel�fono
+	 * al usuario en el telÃ©fono
 	 */
 	private ProgressDialogPro progressDialog;
 

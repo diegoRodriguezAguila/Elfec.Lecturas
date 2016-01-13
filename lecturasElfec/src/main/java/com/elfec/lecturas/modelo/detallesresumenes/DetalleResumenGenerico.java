@@ -16,11 +16,11 @@ public abstract class DetalleResumenGenerico
 	 */
 	public String titulo;
 	/**
-	 * Fecha de impresión de la papeleta de resumen
+	 * Fecha de impresiÃ³n de la papeleta de resumen
 	 */
 	public String fechaImpresion;
 	/**
-	 * Hora de impresión de la papeleta de resumen
+	 * Hora de impresiÃ³n de la papeleta de resumen
 	 */
 	public String horaImpresion;
 	/**

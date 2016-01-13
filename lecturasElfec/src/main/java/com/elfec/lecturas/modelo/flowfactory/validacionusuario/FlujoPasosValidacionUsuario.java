@@ -11,7 +11,7 @@ import com.elfec.lecturas.modelo.validaciones.IValidacionUsuario;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
- * Clase est醫ica que se encarga de iniciar el flujo de pasos para validar al usuario
+ * Clase est谩tica que se encarga de iniciar el flujo de pasos para validar al usuario
  * @author drodriguez
  *
  */
@@ -30,7 +30,7 @@ public class FlujoPasosValidacionUsuario
 	 */
 	public static String imei;
 	/**
-	 * La fecha de sincronizaci髇 del telefono con el servidor.
+	 * La fecha de sincronizaci贸n del telefono con el servidor.
 	 */
 	public static Date fechaSinc;
 	/**
@@ -43,7 +43,7 @@ public class FlujoPasosValidacionUsuario
 	 */
 	public static Usuario usuarioEncontrado;
 	/**
-	 * En caso de necesitarse es la conexi髇 a la base de datos Oracle.
+	 * En caso de necesitarse es la conexi贸n a la base de datos Oracle.
 	 */
 	public static ConectorBDOracle conexion;
 	
@@ -79,8 +79,8 @@ public class FlujoPasosValidacionUsuario
 	}
 	
 	/**
-	 * Una vez finalizada la validaci髇 del usuario y en caso de que esta sea correcta se debe guardar los datos de usuario
-	 * recopilados durante la validaci髇, este metodo se encarga de dicho proceso
+	 * Una vez finalizada la validaci贸n del usuario y en caso de que esta sea correcta se debe guardar los datos de usuario
+	 * recopilados durante la validaci贸n, este metodo se encarga de dicho proceso
 	 */
 	public static void guardarUsuario()
 	{

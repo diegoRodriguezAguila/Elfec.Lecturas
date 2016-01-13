@@ -3,7 +3,7 @@ package com.elfec.lecturas.modelo.flowfactory.validacionusuario;
 import com.elfec.lecturas.modelo.validaciones.IValidacionUsuario;
 
 /**
- * Define un paso de la validación de usuario
+ * Define un paso de la validaciÃ³n de usuario
  * @author drodriguez
  *
  */
@@ -15,7 +15,7 @@ public abstract class PasoValidacionUsuario {
 	protected IValidacionUsuario resultadoValidacion;
 	
 	/**
-	 * Obtiene el resultado de ese paso de la validación, null en caso de
+	 * Obtiene el resultado de ese paso de la validaciÃ³n, null en caso de
 	 * que no se obtenga resultado del paso.
 	 * @return Se retorna el valor de la variable <b>resultadoValidacion</b>
 	 */

@@ -1,9 +1,5 @@
 package com.elfec.lecturas.logica_negocio;
 
-import java.net.ConnectException;
-import java.sql.SQLException;
-import java.util.List;
-
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataExporter;
 import com.elfec.lecturas.modelo.MedidorEntreLineas;
@@ -11,8 +7,12 @@ import com.elfec.lecturas.modelo.eventos.ExportacionDatosListener;
 import com.elfec.lecturas.modelo.intercambio_datos.ExportSpecs;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 
+import java.net.ConnectException;
+import java.sql.SQLException;
+import java.util.List;
+
 /**
- * Capa de l�gica de negocio para medidores entre lineas
+ * Capa de lÃ³gica de negocio para medidores entre lineas
  * 
  * @author drodriguez
  *

@@ -1,12 +1,5 @@
 package com.elfec.lecturas.controlador;
 
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -44,6 +37,14 @@ import com.elfec.lecturas.servicios.receivers.DataExportationReceiver;
 import com.elfec.lecturas.servicios.receivers.DataImportationReceiver;
 import com.elfec.lecturas.settings.AdministradorSeguridad;
 import com.elfec.lecturas.settings.VariablesDeSesion;
+
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 /**
  * Controlador de la actividad de Inicio, esta es la segunda pantalla a la que
@@ -186,7 +187,7 @@ public class Inicio extends AppCompatActivity implements
 
 	/**
 	 * Elimina todos los datos diarios y mensuales, es invocado cuando se
-	 * presiona la opcion del menu de eliminar datos y se confirma. Esta opci�n
+	 * presiona la opcion del menu de eliminar datos y se confirma. Esta opciÃ³n
 	 * deberia estar disponible solo para administradores.
 	 */
 	private void eliminarDatos() {
@@ -208,7 +209,7 @@ public class Inicio extends AppCompatActivity implements
 
 	/**
 	 * Fuerza la descarga de datos, aun cuando no se hayan terminado de realizar
-	 * todas las lecturas. Esta opci�n deberia estar disponible solo para
+	 * todas las lecturas. Esta opciÃ³n deberia estar disponible solo para
 	 * administradores.
 	 */
 	private void forzarDescarga() {
@@ -254,7 +255,7 @@ public class Inicio extends AppCompatActivity implements
 	}
 
 	/**
-	 * Inicia la actividad de Configurar el servidor. Esta opci�n deberia estar
+	 * Inicia la actividad de Configurar el servidor. Esta opciÃ³n deberia estar
 	 * disponible solo para administradores.
 	 * 
 	 * @param menuitem
@@ -269,7 +270,7 @@ public class Inicio extends AppCompatActivity implements
 	}
 
 	/**
-	 * Abre el cuadro de dialogo para selecci�n de impresora
+	 * Abre el cuadro de dialogo para selecciÃ³n de impresora
 	 * 
 	 * @param menuitem
 	 */
@@ -373,7 +374,7 @@ public class Inicio extends AppCompatActivity implements
 	}
 
 	/**
-	 * Inicia el servicio de importaci�n de datos
+	 * Inicia el servicio de importaciÃ³n de datos
 	 */
 	private void iniciarImportacionDatos() {
 		startService(new Intent(this, ServicioImportacionDatos.class));
@@ -410,7 +411,7 @@ public class Inicio extends AppCompatActivity implements
 	}
 
 	/**
-	 * Inicia el servicio de exportaci�n de datos
+	 * Inicia el servicio de exportaciÃ³n de datos
 	 */
 	private void iniciarExportacionDatos() {
 		startService(new Intent(this, ServicioExportacionDatos.class));

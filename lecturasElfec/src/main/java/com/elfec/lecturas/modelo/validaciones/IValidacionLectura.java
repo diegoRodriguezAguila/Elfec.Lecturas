@@ -4,7 +4,7 @@ import com.elfec.lecturas.modelo.Ordenativo;
 
 /**
  * La interfaz de la que deben heredar los resultados de validaciones. 
- * El código asignado para las validaciones de lectura es <b>VL</b>.
+ * El cÃ³digo asignado para las validaciones de lectura es <b>VL</b>.
  * @author drodriguez
  *
  */

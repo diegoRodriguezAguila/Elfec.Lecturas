@@ -12,9 +12,9 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 /**
- * Almacena la informaciÛn sobre conceptos de las lecturas, hay informaciÛn de
- * la tabla MOVILES.LECTURASCONCEPTOS de la BD Moviles de Oracle. AsÌ como
- * tambiÈn informaciÛn de conceptos que se generan al crear el aviso de cobranza
+ * Almacena la informaci√≥n sobre conceptos de las lecturas, hay informaci√≥n de
+ * la tabla MOVILES.LECTURASCONCEPTOS de la BD Moviles de Oracle. As√≠ como
+ * tambi√©n informaci√≥n de conceptos que se generan al crear el aviso de cobranza
  * de la lectura
  * 
  * @author drodriguez
@@ -28,7 +28,7 @@ public class ConceptoLectura extends Model {
 	@Column(name = "OrdenImpresion", notNull = true, index = true)
 	public int OrdenImpresion;
 	/**
-	 * Este atributo se utiliza para la modificaciÛn de la lectura, los
+	 * Este atributo se utiliza para la modificaci√≥n de la lectura, los
 	 * conceptos que se importaron de la base de datos Oracle no son
 	 * eliminables, y tienen este campo en <b>0</b> en cambio los conceptos que
 	 * se generan al momento de crear el aviso de cobranza si son eliminables y
@@ -42,7 +42,7 @@ public class ConceptoLectura extends Model {
 	}
 
 	/**
-	 * Los conceptos creados con este constructor tendr·n la bandera
+	 * Los conceptos creados con este constructor tendr√°n la bandera
 	 * <b>EsEliminable</b> en 1, dado que se crean al momento de generar el
 	 * aviso de cobranza
 	 * 
@@ -75,7 +75,7 @@ public class ConceptoLectura extends Model {
 	}
 
 	/**
-	 * Los conceptos creados con este constructor tendr·n la bandera
+	 * Los conceptos creados con este constructor tendr√°n la bandera
 	 * <b>EsEliminable</b> en 0, dado que se crean de un ResultSet.
 	 * 
 	 * @param rs
@@ -140,7 +140,7 @@ public class ConceptoLectura extends Model {
 	 * @param suministro
 	 * @param mes
 	 * @param anio
-	 * @return La lectura que coincida con esos par·metros
+	 * @return La lectura que coincida con esos par√°metros
 	 */
 	public static Lectura obtenerLectura(long suministro, int mes, int anio) {
 		return new Select().from(Lectura.class).where("LEMSUM=?", suministro)
@@ -148,8 +148,8 @@ public class ConceptoLectura extends Model {
 	}
 
 	/**
-	 * Elimina toda la informaciÛn de conceptos de lecturas que pertenezcan a la
-	 * asignaciÛn de ruta dada
+	 * Elimina toda la informaci√≥n de conceptos de lecturas que pertenezcan a la
+	 * asignaci√≥n de ruta dada
 	 * 
 	 * @param asignacionRuta
 	 * @param nusClausulaIN

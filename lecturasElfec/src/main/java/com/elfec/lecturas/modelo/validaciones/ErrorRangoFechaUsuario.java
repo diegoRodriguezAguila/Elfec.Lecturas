@@ -7,9 +7,9 @@ import java.util.Locale;
 
 /**
  * Es utilizada cuando un usuario se intenta logear y la fecha del movil
- * no corresponde a la fecha resultado de la sincronizacion con el servidor o la fecha de sincronizaciÛn
+ * no corresponde a la fecha resultado de la sincronizacion con el servidor o la fecha de sincronizaci√≥n
  * de la fecha del usuario no esta dentro el rango permitido
- * <b>cÛdigo VU-005</b>
+ * <b>c√≥digo VU-005</b>
  * @author drodriguez
  *
  */
@@ -32,9 +32,9 @@ public class ErrorRangoFechaUsuario implements IValidacionUsuario {
 		
 		DateFormat df = new SimpleDateFormat("dd/MM/yyyy",Locale.getDefault());
 		String fecha = df.format(fechaServidor);
-		return "La fecha del dispositivo no corresponde con la que se sincronizÛ con el servidor y tampoco est· en el rango de dias permitidos, la fecha sincronizada es: "+fecha
-				+". Este error puede ocurrir cuando el dispositivo se quedÛ sin bateria y la fecha no coincide. TambiÈn puede ser que "+
-		"no se hayan descargado los datos del dÌa anterior, para ello contacte con un administrador";
+		return "La fecha del dispositivo no corresponde con la que se sincroniz√≥ con el servidor y tampoco est√° en el rango de dias permitidos, la fecha sincronizada es: "+fecha
+				+". Este error puede ocurrir cuando el dispositivo se qued√≥ sin bateria y la fecha no coincide. Tambi√©n puede ser que "+
+		"no se hayan descargado los datos del d√≠a anterior, para ello contacte con un administrador";
 	}
 
 	@Override

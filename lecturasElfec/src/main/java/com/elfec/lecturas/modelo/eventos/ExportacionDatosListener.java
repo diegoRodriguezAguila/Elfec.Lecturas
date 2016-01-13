@@ -1,7 +1,7 @@
 package com.elfec.lecturas.modelo.eventos;
 
 /**
- * Clase que informa de los eventos que ocurren durante la exportaci髇 de datos
+ * Clase que informa de los eventos que ocurren durante la exportaci贸n de datos
  * @author drodriguez
  *
  */
@@ -9,7 +9,7 @@ public interface ExportacionDatosListener {
 
 	/**
 	 * Se ejecuta el momento en que se obtuvieron todos los datos para exportar
-	 * y se esta por empezar la exportaci髇
+	 * y se esta por empezar la exportaci贸n
 	 * @param totalElementos total de datos a exportar
 	 */
 	public void onExportacionInicializada(int totalElementos);
@@ -22,8 +22,8 @@ public interface ExportacionDatosListener {
 	public void onExportando(int countExportacion, int totalElementos);
 	
 	/**
-	 * Se ejecuta el momento en que se finaliza la exportaci髇, ya sea exitosa o fallidamente
-	 * y se esta por empezar la exportaci髇
+	 * Se ejecuta el momento en que se finaliza la exportaci贸n, ya sea exitosa o fallidamente
+	 * y se esta por empezar la exportaci贸n
 	 */
 	public void onExportacionFinalizada();
 }

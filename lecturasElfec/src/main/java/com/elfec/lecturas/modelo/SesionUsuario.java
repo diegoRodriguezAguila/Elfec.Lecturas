@@ -17,7 +17,7 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
 /**
- * Almacena la información sobre la sesion de usuario actual, <b>no debe instanciarse directamente</b>, en su lugar, deben utilizarse
+ * Almacena la informaciÃ³n sobre la sesion de usuario actual, <b>no debe instanciarse directamente</b>, en su lugar, deben utilizarse
  * los metodos de iniciar, cerrar y recuperar sesion
  * @author drodriguez
  */

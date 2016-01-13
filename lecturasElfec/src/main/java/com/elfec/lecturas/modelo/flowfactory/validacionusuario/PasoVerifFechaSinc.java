@@ -6,10 +6,10 @@ import java.util.Date;
 import com.elfec.lecturas.modelo.validaciones.ErrorRangoFechaUsuario;
 
 /**
- * Define el paso de validación en el que se valida que la fecha de
- * sincronización esté en el rango permitido. <br>
+ * Define el paso de validaciÃ³n en el que se valida que la fecha de
+ * sincronizaciÃ³n estÃ© en el rango permitido. <br>
  * <br>
- * <b>Código: PVU-1.2</b>
+ * <b>CÃ³digo: PVU-1.2</b>
  * 
  * @author drodriguez
  *
@@ -26,7 +26,7 @@ public class PasoVerifFechaSinc extends PasoValidacionUsuario {
 	 */
 	@Override
 	public PasoValidacionUsuario procesarPaso() {
-		// fechas sincronización no está en rango
+		// fechas sincronizaciÃ³n no estÃ¡ en rango
 		if (!fechaSincronizacionEstaEnRango(
 				FlujoPasosValidacionUsuario.usuarioEncontrado.FechaSincronizacion,
 				FlujoPasosValidacionUsuario.usuarioEncontrado.RangoDias)) {
@@ -39,7 +39,7 @@ public class PasoVerifFechaSinc extends PasoValidacionUsuario {
 
 	/**
 	 * Verifica si la fecha de sincronizacion de la sesion del usuario esta
-	 * dentro el rango permitido según el campo RangoDias del Usuario.
+	 * dentro el rango permitido segÃºn el campo RangoDias del Usuario.
 	 * 
 	 * @param fechaSinc
 	 *            , fecha de sincronizacion del usuario

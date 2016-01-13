@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Representa una vista o cualquier observador que quiera recibir
- * actualizaciones durante un evento de exportaci�n de datos
+ * actualizaciones durante un evento de exportaciÃ³n de datos
  * 
  * @author drodriguez
  *
@@ -55,7 +55,7 @@ public interface IDataExportationObserver {
 			List<Exception> errors);
 
 	/**
-	 * Indica al usuario que la exportaci�n fu� exitosa
+	 * Indica al usuario que la exportaciÃ³n fuÃ© exitosa
 	 */
 	public void notifySuccessfulExportation();
 }

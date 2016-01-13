@@ -3,7 +3,7 @@ package com.elfec.lecturas.modelo.excepciones;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 
 /**
- * Excepción que se lanza cuando no se encontraron lecturas para la asignación
+ * ExcepciÃ³n que se lanza cuando no se encontraron lecturas para la asignaciÃ³n
  * de ruta
  * 
  * @author drodriguez
@@ -27,6 +27,6 @@ public class RutaAsignadaSinLecturasException extends Exception {
 				+ assignedRoute.Ruta
 				+ "</b>  en la fecha del rol: <b>"
 				+ assignedRoute.getFechaCronograma().toString("dd/MM/yyyy")
-				+ "</b>. Si tiene problemas al realizar la carga solicite la desasignación de dicha ruta al administrador.";
+				+ "</b>. Si tiene problemas al realizar la carga solicite la desasignaciÃ³n de dicha ruta al administrador.";
 	}
 }

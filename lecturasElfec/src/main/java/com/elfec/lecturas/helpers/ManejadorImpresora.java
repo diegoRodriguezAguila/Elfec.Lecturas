@@ -20,7 +20,7 @@ import com.zebra.sdk.printer.ZebraPrinterLanguageUnknownException;
 
 /**
  * Maneja la conexion con las impresoras bluetooth, asi como la seleccion de la
- * impresora predeterminada e impresi�n
+ * impresora predeterminada e impresiÃ³n
  * 
  * @author drodriguez
  *
@@ -41,7 +41,7 @@ public class ManejadorImpresora {
 	 * @param textoCPCL
 	 *            , texto en lenguaje CPCL
 	 * @throws ImpresoraPredefinidaNoAsignadaException
-	 *             , cuando no se asign� la impresoraPredefinida y se llama al
+	 *             , cuando no se asignÃ³ la impresoraPredefinida y se llama al
 	 *             metodo
 	 */
 	public static void imprimir(String textoCPCL)
@@ -85,7 +85,7 @@ public class ManejadorImpresora {
 	 * Obtiene la lista de los dispositivos sincronizados con el celular
 	 * 
 	 * @param activity
-	 *            , se utiliza para poder llamar al dialogo de activaci�n de
+	 *            , se utiliza para poder llamar al dialogo de activaciÃ³n de
 	 *            bluetooth, en caso de encontrarse apagado
 	 * @return lista de dispositivos bluetooth sincronizadas con el celular
 	 */
@@ -107,7 +107,7 @@ public class ManejadorImpresora {
 	}
 
 	/**
-	 * Realiza la conexi�n con la impresora predefinida y envia el texto, que
+	 * Realiza la conexiÃ³n con la impresora predefinida y envia el texto, que
 	 * tiene que ser en formato CPCL, a imprimir
 	 * 
 	 * @param textoAImprimir

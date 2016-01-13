@@ -10,7 +10,7 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 /**
- * Almacena la informaci髇 sobre la evoluci髇 de consumos, de la tabla
+ * Almacena la informaci贸n sobre la evoluci贸n de consumos, de la tabla
  * MOVILES.LECTURASC de la BD Moviles de Oracle
  * 
  * @author drodriguez
@@ -153,7 +153,7 @@ public class EvolucionConsumo extends Model {
 	 * @param suministro
 	 * @param mes
 	 * @param anio
-	 * @return La evolucion de consumo que coincida con esos par醡etros, null si
+	 * @return La evolucion de consumo que coincida con esos par谩metros, null si
 	 *         no se encuentra
 	 */
 	public static EvolucionConsumo obtenerEvolucionConsumo(long suministro,
@@ -180,8 +180,8 @@ public class EvolucionConsumo extends Model {
 	}
 
 	/**
-	 * Elimina toda la informaci髇 de evoluci髇 de consumos de lecturas que
-	 * pertenezcan a la asignaci髇 de ruta dada
+	 * Elimina toda la informaci贸n de evoluci贸n de consumos de lecturas que
+	 * pertenezcan a la asignaci贸n de ruta dada
 	 * 
 	 * @param asignacionRuta
 	 * @param nusClausulaIN

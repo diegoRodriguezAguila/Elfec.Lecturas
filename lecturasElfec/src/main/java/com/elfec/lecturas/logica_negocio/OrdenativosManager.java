@@ -18,7 +18,7 @@ import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.settings.AppPreferences;
 
 /**
- * Provee de una capa de l�gica de negocio para los Ordenativos
+ * Provee de una capa de lÃ³gica de negocio para los Ordenativos
  * 
  * @author drodriguez
  *
@@ -27,7 +27,7 @@ public class OrdenativosManager {
 	/**
 	 * Importa los ordenativos del erp si es que no se importaron ya
 	 * previamente.<br>
-	 * <b>Nota.-</b> La importaci�n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username

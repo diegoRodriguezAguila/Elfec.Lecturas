@@ -12,7 +12,7 @@ import com.activeandroid.query.Select;
 import com.elfec.lecturas.settings.VariablesDeEntorno;
 
 /**
- * Almacena la información sobre las bases de calculo de conceptos, de la tabla
+ * Almacena la informaciÃ³n sobre las bases de calculo de conceptos, de la tabla
  * ERP_ELFEC.GBASES_CALC_CPTOS de la BD Oracle
  * 
  * @author drodriguez

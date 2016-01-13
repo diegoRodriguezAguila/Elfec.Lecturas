@@ -4,7 +4,7 @@ import com.elfec.lecturas.modelo.Ordenativo;
 
 /**
  * Es utilizada cuando la validacion de una lectura fue exitosa y no se encontraron errores. 
- * <b>código VL-001</b>
+ * <b>cÃ³digo VL-001</b>
  * @author drodriguez
  */
 public class ValidacionLecturaCorrecta implements IValidacionLectura {

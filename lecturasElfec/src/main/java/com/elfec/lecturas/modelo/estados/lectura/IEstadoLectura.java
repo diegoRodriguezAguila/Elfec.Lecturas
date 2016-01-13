@@ -6,7 +6,7 @@ import com.elfec.lecturas.controlador.TomarLectura;
 import com.elfec.lecturas.modelo.Lectura;
 
 /**
- * Define el patron State de diseÒo abstrae el estado de la lectura
+ * Define el patron State de dise√±o abstrae el estado de la lectura
  * @author drodriguez
  *
  */
@@ -22,7 +22,7 @@ public interface IEstadoLectura
 	 */
 	public int getEstadoEntero();
 	/**
-	 * @return El estado en cadena, es decir si el Estado=0, devolver· "Pendiente"
+	 * @return El estado en cadena, es decir si el Estado=0, devolver√° "Pendiente"
 	 */
 	public String getEstadoCadena();
 	/**

@@ -11,7 +11,7 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 /**
- * Almacena la información sobre los ordenativos, de la tabla
+ * Almacena la informaciÃ³n sobre los ordenativos, de la tabla
  * ERP_ELFEC.TIPOS_NOV_SUM de la BD Oracle
  * 
  * @author drodriguez
@@ -65,9 +65,9 @@ public class Ordenativo extends Model {
 
 	/**
 	 * Accede a la base de datos y obtiene el ordenativo correspondiente al
-	 * código solicitado
+	 * cÃ³digo solicitado
 	 * 
-	 * @return Ordenativo correspondiente al código solicitado, o null si no
+	 * @return Ordenativo correspondiente al cÃ³digo solicitado, o null si no
 	 *         existe
 	 */
 	public static Ordenativo obtenerOrdenativoPorCodigo(int codigo) {

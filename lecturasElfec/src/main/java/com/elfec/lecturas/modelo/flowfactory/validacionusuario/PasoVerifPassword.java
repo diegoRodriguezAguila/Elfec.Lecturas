@@ -6,9 +6,9 @@ import com.elfec.lecturas.modelo.validaciones.ValidacionUsuarioCorrecta;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
- * Define el paso de validación en el que se verifica que el hash del password ingresado
+ * Define el paso de validaciÃ³n en el que se verifica que el hash del password ingresado
  *  coincide con el hash del password guardado en la bd local
- * <br><br><b>Código: PVU-1.2.2</b>
+ * <br><br><b>CÃ³digo: PVU-1.2.2</b>
  * @author drodriguez
  */
 public class PasoVerifPassword extends PasoValidacionUsuario {
@@ -22,14 +22,14 @@ public class PasoVerifPassword extends PasoValidacionUsuario {
 	@Override
 	public PasoValidacionUsuario procesarPaso() {
 		if(!FlujoPasosValidacionUsuario.usuarioEncontrado.Password.equals
-				(Usuario.hash(FlujoPasosValidacionUsuario.password)))  //contraseña no coincide
+				(Usuario.hash(FlujoPasosValidacionUsuario.password)))  //contraseÃ±a no coincide
 		{
 			resultadoValidacion = new ErrorUsuarioPasswordIncorrectos();
 		}
 		else
 		{
 			VariablesDeSesion.setPerfilUsuario(FlujoPasosValidacionUsuario.usuarioEncontrado.Perfil);
-			resultadoValidacion = new ValidacionUsuarioCorrecta();//contraseña coincide, exito de validacion
+			resultadoValidacion = new ValidacionUsuarioCorrecta();//contraseÃ±a coincide, exito de validacion
 		}
 		return null;
 	}

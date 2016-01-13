@@ -13,7 +13,7 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 /**
- * Almacena la información sobre las categorias de conceptos, de la tabla
+ * Almacena la informaciÃ³n sobre las categorias de conceptos, de la tabla
  * ERP_ELFEC.CPTOS_CATEGORIAS de la BD Oracle
  * 
  * @author drodriguez

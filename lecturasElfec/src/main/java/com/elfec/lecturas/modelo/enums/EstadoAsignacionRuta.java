@@ -16,15 +16,15 @@ public enum EstadoAsignacionRuta {
 	 */
 	ASIGNADA,
 	/**
-	 * Estado de ruta importada al m髒il
+	 * Estado de ruta importada al m贸vil
 	 */
 	IMPORTADA,
 	/**
-	 * Estado de ruta exportada del m髒il al servidor
+	 * Estado de ruta exportada del m贸vil al servidor
 	 */
 	EXPORTADA,
 	/**
-	 * Estado de ruta exportada del m髒il al servidor para relectura
+	 * Estado de ruta exportada del m贸vil al servidor para relectura
 	 */
 	EXPORTADA_CON_RELECTURAS,
 	/**
@@ -36,11 +36,11 @@ public enum EstadoAsignacionRuta {
 	 */
 	RELECTURA_ASIGNADA,
 	/**
-	 * Estado de ruta de relectura importada al m髒il
+	 * Estado de ruta de relectura importada al m贸vil
 	 */
 	RELECTURA_IMPORTADA,
 	/**
-	 * Estado de ruta de relectura exportada del m髒il al servidor
+	 * Estado de ruta de relectura exportada del m贸vil al servidor
 	 */
 	RELECTURA_EXPORTADA;
 
@@ -55,7 +55,7 @@ public enum EstadoAsignacionRuta {
 	}
 
 	/**
-	 * Convierte el estado de asignaci髇 de ruta actual a su short equivalente
+	 * Convierte el estado de asignaci贸n de ruta actual a su short equivalente
 	 * 
 	 * @return Short equivalente al estado
 	 */

@@ -16,12 +16,12 @@ import com.activeandroid.Model;
  */
 public interface ImportSource<T extends Model> {
 	/**
-	 * Se ejecuta antes de guardar localmente cada fila de información
+	 * Se ejecuta antes de guardar localmente cada fila de informaciÃ³n
 	 */
 	public void preSaveData(T data);
 
 	/**
-	 * Obtiene la información
+	 * Obtiene la informaciÃ³n
 	 * 
 	 * @return Lista de tipo T
 	 * @throws ConnectException

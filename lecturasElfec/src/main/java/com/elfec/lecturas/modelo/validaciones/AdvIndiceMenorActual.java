@@ -4,7 +4,7 @@ import com.elfec.lecturas.modelo.Ordenativo;
 
 /**
  * Es utilizada cuando la lectura introducida es menor a la anterior
- * <b>código VL-002</b>
+ * <b>cÃ³digo VL-002</b>
  * @author drodriguez
  */
 public class AdvIndiceMenorActual implements IValidacionLectura{

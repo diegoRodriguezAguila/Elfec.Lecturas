@@ -4,7 +4,7 @@ import com.elfec.lecturas.modelo.Ordenativo;
 
 /**
  * Es utilizada cuando el consumo registrado es bajo.
- * <b>código VL-003</b>
+ * <b>cÃ³digo VL-003</b>
  * @author drodriguez
  */
 public class AdvConsumoBajo implements IValidacionLectura {

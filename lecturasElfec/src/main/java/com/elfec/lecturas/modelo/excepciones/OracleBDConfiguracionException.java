@@ -27,7 +27,7 @@ public class OracleBDConfiguracionException extends FormatException {
 	@Override
 	public String getMessage() {
 		return preMensaje
-				+ "Los parámetros de la configuración de conexión a la base de datos tienen un formato incorrecto! "
-				+ "Puede que el archivo haya sido dañado o eliminado!";
+				+ "Los parÃ¡metros de la configuraciÃ³n de conexiÃ³n a la base de datos tienen un formato incorrecto! "
+				+ "Puede que el archivo haya sido daÃ±ado o eliminado!";
 	}
 }

@@ -49,8 +49,8 @@ import com.elfec.lecturas.settings.ConstantesDeEntorno;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
- * Se encarga de la conexi�n con la base de datos oracle, y la importaci�n y
- * exportaci�n de �sta.
+ * Se encarga de la conexiÃ³n con la base de datos oracle, y la importaciÃ³n y
+ * exportaciÃ³n de Ã©sta.
  * 
  * @author drodriguez
  *
@@ -63,9 +63,9 @@ public class ConectorBDOracle {
 
 	/**
 	 * Crea una nueva conexion con la base de datos Oracle, usando la
-	 * informaci�n de conexi�n del archivo JSON de configuraci�n que se
-	 * encuentra en la carpeta <b>assets</b> o con la configuraci�n configurada
-	 * desde el dispositivo. Para crear una nueva conexi�n debe usar el m�todo
+	 * informaciÃ³n de conexiÃ³n del archivo JSON de configuraciÃ³n que se
+	 * encuentra en la carpeta <b>assets</b> o con la configuraciÃ³n configurada
+	 * desde el dispositivo. Para crear una nueva conexiÃ³n debe usar el mÃ©todo
 	 * {@link ConectorBDOracle#crear(Context, boolean)}
 	 * 
 	 * @param contexto
@@ -73,7 +73,7 @@ public class ConectorBDOracle {
 	 *            <b>assets</b>
 	 * @param habilitarRol
 	 *            , indica si se debe habilitar o no el rol de lecturas para
-	 *            esta conexi�n
+	 *            esta conexiÃ³n
 	 * @throws JSONException
 	 * @throws OracleBDConexionException
 	 * @throws FormatException
@@ -129,9 +129,9 @@ public class ConectorBDOracle {
 
 	/**
 	 * Hbailita el rol de LECTURAS para el usuario logeado con el que se realiza
-	 * la conexi�n este metodo se llama con el parametro del constructor y
+	 * la conexiÃ³n este metodo se llama con el parametro del constructor y
 	 * deberia activarse para cualquier conexion a la base de datos oracle que
-	 * requiera acceso a las tablas espec�ficas de lecturas
+	 * requiera acceso a las tablas especÃ­ficas de lecturas
 	 * 
 	 * @param contexto
 	 *            , la actividad de la que se llama el conector, necesaria para
@@ -161,7 +161,7 @@ public class ConectorBDOracle {
 
 	/**
 	 * Importa todas las lecturas correspondientes a la ruta propocionada. Toma
-	 * en cuenta el dia, mes y a�o para realizar la importaci�n y lo realiza de
+	 * en cuenta el dia, mes y aÃ±o para realizar la importaciÃ³n y lo realiza de
 	 * la tabla MOVILES.LECTURAS
 	 * 
 	 * @param ruta
@@ -198,8 +198,8 @@ public class ConectorBDOracle {
 
 	/**
 	 * Importa todas las potencias asociadas a lecturas correspondientes a la
-	 * ruta propocionada. Toma en cuenta el dia, mes y a�o para realizar la
-	 * importaci�n y lo realiza de la tabla MOVILES.LECTURASP
+	 * ruta propocionada. Toma en cuenta el dia, mes y aÃ±o para realizar la
+	 * importaciÃ³n y lo realiza de la tabla MOVILES.LECTURASP
 	 * 
 	 * @param ruta
 	 * @param listLecCondicion
@@ -362,7 +362,7 @@ public class ConectorBDOracle {
 
 	/**
 	 * Exporta una lectura al servidor, no guarda ni realiza cambios localmente,
-	 * se deber�a actualizar su estado en caso de exportarse exitosamente
+	 * se deberÃ­a actualizar su estado en caso de exportarse exitosamente
 	 * 
 	 * @param lec
 	 * @throws SQLException
@@ -374,10 +374,10 @@ public class ConectorBDOracle {
 
 	/**
 	 * Exporta un simple ordenativo, no guarda ni realiza cambios localmente, se
-	 * deber�a actualizar su estado en caso de exportarse exitosamente
+	 * deberÃ­a actualizar su estado en caso de exportarse exitosamente
 	 * 
 	 * @param ordLec
-	 * @return 1 si se import� exitosamente
+	 * @return 1 si se importÃ³ exitosamente
 	 * @throws SQLException
 	 */
 	public int exportarOrdenativoLectura(OrdenativoLectura ordLec)
@@ -387,7 +387,7 @@ public class ConectorBDOracle {
 
 	/**
 	 * Exporta una lectura entre lineas al servidor, no guarda ni realiza
-	 * cambios localmente, se deber�a actualizar su estado en caso de exportarse
+	 * cambios localmente, se deberÃ­a actualizar su estado en caso de exportarse
 	 * exitosamente
 	 * 
 	 * @param lec
@@ -532,7 +532,7 @@ public class ConectorBDOracle {
 
 	/**
 	 * Se conecta a la base de datos oracle y obtiene los tokens para la
-	 * conexi�n al servicio web a partir de la fecha de sincronizacion de la
+	 * conexiÃ³n al servicio web a partir de la fecha de sincronizacion de la
 	 * cuenta del usuario hasta el rango de dias que tiene asignados, el rango
 	 * de dias no puede ser cero. del usuario, de la vista MOVILES.V_TOKEN_LEC
 	 * 
@@ -561,9 +561,9 @@ public class ConectorBDOracle {
 
 	/**
 	 * Se conecta a la base de datos oracle y verifica si el imei propocionado
-	 * esta aurorizado para usar la aplicaci�n para ello accede a la tabla
+	 * esta aurorizado para usar la aplicaciÃ³n para ello accede a la tabla
 	 * MOVILES.IMEI_APP y ve que exista ese IMEI y que tenga estado 1 es decir
-	 * que est� activo
+	 * que estÃ© activo
 	 * 
 	 * @param imei
 	 * @return
@@ -647,7 +647,7 @@ public class ConectorBDOracle {
 	}
 
 	/**
-	 * busca una asignaci�n de ruta seg�n los par�metros especificados
+	 * busca una asignaciÃ³n de ruta segÃºn los parÃ¡metros especificados
 	 * 
 	 * @param usuario
 	 * @param ruta

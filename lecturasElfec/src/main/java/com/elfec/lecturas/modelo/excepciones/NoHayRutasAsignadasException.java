@@ -3,7 +3,7 @@ package com.elfec.lecturas.modelo.excepciones;
 import org.joda.time.DateTime;
 
 /**
- * Excepción que se lanza cuando no existe ninguna ruta asignada para el día
+ * ExcepciÃ³n que se lanza cuando no existe ninguna ruta asignada para el dÃ­a
  * indicado
  * 
  * @author drodriguez
@@ -27,6 +27,6 @@ public class NoHayRutasAsignadasException extends Exception {
 				+ username
 				+ "</b> no tiene ninguna ruta asignada para la fecha de hoy <b>"
 				+ DateTime.now().toString("dd/MM/yyyy")
-				+ "</b> o ya cargó las rutas que se le asignaron.";
+				+ "</b> o ya cargÃ³ las rutas que se le asignaron.";
 	}
 }

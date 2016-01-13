@@ -1,7 +1,7 @@
 package com.elfec.lecturas.modelo.validaciones;
 /**
  * Es utilizada cuando la validacion de un usuario fue exitosa y no se encontraron errores. 
- * <b>código VU-001</b>
+ * <b>cÃ³digo VU-001</b>
  * @author drodriguez
  *
  */

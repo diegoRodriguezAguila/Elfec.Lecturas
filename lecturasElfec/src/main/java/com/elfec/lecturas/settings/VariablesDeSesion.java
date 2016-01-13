@@ -6,8 +6,8 @@ import java.util.Locale;
 import com.elfec.lecturas.modelo.SesionUsuario;
 
 /**
- * Guarda variables correspondientes a la sesion iniciada, que se utilizan a lo largo de toda la aplicaciÛn
- * por eso es una clase est·tica
+ * Guarda variables correspondientes a la sesion iniciada, que se utilizan a lo largo de toda la aplicaci√≥n
+ * por eso es una clase est√°tica
  * @author drodriguez
  *
  */
@@ -30,11 +30,11 @@ public class VariablesDeSesion
 	 */
 	private static String passwordUsuario;
 	/**
-	 * El imei del celular en el que se ejecuta la aplicaciÛn
+	 * El imei del celular en el que se ejecuta la aplicaci√≥n
 	 */
 	private static String imeiCelular;
 	/**
-	 * El perfil del usuario que iniciÛ sesiÛn
+	 * El perfil del usuario que inici√≥ sesi√≥n
 	 */
 	private static String perfilUsuario;
 	

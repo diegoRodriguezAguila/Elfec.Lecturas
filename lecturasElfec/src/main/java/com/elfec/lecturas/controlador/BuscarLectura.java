@@ -1,9 +1,5 @@
 package com.elfec.lecturas.controlador;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +19,11 @@ import com.elfec.lecturas.helpers.ui.TecladoHelper;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.eventos.OnLecturaSeleccionadaListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class BuscarLectura extends AppCompatActivity {
 
@@ -169,7 +170,7 @@ public class BuscarLectura extends AppCompatActivity {
 	}
 
 	/**
-	 * Se encarga de decidir qu� hacer con los resultados de la b�squeda
+	 * Se encarga de decidir quÃ© hacer con los resultados de la bÃºsqueda
 	 * 
 	 * @param lecturasEncontradas
 	 * @param lecturaEnc
@@ -198,7 +199,7 @@ public class BuscarLectura extends AppCompatActivity {
 
 	/**
 	 * Muestra un dialogo que indica al usuario que no se encontraron resultados
-	 * de su b�squeda
+	 * de su bÃºsqueda
 	 */
 	private void mostrarDialogoNoResultados() {
 		new AlertDialog.Builder(this).setMessage(R.string.res_fallido_busqueda)

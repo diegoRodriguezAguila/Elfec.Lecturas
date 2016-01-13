@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 /**
- * Maneja las sharedpreferences de toda la aplicación
+ * Maneja las sharedpreferences de toda la aplicaciÃ³n
  * 
  * @author Diego
  *
@@ -34,7 +34,7 @@ public class AppPreferences {
 	private static AppPreferences appPreferences;
 
 	/**
-	 * Este método se debe llamar al inicializar la aplicación
+	 * Este mÃ©todo se debe llamar al inicializar la aplicaciÃ³n
 	 * 
 	 * @param context
 	 */
@@ -43,9 +43,9 @@ public class AppPreferences {
 	}
 
 	/**
-	 * Obtiene el contexto de la aplicación
+	 * Obtiene el contexto de la aplicaciÃ³n
 	 * 
-	 * @return el contexto de la aplicación
+	 * @return el contexto de la aplicaciÃ³n
 	 */
 	public static Context getApplicationContext() {
 		return AppPreferences.context;
@@ -55,7 +55,7 @@ public class AppPreferences {
 		if (appPreferences == null) {
 			if (context == null)
 				throw new IllegalStateException(
-						"La clase no se inicializó correctamente antes de utilizarse, debe asignarse el contexto antes de utilizar las preferencias");
+						"La clase no se inicializÃ³ correctamente antes de utilizarse, debe asignarse el contexto antes de utilizar las preferencias");
 			appPreferences = new AppPreferences(context);
 		}
 		return appPreferences;
@@ -82,10 +82,10 @@ public class AppPreferences {
 	}
 
 	/**
-	 * Indica si toda la información que solo debe ser importada una vez la ha
+	 * Indica si toda la informaciÃ³n que solo debe ser importada una vez la ha
 	 * sido
 	 * 
-	 * @return true si es que ya se importó toda
+	 * @return true si es que ya se importÃ³ toda
 	 */
 	public boolean estaInfoReqUnaVezImportados() {
 		return preferences
@@ -93,7 +93,7 @@ public class AppPreferences {
 	}
 
 	/**
-	 * Asigna si toda la información que solo debe ser importada una vez la ha
+	 * Asigna si toda la informaciÃ³n que solo debe ser importada una vez la ha
 	 * sido
 	 * 
 	 * @return la instancia actual de PreferencesManager
@@ -108,7 +108,7 @@ public class AppPreferences {
 	/**
 	 * Indica si los SGC_MOVIL_PARAM han sido importados
 	 * 
-	 * @return true si es que ya se importó
+	 * @return true si es que ya se importÃ³
 	 */
 	public boolean estaParametrizablesImportados() {
 		return preferences.getBoolean(PARAMETRIZABLES_IMPORTADOS, false);
@@ -129,7 +129,7 @@ public class AppPreferences {
 	/**
 	 * Indica si los TIPOS_CATEG_SUM han sido importados
 	 * 
-	 * @return true si es que ya se importó
+	 * @return true si es que ya se importÃ³
 	 */
 	public boolean estaOrdenativosImportados() {
 		return preferences.getBoolean(ORDENATIVOS_IMPORTADOS, false);
@@ -149,7 +149,7 @@ public class AppPreferences {
 	/**
 	 * Indica si los GBASES_CALC_CPTOS han sido importados
 	 * 
-	 * @return true si es que ya se importó
+	 * @return true si es que ya se importÃ³
 	 */
 	public boolean estaBasesCalcConceptosImportados() {
 		return preferences.getBoolean(BASES_CALCULO_CPTOS_IMPORTADOS, false);
@@ -170,7 +170,7 @@ public class AppPreferences {
 	/**
 	 * Indica si los GBASES_CALC_IMP han sido importados
 	 * 
-	 * @return true si es que ya se importó
+	 * @return true si es que ya se importÃ³
 	 */
 	public boolean estaBasesCalculoImportados() {
 		return preferences.getBoolean(BASES_CALCULO_IMPORTADOS, false);
@@ -190,7 +190,7 @@ public class AppPreferences {
 	/**
 	 * Indica si los CONCEPTOS han sido importados
 	 * 
-	 * @return true si es que ya se importó
+	 * @return true si es que ya se importÃ³
 	 */
 	public boolean estaConceptosImportados() {
 		return preferences.getBoolean(CONCEPTOS_IMPORTADOS, false);
@@ -210,7 +210,7 @@ public class AppPreferences {
 	/**
 	 * Indica si los CPTOS_CATEGORIAS han sido importados
 	 * 
-	 * @return true si es que ya se importó
+	 * @return true si es que ya se importÃ³
 	 */
 	public boolean estaConceptosCategoriasImportados() {
 		return preferences.getBoolean(CONCEPTOS_CATEG_IMPORTADOS, false);
@@ -232,7 +232,7 @@ public class AppPreferences {
 	/**
 	 * Indica si los CONCEPTOS_TARIFAS han sido importados
 	 * 
-	 * @return true si es que ya se importó
+	 * @return true si es que ya se importÃ³
 	 */
 	public boolean estaConceptosTarifasImportados() {
 		return preferences.getBoolean(CONCEPTOS_TARIFA_IMPORTADOS, false);
@@ -251,7 +251,7 @@ public class AppPreferences {
 	}
 
 	/**
-	 * Borra las preferencias guardadas de la información que se debe importar
+	 * Borra las preferencias guardadas de la informaciÃ³n que se debe importar
 	 * solo una vez
 	 */
 	public void eliminarPreferenciasDeInfoReqUnaVez() {
@@ -268,7 +268,7 @@ public class AppPreferences {
 	/**
 	 * Indica si las RECLASIFICACION CATEGORIAS han sido importadas
 	 * 
-	 * @return true si es que ya se importó
+	 * @return true si es que ya se importÃ³
 	 */
 	public boolean estaReclasifCategoriasImportados() {
 		return preferences.getBoolean(RECLASIF_CATEG_IMPORTADOS, false);

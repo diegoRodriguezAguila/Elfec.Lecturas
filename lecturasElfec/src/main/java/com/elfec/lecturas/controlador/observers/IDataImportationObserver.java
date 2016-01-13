@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Representa una vista o cualquier observador que quiera recibir
- * actualizaciones durante un evento de importaci�n de datos
+ * actualizaciones durante un evento de importaciÃ³n de datos
  * 
  * @author drodriguez
  *
@@ -39,7 +39,7 @@ public interface IDataImportationObserver {
 			List<Exception> errors);
 
 	/**
-	 * Indica al usuario que la importaci�n fu� exitosa
+	 * Indica al usuario que la importaciÃ³n fuÃ© exitosa
 	 */
 	public void notifySuccessfulImportation();
 }

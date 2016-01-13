@@ -18,6 +18,6 @@ public class PotenciaSinLecturaException extends Exception {
 		return "La potencia del suministro: <b>"
 				+ nus
 				+ "</b> no pertenece a ninguna lectura descargada."
-				+ "Puede que haya un problema en la información del servidor, contacte con TI";
+				+ "Puede que haya un problema en la informaciÃ³n del servidor, contacte con TI";
 	}
 }

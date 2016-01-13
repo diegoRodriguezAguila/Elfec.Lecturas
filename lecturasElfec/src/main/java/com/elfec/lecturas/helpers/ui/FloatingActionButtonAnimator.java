@@ -28,7 +28,7 @@ public class FloatingActionButtonAnimator {
 	}
 
 	/**
-	 * Muestra el FloatingActionButton con la animaci�n por defecto
+	 * Muestra el FloatingActionButton con la animaciÃ³n por defecto
 	 * 
 	 * @param fab
 	 */
@@ -37,9 +37,9 @@ public class FloatingActionButtonAnimator {
 	}
 
 	/**
-	 * Muestra el FloatingActionButton con la animaci�n pasada en los
-	 * par�metros. Este m�todo no llama a los callbacks de animaci�n de la
-	 * animaci�n para ello utilize el m�todo
+	 * Muestra el FloatingActionButton con la animaciÃ³n pasada en los
+	 * parÃ¡metros. Este mÃ©todo no llama a los callbacks de animaciÃ³n de la
+	 * animaciÃ³n para ello utilize el mÃ©todo
 	 * {@link #hide(FloatingActionButton, Animation, AnimationListener)}
 	 * 
 	 * @param fab
@@ -50,7 +50,7 @@ public class FloatingActionButtonAnimator {
 	}
 
 	/**
-	 * Muestra el FloatingActionButton con la animaci�n pasada en los par�metros
+	 * Muestra el FloatingActionButton con la animaciÃ³n pasada en los parÃ¡metros
 	 * con el callback de animaciones proporcionado
 	 * 
 	 * @param fab
@@ -89,7 +89,7 @@ public class FloatingActionButtonAnimator {
 	}
 
 	/**
-	 * Esconde el FloatingActionButton con la animaci�n por defecto
+	 * Esconde el FloatingActionButton con la animaciÃ³n por defecto
 	 * 
 	 * @param fab
 	 */
@@ -98,9 +98,9 @@ public class FloatingActionButtonAnimator {
 	}
 
 	/**
-	 * Esconde el FloatingActionButton con la animaci�n pasada en los
-	 * par�metros. Este m�todo no llama a los callbacks de animaci�n de la
-	 * animaci�n para ello utilize el m�todo
+	 * Esconde el FloatingActionButton con la animaciÃ³n pasada en los
+	 * parÃ¡metros. Este mÃ©todo no llama a los callbacks de animaciÃ³n de la
+	 * animaciÃ³n para ello utilize el mÃ©todo
 	 * {@link #hide(FloatingActionButton, Animation, AnimationListener)}
 	 * 
 	 * @param fab
@@ -111,8 +111,8 @@ public class FloatingActionButtonAnimator {
 	}
 
 	/**
-	 * Esconde el FloatingActionButton con la animaci�n pasada en los par�metros
-	 * se llama a los callbacks de animaci�n proporcionados
+	 * Esconde el FloatingActionButton con la animaciÃ³n pasada en los parÃ¡metros
+	 * se llama a los callbacks de animaciÃ³n proporcionados
 	 * 
 	 * @param fab
 	 * @param anim
@@ -150,8 +150,8 @@ public class FloatingActionButtonAnimator {
 	}
 
 	/**
-	 * Esconde un FloatingActionButton y al finalizar la animaci�n inicia la
-	 * animaci�n de mostrar el otro bot�n, con las animaciones por defecto
+	 * Esconde un FloatingActionButton y al finalizar la animaciÃ³n inicia la
+	 * animaciÃ³n de mostrar el otro botÃ³n, con las animaciones por defecto
 	 * 
 	 * @param fabToHide
 	 * @param fabToShow
@@ -162,8 +162,8 @@ public class FloatingActionButtonAnimator {
 	}
 
 	/**
-	 * Esconde un FloatingActionButton y al finalizar la animaci�n inicia la
-	 * animaci�n de mostrar el otro bot�n, con las animaciones proporcionadas
+	 * Esconde un FloatingActionButton y al finalizar la animaciÃ³n inicia la
+	 * animaciÃ³n de mostrar el otro botÃ³n, con las animaciones proporcionadas
 	 * 
 	 * @param fabToHide
 	 * @param fabToShow

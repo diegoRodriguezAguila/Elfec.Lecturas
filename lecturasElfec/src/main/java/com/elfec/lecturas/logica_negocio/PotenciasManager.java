@@ -17,16 +17,16 @@ import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 
 /**
- * Se encarga de la l骻ica de negocio de las potencias LECTURSP
+ * Se encarga de la l贸gica de negocio de las potencias LECTURSP
  * 
  * @author drodriguez
  *
  */
 public class PotenciasManager {
 	/**
-	 * Importa toda la informaci髇 de potencias de las lecturas de las rutas
+	 * Importa toda la informaci贸n de potencias de las lecturas de las rutas
 	 * asignadas al usuario para la fecha actual.<br>
-	 * <b>Nota.-</b> La importaci髇 incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaci贸n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username
@@ -65,7 +65,7 @@ public class PotenciasManager {
 	}
 
 	/**
-	 * Importa la informac髇 de las potencias de lecturas de una ruta asignada
+	 * Importa la informac贸n de las potencias de lecturas de una ruta asignada
 	 * 
 	 * @param username
 	 * @param password

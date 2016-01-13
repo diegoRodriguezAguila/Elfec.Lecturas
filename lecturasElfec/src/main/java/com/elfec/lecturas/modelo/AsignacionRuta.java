@@ -18,7 +18,7 @@ import com.elfec.lecturas.modelo.enums.EstadoAsignacionRuta;
 import com.elfec.lecturas.modelo.estados.lectura.ReIntentar;
 
 /**
- * Almacena la información sobre las rutas asignadas a un usuario de la tabla
+ * Almacena la informaciÃ³n sobre las rutas asignadas a un usuario de la tabla
  * MOVILES.USUARIO_ASIGNACION
  * 
  * @author drodriguez
@@ -97,9 +97,9 @@ public class AsignacionRuta extends Model {
 	}
 
 	/**
-	 * Obtiene la fecha de la asignación en el rol
+	 * Obtiene la fecha de la asignaciÃ³n en el rol
 	 * 
-	 * @return fecha de la asiganción de la ruta en el rol
+	 * @return fecha de la asiganciÃ³n de la ruta en el rol
 	 */
 	public DateTime getFechaCronograma() {
 		return new DateTime(Anio, Mes, Dia, 0, 0);
@@ -149,11 +149,11 @@ public class AsignacionRuta extends Model {
 	}
 
 	/**
-	 * Indica si la ruta tiene algún estado de asignada. Su status es igual a
+	 * Indica si la ruta tiene algÃºn estado de asignada. Su status es igual a
 	 * {@link EstadoAsignacionRuta#ASIGNADA} o
 	 * {@link EstadoAsignacionRuta#RELECTURA_ASIGNADA}
 	 * 
-	 * @return true si es que la ruta fué asignada
+	 * @return true si es que la ruta fuÃ© asignada
 	 */
 	public boolean estaAsignada() {
 		EstadoAsignacionRuta status = getEstado();
@@ -162,11 +162,11 @@ public class AsignacionRuta extends Model {
 	}
 
 	/**
-	 * Indica si la ruta tiene algún estado de importada. Su status es igual a
+	 * Indica si la ruta tiene algÃºn estado de importada. Su status es igual a
 	 * {@link EstadoAsignacionRuta#IMPORTADA} o
 	 * {@link EstadoAsignacionRuta#RELECTURA_IMPORTADA}
 	 * 
-	 * @return true si es que la ruta fué importada
+	 * @return true si es que la ruta fuÃ© importada
 	 */
 	public boolean estaImportada() {
 		EstadoAsignacionRuta status = getEstado();
@@ -236,7 +236,7 @@ public class AsignacionRuta extends Model {
 
 	/**
 	 * Obtiene la ruta pero con el formato de cuenta, es decir que una ruta 3320
-	 * devolvería 03-320
+	 * devolverÃ­a 03-320
 	 * 
 	 * @return
 	 */

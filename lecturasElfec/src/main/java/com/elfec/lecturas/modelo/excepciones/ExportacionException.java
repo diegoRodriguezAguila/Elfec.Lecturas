@@ -1,8 +1,8 @@
 package com.elfec.lecturas.modelo.excepciones;
 
 /**
- * Excepción que se lanza cuando ocurrió un error al realizar la exportación de
- * información
+ * ExcepciÃ³n que se lanza cuando ocurriÃ³ un error al realizar la exportaciÃ³n de
+ * informaciÃ³n
  * 
  * @author drodriguez
  *
@@ -22,7 +22,7 @@ public class ExportacionException extends Exception {
 
 	@Override
 	public String getMessage() {
-		return "Ocurrió un error en el servidor al realizar la exportación! Información del error: "
+		return "OcurriÃ³ un error en el servidor al realizar la exportaciÃ³n! InformaciÃ³n del error: "
 				+ errorInfo;
 	}
 

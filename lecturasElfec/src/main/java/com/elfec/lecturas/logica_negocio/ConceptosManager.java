@@ -24,7 +24,7 @@ public class ConceptosManager {
 	/**
 	 * Importa los conceptos del ERP_ELFEC.CONCEPTOS si es que no se importaron
 	 * ya previamente.<br>
-	 * <b>Nota.-</b> La importaci�n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username
@@ -63,7 +63,7 @@ public class ConceptosManager {
 	/**
 	 * Importa los conceptos categorias de ERP_ELFEC.CPTOS_CATEGORIAS si es que
 	 * no se importaron ya previamente.<br>
-	 * <b>Nota.-</b> La importaci�n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username
@@ -105,7 +105,7 @@ public class ConceptosManager {
 	/**
 	 * Importa los conceptos tarifas de ERP_ELFEC.CONCEPTOS_TARIFAS si es que no
 	 * se importaron ya previamente.<br>
-	 * <b>Nota.-</b> La importaci�n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username

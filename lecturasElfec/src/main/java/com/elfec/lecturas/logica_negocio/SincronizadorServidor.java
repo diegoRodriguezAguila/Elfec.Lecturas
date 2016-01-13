@@ -14,7 +14,7 @@ import com.elfec.lecturas.modelo.validaciones.sincronizacion.IEstadoSincronizaci
 import com.elfec.lecturas.modelo.validaciones.sincronizacion.SincronizacionCorrecta;
 
 /**
- * Se encarga del proceso de sincronización con el servidor
+ * Se encarga del proceso de sincronizaciÃ³n con el servidor
  * 
  * @author drodriguez
  *
@@ -23,7 +23,7 @@ public class SincronizadorServidor {
 
 	/**
 	 * Intenta obtener la fecha del servidor y la compara con la fecha actual
-	 * del movil y en función a eso se devuelven los distintos tipos de
+	 * del movil y en funciÃ³n a eso se devuelven los distintos tipos de
 	 * resultados de sincronizacion, las clases que implementan la interfaz
 	 * IEstadoSincronizacion
 	 * 

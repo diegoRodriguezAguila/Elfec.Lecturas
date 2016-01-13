@@ -1,11 +1,11 @@
 package com.elfec.lecturas.controlador.filtroslecturas;
 
+import com.activeandroid.query.Select;
+import com.elfec.lecturas.modelo.Lectura;
+
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-
-import com.activeandroid.query.Select;
-import com.elfec.lecturas.modelo.Lectura;
 
 /**
  * Se encarga de aplicar los filtros seleccionados por el usuario a la lista de
@@ -113,7 +113,7 @@ public class FiltroLecturas {
 	}
 
 	/**
-	 * Verifica si existe alg�n criterio agregado al filtro
+	 * Verifica si existe algÃºn criterio agregado al filtro
 	 * 
 	 * @return
 	 */

@@ -8,7 +8,7 @@ package com.elfec.lecturas.settings.ui;
 public class OpcionesPreferenciasUI {
 
 	/**
-	 * Preferencia de mostrar un cuadro de dialogo para la confirmación antes de imprimir una lectura
+	 * Preferencia de mostrar un cuadro de dialogo para la confirmaciÃ³n antes de imprimir una lectura
 	 */
 	public static final String MOSTRAR_CONFIRMACION_IMPRESION = "MOSTRAR_CONFIRMACION_IMPRESION";
 	/**

@@ -10,7 +10,7 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 /**
- * Almacena la información sobre las bases de calculo, de la tabla
+ * Almacena la informaciÃ³n sobre las bases de calculo, de la tabla
  * ERP_ELFEC.GBASES_CALC de la BD ERP_ELFEC de Oracle
  * 
  * @author drodriguez

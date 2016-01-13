@@ -6,7 +6,7 @@ import java.util.List;
 import com.elfec.lecturas.modelo.PreferenciaUI;
 
 /**
- * Es el que maneja las preferencias de UI de los usuarios en la aplicaciÛn con un usuario dado, es un singletone 
+ * Es el que maneja las preferencias de UI de los usuarios en la aplicaci√≥n con un usuario dado, es un singletone 
  * y solo puede instanciarse a traves del metodo estatico <b>instanciar</b>
  * @author drodriguez
  *
@@ -43,14 +43,14 @@ public class AdminUI {
 	}
 	
 	/**
-	 * Obtiene el valor de la preferencia de UI que corresponda a la opcion proporcionada. Si el usuario no definiÛ
-	 * la preferencia de usuario para esa llave se retornar· la preferencia por defecto. (vease el metodo cargarValoresPorDefecto) para ver
+	 * Obtiene el valor de la preferencia de UI que corresponda a la opcion proporcionada. Si el usuario no defini√≥
+	 * la preferencia de usuario para esa llave se retornar√° la preferencia por defecto. (vease el metodo cargarValoresPorDefecto) para ver
 	 * que valores se asignan a cada llave por defecto.
 	 * @param opcion se deberia usar las constantes en la clase OpcionesPreferenciasUI
 	 * @param type el tipo a llamar, las llamadas tendrian que ser con la clase de un tipo por ejemplo: Integer.class<br>
 	 * Los tipos que se soportan son Integer, Double y String, otros tipos retornaran null
 	 * @return el valor de la preferencia para el usuario actual, si no existe dicha preferencia se retorna null. Si existe
-	 * pero el usuario no la definiÛ utiliza el valor por defecto.
+	 * pero el usuario no la defini√≥ utiliza el valor por defecto.
 	 */
 	public <T> T obtenerPreferencia(String opcion, Class<T> type)
 	{
@@ -60,7 +60,7 @@ public class AdminUI {
 	
 	/**
 	 * Guarda una preferencia de UI del usuario, en caso de no existir un valor para la <b>opcion</b> crea una nueva.<br>
-	 * Si la opcion tenÌa un valor por defecto este se sobre escribir· y guardar· en las preferencias del usuario.
+	 * Si la opcion ten√≠a un valor por defecto este se sobre escribir√° y guardar√° en las preferencias del usuario.
 	 * @param opcion
 	 * @param valor
 	 */

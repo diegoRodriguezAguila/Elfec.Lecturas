@@ -6,7 +6,7 @@ import java.util.List;
 import com.elfec.lecturas.modelo.PermisoRestriccion;
 
 /**
- * Es el que maneja los permisos de uso de la aplicación con un perfil dado, es un singletone 
+ * Es el que maneja los permisos de uso de la aplicaciÃ³n con un perfil dado, es un singletone 
  * y solo puede instanciarse a traves del metodo estatico <b>obtenerAdministradorSeguridad</b>
  * @author drodriguez
  *

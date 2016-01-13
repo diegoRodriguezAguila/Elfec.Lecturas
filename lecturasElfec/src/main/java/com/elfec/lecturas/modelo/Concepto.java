@@ -10,7 +10,7 @@ import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
 
 /**
- * Almacena la información sobre conceptos, de la tabla ERP_ELFEC.CONCEPTOS de
+ * Almacena la informaciÃ³n sobre conceptos, de la tabla ERP_ELFEC.CONCEPTOS de
  * la BD Oracle
  * 
  * @author drodriguez

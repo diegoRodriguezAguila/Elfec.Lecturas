@@ -40,7 +40,7 @@ import com.elfec.lecturas.settings.VariablesDeEntorno;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 
 /**
- * Almacena la información sobre las lecturas, de la tabla Lecturas de la BD
+ * Almacena la informaciÃ³n sobre las lecturas, de la tabla Lecturas de la BD
  * Moviles de Oracle (MOVILES.LECTURAS)
  * 
  * @author drodriguez
@@ -86,7 +86,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 
 	/**
 	 * Cuando fue enviado por 3g tiene el estado 1, 0 en caso contrario , 2 si
-	 * es que se envió al servidor por otro medio
+	 * es que se enviÃ³ al servidor por otro medio
 	 */
 	@Column(name = "Enviado3G")
 	public int Enviado3G;
@@ -102,7 +102,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	public int NumModificaciones;
 
 	/**
-	 * El usuario que insertó la lectura
+	 * El usuario que insertÃ³ la lectura
 	 */
 	@Column(name = "UsuarioAuditoria")
 	public String UsuarioAuditoria;
@@ -474,7 +474,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	}
 
 	/**
-	 * Llama al método de EstadoLectura, para mostrarla en una vista del tipo
+	 * Llama al mÃ©todo de EstadoLectura, para mostrarla en una vista del tipo
 	 * TomarLectura
 	 * 
 	 * @param tomarLectura
@@ -484,7 +484,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	}
 
 	/**
-	 * Llama al método de EstadoLectura, para mostrar los menus en una vista del
+	 * Llama al mÃ©todo de EstadoLectura, para mostrar los menus en una vista del
 	 * tipo TomarLectura
 	 * 
 	 * @param tomarLectura
@@ -494,7 +494,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	}
 
 	/**
-	 * Asigna la implementación de la interfaz EstadoLectura, correcta según el
+	 * Asigna la implementaciÃ³n de la interfaz EstadoLectura, correcta segÃºn el
 	 * int de estado que se le haya pasado, utiliza el factory para esto
 	 * 
 	 * @param estado
@@ -505,7 +505,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	}
 
 	/**
-	 * Retorna la implementación de la interfaz EstadoLectura, correspondiente
+	 * Retorna la implementaciÃ³n de la interfaz EstadoLectura, correspondiente
 	 * al entero Estado, adicionalmente verifica si el entero esta sincronizado
 	 * con la clase de estado.
 	 * 
@@ -519,8 +519,8 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	}
 
 	/**
-	 * Elimina toda la información general de lecturas que pertenezcan a la
-	 * asignación de ruta dada
+	 * Elimina toda la informaciÃ³n general de lecturas que pertenezcan a la
+	 * asignaciÃ³n de ruta dada
 	 * 
 	 * @param routeAssignment
 	 */
@@ -595,7 +595,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	/**
 	 * Busca una Lectura por los ultimos digitos de la cuenta, la cuenta de
 	 * busqueda debe estar en formato 00500 (sin guiones). debe ser de 5
-	 * digitos, caso contrario la busqueda retornará resultados inesperados
+	 * digitos, caso contrario la busqueda retornarÃ¡ resultados inesperados
 	 * 
 	 * @param cuenta
 	 * @return Lista de lecturas cuyas cuentas terminan en los digitos
@@ -762,7 +762,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 
 	/**
 	 * Accede a la base de datos y obtiene los conceptos asignados a la lectura,
-	 * en orden de impresión
+	 * en orden de impresiÃ³n
 	 * 
 	 * @return lista de conceptos
 	 */
@@ -810,7 +810,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	}
 
 	/**
-	 * Obtiene el valor de la estimación de la lectura, no guarda ni cambia
+	 * Obtiene el valor de la estimaciÃ³n de la lectura, no guarda ni cambia
 	 * ningun estado
 	 * 
 	 * @return el valor de la lectura estimada
@@ -824,7 +824,7 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	}
 
 	/**
-	 * Obtiene el valor de la estimación de la demanda, no guarda ni cambia
+	 * Obtiene el valor de la estimaciÃ³n de la demanda, no guarda ni cambia
 	 * ningun estado.
 	 * 
 	 * @param lectura
@@ -841,12 +841,12 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
 	/**
 	 * A partir del valor del consumo facturado, busca en la tabla de
 	 * recategorizaciones si es que hay alguna recategorizacion para su
-	 * categoria, y en caso de cumplir las condiciones de recategorización, la
+	 * categoria, y en caso de cumplir las condiciones de recategorizaciÃ³n, la
 	 * recategoriza llena los valores de <b>CategoriaRecategorizada</b> con la
 	 * nueva categoria y pone <b>TagRecategorizacion</b> en 1. y se guarda con
 	 * la nueva categoria, llamar despues de haber llamado a <b>leerLectura</b>
 	 * 
-	 * @return retorna true, si es que se realizó una recategorización, false en
+	 * @return retorna true, si es que se realizÃ³ una recategorizaciÃ³n, false en
 	 *         caso contrario
 	 */
 	public boolean recategorizarSiEsNecesario() {

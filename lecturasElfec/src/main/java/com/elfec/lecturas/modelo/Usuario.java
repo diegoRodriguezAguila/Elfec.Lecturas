@@ -18,8 +18,8 @@ import com.elfec.lecturas.modelo.flowfactory.validacionusuario.FlujoPasosValidac
 import com.elfec.lecturas.modelo.validaciones.IValidacionUsuario;
 
 /**
- * Almacena la informaciÛn sobre los usuarios del sistema, una vez que un usuario inicia sesiÛn en la red interna de elfec
- * se copia su informaciÛn de la tabla MOVILES.USUARIOS_APP de la BD Moviles de Oracle
+ * Almacena la informaci√≥n sobre los usuarios del sistema, una vez que un usuario inicia sesi√≥n en la red interna de elfec
+ * se copia su informaci√≥n de la tabla MOVILES.USUARIOS_APP de la BD Moviles de Oracle
  * @author drodriguez
  */
 @Table(name = "Usuarios")
@@ -43,13 +43,13 @@ public class Usuario extends Model{
 	@Column(name = "RangoDias",notNull=true) 
 	public int RangoDias;
 	/**
-	 * Indica si se le obligar· al usuario a tener el GPS encendido para realizar lecturas
-	 * si est· en 1, se le obligar·.
+	 * Indica si se le obligar√° al usuario a tener el GPS encendido para realizar lecturas
+	 * si est√° en 1, se le obligar√°.
 	 */
 	@Column(name = "RequiereGPS",notNull=true) 
 	public int RequiereGPS;
 	/**
-	 * Si est· en 1 se le obligar· al usuario a tener el 3G de datos moviles encendido para realizar lecturas.
+	 * Si est√° en 1 se le obligar√° al usuario a tener el 3G de datos moviles encendido para realizar lecturas.
 	 */
 	@Column(name = "Requiere3G",notNull=true) 
 	public int Requiere3G;
@@ -75,7 +75,7 @@ public class Usuario extends Model{
 	
 	/**
 	 * Obtiene todos los usuarios registrados en el movil
-	 * @return Retorna una lista con todos los usuarios de la base de datos del mÛvil**/
+	 * @return Retorna una lista con todos los usuarios de la base de datos del m√≥vil**/
 	public static List<Usuario> obtenerTodosLosUsuarios() {
 	    return new Select()
 	        .from(Usuario.class)
@@ -93,12 +93,12 @@ public class Usuario extends Model{
 	}
 	
 	/**
-	 * Valida el usuario para iniciar sesiÛn
+	 * Valida el usuario para iniciar sesi√≥n
 	 * @param usuario El nombre de usuario que se quiere validar
 	 * @param password El password (sin encriptar) que se quiere validar
 	 * @param imei El IMEI del telefono
 	 * @param fechaSinc 
-	 * @return Una clase que implemente IValidacionUsuario, estas se componen de codigo y mensaje e indican el resultado del proceso de validaciÛn**/
+	 * @return Una clase que implemente IValidacionUsuario, estas se componen de codigo y mensaje e indican el resultado del proceso de validaci√≥n**/
 	public static IValidacionUsuario validar(String usuario, String password, String imei, Date fechaSinc, Context context)
 	{
 		return FlujoPasosValidacionUsuario.validarUsuario(usuario, password, imei, fechaSinc, context);

@@ -3,7 +3,7 @@ package com.elfec.lecturas.controlador.filtroslecturas;
 import com.elfec.lecturas.modelo.Lectura;
 
 /**
- * Es el criterio que sirve para filtrar por rutas seg�n una seleccionada
+ * Es el criterio que sirve para filtrar por rutas segÃºn una seleccionada
  * 
  * @author drodriguez
  *

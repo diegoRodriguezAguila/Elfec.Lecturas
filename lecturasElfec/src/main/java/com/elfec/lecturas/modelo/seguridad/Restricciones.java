@@ -7,11 +7,11 @@ package com.elfec.lecturas.modelo.seguridad;
  */
 public class Restricciones {
 	/**
-	 * Restricción de la cantidad maxima de veces que se puede modificar una lectura.
+	 * RestricciÃ³n de la cantidad maxima de veces que se puede modificar una lectura.
 	 */
 	public static final String MAX_MODIFICAR_LECTURA = "MAX_MODIFICAR_LECTURA";
 	/**
-	 * Restricción de la cantidad maxima de impresiones por lectura.
+	 * RestricciÃ³n de la cantidad maxima de impresiones por lectura.
 	 */
 	public static final String MAX_IMPRESIONES_LECTURA = "MAX_IMPRESIONES_LECTURA";
 }

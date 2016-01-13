@@ -9,7 +9,7 @@ import com.elfec.lecturas.R;
 
 /**
  * Se encarga de contraer o expandir un control, es un ayudante para la
- * animaci�n de controles
+ * animaciÃ³n de controles
  * 
  * @author drodriguez
  *

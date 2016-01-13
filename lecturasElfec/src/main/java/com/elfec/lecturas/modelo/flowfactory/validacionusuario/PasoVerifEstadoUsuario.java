@@ -3,10 +3,10 @@ package com.elfec.lecturas.modelo.flowfactory.validacionusuario;
 import com.elfec.lecturas.modelo.validaciones.ErrorEmpleadoInhabilitado;
 
 /**
- * Define el paso de validación en el que se verifican si el usuario obtenido de la base
+ * Define el paso de validaciÃ³n en el que se verifican si el usuario obtenido de la base
  * de datos oracle se encuentra activo.
  * fueron cargados.
- * <br><br><b>Código: PVU-1.1.1</b>
+ * <br><br><b>CÃ³digo: PVU-1.1.1</b>
  * @author drodriguez
  */
 public class PasoVerifEstadoUsuario extends PasoValidacionUsuario {

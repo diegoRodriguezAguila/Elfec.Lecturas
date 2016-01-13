@@ -13,7 +13,7 @@ import com.elfec.lecturas.modelo.interfaces.IExportable;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 
 /**
- * Se encarga de exportar cualquier tipo de información
+ * Se encarga de exportar cualquier tipo de informaciÃ³n
  * 
  * @author drodriguez
  *
@@ -21,7 +21,7 @@ import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 public class DataExporter {
 
 	/**
-	 * Importa cualquier tipo de información que debe ser importada una sola vez
+	 * Importa cualquier tipo de informaciÃ³n que debe ser importada una sola vez
 	 * 
 	 * @param exportSpecs
 	 * @param exportListener
@@ -52,7 +52,7 @@ public class DataExporter {
 			int rowRes, count = 0;
 			for (T data : dataList) {
 				rowRes = exportSpecs.exportData(data);
-				if (rowRes == 1) // se insertó existosamente
+				if (rowRes == 1) // se insertÃ³ existosamente
 				{
 					data.setExportStatus(EstadoExportacion.EXPORTADO);
 					data.save();

@@ -1,16 +1,16 @@
 package com.elfec.lecturas.logica_negocio;
 
-import java.sql.SQLException;
-
-import org.json.JSONException;
-
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.settings.AppPreferences;
 
+import org.json.JSONException;
+
+import java.sql.SQLException;
+
 /**
- * Se encarga de la lógica de negocio de los parametrizables
+ * Se encarga de la lÃ³gica de negocio de los parametrizables
  * 
  * @author drodriguez
  *

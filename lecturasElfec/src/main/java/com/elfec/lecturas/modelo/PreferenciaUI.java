@@ -12,8 +12,8 @@ import com.activeandroid.query.Select;
 
 
 /**
- * Almacena la información sobre las personalizaciones y preferencias de UI definidas por los usuarios,
- * se copia su esta información el momento en que el usuario se logea por primera vez en el dispositivo
+ * Almacena la informaciÃ³n sobre las personalizaciones y preferencias de UI definidas por los usuarios,
+ * se copia su esta informaciÃ³n el momento en que el usuario se logea por primera vez en el dispositivo
  * de la tabla MOVILES.USUARIO_PREFERENCIAS_UI de la BD Moviles de Oracle
  * @author drodriguez
  */

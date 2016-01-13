@@ -3,23 +3,23 @@ package com.elfec.lecturas.helpers.ui;
 import android.os.SystemClock;
 
 /**
- * Helper para el control de m�ltiples clicks seguidos a un mismo bot�n
+ * Helper para el control de mÃºltiples clicks seguidos a un mismo botÃ³n
  * 
  * @author drodriguez
  *
  */
 public class ClicksBotonesHelper {
 	/**
-	 * Tiempo m�nimo entre clicks a un boton
+	 * Tiempo mÃ­nimo entre clicks a un boton
 	 */
 	private static final int TIME_BETWEEN_CLICKS = 500;
 	/**
-	 * �ltimo click realizado
+	 * Ãºltimo click realizado
 	 */
 	private volatile static long lastClickTime = 0;
 
 	/**
-	 * Verifica si pas� el m�nimo tiempo requerido entre clicks
+	 * Verifica si pasÃ³ el mÃ­nimo tiempo requerido entre clicks
 	 * {@link #TIME_BETWEEN_CLICKS} para realizar un click
 	 * 
 	 * @return true si es que se permite hacer un click

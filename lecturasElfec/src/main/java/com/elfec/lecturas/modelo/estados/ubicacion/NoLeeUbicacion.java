@@ -4,7 +4,7 @@ import android.content.Context;
 import android.location.LocationListener;
 
 /**
- * Es el estado que corresponde al entero 0, en el no se lee la ubicación y por
+ * Es el estado que corresponde al entero 0, en el no se lee la ubicaciÃ³n y por
  * tanto el evento que se ejecutaria al recibir la ubicacion no se ejecuta
  * 
  * @author drodriguez

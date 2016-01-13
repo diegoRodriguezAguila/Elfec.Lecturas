@@ -3,7 +3,7 @@ package com.elfec.lecturas.controlador.adaptadores;
 import java.util.List;
 
 /**
- * Adapter para navegaci�n sobre un conjunto
+ * Adapter para navegaciÃ³n sobre un conjunto
  * 
  * @author drodriguez
  *
@@ -49,8 +49,8 @@ public class NavegacionAdapter<T> {
 	}
 
 	/**
-	 * Selecciona la posici�n actual, si la posici�n seleccionada es mayor al
-	 * tama�o de la lista se va al ultimo elemento, y si es menor a cero al
+	 * Selecciona la posiciÃ³n actual, si la posiciÃ³n seleccionada es mayor al
+	 * tamaÃ±o de la lista se va al ultimo elemento, y si es menor a cero al
 	 * primero
 	 * 
 	 * @param pos
@@ -66,7 +66,7 @@ public class NavegacionAdapter<T> {
 	}
 
 	/**
-	 * Devuelve la posici�n del objeto solicitado, -1 si es que no se encuentra
+	 * Devuelve la posiciÃ³n del objeto solicitado, -1 si es que no se encuentra
 	 * 
 	 * @param obj
 	 * @return
@@ -79,9 +79,9 @@ public class NavegacionAdapter<T> {
 	}
 
 	/**
-	 * Obtiene la posici�n actual
+	 * Obtiene la posiciÃ³n actual
 	 * 
-	 * @return posici�n actual
+	 * @return posiciÃ³n actual
 	 */
 	public int getPosicionActual() {
 		return mPosActual;
@@ -97,10 +97,10 @@ public class NavegacionAdapter<T> {
 	}
 
 	/**
-	 * Devuelve la posici�n del primer objeto que cumple las condiciones
+	 * Devuelve la posiciÃ³n del primer objeto que cumple las condiciones
 	 * 
 	 * @param condicion
-	 * @return posici�n del objeto, -1 si no se encontr� el objeto
+	 * @return posiciÃ³n del objeto, -1 si no se encontrÃ³ el objeto
 	 */
 	public int buscar(Predicado<T> condicion) {
 		int tam = mLista.size();
@@ -112,10 +112,10 @@ public class NavegacionAdapter<T> {
 	}
 
 	/**
-	 * Devuelve la posici�n del ultimo objeto que cumple las condiciones
+	 * Devuelve la posiciÃ³n del ultimo objeto que cumple las condiciones
 	 * 
 	 * @param condicion
-	 * @return posici�n del objeto, -1 si no se encontr� el objeto
+	 * @return posiciÃ³n del objeto, -1 si no se encontrÃ³ el objeto
 	 */
 	public int buscarAlReves(Predicado<T> condicion) {
 		for (int i = mLista.size() - 1; i >= 0; i--) {
@@ -147,7 +147,7 @@ public class NavegacionAdapter<T> {
 	}
 
 	/**
-	 * Define una interfaz de predicado para b�squedas de navegaci�n, etc
+	 * Define una interfaz de predicado para bÃºsquedas de navegaciÃ³n, etc
 	 * 
 	 * @author drodriguez
 	 *

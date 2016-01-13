@@ -2,7 +2,7 @@ package com.elfec.lecturas.modelo.backuptexto;
 
 /**
  * Define una interfaz que se usa para convertir cualquier objeto
- * a una linea de texto que ser· utilizada para guardar en el archivo de backup que corresponda
+ * a una linea de texto que ser√° utilizada para guardar en el archivo de backup que corresponda
  * @author drodriguez
  *
  */

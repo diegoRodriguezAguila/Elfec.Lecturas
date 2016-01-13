@@ -3,8 +3,8 @@ package com.elfec.lecturas.modelo.validaciones.sincronizacion;
 import java.util.Date;
 
 /**
- * Es utilizada cuando la conexion con el servidor falló o no se pudo obtener su fecha
- * <b>código VS-001</b>
+ * Es utilizada cuando la conexion con el servidor fallÃ³ o no se pudo obtener su fecha
+ * <b>cÃ³digo VS-001</b>
  * @author drodriguez
  *
  */
@@ -17,7 +17,7 @@ public class ErrorConexionServidor implements IEstadoSincronizacion {
 
 	@Override
 	public String obtenerMensaje() {
-		return "Ocurrió un problema al intentar conectar con el servidor, revise su nombre de usuario, contraseña y que esté conectado a la red de la empresa.";
+		return "OcurriÃ³ un problema al intentar conectar con el servidor, revise su nombre de usuario, contraseÃ±a y que estÃ© conectado a la red de la empresa.";
 	}
 
 	@Override

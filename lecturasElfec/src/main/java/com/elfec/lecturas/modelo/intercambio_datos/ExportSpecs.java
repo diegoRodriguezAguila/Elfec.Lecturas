@@ -9,7 +9,7 @@ import com.elfec.lecturas.modelo.interfaces.IExportable;
 
 /**
  * Interfaz que utiliza DataExporter para determinar la fuente de los datos que
- * se quieren exportar y el mÈtodo de exportaciÛn
+ * se quieren exportar y el m√©todo de exportaci√≥n
  * 
  * @author drodriguez
  *
@@ -17,16 +17,16 @@ import com.elfec.lecturas.modelo.interfaces.IExportable;
  */
 public interface ExportSpecs<T extends Model & IExportable> {
 	/**
-	 * Obtiene la informaciÛn que se exportar·
+	 * Obtiene la informaci√≥n que se exportar√°
 	 * 
 	 * @return Lista
 	 */
 	public List<T> requestDataToExport();
 
 	/**
-	 * MÈtodo que se llama para exportar la informaciÛn
+	 * M√©todo que se llama para exportar la informaci√≥n
 	 * 
-	 * @return el numero de filas exportadas exitosamente, deberÌa ser 1
+	 * @return el numero de filas exportadas exitosamente, deber√≠a ser 1
 	 */
 	public int exportData(T data) throws ConnectException, SQLException;
 }

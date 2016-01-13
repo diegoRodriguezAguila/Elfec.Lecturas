@@ -3,9 +3,9 @@ package com.elfec.lecturas.modelo.flowfactory.validacionusuario;
 import com.elfec.lecturas.modelo.Usuario;
 
 /**
- * Define el paso de validación en el que se busca al usuario en la tabla local Usuarios.
+ * Define el paso de validaciÃ³n en el que se busca al usuario en la tabla local Usuarios.
  * Es el primer paso del flujo.<br><br>
- * <b>Código: PVU-1</b>
+ * <b>CÃ³digo: PVU-1</b>
  * @author drodriguez
  *
  */

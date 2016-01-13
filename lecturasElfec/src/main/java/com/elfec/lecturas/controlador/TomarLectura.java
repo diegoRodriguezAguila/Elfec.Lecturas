@@ -1,13 +1,5 @@
 package com.elfec.lecturas.controlador;
 
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -80,6 +72,15 @@ import com.elfec.lecturas.settings.VariablesDeEntorno;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 import com.elfec.lecturas.settings.ui.AdminUI;
 import com.elfec.lecturas.settings.ui.OpcionesPreferenciasUI;
+
+import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 		NavegacionListener<Lectura> {
@@ -217,7 +218,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	}
 
 	/**
-	 * Verifica que el 3G y los servicios de ubicaci�n esten activados para
+	 * Verifica que el 3G y los servicios de ubicaciÃ³n esten activados para
 	 * realizar lecturas, siempre y cuando, sea obligatorio para el usuario
 	 * tenerlos encendidos
 	 */
@@ -238,8 +239,8 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	}
 
 	/**
-	 * Asigna la lista de lecturas sobre la cual se trabajar� seg�n los filtros
-	 * establecidos. Si el resultado de los filtros es una lista vacia mostrar�
+	 * Asigna la lista de lecturas sobre la cual se trabajarÃ¡ segÃºn los filtros
+	 * establecidos. Si el resultado de los filtros es una lista vacia mostrarÃ¡
 	 * un mensaje al usuario y se veran todas las lecturas sin filtros.
 	 */
 	public void asignarLista() {
@@ -280,7 +281,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	private int contadorSatelite = 0;
 
 	/**
-	 * Pone el listener que se encarga de que se intente capturar una ubicaci�n
+	 * Pone el listener que se encarga de que se intente capturar una ubicaciÃ³n
 	 * el momento en que se hace focus en el texto de la lectura
 	 */
 	private void asignarTouchListenerATxtLecturaNueva() {
@@ -638,7 +639,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	}
 
 	/**
-	 * Muestra un dialogo de confirmac�n para poner la lectura en estado de
+	 * Muestra un dialogo de confirmacÃ³n para poner la lectura en estado de
 	 * reintentar
 	 * 
 	 * @param view
@@ -814,7 +815,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	// ----------------------------- DIALOGO MODIFICAR LECTURA
 	// -----------------------------------------------
 	/**
-	 * Abre el dialogo de confirmaci�n para modificar una lectura
+	 * Abre el dialogo de confirmaciÃ³n para modificar una lectura
 	 */
 	private void mostrarDialogoModificarLectura() {
 		final Lectura lectura = navegacionAdapter.getActual();
@@ -871,7 +872,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	// ----------------------------- Estimar Lectura
 	// -----------------------------------------------
 	/**
-	 * Muestra el dialogo de confirmaci�n de estimaci�n de la lectura actual
+	 * Muestra el dialogo de confirmaciÃ³n de estimaciÃ³n de la lectura actual
 	 */
 	private void mostrarDialogoEstimarLectura() {
 		new AlertDialog.Builder(this)
@@ -992,8 +993,8 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 
 	/**
 	 * Verifica si la lectura no llego al limite de impresiones y si la bandera
-	 * de impresi�n est� activa en caso de que todo este correcto procede a
-	 * verificar la asignaci�n de la impresora, caso contrario muestra los
+	 * de impresiÃ³n estÃ¡ activa en caso de que todo este correcto procede a
+	 * verificar la asignaciÃ³n de la impresora, caso contrario muestra los
 	 * respectivos mensajes de error
 	 * 
 	 * @param lecturaActual
@@ -1024,7 +1025,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	}
 
 	/**
-	 * Muestra el dialogo de confirmaci�n de impresion antes de realizarla
+	 * Muestra el dialogo de confirmaciÃ³n de impresion antes de realizarla
 	 * 
 	 * @param avisoCobranza
 	 */
@@ -1040,9 +1041,9 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	}
 
 	/**
-	 * Verifica si se asigno la impresora para realizar la impresi�n y procede a
-	 * iniciar la impresion, si no se asign� una impresora, muestra el dialogo
-	 * para su selecci�n primeramente.
+	 * Verifica si se asigno la impresora para realizar la impresiÃ³n y procede a
+	 * iniciar la impresion, si no se asignÃ³ una impresora, muestra el dialogo
+	 * para su selecciÃ³n primeramente.
 	 * 
 	 * @param avisoCobranza
 	 */
@@ -1079,7 +1080,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 
 	/**
 	 * Muestra un dialogo que anuncia al usuario que se llego al limite de
-	 * impresiones y que no podr� imprimir la lectura
+	 * impresiones y que no podrÃ¡ imprimir la lectura
 	 */
 	public void mostrarDialogoLimiteDeImpresiones() {
 		new AlertDialog.Builder(this)
@@ -1180,7 +1181,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	}
 
 	/**
-	 * Muestra un dialogo para tomar una fotograf�a de una lectura entre l�neas.
+	 * Muestra un dialogo para tomar una fotografÃ­a de una lectura entre lÃ­neas.
 	 * 
 	 * @param medEntreLineas
 	 */
@@ -1244,10 +1245,10 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
 	}
 
 	/**
-	 * Obtiene la posici�n de la lectura
+	 * Obtiene la posiciÃ³n de la lectura
 	 * 
 	 * @param idLectura
-	 * @return pos lectura, -1 si no se encontr�
+	 * @return pos lectura, -1 si no se encontrÃ³
 	 */
 	private int obtenerPosLectura(final long idLectura) {
 		return navegacionAdapter.buscar(new Predicado<Lectura>() {

@@ -2,7 +2,7 @@ package com.elfec.lecturas.modelo.validaciones;
 
 /**
  * Es utilizada cuando el usuario o el password no corresponden a los de la base de datos. 
- * <b>código VU-002</b>
+ * <b>cÃ³digo VU-002</b>
  * @author drodriguez
  *
  */

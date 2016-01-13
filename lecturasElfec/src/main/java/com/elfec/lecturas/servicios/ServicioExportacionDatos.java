@@ -17,7 +17,7 @@ import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 
 /**
- * Servicio android que corre en segundo plano para realizar la exportación de
+ * Servicio android que corre en segundo plano para realizar la exportaciÃ³n de
  * datos al servidor, notifica eventos de UI a
  * {@link DataImportationReceiverPresenter}
  * 
@@ -26,23 +26,23 @@ import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
  */
 public class ServicioExportacionDatos extends Service {
 	/**
-	 * Acción del broadcast
+	 * AcciÃ³n del broadcast
 	 */
 	public static final String BROADCAST_ACTION = "com.elfec.lecturas.exportEvent";
 	/**
-	 * Mensaje de inicio de exportación
+	 * Mensaje de inicio de exportaciÃ³n
 	 */
 	public static final int EXPORTATION_STARTING = 1;
 	/**
-	 * Mensaje de actualización de un paso de exportación
+	 * Mensaje de actualizaciÃ³n de un paso de exportaciÃ³n
 	 */
 	public static final int UPDATE_WAITING = 2;
 	/**
-	 * Mensaje de actualización del progreso de exportación
+	 * Mensaje de actualizaciÃ³n del progreso de exportaciÃ³n
 	 */
 	public static final int UPDATE_PROGRESS = 3;
 	/**
-	 * Mensajde de fin de la exportación
+	 * Mensajde de fin de la exportaciÃ³n
 	 */
 	public static final int EXPORTATION_FINISHED = 4;
 
@@ -123,7 +123,7 @@ public class ServicioExportacionDatos extends Service {
 	 * Envia un mensaje al broadcaster
 	 * 
 	 * @param action
-	 *            acción
+	 *            acciÃ³n
 	 */
 	private void sendExportationMessage(int action) {
 		sendExportationMessage(action, -1);
@@ -133,7 +133,7 @@ public class ServicioExportacionDatos extends Service {
 	 * Envia un mensaje al broadcaster
 	 * 
 	 * @param action
-	 *            acción
+	 *            acciÃ³n
 	 */
 	private void sendExportationMessage(int action, int strMsgId) {
 		sendExportationMessage(action, strMsgId, -1);
@@ -143,7 +143,7 @@ public class ServicioExportacionDatos extends Service {
 	 * Envia un mensaje al broadcaster
 	 * 
 	 * @param action
-	 *            acción
+	 *            acciÃ³n
 	 * @param strMsgId
 	 *            stringId del mensaje
 	 * @param totalData
@@ -160,7 +160,7 @@ public class ServicioExportacionDatos extends Service {
 	}
 
 	/**
-	 * Enviaun mensaje al broadcaster de actualizar el progreso de exportación
+	 * Enviaun mensaje al broadcaster de actualizar el progreso de exportaciÃ³n
 	 * 
 	 * @param count
 	 * @param total
@@ -172,8 +172,8 @@ public class ServicioExportacionDatos extends Service {
 	}
 
 	/**
-	 * Envia un mensaje al broadcaster de que se finalizó de realizar la
-	 * exportación o esta se interrumpió
+	 * Envia un mensaje al broadcaster de que se finalizÃ³ de realizar la
+	 * exportaciÃ³n o esta se interrumpiÃ³
 	 * 
 	 * @param result
 	 */

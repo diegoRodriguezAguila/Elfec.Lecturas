@@ -10,8 +10,8 @@ import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Select;
 
 /**
- * Almacena la información sobre los permisos y restricciones de los usuarios del sistema, una vez que un usuario inicia sesión en la red interna de elfec
- * se copia su información de la tabla MOVILES.PERFIL_APP_OPCIONES de la BD Moviles de Oracle
+ * Almacena la informaciÃ³n sobre los permisos y restricciones de los usuarios del sistema, una vez que un usuario inicia sesiÃ³n en la red interna de elfec
+ * se copia su informaciÃ³n de la tabla MOVILES.PERFIL_APP_OPCIONES de la BD Moviles de Oracle
  * @author drodriguez
  */
 @Table(name = "PermisosYRestricciones")

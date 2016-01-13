@@ -3,14 +3,14 @@ package com.elfec.lecturas.modelo.eventos;
 import com.elfec.lecturas.modelo.OrdenativoLectura;
 
 /**
- * Evento que se ejecuta al guardarse una observación
+ * Evento que se ejecuta al guardarse una observaciÃ³n
  * 
  * @author drodriguez
  *
  */
 public interface OnObservacionGuardadaListener {
 	/**
-	 * Se ejecuta al guardarse una observación exitosamente
+	 * Se ejecuta al guardarse una observaciÃ³n exitosamente
 	 * 
 	 * @param ordenativoLectura
 	 */

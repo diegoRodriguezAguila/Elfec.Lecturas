@@ -14,7 +14,7 @@ public interface EventoAlObtenerUbicacion {
 	public void ejecutarTarea(Location ubicacionObtenida);
 	
 	/**
-	 * El metodo que se ejecuta en caso de no haber podido obtener la ubicación, es decir que se cumplio el timeout
+	 * El metodo que se ejecuta en caso de no haber podido obtener la ubicaciÃ³n, es decir que se cumplio el timeout
 	 */
 	public void ejecturaSiTimeout();
 }

@@ -14,16 +14,16 @@ import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 
 /**
- * Se encarga de las operaciones de negocio de la evoluci�n de consumo
+ * Se encarga de las operaciones de negocio de la evoluciÃ³n de consumo
  * 
  * @author drodriguez
  *
  */
 public class EvolucionConsumoManager {
 	/**
-	 * Importa toda la informaci�n de evoluciones de consumo de las lecturas de
+	 * Importa toda la informaciÃ³n de evoluciones de consumo de las lecturas de
 	 * las rutas asignadas al usuario para la fecha actual.<br>
-	 * <b>Nota.-</b> La importaci�n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username
@@ -60,7 +60,7 @@ public class EvolucionConsumoManager {
 	}
 
 	/**
-	 * Importa la informac�n de las evoluciones de consumo de lecturas de una
+	 * Importa la informacÃ³n de las evoluciones de consumo de lecturas de una
 	 * ruta asignada
 	 * 
 	 * @param username

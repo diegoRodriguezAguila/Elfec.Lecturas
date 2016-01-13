@@ -1,10 +1,5 @@
 package com.elfec.lecturas.logica_negocio;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
-
 import android.util.SparseArray;
 
 import com.elfec.lecturas.modelo.BaseCalculo;
@@ -15,6 +10,11 @@ import com.elfec.lecturas.modelo.ConceptoTarifa;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.SubConcepto;
 import com.elfec.lecturas.settings.VariablesDeEntorno;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GestionadorImportesYConceptos {
 	
@@ -258,7 +258,7 @@ public class GestionadorImportesYConceptos {
 	/**
 	 * Realiza la sumatoria de los importes de los subconceptos que pertenecen a la base de calculo del parametro (idBaseCalculo)
 	 * @param idBaseCalculo, id de la base de calculo
-	 * @param subConceptos, lista de subconceptos de la que se realizar� la sumatoria
+	 * @param subConceptos, lista de subconceptos de la que se realizarÃ¡ la sumatoria
 	 * @return Sumatoria de los importes de los subconceptos que pertenecen a una misma base de calculo
 	 */
 	private static BigDecimal sumatoriaSubconceptosBaseCalculo(int idBaseCalculo, ArrayList<SubConcepto> subConceptos )
@@ -279,7 +279,7 @@ public class GestionadorImportesYConceptos {
 	 * y que sean menores (o iguales) al limite de valor proporcionado.
 	 * @param limiteValor, valorLimite
 	 * @param idBaseCalculo, id de la base de calculo
-	 * @param subConceptos, lista de subconceptos de la que se realizar� la sumatoria
+	 * @param subConceptos, lista de subconceptos de la que se realizarÃ¡ la sumatoria
 	 * @return Sumatoria de los importes de los subconceptos que pertenecen a una misma base de calculo
 	 */
 	private static BigDecimal sumatoriaSubconceptosBaseCalculo(int idBaseCalculo, ArrayList<SubConcepto> subConceptos, int limiteValor)

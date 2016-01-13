@@ -1,7 +1,7 @@
 package com.elfec.lecturas.modelo.excepciones;
 
 /**
- * Se lanza cuando por algún motivo se interrumpió la conexión a la bd
+ * Se lanza cuando por algÃºn motivo se interrumpiÃ³ la conexiÃ³n a la bd
  * 
  * @author drodriguez
  *
@@ -24,6 +24,6 @@ public class OracleBDConexionException extends Exception {
 	@Override
 	public String getMessage() {
 		return preMensaje
-				+ "No se pudo establecer conexión con el servidor o ésta se interrumpió. ¡Asegurese de estar conectado a la red de la empresa!";
+				+ "No se pudo establecer conexiÃ³n con el servidor o Ã©sta se interrumpiÃ³. Â¡Asegurese de estar conectado a la red de la empresa!";
 	}
 }

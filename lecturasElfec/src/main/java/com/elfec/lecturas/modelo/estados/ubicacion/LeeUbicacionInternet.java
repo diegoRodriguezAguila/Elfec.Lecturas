@@ -14,8 +14,8 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 
 /**
- * Es el estado que corresponde al entero 1, se lee la ubicación por 3g, en caso
- * de no haber conexión a internet se utiliza el gps
+ * Es el estado que corresponde al entero 1, se lee la ubicaciÃ³n por 3g, en caso
+ * de no haber conexiÃ³n a internet se utiliza el gps
  * 
  * @author drodriguez
  *

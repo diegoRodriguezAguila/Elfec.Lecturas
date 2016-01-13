@@ -5,7 +5,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 
 /**
- * Es el estado que corresponde al entero 2, en el se lee la ubicación por GPS
+ * Es el estado que corresponde al entero 2, en el se lee la ubicaciÃ³n por GPS
  * 
  * @author drodriguez
  *

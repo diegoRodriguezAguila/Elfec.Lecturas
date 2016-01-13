@@ -19,16 +19,16 @@ import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 
 /**
- * Se encarga de la l�gica de negocio de lecturas
+ * Se encarga de la lÃ³gica de negocio de lecturas
  * 
  * @author drodriguez
  *
  */
 public class LecturasManager {
 	/**
-	 * Importa toda la informaci�n general de las lecturas de las rutas
+	 * Importa toda la informaciÃ³n general de las lecturas de las rutas
 	 * asignadas al usuario para la fecha actual.<br>
-	 * <b>Nota.-</b> La importaci�n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
 	 * @param username
@@ -69,7 +69,7 @@ public class LecturasManager {
 	}
 
 	/**
-	 * Importa la informac�n general de lecturas de una ruta asignada
+	 * Importa la informacÃ³n general de lecturas de una ruta asignada
 	 * 
 	 * @param username
 	 * @param password

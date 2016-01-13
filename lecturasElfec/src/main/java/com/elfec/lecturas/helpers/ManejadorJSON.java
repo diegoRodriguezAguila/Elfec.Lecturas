@@ -67,7 +67,7 @@ public class ManejadorJSON {
 	
 	/**
 	 * Guarda una cadena en formato JSON en el archivo con el nombre proporcionado (SIN LA EXTENSION .JS, el nombre plano) 
-	 * en el directorio principal de almacenamiento interno de la aplicaci�n definido en las constantes de entorno como "directorioAplicacion"
+	 * en el directorio principal de almacenamiento interno de la aplicaciÃ³n definido en las constantes de entorno como "directorioAplicacion"
 	 * @param jsonStr
 	 * @param nombreArch
 	 * @see ConstantesDeEntorno.directorioAplicacion

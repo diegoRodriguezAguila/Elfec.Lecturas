@@ -1,7 +1,7 @@
 package com.elfec.lecturas.modelo.excepciones;
 
 /**
- * Es lanzada cuando se intenta realizar una impresión y la impresora predefinida no se asignó
+ * Es lanzada cuando se intenta realizar una impresiÃ³n y la impresora predefinida no se asignÃ³
  * @author drodriguez
  *
  */
@@ -11,7 +11,7 @@ public class ImpresoraPredefinidaNoAsignadaException extends Exception {
 	@Override
 	public String getMessage()
 	{
-		return "No se seleccionó una impresora!";
+		return "No se seleccionÃ³ una impresora!";
 	}
 
 }

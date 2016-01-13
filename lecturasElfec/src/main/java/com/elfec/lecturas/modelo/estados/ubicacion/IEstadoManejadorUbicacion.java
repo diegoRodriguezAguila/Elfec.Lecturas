@@ -5,7 +5,7 @@ import android.location.LocationListener;
 
 
 /**
- * Define el patron State de diseño, abstrae el estado del manejador de ubicacion
+ * Define el patron State de diseÃ±o, abstrae el estado del manejador de ubicacion
  * @author drodriguez
  *
  */

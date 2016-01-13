@@ -3,21 +3,21 @@ package com.elfec.lecturas.modelo.eventos;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 
 /**
- * Listener para los eventos que ocurren en la importación de datos
+ * Listener para los eventos que ocurren en la importaciÃ³n de datos
  * 
  * @author drodriguez
  *
  */
 public interface ImportacionDatosListener {
 	/**
-	 * La función que se llama cuando se inicializó una importación de datos
+	 * La funciÃ³n que se llama cuando se inicializÃ³ una importaciÃ³n de datos
 	 * 
 	 * @param result
 	 */
 	public void onImportacionIniciada();
 
 	/**
-	 * La función que se llama cuando finalizó un evento de importación de datos
+	 * La funciÃ³n que se llama cuando finalizÃ³ un evento de importaciÃ³n de datos
 	 * 
 	 * @param result
 	 */

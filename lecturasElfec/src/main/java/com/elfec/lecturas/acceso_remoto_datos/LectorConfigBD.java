@@ -1,5 +1,11 @@
 package com.elfec.lecturas.acceso_remoto_datos;
 
+import android.content.Context;
+import android.util.Log;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -8,28 +14,22 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.content.Context;
-import android.util.Log;
-
 /**
- * Es un objeto est�tico que sirve para poder obtener y escribir el archivo de configuraci�n que est� en JSON bajo la carpeta
+ * Es un objeto estÃ¡tico que sirve para poder obtener y escribir el archivo de configuraciÃ³n que estÃ¡ en JSON bajo la carpeta
  * de assets, el nombre del archivo es <b>config_bd.json</b>.
  * @author drodriguez
  *
  */
 public class LectorConfigBD {
 
-	/** Define el nombre del archivo de configuraci�n. **/
+	/** Define el nombre del archivo de configuraciÃ³n. **/
 	private static final String archivoConfig="config_bd.json";
 	private static Context contexto;
 	
 	/**
-	 * Se encarga de devolver un objeto json que representa el archivo de configuraci�n leido.
+	 * Se encarga de devolver un objeto json que representa el archivo de configuraciÃ³n leido.
 	 * @param contextoNuevo, es el contexto la actividad de la que se llama, necesaria para obtener el asset.
-	 * @return JSONObject que respresenta la configuraci�n actual.
+	 * @return JSONObject que respresenta la configuraciÃ³n actual.
 	 * @throws JSONException
 	 */
 	public static JSONObject obtenerConfiguracion(Context contextoNuevo) throws JSONException
@@ -40,9 +40,9 @@ public class LectorConfigBD {
 	}
 	
 	/**
-	 * Se encarga de escribir la informaci�n de configuraci�n a partir de un JSONObject
+	 * Se encarga de escribir la informaciÃ³n de configuraciÃ³n a partir de un JSONObject
 	 * @param nuevaConfig, Recibe un objeto JSON que sea valido para la configuracion
-	 * @return si se guard� exitosamente la configuraci�n.
+	 * @return si se guardÃ³ exitosamente la configuraciÃ³n.
 	 */
 	public static boolean escribirConfiguracion(JSONObject nuevaConfig)
 	{
@@ -64,7 +64,7 @@ public class LectorConfigBD {
 	}
 	
 	/**
-	 * Lee el archivo de configuracion del usuario, busca en la carpeta de la aplicaci�n, caso contrario usa el por defecto de assets
+	 * Lee el archivo de configuracion del usuario, busca en la carpeta de la aplicaciÃ³n, caso contrario usa el por defecto de assets
 	 * @return retorna la cadena JSON o caso contrario un mensaje de error de que no existe el archivo.
 	 */
 	private static String leerArchivoConfiguracion()

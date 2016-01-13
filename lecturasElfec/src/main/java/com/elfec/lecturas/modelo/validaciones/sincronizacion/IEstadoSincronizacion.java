@@ -4,29 +4,29 @@ import java.util.Date;
 
 /**
  * La interfaz que deben implementar los resultados de validaciones de sincronizacion con el servidor. 
- * El c骴igo asignados para las validaciones de sincronizaion es <b>VS</b>.
+ * El c贸digo asignados para las validaciones de sincronizaion es <b>VS</b>.
  * @author drodriguez
  *
  */
 public interface IEstadoSincronizacion {
 
 	/**
-	 * Obtiene el codigo del resultado de la sincronizaci髇
+	 * Obtiene el codigo del resultado de la sincronizaci贸n
 	 * @return
 	 */
 	public String obtenerCodigo();
 	/**
-	 * Obtiene el mensaje del resultado de la sincronizaci髇
+	 * Obtiene el mensaje del resultado de la sincronizaci贸n
 	 * @return
 	 */
 	public String obtenerMensaje();
 	/**
-	 * Indica si el resultado de la sincronizaci髇 fue erroneo, es decir que no la sincronizaci髇 no fue correcta
+	 * Indica si el resultado de la sincronizaci贸n fue erroneo, es decir que no la sincronizaci贸n no fue correcta
 	 * @return
 	 */
 	public boolean esError();
 	/**
-	 * Obtiene la fecha de sincronizaci髇 obtenida, en caso de no haberla podido obtener devuelve null
+	 * Obtiene la fecha de sincronizaci贸n obtenida, en caso de no haberla podido obtener devuelve null
 	 * @return
 	 */
 	public Date obtenerFechaSinc();

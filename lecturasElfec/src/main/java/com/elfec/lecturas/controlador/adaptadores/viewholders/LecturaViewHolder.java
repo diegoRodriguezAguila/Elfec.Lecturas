@@ -33,7 +33,7 @@ public class LecturaViewHolder {
 	}
 
 	/**
-	 * Asigna la informaci�n a los campos de la vista
+	 * Asigna la informaciÃ³n a los campos de la vista
 	 * 
 	 * @param lectura
 	 * @param esDialogo

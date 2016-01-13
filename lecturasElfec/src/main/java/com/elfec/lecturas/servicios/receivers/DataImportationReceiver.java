@@ -16,7 +16,7 @@ import com.elfec.lecturas.servicios.ServicioImportacionDatos;
 
 /**
  * Servicio de presenter que se encarga de escuchar los mensajes del servicio de
- * importación de datos su interacción con la vista
+ * importaciÃ³n de datos su interacciÃ³n con la vista
  * 
  * @author drodriguez
  *
@@ -77,7 +77,7 @@ public class DataImportationReceiver extends BroadcastReceiver {
 	}
 
 	/**
-	 * Notifica al usuario en la UI que empezó la importación de datos
+	 * Notifica al usuario en la UI que empezÃ³ la importaciÃ³n de datos
 	 */
 	private void importationStarting() {
 		for (IDataImportationObserver observer : observers) {
@@ -87,7 +87,7 @@ public class DataImportationReceiver extends BroadcastReceiver {
 	}
 
 	/**
-	 * Realiza la actualización del mensaje de espera a la interfaz
+	 * Realiza la actualizaciÃ³n del mensaje de espera a la interfaz
 	 * 
 	 * @param msgStrId
 	 */
@@ -98,7 +98,7 @@ public class DataImportationReceiver extends BroadcastReceiver {
 	}
 
 	/**
-	 * Notifica al usuario de que el evento de importación finalizó
+	 * Notifica al usuario de que el evento de importaciÃ³n finalizÃ³
 	 * 
 	 * @param result
 	 */
