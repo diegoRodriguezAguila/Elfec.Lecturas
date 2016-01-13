@@ -42,7 +42,6 @@ public class LeeUbicacionGPS implements IEstadoManejadorUbicacion, GoogleApiClie
 		locationrequest.setNumUpdates(3);
 		locationrequest.setFastestInterval(5000);
 		locationrequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mGoogleApiClient.connect();
 	}
 
 	@Override
@@ -74,7 +73,7 @@ public class LeeUbicacionGPS implements IEstadoManejadorUbicacion, GoogleApiClie
 
 	@Override
 	public void obtenerUbicacion(
-			final android.location.LocationListener classicLocationListener) {
+			final LocationListener classicLocationListener) {
 		this.locationListener = new LocationListener() {
 			@Override
 			public void onLocationChanged(Location location) {

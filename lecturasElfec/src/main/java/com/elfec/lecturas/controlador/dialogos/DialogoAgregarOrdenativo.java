@@ -1,8 +1,5 @@
 package com.elfec.lecturas.controlador.dialogos;
 
-import java.util.Date;
-import java.util.List;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -23,10 +20,14 @@ import android.widget.Toast;
 
 import com.elfec.lecturas.R;
 import com.elfec.lecturas.controlador.adaptadores.OrdenativoAdapter;
+import com.elfec.lecturas.helpers.ui.TecladoHelper;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.Ordenativo;
 import com.elfec.lecturas.modelo.OrdenativoLectura;
 import com.elfec.lecturas.modelo.eventos.OnObservacionGuardadaListener;
+
+import java.util.Date;
+import java.util.List;
 
 public class DialogoAgregarOrdenativo {
 
@@ -105,6 +106,7 @@ public class DialogoAgregarOrdenativo {
 				.setNegativeButton(R.string.salida_btn, new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+                        TecladoHelper.esconderTeclado(rootView);
 						dialog.cancel();
 					}
 				}).create();

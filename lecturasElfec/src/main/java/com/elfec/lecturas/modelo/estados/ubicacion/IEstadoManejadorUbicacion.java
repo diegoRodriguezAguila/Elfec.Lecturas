@@ -1,7 +1,8 @@
 package com.elfec.lecturas.modelo.estados.ubicacion;
 
 import android.content.Context;
-import android.location.LocationListener;
+
+import com.google.android.gms.location.LocationListener;
 
 
 /**

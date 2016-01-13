@@ -1,7 +1,5 @@
 package com.elfec.lecturas.controlador.dialogos;
 
-import java.math.BigDecimal;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.support.v7.app.AlertDialog;
@@ -15,6 +13,8 @@ import com.elfec.lecturas.R;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.Potencia;
 import com.elfec.lecturas.modelo.eventos.OnPotenciaGuardadaListener;
+
+import java.math.BigDecimal;
 
 /**
  * @author drodriguez
@@ -126,8 +126,7 @@ public class DialogoPotencia {
 		txtDemanda = (EditText) rootView.findViewById(R.id.txt_demanda);
 		lblDemanda = (TextView) rootView.findViewById(R.id.lbl_demanda);
 		lblValDemanda = (TextView) rootView.findViewById(R.id.lbl_val_demanda);
-		lblPotencia.setText(""
-				+ lecturaActual.PotenciaLectura.LecturaAnteriorPotencia);
+		lblPotencia.setText(String.valueOf(lecturaActual.PotenciaLectura.LecturaAnteriorPotencia));
 		if (lecturaActual.LeePotencia == 0)// si no lee potencia
 		{
 			lblDemanda.setVisibility(View.GONE);

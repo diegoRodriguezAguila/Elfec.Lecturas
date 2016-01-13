@@ -3,8 +3,6 @@ package com.elfec.lecturas.helpers;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
-import android.location.LocationListener;
-import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.Toast;
@@ -16,6 +14,7 @@ import com.elfec.lecturas.modelo.estados.ubicacion.IEstadoManejadorUbicacion;
 import com.elfec.lecturas.modelo.eventos.EventoAlObtenerUbicacion;
 import com.elfec.lecturas.settings.VariablesDeEntorno;
 import com.elfec.lecturas.settings.VariablesDeSesion;
+import com.google.android.gms.location.LocationListener;
 
 /**
  * Se encarga de realizar las conexiones con satelite o 3g para obtener la
@@ -143,19 +142,6 @@ public class ManejadorUbicacion {
 					}
 					timeoutController.removeCallbacks(timeoutRun);
 					estadoManejadorUbicacion.deshabilitarServicio();
-				}
-
-				@Override
-				public void onStatusChanged(String provider, int status,
-						Bundle extras) {
-				}
-
-				@Override
-				public void onProviderEnabled(String provider) {
-				}
-
-				@Override
-				public void onProviderDisabled(String provider) {
 				}
 			};
 

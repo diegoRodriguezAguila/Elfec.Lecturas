@@ -1,10 +1,5 @@
 package com.elfec.lecturas.logica_negocio;
 
-import java.net.ConnectException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataImporter;
 import com.elfec.lecturas.modelo.AsignacionRuta;
@@ -15,6 +10,11 @@ import com.elfec.lecturas.modelo.excepciones.PotenciaSinLecturaException;
 import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
+
+import java.net.ConnectException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Se encarga de la lógica de negocio de las potencias LECTURSP
@@ -28,9 +28,8 @@ public class PotenciasManager {
 	 * asignadas al usuario para la fecha actual.<br>
 	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
 	 * local de los datos
-	 * 
-	 * @param username
-	 * @param password
+	 *
+	 * @param conector
 	 * @param importacionDatosListener
 	 *            {@link ImportacionDatosListener}
 	 * @return {@link ResultadoTipado} con el resultado de la las lecturas de la
@@ -66,10 +65,8 @@ public class PotenciasManager {
 
 	/**
 	 * Importa la informacón de las potencias de lecturas de una ruta asignada
-	 * 
-	 * @param username
-	 * @param password
-	 * @param LecturaRDA
+	 *
+	 * @param conector
 	 * @param assignedRoute
 	 * @param inClausula
 	 * @return {@link ResultadoTipado} con el resultado de las lecturas de la
@@ -112,8 +109,10 @@ public class PotenciasManager {
 		Lectura lect;
 		for (Potencia potencia : potencias) {
 			lect = Lectura.buscarPorNUS(potencia.Suministro);
-			if (lect != null)
-				lect.PotenciaLectura = potencia;
+			if (lect != null) {
+                lect.PotenciaLectura = potencia;
+                lect.save();
+            }
 			else {
 				resultado.agregarError(new PotenciaSinLecturaException(
 						potencia.Suministro));
