@@ -8,8 +8,8 @@ android {
         applicationId "com.elfec.lecturas"
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 4
-        versionName "1.16.01.13"
+        versionCode 5
+        versionName "1.16.07.11"
     }
 
     buildTypes {

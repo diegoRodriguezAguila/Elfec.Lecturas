@@ -33,7 +33,7 @@
             android:value="Lecturas.db" />
         <meta-data
             android:name="AA_DB_VERSION"
-            android:value="53" />
+            android:value="55" />
         <activity
             android:name="com.elfec.lecturas.controlador.Login"
             android:label="@string/app_name" >
