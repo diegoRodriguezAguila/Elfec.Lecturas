@@ -1,10 +1,5 @@
 package com.elfec.lecturas.logica_negocio;
 
-import java.net.ConnectException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataExporter;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataImporter;
@@ -18,21 +13,25 @@ import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 
+import java.net.ConnectException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * Se encarga de la lÃ³gica de negocio de lecturas
+ * Se encarga de la lógica de negocio de lecturas
  * 
  * @author drodriguez
  *
  */
 public class LecturasManager {
 	/**
-	 * Importa toda la informaciÃ³n general de las lecturas de las rutas
+	 * Importa toda la información general de las lecturas de las rutas
 	 * asignadas al usuario para la fecha actual.<br>
-	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
-	 * @param username
-	 * @param password
+	 * @param conector
 	 * @param importacionDatosListener
 	 *            {@link ImportacionDatosListener}
 	 * @return {@link ResultadoTipado} con el resultado de la las lecturas de la
@@ -69,11 +68,9 @@ public class LecturasManager {
 	}
 
 	/**
-	 * Importa la informacÃ³n general de lecturas de una ruta asignada
+	 * Importa la informacón general de lecturas de una ruta asignada
 	 * 
-	 * @param username
-	 * @param password
-	 * @param LecturaRDA
+	 * @param conector
 	 * @param assignedRoute
 	 * @return {@link ResultadoTipado} con el resultado de las lecturas de la
 	 *         ruta asignada al usuario

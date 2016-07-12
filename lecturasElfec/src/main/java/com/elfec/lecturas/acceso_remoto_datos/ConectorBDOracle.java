@@ -1,24 +1,5 @@
 package com.elfec.lecturas.acceso_remoto_datos;
 
-import java.net.ConnectException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.content.Context;
 import android.nfc.FormatException;
 
@@ -48,9 +29,27 @@ import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.settings.ConstantesDeEntorno;
 import com.elfec.lecturas.settings.VariablesDeSesion;
 
+import org.joda.time.DateTime;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Locale;
+
 /**
- * Se encarga de la conexiÃ³n con la base de datos oracle, y la importaciÃ³n y
- * exportaciÃ³n de Ã©sta.
+ * Se encarga de la conexión con la base de datos oracle, y la importación y
+ * exportación de ésta.
  *
  * @author drodriguez
  */
@@ -58,23 +57,20 @@ public class ConectorBDOracle {
     private Connection conn = null;
     private Statement stmt = null;
     private ResultSet rs = null;
-    private Calendar calendar = Calendar.getInstance();
+    private DateTime currentDate = DateTime.now();
 
     /**
      * Crea una nueva conexion con la base de datos Oracle, usando la
-     * informaciÃ³n de conexiÃ³n del archivo JSON de configuraciÃ³n que se
-     * encuentra en la carpeta <b>assets</b> o con la configuraciÃ³n configurada
-     * desde el dispositivo. Para crear una nueva conexiÃ³n debe usar el mÃ©todo
+     * información de conexión del archivo JSON de configuración que se
+     * encuentra en la carpeta <b>assets</b> o con la configuración configurada
+     * desde el dispositivo. Para crear una nueva conexión debe usar el método
      * {@link ConectorBDOracle#crear(Context, boolean)}
      *
      * @param contexto     contexto, necesario para poder acceder a la carpeta
      *                     <b>assets</b>
      * @param habilitarRol , indica si se debe habilitar o no el rol de lecturas para
-     *                     esta conexiÃ³n
-     * @throws JSONException
+     *                     esta conexión
      * @throws OracleBDConexionException
-     * @throws FormatException
-     * @throws ConnectException
      */
     private ConectorBDOracle(Context contexto, boolean habilitarRol)
             throws OracleBDConexionException, OracleBDConfiguracionException {
@@ -113,7 +109,7 @@ public class ConectorBDOracle {
      */
     public static ResultadoTipado<ConectorBDOracle> crear(Context contexto,
                                                           boolean habilitarRol) {
-        ResultadoTipado<ConectorBDOracle> result = new ResultadoTipado<ConectorBDOracle>();
+        ResultadoTipado<ConectorBDOracle> result = new ResultadoTipado<>();
         try {
             result.setResultado(new ConectorBDOracle(contexto, habilitarRol));
         } catch (FormatException e) {
@@ -126,7 +122,7 @@ public class ConectorBDOracle {
 
     /**
      * Hbailita el rol de LECTURAS para el usuario logeado con el que se realiza
-     * la conexiÃ³n este metodo se llama con el parametro del constructor y
+     * la conexión este metodo se llama con el parametro del constructor y
      * deberia activarse para cualquier conexion a la base de datos oracle que
      * requiera acceso a las tablas especÃ­ficas de lecturas
      *
@@ -157,7 +153,7 @@ public class ConectorBDOracle {
 
     /**
      * Importa todas las lecturas correspondientes a la ruta propocionada. Toma
-     * en cuenta el dia, mes y aÃ±o para realizar la importaciÃ³n y lo realiza de
+     * en cuenta el dia, mes y año para realizar la importación y lo realiza de
      * la tabla MOVILES.LECTURAS
      *
      * @param ruta
@@ -166,7 +162,7 @@ public class ConectorBDOracle {
      */
     public List<Lectura> obtenerLecturasPorRuta(AsignacionRuta ruta)
             throws SQLException {
-        List<Lectura> lista = new ArrayList<Lectura>();
+        List<Lectura> lista = new ArrayList<>();
         StringBuilder query = new StringBuilder();
         if (ruta.getEstado() == EstadoAsignacionRuta.ASIGNADA) {
             query = new StringBuilder(
@@ -198,8 +194,8 @@ public class ConectorBDOracle {
 
     /**
      * Importa todas las potencias asociadas a lecturas correspondientes a la
-     * ruta propocionada. Toma en cuenta el dia, mes y aÃ±o para realizar la
-     * importaciÃ³n y lo realiza de la tabla MOVILES.LECTURASP
+     * ruta propocionada. Toma en cuenta el dia, mes y año para realizar la
+     * importación y lo realiza de la tabla MOVILES.LECTURASP
      *
      * @param ruta
      * @param listLecCondicion
@@ -208,12 +204,12 @@ public class ConectorBDOracle {
      */
     public List<Potencia> obtenerPotenciasPorRuta(int ruta,
                                                   String listLecCondicion) throws SQLException {
-        List<Potencia> lista = new ArrayList<Potencia>();
+        List<Potencia> lista = new ArrayList<>();
         StringBuilder query = new StringBuilder(
                 "SELECT * FROM MOVILES.LECTURASP WHERE LEMRUT=");
         rs = stmt.executeQuery(query.append(ruta).append(" AND LEMMES=")
-                .append((calendar.get(Calendar.MONTH) + 1))
-                .append(" AND LEMANO=").append(calendar.get(Calendar.YEAR))
+                .append(currentDate.getMonthOfYear())
+                .append(" AND LEMANO=").append(currentDate.getYear())
                 .append(" AND LEMSUM IN ").append(listLecCondicion).toString());
         while (rs.next()) {
             lista.add(new Potencia(rs));
@@ -223,12 +219,12 @@ public class ConectorBDOracle {
 
     public List<ConceptoLectura> obtenerConceptosPorRuta(int ruta,
                                                          String listLecCondicion) throws SQLException {
-        List<ConceptoLectura> lista = new ArrayList<ConceptoLectura>();
+        List<ConceptoLectura> lista = new ArrayList<>();
         StringBuilder query = new StringBuilder(
                 "SELECT * FROM MOVILES.LECTURASCONCEPTOS WHERE LEMRUT=");
         rs = stmt.executeQuery(query.append(ruta).append(" AND LEMMES=")
-                .append((calendar.get(Calendar.MONTH) + 1))
-                .append(" AND LEMANO=").append(calendar.get(Calendar.YEAR))
+                .append(currentDate.getMonthOfYear())
+                .append(" AND LEMANO=").append(currentDate.getYear())
                 .append(" AND LEMSUM IN ").append(listLecCondicion).toString());
         while (rs.next()) {
             lista.add(new ConceptoLectura(rs));
@@ -236,14 +232,15 @@ public class ConectorBDOracle {
         return lista;
     }
 
-    public List<EvolucionConsumo> obtenerEvolucionConsumosPorRuta(int ruta,
-                                                                  String listLecCondicion) throws SQLException {
-        List<EvolucionConsumo> lista = new ArrayList<EvolucionConsumo>();
+    public List<EvolucionConsumo>
+    obtenerEvolucionConsumosPorRuta(int ruta, String listLecCondicion)
+            throws SQLException {
+        List<EvolucionConsumo> lista = new ArrayList<>();
         StringBuilder query = new StringBuilder(
                 "SELECT * FROM MOVILES.LECTURASC WHERE LEMRUT=");
         rs = stmt.executeQuery(query.append(ruta).append(" AND LEMMES=")
-                .append((calendar.get(Calendar.MONTH) + 1))
-                .append(" AND LEMANO=").append(calendar.get(Calendar.YEAR))
+                .append(currentDate.getMonthOfYear())
+                .append(" AND LEMANO=").append(currentDate.getYear())
                 .append(" AND LEMSUM IN ").append(listLecCondicion).toString());
         while (rs.next()) {
             lista.add(new EvolucionConsumo(rs));
@@ -269,9 +266,9 @@ public class ConectorBDOracle {
 
     public List<ConceptoCategoria> obtenerConceptosCategorias()
             throws SQLException {
-        List<ConceptoCategoria> lista = new ArrayList<ConceptoCategoria>();
-        int idCuadroTarifario = ((calendar.get(Calendar.YEAR) - 2000) * 100)
-                + (calendar.get(Calendar.MONTH) + 1);
+        List<ConceptoCategoria> lista = new ArrayList<>();
+        int idCuadroTarifario = ((currentDate.getYear() - 2000) * 100)
+                + currentDate.getMonthOfYear();
         rs = stmt
                 .executeQuery("SELECT * FROM ERP_ELFEC.CPTOS_CATEGORIAS WHERE IDCUADRO_TARIF = "
                         + idCuadroTarifario
@@ -283,9 +280,9 @@ public class ConectorBDOracle {
     }
 
     public List<ConceptoTarifa> obtenerConceptosTarifas() throws SQLException {
-        List<ConceptoTarifa> lista = new ArrayList<ConceptoTarifa>();
-        int idCuadroTarifario = ((calendar.get(Calendar.YEAR) - 2000) * 100)
-                + (calendar.get(Calendar.MONTH) + 1);
+        List<ConceptoTarifa> lista = new ArrayList<>();
+        int idCuadroTarifario = ((currentDate.getYear() - 2000) * 100)
+                + currentDate.getMonthOfYear();
         rs = stmt
                 .executeQuery("SELECT * FROM ERP_ELFEC.CONCEPTOS_TARIFAS WHERE IDCUADRO_TARIF = "
                         + idCuadroTarifario);
@@ -296,7 +293,7 @@ public class ConectorBDOracle {
     }
 
     public List<BaseCalculo> obtenerBasesCalculo() throws SQLException {
-        List<BaseCalculo> lista = new ArrayList<BaseCalculo>();
+        List<BaseCalculo> lista = new ArrayList<>();
         rs = stmt
                 .executeQuery("SELECT IDBASE_CALCULO,DESCRIPCION,"
                         + "(SELECT ORDEN_IMPRESION FROM ERP_ELFEC.GBASES_CALC_IMP I WHERE I.IDBASE_CALCULO=B.IDBASE_CALCULO) AS ORDEN_IMPRESION "
@@ -309,7 +306,7 @@ public class ConectorBDOracle {
 
     public List<BaseCalculoConcepto> obtenerBasesCalculoConceptos()
             throws SQLException {
-        List<BaseCalculoConcepto> lista = new ArrayList<BaseCalculoConcepto>();
+        List<BaseCalculoConcepto> lista = new ArrayList<>();
         rs = stmt
                 .executeQuery("SELECT * FROM ERP_ELFEC.GBASES_CALC_CPTOS WHERE IDCONCEPTO>=10000 AND IDCONCEPTO<14000");
         while (rs.next()) {
@@ -319,7 +316,7 @@ public class ConectorBDOracle {
     }
 
     public List<Concepto> obtenerConceptos() throws SQLException {
-        List<Concepto> lista = new ArrayList<Concepto>();
+        List<Concepto> lista = new ArrayList<>();
         rs = stmt
                 .executeQuery("SELECT * FROM ERP_ELFEC.CONCEPTOS WHERE IDCONCEPTO>=10000 AND IDCONCEPTO<12000");
         while (rs.next()) {
@@ -330,7 +327,7 @@ public class ConectorBDOracle {
 
     public List<ReclasificacionCategoria> obtenerReclasificacionCategorias()
             throws SQLException {
-        List<ReclasificacionCategoria> lista = new ArrayList<ReclasificacionCategoria>();
+        List<ReclasificacionCategoria> lista = new ArrayList<>();
         rs = stmt
                 .executeQuery("SELECT CR.IDCATEG_ORIG,CR.IDCATEG_DEST,CR.CONDICION,CR.VALOR,FAM.RECSGLDES "
                         + "FROM ERP_ELFEC.CATEG_RECLASIF CR, MOVILES.RECATEGORIZACION FAM "
@@ -377,7 +374,7 @@ public class ConectorBDOracle {
      * deberÃ­a actualizar su estado en caso de exportarse exitosamente
      *
      * @param ordLec
-     * @return 1 si se importÃ³ exitosamente
+     * @return 1 si se importó exitosamente
      * @throws SQLException
      */
     public int exportarOrdenativoLectura(OrdenativoLectura ordLec)
@@ -532,7 +529,7 @@ public class ConectorBDOracle {
 
     /**
      * Se conecta a la base de datos oracle y obtiene los tokens para la
-     * conexiÃ³n al servicio web a partir de la fecha de sincronizacion de la
+     * conexión al servicio web a partir de la fecha de sincronizacion de la
      * cuenta del usuario hasta el rango de dias que tiene asignados, el rango
      * de dias no puede ser cero. del usuario, de la vista MOVILES.V_TOKEN_LEC
      *
@@ -561,9 +558,9 @@ public class ConectorBDOracle {
 
     /**
      * Se conecta a la base de datos oracle y verifica si el imei propocionado
-     * esta aurorizado para usar la aplicaciÃ³n para ello accede a la tabla
+     * esta aurorizado para usar la aplicación para ello accede a la tabla
      * MOVILES.IMEI_APP y ve que exista ese IMEI y que tenga estado 1 es decir
-     * que estÃ© activo
+     * que esté activo
      *
      * @param imei
      * @return
@@ -589,16 +586,16 @@ public class ConectorBDOracle {
      */
     public List<AsignacionRuta> obtenerRutasAsignadas(String usuario)
             throws SQLException {
-        List<AsignacionRuta> lista = new ArrayList<AsignacionRuta>();
+        List<AsignacionRuta> lista = new ArrayList<>();
         rs = stmt
                 .executeQuery("SELECT * FROM MOVILES.USUARIO_ASIGNACION WHERE UPPER(USUARIO)=UPPER('"
                         + usuario
                         + "') AND DIA_ASIG_CARGA="
-                        + calendar.get(Calendar.DAY_OF_MONTH)
+                        + currentDate.getDayOfMonth()
                         + " AND MES="
-                        + (calendar.get(Calendar.MONTH) + 1)
+                        + currentDate.getMonthOfYear()
                         + " AND ANIO="
-                        + calendar.get(Calendar.YEAR)
+                        + currentDate.getYear()
                         + " AND (ESTADO=1 OR ESTADO=6)");
         while (rs.next()) {
             lista.add(new AsignacionRuta(rs));
@@ -647,9 +644,8 @@ public class ConectorBDOracle {
     }
 
     /**
-     * busca una asignaciÃ³n de ruta segÃºn los parÃ¡metros especificados
+     * busca una asignación de ruta segÃºn los parÃ¡metros especificados
      *
-     * @param usuario
      * @param ruta
      * @param ordenInicio
      * @param ordenFin
@@ -688,7 +684,7 @@ public class ConectorBDOracle {
      */
     public void actualizarEquivalentesReintentar(List<AsignacionRuta> listaRutas)
             throws SQLException {
-        List<AsignacionRuta> listaRutasEquivalentes = new ArrayList<AsignacionRuta>();
+        List<AsignacionRuta> listaRutasEquivalentes = new ArrayList<>();
         for (AsignacionRuta ruta : listaRutas) {
             if (ruta.getEstado() == EstadoAsignacionRuta.RELECTURA_EXPORTADA) {
                 AsignacionRuta asignacionEquivalente = buscarAsignacionRuta(

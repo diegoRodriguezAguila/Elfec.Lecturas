@@ -1,11 +1,6 @@
 package com.elfec.lecturas.controlador;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -20,6 +15,11 @@ import com.elfec.lecturas.R;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.Lectura;
 import com.elfec.lecturas.modelo.MedidorEntreLineas;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ResumenLecturas extends AppCompatActivity {
 
@@ -89,15 +89,15 @@ public class ResumenLecturas extends AppCompatActivity {
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				txtNumLecturas.setText("" + numLecturas);
-				txtLecturasRealizadas.setText("" + lecturasRealizadas);
-				txtLecturasPendientes.setText("" + lecturasPendientes);
-				txtLecturasNormales.setText("" + lecturasNormales);
-				txtLecturasEntreLineas.setText("" + lecturasEntreLineas);
-				txtLecturasImpedidas.setText("" + lecturasImpedidas);
-				txtLecturasPostergadas.setText("" + lecturasPostergadas);
-				txtLecturasReintentar.setText("" + lecturasReintentar);
-				txtLecturasTotales.setText("" + lecturasTotales);
+				txtNumLecturas.setText(String.valueOf(numLecturas));
+				txtLecturasRealizadas.setText(String.valueOf(lecturasRealizadas));
+				txtLecturasPendientes.setText(String.valueOf(lecturasPendientes));
+				txtLecturasNormales.setText(String.valueOf(lecturasNormales));
+				txtLecturasEntreLineas.setText(String.valueOf(lecturasEntreLineas));
+				txtLecturasImpedidas.setText(String.valueOf(lecturasImpedidas));
+				txtLecturasPostergadas.setText(String.valueOf(lecturasPostergadas));
+				txtLecturasReintentar.setText(String.valueOf(lecturasReintentar));
+				txtLecturasTotales.setText(String.valueOf(lecturasTotales));
 			}
 		});
 	}
@@ -107,13 +107,6 @@ public class ResumenLecturas extends AppCompatActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.resumen_lecturas, menu);
 		return true;
-	}
-
-	public void btnInicioClick(View view) {
-		Intent intent = new Intent(this, MenuPrincipal.class);
-		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		startActivity(intent);
-		overridePendingTransition(R.anim.slide_right_in, R.anim.slide_right_out);
 	}
 
 	@Override
@@ -140,7 +133,7 @@ public class ResumenLecturas extends AppCompatActivity {
 
 	private void obtenerSpinnerRutas() {
 		listaRutas = AsignacionRuta.obtenerTodasLasRutas();
-		List<String> listaRutasStr = new ArrayList<String>();
+		List<String> listaRutasStr = new ArrayList<>();
 		listaRutasStr.add("Todas");
 		for (AsignacionRuta asignRuta : listaRutas) {
 			listaRutasStr.add("" + asignRuta.Ruta);
@@ -151,7 +144,7 @@ public class ResumenLecturas extends AppCompatActivity {
 	/**
 	 * Asigna las rutas del spinner
 	 * 
-	 * @param listaRutas
+	 * @param listaRutas rutas
 	 */
 	private void setRutas(final List<String> listaRutas) {
 		runOnUiThread(new Runnable() {

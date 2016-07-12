@@ -1,11 +1,7 @@
 package com.elfec.lecturas.logica_negocio;
 
-import java.net.ConnectException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
+import com.elfec.lecturas.helpers.sql.SqlUtils;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataImporter;
 import com.elfec.lecturas.modelo.AsignacionRuta;
 import com.elfec.lecturas.modelo.BaseCalculoConcepto;
@@ -15,6 +11,11 @@ import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 
+import java.net.ConnectException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Maneja la logica de negocio de LECTURASCONCEPTOS
  * 
@@ -23,13 +24,12 @@ import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
  */
 public class ConceptoLecturaManager {
 	/**
-	 * Importa toda la informaciÃ³n de LECTURASCONCEPTOS de las rutas asignadas
+	 * Importa toda la información de LECTURASCONCEPTOS de las rutas asignadas
 	 * al usuario para la fecha actual.<br>
-	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
-	 * @param username
-	 * @param password
+	 * @param conector
 	 * @param importacionDatosListener
 	 *            {@link ImportacionDatosListener}
 	 * @return {@link ResultadoTipado} con el resultado de la las lecturas de la
@@ -37,7 +37,6 @@ public class ConceptoLecturaManager {
 	 */
 	public ResultadoTipado<List<ConceptoLectura>> importarConceptosLecturasDeRutasAsignadas(
 			ConectorBDOracle conector, List<AsignacionRuta> assignedRoutes,
-			final String inClausula,
 			ImportacionDatosListener importacionDatosListener) {
 		ResultadoTipado<List<ConceptoLectura>> globalResult = new ResultadoTipado<List<ConceptoLectura>>(
 				new ArrayList<ConceptoLectura>());
@@ -47,7 +46,8 @@ public class ConceptoLecturaManager {
 
 		for (AsignacionRuta assignedRoute : assignedRoutes) {
 			result = importarConceptosLecturasDeRuta(conector, assignedRoute,
-					inClausula);
+					SqlUtils.convertirAClausulaIn(
+							Lectura.obtenerLecturasDeRutaAsignada(assignedRoute)));
 			// copiando errores
 			globalResult.agregarErrores(result.getErrores());
 			if (!globalResult.tieneErrores())
@@ -62,11 +62,9 @@ public class ConceptoLecturaManager {
 	}
 
 	/**
-	 * Importa la informacÃ³n de LECTURASCONCEPTOS de una ruta asignada
+	 * Importa la informacón de LECTURASCONCEPTOS de una ruta asignada
 	 * 
-	 * @param username
-	 * @param password
-	 * @param LecturaRDA
+	 * @param conector
 	 * @param assignedRoute
 	 * @param inClausula
 	 * @return {@link ResultadoTipado} con el resultado de las lecturas de la
@@ -93,9 +91,9 @@ public class ConceptoLecturaManager {
 						BaseCalculoConcepto baseCalculoConcepto = BaseCalculoConcepto
 								.obtenerBaseCalculoConcepto(conc.ConceptoCodigo);
 						conc.Lectura = lectura;
-						conc.OrdenImpresion = baseCalculoConcepto == null ? null
+						conc.OrdenImpresion = baseCalculoConcepto == null ? 0
 								: baseCalculoConcepto.BaseCalculo.OrdenImpresion;
-						conc.AreaImpresion = baseCalculoConcepto == null ? null
+						conc.AreaImpresion = baseCalculoConcepto == null ? 0
 								: baseCalculoConcepto.Concepto.AreaImpresion;
 					}
 				});

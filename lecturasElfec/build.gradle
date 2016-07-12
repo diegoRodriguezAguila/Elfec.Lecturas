@@ -8,11 +8,14 @@ android {
         applicationId "com.elfec.lecturas"
         minSdkVersion 10
         targetSdkVersion 23
-        versionCode 5
-        versionName "1.16.07.11"
+        versionCode 6
+        versionName "1.16.07.12"
     }
 
     buildTypes {
+        debug {
+            buildConfigField "boolean", "IS_PRODUCTION", 'false'
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'

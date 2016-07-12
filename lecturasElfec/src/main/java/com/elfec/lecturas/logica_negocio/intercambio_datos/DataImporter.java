@@ -1,14 +1,14 @@
 package com.elfec.lecturas.logica_negocio.intercambio_datos;
 
-import java.net.ConnectException;
-import java.sql.SQLException;
-import java.util.List;
-
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
 import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
 import com.elfec.lecturas.modelo.resultados.ResultadoTipado;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
+
+import java.net.ConnectException;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Se encarga de importar cualquier tipo de información
@@ -53,8 +53,8 @@ public class DataImporter {
 	/**
 	 * Importa cualquier tipo de información
 	 * 
-	 * @param importSpecs
-	 * @return {@link TypedResult}
+	 * @param importSource
+	 * @return {@link ResultadoTipado}
 	 */
 	public <T extends Model> ResultadoTipado<List<T>> importData(
 			ImportSource<T> importSource) {
