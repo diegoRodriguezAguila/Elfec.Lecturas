@@ -630,17 +630,21 @@ public class ConectorBDOracle {
     public void actualizarEstadoRuta(AsignacionRuta ruta,
                                      boolean actualizarCantLecturasRecibidas) throws SQLException {
         String query;
-        String datos;
-        String condicion;
+        StringBuilder datos;
+        StringBuilder condicion;
         query = "UPDATE MOVILES.USUARIO_ASIGNACION";
-        datos = " SET ESTADO="
-                + ruta.getEstado().toShort()
-                + (actualizarCantLecturasRecibidas ? ", CANT_LEC_REC="
-                + ruta.cantLecturasEnviadas : "");
-        condicion = " WHERE UPPER(USUARIO)=UPPER('" + ruta.UsuarioAsignado
-                + "') AND DIA=" + ruta.Dia + " AND MES=" + ruta.Mes
-                + " AND ANIO=" + ruta.Anio + " AND RUTA=" + ruta.Ruta;
-        stmt.executeUpdate(query + datos + condicion);
+        datos = new StringBuilder();
+        datos.append(" SET ESTADO=")
+                .append(ruta.getEstado().toShort())
+                .append((actualizarCantLecturasRecibidas ?
+                        ", CANT_LEC_REC="+ ruta.cantLecturasEnviadas : ""));
+        condicion = new StringBuilder();
+        condicion.append(" WHERE UPPER(USUARIO)=UPPER('").append(ruta.UsuarioAsignado)
+                .append("') AND DIA=").append(ruta.Dia).append(" AND MES=").append(ruta.Mes)
+                .append(" AND ANIO=").append(ruta.Anio).append(" AND RUTA=").append(ruta.Ruta)
+                .append(" AND ORDEN_INICIO=").append(ruta.OrdenInicio)
+                .append(" AND ORDEN_FIN=").append(ruta.OrdenFin);
+        stmt.executeUpdate(query + datos.toString() + condicion.toString());
     }
 
     /**

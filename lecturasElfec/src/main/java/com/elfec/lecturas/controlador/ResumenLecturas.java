@@ -46,7 +46,7 @@ public class ResumenLecturas extends AppCompatActivity {
 				asignarCampos();
 				obtenerSpinnerRutas();
 				ponerItemSelectedListenerRutas();
-				obtenerDatos(-1);
+				obtenerDatos(null);
 			}
 		}).start();
 	}
@@ -62,7 +62,7 @@ public class ResumenLecturas extends AppCompatActivity {
 	 * @param ruta
 	 *            -1 para todas las rutas
 	 */
-	public void obtenerDatos(int ruta) {
+	public void obtenerDatos(AsignacionRuta ruta) {
 		int numLecturas = Lectura.countLecturasPorEstadoYRuta(ruta);
 		int lecturasRealizadas = Lectura
 				.countLecturasPorEstadoYRuta(ruta, 1, 2);
@@ -169,8 +169,8 @@ public class ResumenLecturas extends AppCompatActivity {
 				new Thread(new Runnable() {
 					@Override
 					public void run() {
-						obtenerDatos(position == 0 ? -1 : (listaRutas
-								.get(position - 1).Ruta));
+						obtenerDatos(position == 0 ? null : (listaRutas
+								.get(position - 1)));
 					}
 				}).start();
 			}

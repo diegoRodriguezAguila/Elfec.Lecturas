@@ -554,33 +554,6 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
     }
 
     /**
-     * Accede a la base de datos y obtiene todas las lecturas de la <b>ruta</b>
-     * en orden por cuentas
-     *
-     * @param ruta
-     * @return Lista de Lecturas en orden de cuentas
-     */
-    public static List<Lectura> obtenerLecturasDeRuta(int ruta) {
-        return new Select().from(Lectura.class).where("LEMRUT=?", ruta)
-                .orderBy("LEMCTAANT").execute();
-    }
-
-    /**
-     * Accede a la base de datos y obtiene todas las lecturas realizadas (No
-     * pendientes ni postergadas) de la <b>ruta</b> en orden por cuentas
-     *
-     * @param ruta
-     * @return Lista de Lecturas en orden de cuentas de la ruta
-     */
-    public static List<Lectura> obtenerLecturasRealizadasDeRuta(int ruta) {
-        return new Select()
-                .from(Lectura.class)
-                .where("LEMRUT=" + ruta
-                        + " AND EstadoLectura<>0 AND EstadoLectura<>3")
-                .execute();
-    }
-
-    /**
      * Accede a la base de datos y obtiene todas las lecturas que tengan el
      * <b>estado</b> en orden por cuentas
      *
@@ -591,20 +564,6 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
         return new Select().from(Lectura.class)
                 .where("EstadoLectura=?", estado).orderBy("LEMCTAANT")
                 .execute();
-    }
-
-    /**
-     * Accede a la base de datos y obtiene todas las lecturas que tengan el
-     * <b>estado</b> y la <b>ruta</b> en orden por cuentas
-     *
-     * @param estado
-     * @return Lista de Lecturas en orden de cuentas
-     */
-    public static List<Lectura> obtenerLecturasPorEstadoYRuta(int estado,
-                                                              int ruta) {
-        return new Select().from(Lectura.class)
-                .where("EstadoLectura=" + estado + " AND LEMRUT=" + ruta)
-                .orderBy("LEMCTAANT").execute();
     }
 
     /**
@@ -1062,34 +1021,41 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
     /**
      * Realiza un count de las lecturas que tienen uno o mas estados
      *
-     * @param ruta    si es -1 se hace de todas las rutas
+     * @param ruta    si es null se hace de todas las rutas
      * @param estados
      * @return
      */
-    public static int countLecturasPorEstadoYRuta(int ruta, int... estados) {
+    public static int countLecturasPorEstadoYRuta(AsignacionRuta ruta, int... estados) {
         boolean hayEstados = estados.length > 0;
         String[] estadosStr = new String[estados.length];
         StringBuilder inClause = new StringBuilder("(");
         if (hayEstados) {
             for (int i = 0; i < estados.length; i++) {
-                estadosStr[i] = "" + estados[i];
+                estadosStr[i] = String.valueOf(estados[i]);
                 inClause.append((i == (estados.length - 1) ? "?" : "?, "));
             }
             inClause.append(")");
         }
+        String query = getEstadoYRutaQuery(hayEstados, inClause.toString(), ruta);
         Cursor mCount = Cache
                 .openDatabase()
-                .rawQuery(
-                        "SELECT COUNT(*) FROM Lecturas "
-                                + (hayEstados ? ("WHERE EstadoLectura IN " + inClause.toString())
-                                : "")
-                                + (ruta != -1 ? ((hayEstados ? " AND"
-                                : " WHERE") + " LEMRUT=" + ruta) : ""),
-                        (hayEstados ? estadosStr : null));
+                .rawQuery(query, estadosStr);
         mCount.moveToFirst();
         int count = mCount.getInt(0);
         mCount.close();
         return count;
+    }
+
+    private static String getEstadoYRutaQuery(boolean hayEstados, String inClause,
+                                              AsignacionRuta ruta) {
+        return "SELECT COUNT(*) FROM Lecturas " +
+                (hayEstados ? ("WHERE EstadoLectura IN " + inClause)
+                        : "") +
+                (ruta != null ? ((hayEstados ? " AND" : " WHERE") +
+                        " LEMRUT=" + ruta.Ruta +
+                        " AND LEMCTAANT BETWEEN "
+                        + ruta.obtenerCuentaInicio() + " AND "
+                        + ruta.obtenerCuentaFin()) : "");
     }
 
     @Override
