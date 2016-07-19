@@ -15,10 +15,12 @@ public class SqlUtils {
     /**
      * Obtiene la clausula In de la información general de lecturas
      *
-     * @param lecturas
+     * @param lecturas lecturas
      * @return clausula IN SQL de suministros de lecturas
      */
     public static String convertirAClausulaIn(List<Lectura> lecturas) {
+        if(lecturas.size() == 0)
+            return "(-1)";
         return ObjectListToSQL.convertToSQL(lecturas, "LEMSUM",
                 new AttributePicker<String, Lectura>() {
                     @Override
