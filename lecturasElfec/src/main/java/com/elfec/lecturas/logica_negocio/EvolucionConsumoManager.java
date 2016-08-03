@@ -27,8 +27,7 @@ public class EvolucionConsumoManager {
      * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
      * local de los datos
      *
-     * @param username
-     * @param password
+     * @param conector
      * @param importacionDatosListener {@link ImportacionDatosListener}
      * @return {@link ResultadoTipado} con el resultado de la las lecturas de la
      * lista de rutas asignadas al usuario

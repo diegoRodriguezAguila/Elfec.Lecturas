@@ -30,7 +30,7 @@
     <string name="menu_principal_btn">Menu principal</string>
     <string name="menu_principal_info">Presione menu principal para ingresar a las opciones de lecturas.</string>
     <string name="cargar_datos_btn">CARGAR DATOS</string>
-    <string name="ruta_info_lbl">Ruta no asignada.</string>
+    <string name="ruta_info_lbl">Rutas no cargadas.</string>
     <string name="info_datos_no_cargados_lbl">Los datos no fueron cargados, no puede acceder al Menu Principal.</string>
     <string name="info_datos_cargados_lbl">Los datos ya fueron cargados.</string>
     <!-- Inicio: Carga de datos -->
