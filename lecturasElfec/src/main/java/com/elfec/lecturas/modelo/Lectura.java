@@ -790,9 +790,13 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
     public int obtenerLecturaActivaEstimada() {
         int consumoPromedioNeto = (new BigDecimal(ConsumoPromedio).divide(
                 FactorMultiplicador, 2, RoundingMode.HALF_UP)).intValue();
-        return LecturaAnterior + consumoPromedioNeto;// cambiar esto en caso de
-        // que se cambie la
-        // forma de estimacion
+        int lecturaEstimada = LecturaAnterior + consumoPromedioNeto;
+        String lecEstStr = String.valueOf(lecturaEstimada);
+        if (lecEstStr.length() > NumDigitosMedidor) {
+            //truncar digito mas significativo
+            lecturaEstimada = Integer.parseInt(lecEstStr.substring(1));
+        }
+        return lecturaEstimada;
     }
 
     /**
