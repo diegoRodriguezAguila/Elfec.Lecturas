@@ -18,85 +18,81 @@ import java.util.List;
 
 /**
  * Maneja la logica de negocio de LECTURASCONCEPTOS
- * 
- * @author drodriguez
  *
+ * @author drodriguez
  */
 public class ConceptoLecturaManager {
-	/**
-	 * Importa toda la información de LECTURASCONCEPTOS de las rutas asignadas
-	 * al usuario para la fecha actual.<br>
-	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
-	 * local de los datos
-	 * 
-	 * @param conector
-	 * @param importacionDatosListener
-	 *            {@link ImportacionDatosListener}
-	 * @return {@link ResultadoTipado} con el resultado de la las lecturas de la
-	 *         lista de rutas asignadas al usuario
-	 */
-	public ResultadoTipado<List<ConceptoLectura>> importarConceptosLecturasDeRutasAsignadas(
-			ConectorBDOracle conector, List<AsignacionRuta> assignedRoutes,
-			ImportacionDatosListener importacionDatosListener) {
-		ResultadoTipado<List<ConceptoLectura>> globalResult = new ResultadoTipado<List<ConceptoLectura>>(
-				new ArrayList<ConceptoLectura>());
-		ResultadoTipado<List<ConceptoLectura>> result;
-		if (importacionDatosListener != null)
-			importacionDatosListener.onImportacionIniciada();
+    /**
+     * Importa toda la información de LECTURASCONCEPTOS de las rutas asignadas
+     * al usuario para la fecha actual.<br>
+     * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
+     * local de los datos
+     *
+     * @param conector
+     * @param importacionDatosListener {@link ImportacionDatosListener}
+     * @return {@link ResultadoTipado} con el resultado de la las lecturas de la
+     * lista de rutas asignadas al usuario
+     */
+    public ResultadoTipado<List<ConceptoLectura>> importarConceptosLecturasDeRutasAsignadas(
+            ConectorBDOracle conector, List<AsignacionRuta> assignedRoutes,
+            ImportacionDatosListener importacionDatosListener) {
+        ResultadoTipado<List<ConceptoLectura>> globalResult = new ResultadoTipado<List<ConceptoLectura>>(
+                new ArrayList<ConceptoLectura>());
+        ResultadoTipado<List<ConceptoLectura>> result;
+        if (importacionDatosListener != null)
+            importacionDatosListener.onImportacionIniciada();
+        ConceptoLectura.eliminarConceptosLecturas();
+        for (AsignacionRuta assignedRoute : assignedRoutes) {
+            result = importarConceptosLecturasDeRuta(conector, assignedRoute,
+                    SqlUtils.convertirAClausulaIn(
+                            Lectura.obtenerLecturasDeRutaAsignada(assignedRoute)));
+            // copiando errores
+            globalResult.agregarErrores(result.getErrores());
+            if (!globalResult.tieneErrores())
+                globalResult.getResultado().addAll(result.getResultado());
+            else
+                break; // rompe ciclo si hay errores
+        }
 
-		for (AsignacionRuta assignedRoute : assignedRoutes) {
-			result = importarConceptosLecturasDeRuta(conector, assignedRoute,
-					SqlUtils.convertirAClausulaIn(
-							Lectura.obtenerLecturasDeRutaAsignada(assignedRoute)));
-			// copiando errores
-			globalResult.agregarErrores(result.getErrores());
-			if (!globalResult.tieneErrores())
-				globalResult.getResultado().addAll(result.getResultado());
-			else
-				break; // rompe ciclo si hay errores
-		}
+        if (importacionDatosListener != null)
+            importacionDatosListener.onImportacionFinalizada(globalResult);
+        return globalResult;
+    }
 
-		if (importacionDatosListener != null)
-			importacionDatosListener.onImportacionFinalizada(globalResult);
-		return globalResult;
-	}
+    /**
+     * Importa la informacón de LECTURASCONCEPTOS de una ruta asignada
+     *
+     * @param conector
+     * @param assignedRoute
+     * @param inClausula
+     * @return {@link ResultadoTipado} con el resultado de las lecturas de la
+     * ruta asignada al usuario
+     */
+    private ResultadoTipado<List<ConceptoLectura>> importarConceptosLecturasDeRuta(
+            final ConectorBDOracle conector,
+            final AsignacionRuta assignedRoute, final String inClausula) {
+        return new DataImporter()
+                .importData(new ImportSource<ConceptoLectura>() {
+                    @Override
+                    public List<ConceptoLectura> requestData()
+                            throws ConnectException, SQLException {
+                        return conector.obtenerConceptosPorRuta(
+                                assignedRoute.Ruta, inClausula);
+                    }
 
-	/**
-	 * Importa la informacón de LECTURASCONCEPTOS de una ruta asignada
-	 * 
-	 * @param conector
-	 * @param assignedRoute
-	 * @param inClausula
-	 * @return {@link ResultadoTipado} con el resultado de las lecturas de la
-	 *         ruta asignada al usuario
-	 */
-	private ResultadoTipado<List<ConceptoLectura>> importarConceptosLecturasDeRuta(
-			final ConectorBDOracle conector,
-			final AsignacionRuta assignedRoute, final String inClausula) {
-		ConceptoLectura.eliminarConceptosLecturasDeRutaAsignada(assignedRoute,
-				inClausula);
-		return new DataImporter()
-				.importData(new ImportSource<ConceptoLectura>() {
-					@Override
-					public List<ConceptoLectura> requestData()
-							throws ConnectException, SQLException {
-						return conector.obtenerConceptosPorRuta(
-								assignedRoute.Ruta, inClausula);
-					}
+                    @Override
+                    public void preSaveData(ConceptoLectura conc) {
+                        Lectura lectura = ConceptoLectura.obtenerLectura(
+                                conc.Suministro, conc.Mes, conc.Anio);
+                        BaseCalculoConcepto baseCalculoConcepto = BaseCalculoConcepto
+                                .obtenerBaseCalculoConcepto(conc.ConceptoCodigo);
+                        conc.Lectura = lectura;
+                        conc.OrdenImpresion = baseCalculoConcepto == null ? 0
+                                : baseCalculoConcepto.BaseCalculo.OrdenImpresion;
+                        conc.AreaImpresion = baseCalculoConcepto == null ? 0
+                                : baseCalculoConcepto.Concepto.AreaImpresion;
+                    }
+                });
 
-					@Override
-					public void preSaveData(ConceptoLectura conc) {
-						Lectura lectura = ConceptoLectura.obtenerLectura(
-								conc.Suministro, conc.Mes, conc.Anio);
-						BaseCalculoConcepto baseCalculoConcepto = BaseCalculoConcepto
-								.obtenerBaseCalculoConcepto(conc.ConceptoCodigo);
-						conc.Lectura = lectura;
-						conc.OrdenImpresion = baseCalculoConcepto == null ? 0
-								: baseCalculoConcepto.BaseCalculo.OrdenImpresion;
-						conc.AreaImpresion = baseCalculoConcepto == null ? 0
-								: baseCalculoConcepto.Concepto.AreaImpresion;
-					}
-				});
-
-	}
+    }
 }

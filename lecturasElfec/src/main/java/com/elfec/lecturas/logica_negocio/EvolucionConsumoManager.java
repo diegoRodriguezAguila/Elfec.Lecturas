@@ -40,7 +40,7 @@ public class EvolucionConsumoManager {
         ResultadoTipado<List<EvolucionConsumo>> result;
         if (importacionDatosListener != null)
             importacionDatosListener.onImportacionIniciada();
-
+        EvolucionConsumo.eliminarEvConsumos();
         for (AsignacionRuta assignedRoute : assignedRoutes) {
             result = importarEvConsumosDeRuta(conector, assignedRoute,
                     SqlUtils.convertirAClausulaIn(
@@ -71,8 +71,6 @@ public class EvolucionConsumoManager {
     private ResultadoTipado<List<EvolucionConsumo>> importarEvConsumosDeRuta(
             final ConectorBDOracle conector,
             final AsignacionRuta assignedRoute, final String inClausula) {
-        EvolucionConsumo.eliminarEvConsumosDeRutaAsignada(assignedRoute,
-                inClausula);
         return new DataImporter()
                 .importData(new ImportSource<EvolucionConsumo>() {
                     @Override

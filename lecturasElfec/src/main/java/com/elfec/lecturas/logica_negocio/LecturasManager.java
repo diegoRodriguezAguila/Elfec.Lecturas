@@ -45,7 +45,7 @@ public class LecturasManager {
 		ResultadoTipado<List<Lectura>> result;
 		if (importacionDatosListener != null)
 			importacionDatosListener.onImportacionIniciada();
-
+		Lectura.eliminarLecturas();
 		for (AsignacionRuta assignedRoute : assignedRoutes) {
 			result = importarLecturasDeRuta(conector, assignedRoute);
 			// no tiene lecturas en la ruta
@@ -79,7 +79,6 @@ public class LecturasManager {
 			final ConectorBDOracle conector, final AsignacionRuta assignedRoute) {
 		ResultadoTipado<List<Lectura>> resultado = new ResultadoTipado<List<Lectura>>();
 		try {
-			Lectura.eliminarLecturasDeRutaAsignada(assignedRoute);
 			resultado = new DataImporter()
 					.importData(new ImportSource<Lectura>() {
 						@Override

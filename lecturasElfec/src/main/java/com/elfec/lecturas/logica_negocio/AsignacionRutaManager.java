@@ -37,7 +37,7 @@ public class AsignacionRutaManager {
             ImportacionDatosListener dataImportListener) {
         if (dataImportListener != null)
             dataImportListener.onImportacionIniciada();
-        AsignacionRuta.eliminarTodasLasRutasNoImportadasDelUsuario(usuario);
+        AsignacionRuta.eliminarTodasLasRutasAsignadas();
         ResultadoTipado<List<AsignacionRuta>> result = new DataImporter()
                 .importData(new ImportSource<AsignacionRuta>() {
                     @Override
@@ -61,7 +61,7 @@ public class AsignacionRutaManager {
     /**
      * Asigna remota y localmente el estado de CARGADAS a la lista de rutas. Si
      * ocurre un error al realizar el update remoto aquellas rutas que se hayan
-     * logrado guardar estarÃ¡n marcadas como exportadas localmente
+     * logrado guardar estarán marcadas como exportadas localmente
      *
      * @param rutasAsignadas
      * @return {@link ResultadoVoid} lista de errores del proceso
@@ -91,7 +91,7 @@ public class AsignacionRutaManager {
     /**
      * Asigna remota y localmente el estado de DESCARGADAS a la lista de rutas.
      * Si ocurre un error al realizar el update remoto aquellas rutas que se
-     * hayan logrado guardar estarÃ¡n marcadas como exportadas localmente
+     * hayan logrado guardar estarán marcadas como exportadas localmente
      *
      * @param rutas
      * @return {@link ResultadoVoid} lista de errores del proceso

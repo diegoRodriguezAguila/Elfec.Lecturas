@@ -43,7 +43,7 @@ public class PotenciasManager {
         ResultadoTipado<List<Potencia>> result;
         if (importacionDatosListener != null)
             importacionDatosListener.onImportacionIniciada();
-
+        Potencia.eliminarPotencias();
         for (AsignacionRuta assignedRoute : assignedRoutes) {
             result = importarPotenciasDeRuta(conector, assignedRoute,
                     SqlUtils.convertirAClausulaIn(
@@ -78,7 +78,6 @@ public class PotenciasManager {
             final AsignacionRuta assignedRoute, final String inClausula) {
         ResultadoTipado<List<Potencia>> resultado = new ResultadoTipado<List<Potencia>>();
         try {
-            Potencia.eliminarPotenciasDeRutaAsignada(assignedRoute, inClausula);
             resultado = new DataImporter()
                     .importData(new ImportSource<Potencia>() {
                         @Override

@@ -233,6 +233,7 @@ public class Inicio extends AppCompatActivity implements
             public void run() {
                 SesionUsuario.cerrarSesionUsuario(VariablesDeSesion
                         .getUsuarioLogeado());
+                VariablesDeSesion.clearVariablesSession();
             }
         }).start();
         finish();// go back to the previous Activity

@@ -1,9 +1,5 @@
 package com.elfec.lecturas.logica_negocio;
 
-import java.net.ConnectException;
-import java.sql.SQLException;
-import java.util.List;
-
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataImporter;
 import com.elfec.lecturas.modelo.BaseCalculo;
@@ -13,6 +9,10 @@ import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.settings.AppPreferences;
+
+import java.net.ConnectException;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Se encarga de la lÃ³gica de negocio de bases de calculo
@@ -27,10 +27,9 @@ public class BasesCalculoManager {
 	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
-	 * @param username
-	 * @param password
+	 * @param conector
 	 * @param dataImportListener
-	 *            {@link DataImportListener}
+	 *            {@link ImportacionDatosListener}
 	 * @return {@link ResultadoVoid}
 	 */
 	public ResultadoVoid importarBasesCalculo(final ConectorBDOracle conector,
@@ -66,10 +65,9 @@ public class BasesCalculoManager {
 	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
-	 * @param username
-	 * @param password
+	 * @param conector
 	 * @param dataImportListener
-	 *            {@link DataImportListener}
+	 *            {@link ImportacionDatosListener}
 	 * @return {@link ResultadoVoid}
 	 */
 	public ResultadoVoid importarBasesCalculoConceptos(

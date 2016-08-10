@@ -165,16 +165,10 @@ public class AsignacionRuta extends Model {
     }
 
     /**
-     * Elimina todas las rutas asignadas a un usuario que no esten en estado
-     * cargada
-     *
-     * @param assignedUser
+     * Elimina todas las rutas asignadas
      */
-    public static void eliminarTodasLasRutasNoImportadasDelUsuario(
-            String assignedUser) {
-        new Delete().from(AsignacionRuta.class)
-                .where("UsuarioAsignado = ?", assignedUser)
-                .where("Estado IN (1, 6)").execute();
+    public static void eliminarTodasLasRutasAsignadas() {
+        new Delete().from(AsignacionRuta.class).execute();
     }
 
     /**

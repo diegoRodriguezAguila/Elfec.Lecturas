@@ -518,6 +518,14 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
     }
 
     /**
+     * Elimina toda la información general de lecturas
+     */
+    public static void eliminarLecturas() {
+        new Delete()
+                .from(Lectura.class).execute();
+    }
+
+    /**
      * Elimina toda la información general de lecturas que pertenezcan a la
      * asignación de ruta dada
      *

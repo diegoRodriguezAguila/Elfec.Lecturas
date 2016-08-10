@@ -1,9 +1,5 @@
 package com.elfec.lecturas.logica_negocio;
 
-import java.net.ConnectException;
-import java.sql.SQLException;
-import java.util.List;
-
 import com.elfec.lecturas.acceso_remoto_datos.ConectorBDOracle;
 import com.elfec.lecturas.logica_negocio.intercambio_datos.DataImporter;
 import com.elfec.lecturas.modelo.Concepto;
@@ -13,6 +9,10 @@ import com.elfec.lecturas.modelo.eventos.ImportacionDatosListener;
 import com.elfec.lecturas.modelo.intercambio_datos.ImportSource;
 import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 import com.elfec.lecturas.settings.AppPreferences;
+
+import java.net.ConnectException;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Manager para operaciones de logica de negocio relacionadas con conceptos
@@ -24,13 +24,12 @@ public class ConceptosManager {
 	/**
 	 * Importa los conceptos del ERP_ELFEC.CONCEPTOS si es que no se importaron
 	 * ya previamente.<br>
-	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
-	 * @param username
-	 * @param password
+	 * @param conector
 	 * @param dataImportListener
-	 *            {@link DataImportListener}
+	 *            {@link ImportacionDatosListener}
 	 * @return {@link ResultadoVoid}
 	 */
 	public ResultadoVoid importarConceptos(final ConectorBDOracle conector,
@@ -63,13 +62,12 @@ public class ConceptosManager {
 	/**
 	 * Importa los conceptos categorias de ERP_ELFEC.CPTOS_CATEGORIAS si es que
 	 * no se importaron ya previamente.<br>
-	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
-	 * @param username
-	 * @param password
+	 * @param conector
 	 * @param dataImportListener
-	 *            {@link DataImportListener}
+	 *            {@link ImportacionDatosListener}
 	 * @return {@link ResultadoVoid}
 	 */
 	public ResultadoVoid importarConceptosCategorias(
@@ -105,13 +103,12 @@ public class ConceptosManager {
 	/**
 	 * Importa los conceptos tarifas de ERP_ELFEC.CONCEPTOS_TARIFAS si es que no
 	 * se importaron ya previamente.<br>
-	 * <b>Nota.-</b> La importaciÃ³n incluye la consulta remota y el guardado
+	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
 	 * local de los datos
 	 * 
-	 * @param username
-	 * @param password
+	 * @param conector
 	 * @param dataImportListener
-	 *            {@link DataImportListener}
+	 *            {@link ImportacionDatosListener}
 	 * @return {@link ResultadoVoid}
 	 */
 	public ResultadoVoid importarConceptosTarifas(
