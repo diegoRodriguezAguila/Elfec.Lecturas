@@ -10,8 +10,8 @@ android {
         applicationId "com.elfec.lecturas"
         minSdkVersion 10
         targetSdkVersion 24
-        versionCode 9
-        versionName "1.16.09.16"
+        versionCode 10
+        versionName "1.16.09.26"
     }
 
     compileOptions {
@@ -21,7 +21,7 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "boolean", "IS_PRODUCTION", 'false'
+            buildConfigField "boolean", "IS_PRODUCTION", 'true'
         }
         release {
             minifyEnabled true

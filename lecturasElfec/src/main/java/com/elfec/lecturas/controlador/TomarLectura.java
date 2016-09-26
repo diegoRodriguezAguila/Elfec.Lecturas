@@ -115,8 +115,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tomar_lectura);
         new Thread(() -> {
-            navegacionAdapter = new NavegacionAdapter<>(
-                    TomarLectura.this);
+            navegacionAdapter = new NavegacionAdapter<>(TomarLectura.this);
             filtroLecturas = new FiltroLecturas();
             inicializarCampos();
             asignarLista();
@@ -287,7 +286,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
                             lecturaActual.NumDigitosMedidor)});
             lblObservacion
                     .setText((lecturaActual.ObservacionLectura == 0) ? "Ninguna"
-                            : "" + lecturaActual.ObservacionLectura);
+                            : String.valueOf(lecturaActual.ObservacionLectura));
             btnRecordatorios.setEnabled(lecturaActual.tieneRecordatorio());
             txtLecturaNueva.setText("");
         });
@@ -368,7 +367,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
     private Lectura lecturaActual;
 
     public void btnConfirmarLecturaClick(View view) {
-        if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+        if (!ClicksBotonesHelper.sePuedeClickearBoton()) {
             return;
         }
         if (txtLecturaNueva.getText().toString().isEmpty()) {
@@ -410,9 +409,10 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
             ordLec.guardarYEnviarPor3G();
             lecturaActual.ObservacionLectura = ordLec.Ordenativo.Codigo;
             // Caso Lectura Adelantada: hubo volteo y consumo es elevado
-            if (lecturaActual.ObservacionLectura == 85
+            if (lecturaActual.ObservacionLectura == Ordenativo.ORD_VOLTEO_MEDIDOR
                     && lecturaActual.consumoFacturadoAsignadoElevado()) {
-                Ordenativo ord = Ordenativo.obtenerOrdenativoPorCodigo(68);
+                Ordenativo ord = Ordenativo
+                        .obtenerOrdenativoPorCodigo(Ordenativo.ORD_LECT_ADELANTADA);
                 OrdenativoLectura ordLecAdelantada = new OrdenativoLectura(ord,
                         lecturaActual, new Date());
                 ordLecAdelantada.guardarYEnviarPor3G();
@@ -511,7 +511,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
     }
 
     public void btnListaLecturasClick(View view) {
-        if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+        if (!ClicksBotonesHelper.sePuedeClickearBoton()) {
             return;
         }
         Intent intent = new Intent(this, ListaLecturas.class);
@@ -546,7 +546,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
     // -------------------------- BOTONES POSTERGAR Y
     // REINTENTAR-------------------------------------
     public void btnPostergarLecturaClick(View view) {
-        if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+        if (!ClicksBotonesHelper.sePuedeClickearBoton()) {
             return;
         }
         new AlertDialog.Builder(this)
@@ -572,7 +572,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
      * @param view view
      */
     public void btnReintentarLecturaClick(View view) {
-        if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+        if (!ClicksBotonesHelper.sePuedeClickearBoton()) {
             return;
         }
         new AlertDialog.Builder(this)
@@ -617,7 +617,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
     // ORDENATIVO-------------------------------------
 
     public void btnAgregarOrdenativoClick(View view) {
-        if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+        if (!ClicksBotonesHelper.sePuedeClickearBoton()) {
             return;
         }
         new DialogoAgregarOrdenativo(TomarLectura.this,
@@ -644,7 +644,7 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
     // -----------------------------------------------
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (ClicksBotonesHelper.sePuedeClickearBoton()) {
+        if (!ClicksBotonesHelper.sePuedeClickearBoton()) {
             return true;
         }
         switch (item.getItemId()) {
@@ -836,18 +836,42 @@ public class TomarLectura extends AppCompatActivity implements ISwipeListener,
                 R.string.titulo_impedir_lectura,
                 Ordenativo.obtenerOrdenativosDeImpedimento(),
                 ordenativoLectura -> {
-                    estimarLectura();
+                    //Para casa demolida (31) no se estima la lectura,se
+                    //ocupa consumo cero
+                    if (ordenativoLectura.Ordenativo.Codigo == Ordenativo.ORD_CASA_DEMOLIDA) {
+                        casaDemolidaAsignarConsumo(lecturaActual);
+                    } else estimarLectura();
                     lecturaActual.setEstadoLectura(2);// impedida
                     lecturaActual.save();
                     ManejadorBackupTexto.guardarBackupModelo(lecturaActual);
                     asignarDatos();
-                    if (ordenativoLectura != null)
-                        mostrarDialogoFotoOrdenativo(ordenativoLectura);
+                    mostrarDialogoFotoOrdenativo(ordenativoLectura);
                     actualizarLecturasYFiltro(true);
                     asignarDatos();
                 });
         pd.setIcon(R.drawable.impedir_lectura_d);
         pd.show();
+    }
+
+    /**
+     * Pone consumo cero cuando la casa es demolida
+     * @param lecturaActual lectura actual
+     */
+    private void casaDemolidaAsignarConsumo(Lectura lecturaActual) {
+        lecturaActual.leerLectura(lecturaActual.LecturaAnterior, new Date());
+        // si debe calcular potencia
+        if (lecturaActual.TagCalculaPotencia == 1
+                || lecturaActual.LeePotencia == 1) {
+            estimarPotencia(lecturaActual);
+        }
+        GestionadorImportesYConceptos.agregarConceptos(lecturaActual);
+        lecturaActual.save();
+        imprimirLectura(lecturaActual);
+        ManejadorUbicacion.obtenerUbicacionActual(TomarLectura.this,
+                lecturaActual);
+        // no se guarda gps, se guarda directamente la lectura
+        if (VariablesDeEntorno.tipoGuardadoUbicacion == 0)
+            ManejadorConexionRemota.guardarLectura(lecturaActual);
     }
 
     // ---------------------------------- Visualizar Potencia
