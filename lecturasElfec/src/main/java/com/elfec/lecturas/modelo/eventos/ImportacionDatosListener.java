@@ -11,15 +11,14 @@ import com.elfec.lecturas.modelo.resultados.ResultadoVoid;
 public interface ImportacionDatosListener {
 	/**
 	 * La función que se llama cuando se inicializó una importación de datos
-	 * 
-	 * @param result
+	 *
 	 */
-	public void onImportacionIniciada();
+	void onImportacionIniciada();
 
 	/**
 	 * La función que se llama cuando finalizó un evento de importación de datos
 	 * 
-	 * @param result
+	 * @param result resultado de la importacion
 	 */
-	public void onImportacionFinalizada(ResultadoVoid result);
+	void onImportacionFinalizada(ResultadoVoid result);
 }

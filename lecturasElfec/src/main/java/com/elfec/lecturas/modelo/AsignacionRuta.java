@@ -187,11 +187,9 @@ public class AsignacionRuta extends Model {
                                 + "(select count(*) NUM from AsignacionesRutas WHERE Estado IN (?, ?)) AS CARGADAS, "
                                 + "(select count(*) NUM from AsignacionesRutas) AS TODAS "
                                 + "WHERE CARGADAS.NUM=TODAS.NUM AND TODAS.NUM>0",
-                        new String[]{
-                                "" + EstadoAsignacionRuta.IMPORTADA.toShort(),
-                                ""
-                                        + EstadoAsignacionRuta.RELECTURA_IMPORTADA
-                                        .toShort()});
+                        new String[]{String.valueOf(EstadoAsignacionRuta.IMPORTADA.toShort()),
+                                String.valueOf(EstadoAsignacionRuta
+                                        .RELECTURA_IMPORTADA.toShort())});
         mCount.moveToFirst();
         int count = mCount.getInt(0);
         mCount.close();

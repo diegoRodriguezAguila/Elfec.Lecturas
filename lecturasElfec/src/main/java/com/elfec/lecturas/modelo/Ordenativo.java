@@ -1,14 +1,14 @@
 package com.elfec.lecturas.modelo;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
-
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
 import com.activeandroid.query.Delete;
 import com.activeandroid.query.Select;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Almacena la información sobre los ordenativos, de la tabla
@@ -38,6 +38,16 @@ public class Ordenativo extends Model {
 
 	@Column(name = "TIPO_NOV")
 	public String TipoNovedad;
+
+	/**
+	 * Accede a la base de datos y obtiene todos los ordenativos
+	 *
+	 * @return Lista de ordenativos en orden por codigo
+	 */
+	public static List<Ordenativo> obtenerTodos() {
+		return new Select().from(Ordenativo.class)
+				.orderBy("IDNOVEDAD").execute();
+	}
 
 	/**
 	 * Accede a la base de datos y obtiene todos los ordenativos que no sean de

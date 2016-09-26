@@ -29,226 +29,218 @@ import java.util.List;
 /**
  * Servicio android que corre en segundo plano para realizar la importación de
  * datos del servidor, notifica eventos de UI a {@link DataImportationReceiver}
- * 
- * @author drodriguez
  *
+ * @author drodriguez
  */
 public class ServicioImportacionDatos extends Service {
 
-	/**
-	 * Acción del broadcast
-	 */
-	public static final String BROADCAST_ACTION = "com.elfec.lecturas.importEvent";
-	/**
-	 * Mensaje de inicio de importación
-	 */
-	public static final int IMPORTATION_STARTING = 1;
-	/**
-	 * Mensaje de actualización de un paso de importación
-	 */
-	public static final int UPDATE_WAITING = 2;
-	/**
-	 * Mensajde de fin de la importación
-	 */
-	public static final int IMPORTATION_FINISHED = 3;
+    /**
+     * Acción del broadcast
+     */
+    public static final String BROADCAST_ACTION = "com.elfec.lecturas.importEvent";
+    /**
+     * Mensaje de inicio de importación
+     */
+    public static final int IMPORTATION_STARTING = 1;
+    /**
+     * Mensaje de actualización de un paso de importación
+     */
+    public static final int UPDATE_WAITING = 2;
+    /**
+     * Mensajde de fin de la importación
+     */
+    public static final int IMPORTATION_FINISHED = 3;
 
-	private int strMsgId;
+    private int strMsgId;
 
-	private Intent intent;
+    private Intent intent;
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		intent = new Intent(BROADCAST_ACTION);
-	}
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        intent = new Intent(BROADCAST_ACTION);
+    }
 
-	@Override
-	public int onStartCommand(Intent intent, int flags, int startId) {
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				sendImportationAction(IMPORTATION_STARTING);
-				ImportacionDatosListener importacionDatosListener = new ImportacionDatosListener() {
-					@Override
-					public void onImportacionIniciada() {
-						sendImportationAction(UPDATE_WAITING, strMsgId);
-					}
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        new Thread(() -> {
+            sendImportationAction(IMPORTATION_STARTING);
+            ImportacionDatosListener importacionDatosListener = new ImportacionDatosListener() {
+                @Override
+                public void onImportacionIniciada() {
+                    sendImportationAction(UPDATE_WAITING, strMsgId);
+                }
 
-					@Override
-					public void onImportacionFinalizada(ResultadoVoid result) {
-					}
-				};
-				ResultadoVoid result = null;
-				ResultadoTipado<ConectorBDOracle> conectResult = ConectorBDOracle
-						.crear(ServicioImportacionDatos.this, true);
-				result = conectResult;
-				ConectorBDOracle conector = conectResult.getResultado();
-				result = importarDatosRequeridosUnaVez(conector,
-						importacionDatosListener, result);
-				result = importarDatosRutas(conector, importacionDatosListener,
-						result);
-				sendImportationFinished(result);
-				ServicioImportacionDatos.this.stopSelf();
-			}
+                @Override
+                public void onImportacionFinalizada(ResultadoVoid result) {
+                }
+            };
+            ResultadoVoid result = null;
+            ResultadoTipado<ConectorBDOracle> conectResult = ConectorBDOracle
+                    .crear(ServicioImportacionDatos.this, true);
+            result = conectResult;
+            ConectorBDOracle conector = conectResult.getResultado();
+            result = importarDatosRequeridosUnaVez(conector,
+                    importacionDatosListener, result);
+            result = importarDatosRutas(conector, importacionDatosListener,
+                    result);
+            sendImportationFinished(result);
+            ServicioImportacionDatos.this.stopSelf();
+        }).start();
+        return Service.START_NOT_STICKY;
+    }
 
-		}).start();
-		return Service.START_NOT_STICKY;
-	}
+    /**
+     * Envia un mensaje al broadcaster
+     *
+     * @param action acción
+     */
+    private void sendImportationAction(int action) {
+        sendImportationAction(action, -1);
+    }
 
-	/**
-	 * Envia un mensaje al broadcaster
-	 * 
-	 * @param action
-	 *            acción
-	 */
-	private void sendImportationAction(int action) {
-		sendImportationAction(action, -1);
-	}
+    /**
+     * Envia un mensaje al broadcaster
+     *
+     * @param action   acción
+     * @param strMsgId stringId del mensaje
+     */
+    private void sendImportationAction(int action, int strMsgId) {
+        intent.putExtra("action", action);
+        if (strMsgId != -1)
+            intent.putExtra("message", strMsgId);
+        sendBroadcast(intent);
+    }
 
-	/**
-	 * Envia un mensaje al broadcaster
-	 * 
-	 * @param action
-	 *            acción
-	 * @param strMsgId
-	 *            stringId del mensaje
-	 */
-	private void sendImportationAction(int action, int strMsgId) {
-		intent.putExtra("action", action);
-		if (strMsgId != -1)
-			intent.putExtra("message", strMsgId);
-		sendBroadcast(intent);
-	}
+    /**
+     * Envia un mensaje al broadcaster de que se finalizó de realizar la
+     * importación o esta se interrumpió
+     *
+     * @param result
+     */
+    private void sendImportationFinished(ResultadoVoid result) {
+        intent.putExtra("action", IMPORTATION_FINISHED);
+        intent.putExtra("result", result);
+        sendBroadcast(intent);
+    }
 
-	/**
-	 * Envia un mensaje al broadcaster de que se finalizó de realizar la
-	 * importación o esta se interrumpió
-	 * 
-	 * @param result
-	 */
-	private void sendImportationFinished(ResultadoVoid result) {
-		intent.putExtra("action", IMPORTATION_FINISHED);
-		intent.putExtra("result", result);
-		sendBroadcast(intent);
-	}
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
+    }
 
-	@Override
-	public IBinder onBind(Intent intent) {
-		return null;
-	}
+    @Override
+    public void onDestroy() {
+        intent = null;
+        super.onDestroy();
+    }
 
-	@Override
-	public void onDestroy() {
-		intent = null;
-		super.onDestroy();
-	}
+    /**
+     * Importado los datos que solo son necesarios una vez por sesión
+     *
+     * @param conector
+     * @param importacionDatosListener
+     * @param result
+     * @return resultado
+     */
+    private ResultadoVoid importarDatosRequeridosUnaVez(
+            ConectorBDOracle conector,
+            ImportacionDatosListener importacionDatosListener,
+            ResultadoVoid result) {
+        if (AppPreferences.instance().estaInfoReqUnaVezImportada()) {
+            return result;
+        }
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_parametrizables;
+            result = new ParametrizablesManager().importarParametrizables(
+                    conector, importacionDatosListener);
+        }
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_ordenativos;
+            result = new OrdenativosManager().importarOrdenativos(conector,
+                    importacionDatosListener);
+        }
+        ConceptosManager cptManager = new ConceptosManager();
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_conceptos;
+            result = cptManager.importarConceptos(conector,
+                    importacionDatosListener);
+        }
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_conceptos_categ;
+            result = cptManager.importarConceptosCategorias(conector,
+                    importacionDatosListener);
+        }
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_conceptos_tarifa;
+            result = cptManager.importarConceptosTarifas(conector,
+                    importacionDatosListener);
+        }
+        BasesCalculoManager basesCalcManager = new BasesCalculoManager();
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_bases_calculo;
+            result = basesCalcManager.importarBasesCalculo(conector,
+                    importacionDatosListener);
+        }
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_bases_calculo_cptos;
+            result = basesCalcManager.importarBasesCalculoConceptos(
+                    conector, importacionDatosListener);
+        }
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_reclasif_categs;
+            result = new ReclasifCategoriasManager()
+                    .importarReclasificacionCategorias(conector,
+                            importacionDatosListener);
+        }
+        AppPreferences.instance().setInfoReqUnaVezImportados(!result.tieneErrores());
+        return result;
+    }
 
-	/**
-	 * Importado los datos que solo son necesarios una vez por sesión
-	 * 
-	 * @param conector
-	 * @param importacionDatosListener
-	 * @param result
-	 * @return resultado
-	 */
-	private ResultadoVoid importarDatosRequeridosUnaVez(
-			ConectorBDOracle conector,
-			ImportacionDatosListener importacionDatosListener,
-			ResultadoVoid result) {
-		if (!AppPreferences.instance().estaInfoReqUnaVezImportados()) {
-			if (!result.tieneErrores()) {
-				strMsgId = R.string.msg_importando_parametrizables;
-				result = new ParametrizablesManager().importarParametrizables(
-						conector, importacionDatosListener);
-			}
-			if (!result.tieneErrores()) {
-				strMsgId = R.string.msg_importando_ordenativos;
-				result = new OrdenativosManager().importarOrdenativos(conector,
-						importacionDatosListener);
-			}
-			ConceptosManager cptManager = new ConceptosManager();
-			if (!result.tieneErrores()) {
-				strMsgId = R.string.msg_importando_conceptos;
-				result = cptManager.importarConceptos(conector,
-						importacionDatosListener);
-			}
-			if (!result.tieneErrores()) {
-				strMsgId = R.string.msg_importando_conceptos_categ;
-				result = cptManager.importarConceptosCategorias(conector,
-						importacionDatosListener);
-			}
-			if (!result.tieneErrores()) {
-				strMsgId = R.string.msg_importando_conceptos_tarifa;
-				result = cptManager.importarConceptosTarifas(conector,
-						importacionDatosListener);
-			}
-			BasesCalculoManager basesCalcManager = new BasesCalculoManager();
-			if (!result.tieneErrores()) {
-				strMsgId = R.string.msg_importando_bases_calculo;
-				result = basesCalcManager.importarBasesCalculo(conector,
-						importacionDatosListener);
-			}
-			if (!result.tieneErrores()) {
-				strMsgId = R.string.msg_importando_bases_calculo_cptos;
-				result = basesCalcManager.importarBasesCalculoConceptos(
-						conector, importacionDatosListener);
-			}
-			if (!result.tieneErrores()) {
-				strMsgId = R.string.msg_importando_reclasif_categs;
-				result = new ReclasifCategoriasManager()
-						.importarReclasificacionCategorias(conector,
-								importacionDatosListener);
-			}
-			AppPreferences.instance().setInfoReqUnaVezImportados(
-					result.tieneErrores());
-		}
-		return result;
-	}
-
-	@SuppressWarnings("unchecked")
-	private ResultadoVoid importarDatosRutas(ConectorBDOracle conector,
-			ImportacionDatosListener importacionDatosListener,
-			ResultadoVoid result) {
-		List<AsignacionRuta> rutasAsignadas = null;
-		AsignacionRutaManager asignacionRutaManager = new AsignacionRutaManager();
-		if (!result.tieneErrores()) {
-			strMsgId = R.string.msg_importando_asignacion_rutas;
-			result = asignacionRutaManager.importarRutasAsignadasAUsuario(
-					conector, VariablesDeSesion.getUsuarioLogeado(),
-					importacionDatosListener);
-			rutasAsignadas = ((ResultadoTipado<List<AsignacionRuta>>) result)
-					.getResultado();
-		}
-		if (!result.tieneErrores()) {
-			strMsgId = R.string.msg_importando_lecturas;
-			result = new LecturasManager().importarLecturasDeRutasAsignadas(
-					conector, rutasAsignadas, importacionDatosListener);
-		}
-		if (!result.tieneErrores()) {
-			strMsgId = R.string.msg_importando_potencias;
-			result = new PotenciasManager().importarPotenciasDeRutasAsignadas(
-					conector, rutasAsignadas,
-					importacionDatosListener);
-		}
-		if (!result.tieneErrores()) {
-			strMsgId = R.string.msg_importando_ev_consumos;
-			result = new EvolucionConsumoManager()
-					.importarEvConsumosDeRutasAsignadas(conector,
-							rutasAsignadas, importacionDatosListener);
-		}
-		if (!result.tieneErrores()) {
-			strMsgId = R.string.msg_importando_cptos_lecturas;
-			result = new ConceptoLecturaManager()
-					.importarConceptosLecturasDeRutasAsignadas(conector,
-							rutasAsignadas, importacionDatosListener);
-		}
-		if (!result.tieneErrores()) {// FINALIZACION
-			sendImportationAction(UPDATE_WAITING,
-					R.string.msg_finalizando_importacion);
-			result = asignacionRutaManager.setRutasImportadasExitosamente(
-					conector, rutasAsignadas);
-		}
-		return result;
-	}
+    @SuppressWarnings("unchecked")
+    private ResultadoVoid importarDatosRutas(ConectorBDOracle conector,
+                                             ImportacionDatosListener importacionDatosListener,
+                                             ResultadoVoid result) {
+        List<AsignacionRuta> rutasAsignadas = null;
+        AsignacionRutaManager asignacionRutaManager = new AsignacionRutaManager();
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_asignacion_rutas;
+            result = asignacionRutaManager.importarRutasAsignadasAUsuario(
+                    conector, VariablesDeSesion.getUsuarioLogeado(),
+                    importacionDatosListener);
+            rutasAsignadas = ((ResultadoTipado<List<AsignacionRuta>>) result)
+                    .getResultado();
+        }
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_lecturas;
+            result = new LecturasManager().importarLecturasDeRutasAsignadas(
+                    conector, rutasAsignadas, importacionDatosListener);
+        }
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_potencias;
+            result = new PotenciasManager().importarPotenciasDeRutasAsignadas(
+                    conector, rutasAsignadas,
+                    importacionDatosListener);
+        }
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_ev_consumos;
+            result = new EvolucionConsumoManager()
+                    .importarEvConsumosDeRutasAsignadas(conector,
+                            rutasAsignadas, importacionDatosListener);
+        }
+        if (!result.tieneErrores()) {
+            strMsgId = R.string.msg_importando_cptos_lecturas;
+            result = new ConceptoLecturaManager()
+                    .importarConceptosLecturasDeRutasAsignadas(conector,
+                            rutasAsignadas, importacionDatosListener);
+        }
+        if (!result.tieneErrores()) {// FINALIZACION
+            sendImportationAction(UPDATE_WAITING,
+                    R.string.msg_finalizando_importacion);
+            result = asignacionRutaManager.setRutasImportadasExitosamente(
+                    conector, rutasAsignadas);
+        }
+        return result;
+    }
 
 }

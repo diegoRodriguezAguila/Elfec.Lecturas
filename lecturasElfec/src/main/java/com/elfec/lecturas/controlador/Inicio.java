@@ -2,7 +2,6 @@ package com.elfec.lecturas.controlador;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -330,24 +329,16 @@ public class Inicio extends AppCompatActivity implements
     public void asignarEstadoBotonCargar(final boolean menuPrincipalEnabled,
                                          final boolean cargarDatosEnabled,
                                          final CharSequence lblInfoCargaDatosStr) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                btnMenuPrincipal.setEnabled(menuPrincipalEnabled);
-                btnCargarDatos.setEnabled(cargarDatosEnabled);
-                lblInfoCargaDatos.setText(lblInfoCargaDatosStr);
-            }
+        runOnUiThread(() -> {
+            btnMenuPrincipal.setEnabled(menuPrincipalEnabled);
+            btnCargarDatos.setEnabled(cargarDatosEnabled);
+            lblInfoCargaDatos.setText(lblInfoCargaDatosStr);
         });
     }
 
     public void obtenerEstadoBotonDescargar() {
         btnDescargarHabilitado = Lectura.seRealizaronTodasLasLecturas();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                btnDescargarDatos.setEnabled(true);
-            }
-        });
+        runOnUiThread(() -> btnDescargarDatos.setEnabled(true));
     }
 
     /**
@@ -363,13 +354,7 @@ public class Inicio extends AppCompatActivity implements
                     .setMessage(R.string.msg_confirm_import_data)
                     .setNegativeButton(R.string.btn_cancel, null)
                     .setPositiveButton(R.string.btn_ok,
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog,
-                                                    int which) {
-                                    iniciarImportacionDatos();
-                                }
-                            }).show();
+                            (dialog, which) -> iniciarImportacionDatos()).show();
         }
     }
 
@@ -398,13 +383,7 @@ public class Inicio extends AppCompatActivity implements
                         .setMessage(R.string.msg_confirmar_exportacion)
                         .setNegativeButton(R.string.btn_cancel, null)
                         .setPositiveButton(R.string.btn_ok,
-                                new OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog,
-                                                        int which) {
-                                        iniciarExportacionDatos();
-                                    }
-                                }).show();
+                                (dialog, which) -> iniciarExportacionDatos()).show();
             } else
                 mostrarMensajeUsuario(R.string.descarga_inhabilitada);
         }
@@ -426,55 +405,41 @@ public class Inicio extends AppCompatActivity implements
      * @param msgStrId id de la cadena del mensaje
      */
     public void mostrarMensajeUsuario(final int msgStrId) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(Inicio.this, msgStrId, Toast.LENGTH_SHORT)
-                        .show();
-            }
-        });
+        runOnUiThread(() -> Toast.makeText(Inicio.this, msgStrId, Toast.LENGTH_SHORT)
+                .show());
     }
 
     // #region Observer methods
 
     @Override
     public void showImportationWaiting() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressDialog = new ProgressDialogPro(Inicio.this,
-                        R.style.AppStyle_Dialog_FlavoredMaterialLight);
-                progressDialog.setCancelable(false);
-                progressDialog.setIcon(R.drawable.import_from_server_d);
-                progressDialog
-                        .setMessage(getText(R.string.msg_inicializando_importacion));
-                progressDialog.setTitle(R.string.titulo_cargando_datos);
-                progressDialog.show();
-            }
+        runOnUiThread(() -> {
+            progressDialog = new ProgressDialogPro(Inicio.this,
+                    R.style.AppStyle_Dialog_FlavoredMaterialLight);
+            progressDialog.setCancelable(false);
+            progressDialog.setIcon(R.drawable.import_from_server_d);
+            progressDialog
+                    .setMessage(getText(R.string.msg_inicializando_importacion));
+            progressDialog.setTitle(R.string.titulo_cargando_datos);
+            progressDialog.show();
         });
     }
 
     @Override
     public void updateImportationWaiting(final int msgStrId) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog != null)
-                    progressDialog.setMessage(getResources()
-                            .getString(msgStrId));
-            }
+        runOnUiThread(() -> {
+            if (progressDialog != null)
+                progressDialog.setMessage(getResources()
+                        .getString(msgStrId));
         });
     }
 
     @Override
     public void hideWaiting() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog != null) {
-                    obtenerEstadoBotonCargar();
-                    progressDialog.dismiss();
-                }
+        runOnUiThread(() -> {
+            if (progressDialog != null) {
+                obtenerEstadoBotonCargar();
+                progressDialog.dismiss();
             }
         });
     }
@@ -482,105 +447,80 @@ public class Inicio extends AppCompatActivity implements
     @Override
     public void showErrors(final int titleStrId, final int iconDrawableId,
                            final List<Exception> errors) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (errors.size() > 0) {
-                    new AlertDialog.Builder(Inicio.this)
-                            .setTitle(titleStrId)
-                            .setIcon(iconDrawableId)
-                            .setMessage(
-                                    MessageListFormatter
-                                            .fotmatHTMLFromErrors(errors))
-                            .setPositiveButton(R.string.btn_ok, null).show();
-                }
+        runOnUiThread(() -> {
+            if (errors.size() > 0) {
+                new AlertDialog.Builder(Inicio.this)
+                        .setTitle(titleStrId)
+                        .setIcon(iconDrawableId)
+                        .setMessage(
+                                MessageListFormatter
+                                        .fotmatHTMLFromErrors(errors))
+                        .setPositiveButton(R.string.btn_ok, null).show();
             }
         });
     }
 
     @Override
     public void notifySuccessfulImportation() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mostrarMensajeUsuario(R.string.datos_cargados_exito);
-            }
-        });
+        runOnUiThread(() -> mostrarMensajeUsuario(R.string.datos_cargados_exito));
         obtenerEstadoBotonCargar();
         asignarLabelDeRutas();
     }
 
     @Override
     public void showExportationWaiting() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressDialog = new ProgressDialogPro(Inicio.this,
-                        R.style.AppStyle_Dialog_FlavoredMaterialLight);
-                progressDialog.setMessage(getResources().getText(
-                        R.string.msg_inicializando_exportacion));
-                progressDialog.setCancelable(false);
-                progressDialog.setIndeterminate(true);
-                progressDialog.setIcon(R.drawable.export_to_server_d);
-                progressDialog.setTitle(R.string.titulo_exportar_datos);
-                progressDialog
-                        .setProgressStyle(ProgressDialogPro.STYLE_HORIZONTAL);
-                progressDialog.setCanceledOnTouchOutside(false);
-                progressDialog.show();
-            }
+        runOnUiThread(() -> {
+            progressDialog = new ProgressDialogPro(Inicio.this,
+                    R.style.AppStyle_Dialog_FlavoredMaterialLight);
+            progressDialog.setMessage(getResources().getText(
+                    R.string.msg_inicializando_exportacion));
+            progressDialog.setCancelable(false);
+            progressDialog.setIndeterminate(true);
+            progressDialog.setIcon(R.drawable.export_to_server_d);
+            progressDialog.setTitle(R.string.titulo_exportar_datos);
+            progressDialog
+                    .setProgressStyle(ProgressDialogPro.STYLE_HORIZONTAL);
+            progressDialog.setCanceledOnTouchOutside(false);
+            progressDialog.show();
         });
     }
 
     @Override
     public void updateExportationWaiting(final int strId, final int totalData) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog != null) {
-                    progressDialog.setIndeterminate(false);
-                    progressDialog.setMax(totalData);
-                    progressDialog.setMessage(getResources().getString(strId));
-                }
+        runOnUiThread(() -> {
+            if (progressDialog != null) {
+                progressDialog.setIndeterminate(false);
+                progressDialog.setMax(totalData);
+                progressDialog.setMessage(getResources().getString(strId));
             }
         });
     }
 
     @Override
     public void updateExportationWaiting(final int strId) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog != null) {
-                    progressDialog.setMax(0);
-                    progressDialog.setIndeterminate(true);
-                    progressDialog.setMessage(getResources().getString(strId));
-                }
+        runOnUiThread(() -> {
+            if (progressDialog != null) {
+                progressDialog.setMax(0);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage(getResources().getString(strId));
             }
         });
     }
 
     @Override
     public void updateExportationProgress(final int dataCount, final int totalData) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                if (progressDialog != null) {
-                    progressDialog.setMax(totalData);
-                    progressDialog.setIndeterminate(false);
-                    progressDialog.setProgress(dataCount);
-                }
+        runOnUiThread(() -> {
+            if (progressDialog != null) {
+                progressDialog.setMax(totalData);
+                progressDialog.setIndeterminate(false);
+                progressDialog.setProgress(dataCount);
             }
         });
     }
 
     @Override
     public void notifySuccessfulExportation() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mostrarMensajeUsuario(R.string.msg_exportacion_exitosa);
-            }
-        });
+        runOnUiThread(() -> mostrarMensajeUsuario(R.string.msg_exportacion_exitosa));
         onBackPressed();
     }
 
@@ -619,7 +559,7 @@ public class Inicio extends AppCompatActivity implements
         protected ResultadoVoid doInBackground(Void... voids) {
             List<AsignacionRuta> listaRutas = AsignacionRuta
                     .obtenerRutasImportadas();
-            ResultadoVoid result = null;
+            ResultadoVoid result;
             ResultadoTipado<ConectorBDOracle> conectResult = ConectorBDOracle
                     .crear(context, true);
             result = conectResult;

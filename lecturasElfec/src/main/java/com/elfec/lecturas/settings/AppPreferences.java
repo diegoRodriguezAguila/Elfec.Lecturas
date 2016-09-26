@@ -86,7 +86,7 @@ public class AppPreferences {
      *
      * @return true si es que ya se importó toda
      */
-    public boolean estaInfoReqUnaVezImportados() {
+    public boolean estaInfoReqUnaVezImportada() {
         return preferences
                 .getBoolean(ALL_ONCE_REQUIRED_DATOS_IMPORTADOS, false);
     }
