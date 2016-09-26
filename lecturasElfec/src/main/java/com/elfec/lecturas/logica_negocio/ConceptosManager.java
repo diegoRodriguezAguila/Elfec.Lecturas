@@ -16,128 +16,127 @@ import java.util.List;
 
 /**
  * Manager para operaciones de logica de negocio relacionadas con conceptos
- * 
- * @author drodriguez
  *
+ * @author drodriguez
  */
 public class ConceptosManager {
-	/**
-	 * Importa los conceptos del ERP_ELFEC.CONCEPTOS si es que no se importaron
-	 * ya previamente.<br>
-	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
-	 * local de los datos
-	 * 
-	 * @param conector
-	 * @param dataImportListener
-	 *            {@link ImportacionDatosListener}
-	 * @return {@link ResultadoVoid}
-	 */
-	public ResultadoVoid importarConceptos(final ConectorBDOracle conector,
-			ImportacionDatosListener dataImportListener) {
-		ResultadoVoid result = new ResultadoVoid();
-		if (!AppPreferences.instance().estaConceptosImportados()) {
-			if (dataImportListener != null)
-				dataImportListener.onImportacionIniciada();
-			Concepto.eliminarTodosLosConceptos();
-			result = new DataImporter()
-					.importData(new ImportSource<Concepto>() {
-						@Override
-						public List<Concepto> requestData()
-								throws ConnectException, SQLException {
-							return conector.obtenerConceptos();
-						}
+    /**
+     * Importa los conceptos del ERP_ELFEC.CONCEPTOS si es que no se importaron
+     * ya previamente.<br>
+     * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
+     * local de los datos
+     *
+     * @param conector
+     * @param dataImportListener {@link ImportacionDatosListener}
+     * @return {@link ResultadoVoid}
+     */
+    public ResultadoVoid importarConceptos(final ConectorBDOracle conector,
+                                           ImportacionDatosListener dataImportListener) {
+        ResultadoVoid result = new ResultadoVoid();
+        if (AppPreferences.instance().estaConceptosImportados()) {
+            return result;
+        }
+        if (dataImportListener != null)
+            dataImportListener.onImportacionIniciada();
+        Concepto.eliminarTodosLosConceptos();
+        result = new DataImporter()
+                .importData(new ImportSource<Concepto>() {
+                    @Override
+                    public List<Concepto> requestData()
+                            throws ConnectException, SQLException {
+                        return conector.obtenerConceptos();
+                    }
 
-						@Override
-						public void preSaveData(Concepto data) {
-						}
-					});
-			AppPreferences.instance().setConceptosImportados(
-					!result.tieneErrores());
-			if (dataImportListener != null)
-				dataImportListener.onImportacionFinalizada(result);
-		}
-		return result;
-	}
+                    @Override
+                    public void preSaveData(Concepto data) {
+                    }
+                });
+        AppPreferences.instance().setConceptosImportados(
+                !result.tieneErrores());
+        if (dataImportListener != null)
+            dataImportListener.onImportacionFinalizada(result);
+        return result;
+    }
 
-	/**
-	 * Importa los conceptos categorias de ERP_ELFEC.CPTOS_CATEGORIAS si es que
-	 * no se importaron ya previamente.<br>
-	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
-	 * local de los datos
-	 * 
-	 * @param conector
-	 * @param dataImportListener
-	 *            {@link ImportacionDatosListener}
-	 * @return {@link ResultadoVoid}
-	 */
-	public ResultadoVoid importarConceptosCategorias(
-			final ConectorBDOracle conector,
-			ImportacionDatosListener dataImportListener) {
-		ResultadoVoid result = new ResultadoVoid();
-		if (!AppPreferences.instance().estaConceptosCategoriasImportados()) {
-			if (dataImportListener != null)
-				dataImportListener.onImportacionIniciada();
-			ConceptoCategoria.eliminarTodosLosConceptosCatgeorias();
-			result = new DataImporter()
-					.importData(new ImportSource<ConceptoCategoria>() {
-						@Override
-						public List<ConceptoCategoria> requestData()
-								throws ConnectException, SQLException {
-							return conector.obtenerConceptosCategorias();
-						}
+    /**
+     * Importa los conceptos categorias de ERP_ELFEC.CPTOS_CATEGORIAS si es que
+     * no se importaron ya previamente.<br>
+     * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
+     * local de los datos
+     *
+     * @param conector
+     * @param dataImportListener {@link ImportacionDatosListener}
+     * @return {@link ResultadoVoid}
+     */
+    public ResultadoVoid importarConceptosCategorias(
+            final ConectorBDOracle conector,
+            ImportacionDatosListener dataImportListener) {
+        ResultadoVoid result = new ResultadoVoid();
+        if (AppPreferences.instance().estaConceptosCategoriasImportados()) {
+            return result;
+        }
+        if (dataImportListener != null)
+            dataImportListener.onImportacionIniciada();
+        ConceptoCategoria.eliminarTodosLosConceptosCatgeorias();
+        result = new DataImporter()
+                .importData(new ImportSource<ConceptoCategoria>() {
+                    @Override
+                    public List<ConceptoCategoria> requestData()
+                            throws ConnectException, SQLException {
+                        return conector.obtenerConceptosCategorias();
+                    }
 
-						@Override
-						public void preSaveData(ConceptoCategoria cat) {
-							cat.Concepto = Concepto.obtenerConcepto(
-									cat.IdConcepto, cat.IdSubConcepto);
-						}
-					});
-			AppPreferences.instance().setConceptosCategoriasImportados(
-					!result.tieneErrores());
-			if (dataImportListener != null)
-				dataImportListener.onImportacionFinalizada(result);
-		}
-		return result;
-	}
+                    @Override
+                    public void preSaveData(ConceptoCategoria cat) {
+                        cat.Concepto = Concepto.obtenerConcepto(
+                                cat.IdConcepto, cat.IdSubConcepto);
+                    }
+                });
+        AppPreferences.instance().setConceptosCategoriasImportados(
+                !result.tieneErrores());
+        if (dataImportListener != null)
+            dataImportListener.onImportacionFinalizada(result);
+        return result;
+    }
 
-	/**
-	 * Importa los conceptos tarifas de ERP_ELFEC.CONCEPTOS_TARIFAS si es que no
-	 * se importaron ya previamente.<br>
-	 * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
-	 * local de los datos
-	 * 
-	 * @param conector
-	 * @param dataImportListener
-	 *            {@link ImportacionDatosListener}
-	 * @return {@link ResultadoVoid}
-	 */
-	public ResultadoVoid importarConceptosTarifas(
-			final ConectorBDOracle conector,
-			ImportacionDatosListener dataImportListener) {
-		ResultadoVoid result = new ResultadoVoid();
-		if (!AppPreferences.instance().estaConceptosTarifasImportados()) {
-			if (dataImportListener != null)
-				dataImportListener.onImportacionIniciada();
-			ConceptoTarifa.eliminarTodosLosConceptosTarifas();
-			result = new DataImporter()
-					.importData(new ImportSource<ConceptoTarifa>() {
-						@Override
-						public List<ConceptoTarifa> requestData()
-								throws ConnectException, SQLException {
-							return conector.obtenerConceptosTarifas();
-						}
+    /**
+     * Importa los conceptos tarifas de ERP_ELFEC.CONCEPTOS_TARIFAS si es que no
+     * se importaron ya previamente.<br>
+     * <b>Nota.-</b> La importación incluye la consulta remota y el guardado
+     * local de los datos
+     *
+     * @param conector
+     * @param dataImportListener {@link ImportacionDatosListener}
+     * @return {@link ResultadoVoid}
+     */
+    public ResultadoVoid importarConceptosTarifas(
+            final ConectorBDOracle conector,
+            ImportacionDatosListener dataImportListener) {
+        ResultadoVoid result = new ResultadoVoid();
+        if (AppPreferences.instance().estaConceptosTarifasImportados()) {
+            return result;
+        }
+        if (dataImportListener != null)
+            dataImportListener.onImportacionIniciada();
+        ConceptoTarifa.eliminarTodosLosConceptosTarifas();
+        result = new DataImporter()
+                .importData(new ImportSource<ConceptoTarifa>() {
+                    @Override
+                    public List<ConceptoTarifa> requestData()
+                            throws ConnectException, SQLException {
+                        return conector.obtenerConceptosTarifas();
+                    }
 
-						@Override
-						public void preSaveData(ConceptoTarifa tarif) {
-							tarif.Concepto = Concepto.obtenerConcepto(
-									tarif.IdConcepto, tarif.IdSubConcepto);
-						}
-					});
-			AppPreferences.instance().setConceptosTarifasImportados(
-					!result.tieneErrores());
-			if (dataImportListener != null)
-				dataImportListener.onImportacionFinalizada(result);
-		}
-		return result;
-	}
+                    @Override
+                    public void preSaveData(ConceptoTarifa tarif) {
+                        tarif.Concepto = Concepto.obtenerConcepto(
+                                tarif.IdConcepto, tarif.IdSubConcepto);
+                    }
+                });
+        AppPreferences.instance().setConceptosTarifasImportados(
+                !result.tieneErrores());
+        if (dataImportListener != null)
+            dataImportListener.onImportacionFinalizada(result);
+        return result;
+    }
 }
