@@ -11,7 +11,7 @@ android {
         minSdkVersion 10
         targetSdkVersion 24
         versionCode 10
-        versionName "1.16.09.26"
+        versionName "1.16.09.28"
     }
 
     compileOptions {
