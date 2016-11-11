@@ -771,9 +771,10 @@ public class Lectura extends Model implements EventoAlObtenerUbicacion,
         FechaLecturaActual = fechaLec;
         HoraLectura = df.format(fechaLec);
         int lecAnteriorCalculable = LecturaAnterior;
+        //Hubo volteo, indice menor a actual
         if (lecturaNueva < LecturaAnterior) {
             lecAnteriorCalculable = (-1)
-                    * (TopeMedidor.intValue() - LecturaAnterior);
+                    * ((TopeMedidor.intValue() + 1) - LecturaAnterior);
         }
         Consumo = ((new BigDecimal(LecturaNueva - lecAnteriorCalculable))
                 .multiply(FactorMultiplicador)).setScale(0,
